@@ -16,15 +16,15 @@ if (!fs.existsSync(dirPath)) {
     fs.mkdirSync(dirPath, { recursive: true });
 }
 
-// blog 디렉토리 내의 .md 파일 수를 가져옵니다.
+// blog 디렉토리 내의 .mdx 파일 수를 가져옵니다.
 // _draft 디렉토리를 제외합니다.
-const mdFiles = glob.sync(path.join(__dirname, './blog/**/*.md'), {
-    ignore: path.join(__dirname, './blog/**/_draft/**/*.md'),
+const mdxFiles = glob.sync(path.join(__dirname, './blog/**/*.mdx'), {
+    ignore: path.join(__dirname, './blog/**/_draft/**/*.mdx'),
 });
-const count = mdFiles.length;
+const count = mdxFiles.length;
 
 // 파일 이름을 설정합니다.
-const fileName = `${day}-${count + 1}.md`;
+const fileName = `${day}-${count + 1}.mdx`;
 
 // 파일 경로를 설정합니다.
 const filePath = path.join(dirPath, fileName);
