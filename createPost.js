@@ -35,6 +35,7 @@ slug: ${count + 1}
 title: TITLE
 authors: seokjae
 tags: [hola, docusaurus]
+enableComments: true
 ---
 
 Hello world!`;
