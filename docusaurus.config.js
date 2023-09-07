@@ -63,6 +63,13 @@ const config = {
   themeConfig:
   /** @type {import('@docusaurus/preset-classic').ThemeConfig} */
       ({
+        themeConfig: {
+          metadata: [
+              {name: 'keywords', content: 'programming'},
+              {name: 'description', content: 'A tech blog focusing on backend development'},
+          ],
+          // This would become <meta name="keywords" content="cooking, blog"/> in the generated HTML
+        },
         // Replace with your project's social card
         image: "img/docusaurus-social-card.jpg",
         navbar: {

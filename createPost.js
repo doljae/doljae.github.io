@@ -36,6 +36,7 @@ title: TITLE
 authors: seokjae
 tags: [hola, docusaurus]
 enableComments: true
+keywords: [INPUT_SOME_KEYWORDS]
 ---
 
 Hello world!`;
