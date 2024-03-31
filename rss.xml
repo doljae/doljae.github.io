@@ -2,7 +2,7 @@
 <rss version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/">
     <channel>
         <title>Zero to Hero Blog</title>
-        <link>https://doljae.github.io/</link>
+        <link>https://doljae.github.io</link>
         <description>Zero to Hero Blog</description>
         <lastBuildDate>Fri, 25 Aug 2023 00:00:00 GMT</lastBuildDate>
         <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
