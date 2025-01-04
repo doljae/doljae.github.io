@@ -8,7 +8,7 @@
     <subtitle>Zero to Hero Blog</subtitle>
     <icon>https://doljae.github.io/img/favicon.ico</icon>
     <entry>
-        <title type="html"><![CDATA[블로그 이전]]></title>
+        <title type="html"><![CDATA[Blog migration]]></title>
         <id>https://doljae.github.io/1</id>
         <link href="https://doljae.github.io/1"/>
         <updated>2023-08-25T00:00:00.000Z</updated>
