@@ -75,8 +75,8 @@ const config: Config = {
   // useful metadata like html lang. For example, if your site is Chinese, you
   // may want to replace "en" with "zh-Hans".
   i18n: {
-    defaultLocale: 'en',
-    locales: ['en'],
+    defaultLocale: 'ko',
+    locales: ['ko'],
   },
 
   presets: [
@@ -191,7 +191,9 @@ const config: Config = {
     metadata: [
       {name: 'keywords', content: 'programming, backend, architecture, cloud, ai'},
       {name: 'description', content: 'A personal engineering blog focused on backend, architecture, and practical development notes.'},
+      {name: 'content-language', content: 'ko'},
       {name: 'twitter:card', content: 'summary_large_image'},
+      {property: 'og:locale', content: 'ko_KR'},
       ...(searchConsoleVerification
         ? [{name: 'google-site-verification', content: searchConsoleVerification}]
         : []),
