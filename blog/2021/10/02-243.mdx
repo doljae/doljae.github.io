@@ -1,0 +1,154 @@
+---
+slug: 243
+title: "567. Permutation in String"
+authors: seokjae
+tags: ["tistory"]
+enableComments: true
+keywords: ["tistory"]
+date: 2021-10-02T14:03:32+09:00
+---
+
+> 원문: https://doljae.tistory.com/243
+
+![cover](https://blog.kakaocdn.net/dna/E79Mw/btrgDc4TPNj/AAAAAAAAAAAAAAAAAAAAADFtU0XMnARSBt6ZJRusaI8u4kt0wrj0T7Rs8MMaTHI-/img.png?credential=yqXZFxpELC7KVnFOS48ylbz2pIh7yKj8&expires=1772290799&allow_ip=&allow_referer=&signature=AF5g%2FdE619W63fvWLF5JozdNIH8%3D)
+
+영문 소문자로 구성된 문자열 s1, s2가 주어진다. s1의 순열 문자열을 s2가 포함하고 있는지 유무를 반환하는 문제다.
+
+순열 문자열은 어떤 문자열 s1을 구성하는 문자의 순서를 변경해서 만들어지는 새로운 문자열을 의미한다.
+
+<!-- truncate -->
+
+예시
+
+
+```
+Input: s1 = "ab", s2 = "eidbaooo"
+Output: true
+Explanation: s2 contains one permutation of s1 ("ba").
+
+Input: s1 = "ab", s2 = "eidboaoo"
+Output: false
+```
+
+
+1번 예시는 "ab"의 순열 문자열 중 하나인 "ba"가 s2에 포함되어있기 때문에 True를 반환한다.
+
+2번 예시는 자신을 포함한 "ab"의 순열 문자열 모두 s2에 포함되어있지 않기 때문에 False를 반환한다.
+
+1. 구현
+
+
+```
+class Solution:
+    def checkInclusion(self, s1: str, s2: str) -> bool:
+        
+        for item in permutations(list(s1),len(s1)):
+            if "".join(list(item)) in s2:
+                return True
+        return False
+```
+
+내장 함수를 이용해 s1으로 만들 수 있는 순열 문자열을 모두 구하고 문자열이 포함되는지 체크한다.
+
+물론 이렇게 풀라고 낸 문제는 아니다.
+
+2. Sliding Window
+
+
+```
+class Solution:
+    def checkInclusion(self, s1: str, s2: str) -> bool:
+
+        s1_cnt, s2_cnt = [0] * 26, [0] * 26
+        for char in s1:
+            s1_cnt[ord(char) - ord('a')] += 1
+
+        for i in range(len(s2)):
+            s2_cnt[ord(s2[i]) - ord('a')] += 1
+
+            if i >= len(s1):
+                s2_cnt[ord(s2[i - len(s1)]) - ord('a')] -= 1
+
+            if s1_cnt == s2_cnt:
+                return True
+
+        return False
+```
+
+문자열 빈도를 저장하고, 슬라이딩 윈도로 해결할 수 있다.
+
+우선 사이즈 26의 list를 이용한다. 각 인덱스는 a ~ z까지의 문자열 빈도수를 저장하는 용도로 사용한다.
+s1을 구성하는 문자에 대한 cnt값을 저장한다.
+s2를 구성하는 문자에 대한 슬라이딩 윈도를 적용해 s1과 s2의 cnt를 저장한 배열이 같은 경우에 True를 반환한다.
+
+시뮬레이션하면 다음과 같다.
+
+성공 케이스
+
+
+```
+s1 = "ab", s2 = "ooobao"
+s1_cnt -> "a":1, "b":1
+s2 for문 시작
+
+i=0
+s2_cnt -> "o" : 1
+window -> o
+
+i=1
+s2_cnt -> "o" : 2
+window -> oo
+
+i=2
+s2_cnt -> "o" : 2
+window -> oo
+
+i=3
+s2_cnt -> "o" : 1, "b : 1
+window -> ob
+
+i=4
+s2_cnt -> "a" : 1, "b : 1
+window -> ba
+
+# s1_cnt와 s2_cnt가 일치
+# True 반환
+```
+
+실패 케이스
+
+
+```
+s1 = "ab", s2 = "ooboao"
+s1_cnt -> "a":1, "b":1
+s2 for문 시작
+
+i=0
+s2_cnt -> "o" : 1
+window -> o
+
+i=1
+s2_cnt -> "o" : 2
+window -> oo
+
+i=2
+s2_cnt -> "o" : 1, "b" : 1
+window -> ob
+
+i=3
+s2_cnt -> "o" : 1, "b" : 1
+window -> bo
+
+i=4
+s2_cnt -> "o" : 1, "a" : 1
+window -> oa
+
+i=5
+s2_cnt -> "o" : 1, "a" : 1
+window -> ao
+
+# 반복문이 끝날 때 까지 s1_cnt 와 s2_cnt가 같아지는 경우가 없음
+# False 반환
+```
+
+유익한 문제였다.

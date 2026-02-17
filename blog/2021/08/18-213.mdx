@@ -1,0 +1,153 @@
+---
+slug: 213
+title: "1605. Find Valid Matrix Given Row and Column Sums"
+authors: seokjae
+tags: ["tistory"]
+enableComments: true
+keywords: ["tistory"]
+date: 2021-08-18T22:00:19+09:00
+---
+
+> 원문: https://doljae.tistory.com/213
+
+![cover](https://blog.kakaocdn.net/dna/YyXQN/btrcxIAKLxP/AAAAAAAAAAAAAAAAAAAAAPB42kQHA3K2teIiSsQM8zGLOHOwwvm_TRxy8MgZxnwD/img.png?credential=yqXZFxpELC7KVnFOS48ylbz2pIh7yKj8&expires=1772290799&allow_ip=&allow_referer=&signature=b10r4sNp9K2WXjxG0vloTkeV1PU%3D)
+
+0 이상의 정수로 구성된 임의의 2차원 배열이 있다고 가정하자.
+
+n번째 row의 합 정보를 담고 있는 rowSum과 n번째 col의 합 정보를 담고 있는 colSum이 주어진다.
+
+<!-- truncate -->
+
+rowSum과 colSum을 이용해 이 조건에 해당하는 2차원 배열을 반환하는 문제다.
+
+정답은 여러 개가 나올 수 있고 그중 하나만 반환하면 된다.
+
+예시 설명은 아래와 같다.
+
+```
+Input: rowSum = [3,8], colSum = [4,7]
+Output: [[3,0],
+         [1,7]]
+Explanation:
+0th row: 3 + 0 = 3 == rowSum[0]
+1st row: 1 + 7 = 8 == rowSum[1]
+0th column: 3 + 1 = 4 == colSum[0]
+1st column: 0 + 7 = 7 == colSum[1]
+The row and column sums match, and all matrix elements are non-negative.
+Another possible matrix is: [[1,2],
+                             [3,5]]
+```
+
+1. DFS, using Brute-Force (TLE)
+
+
+```
+from copy import deepcopy
+from typing import *
+
+
+class Solution:
+    answer = None
+    flag = False
+
+    def restoreMatrix(self, rowSum: List[int], colSum: List[int]) -> List[List[int]]:
+        height = len(rowSum)
+        width = len(colSum)
+
+        temp = [[0] * width for _ in range(height)]
+        cur_row_sum = rowSum[::]
+        cur_col_sum = colSum[::]
+
+        def dfs(cur_row, cur_col):
+            if self.flag is True:
+                return
+            if cur_row == height and cur_col == 0:
+                if sum(cur_row_sum) == 0 and sum(cur_col_sum) == 0:
+                    self.answer = deepcopy(temp)
+                    self.flag = True
+                return
+
+            cur_val = 0
+            while True:
+                if cur_row_sum[cur_row] - cur_val < 0:
+                    break
+
+                if cur_col_sum[cur_col] - cur_val < 0:
+                    break
+
+                cur_row_sum[cur_row] -= cur_val
+                cur_col_sum[cur_col] -= cur_val
+                temp[cur_row][cur_col] = cur_val
+
+                if cur_col == width - 1:
+                    dfs(cur_row + 1, 0)
+                else:
+                    dfs(cur_row, cur_col + 1)
+
+                cur_row_sum[cur_row] += cur_val
+                cur_col_sum[cur_col] += cur_val
+                cur_val += 1
+
+        dfs(0, 0)
+
+        return self.answer
+```
+
+처음에 이 문제를 어떻게 접근할지 생각해보다가 DFS를 이용한 Brute-Force 접근이 생각났다.
+
+정확힌 이 접근법 말고 다른 접근법이 생각나지 않았다. 행, 열을 조합해서 뭔가 쉽게 계산이 되나 싶었는데 그것도 아닌 것 같았다.
+
+아무튼 접근법은 row, col을 왼쪽에서 오른쪽으로, 위에서 아래로 순회하면서 0부터 가능한 값들을 모두 넣어본다.
+
+모든 값을 넣어서 조건을 만족하면 그 값을 저장하고 flag 값을 이용해 남아있는 재귀를 탈출시켰다.
+
+추가적으로 나름대로 최적화를 한다고 rowSum, colSum을 미리 복사해서 거기서 값을 빼서 썼지만 TLE를 벗어나진 못했다.
+
+시간 복잡도를 따져보면 통과를 못하는 게 당연한데, 최대 row, col 길이가 각각 500, 가능한 정수 범위가 0 ~ 10**8인데 500 * (10**8)을 하면 500억이다;;
+
+2. Greedy
+
+
+```
+from typing import *
+
+
+class Solution:
+    def restoreMatrix(self, rowSum: List[int], colSum: List[int]) -> List[List[int]]:
+        height, width = len(rowSum), len(colSum)
+
+        answer = [[0] * width for _ in range(height)]
+
+        i, j = 0, 0
+        while i < height and j < width:
+            target = min(rowSum[i], colSum[j])
+
+            answer[i][j] = target
+
+            if rowSum[i] == colSum[j]:
+                i, j = i + 1, j + 1
+
+            elif rowSum[i] > colSum[j]:
+                rowSum[i] -= colSum[j]
+                j += 1
+
+            elif rowSum[i] < colSum[j]:
+                colSum[j] -= rowSum[i]
+                i += 1
+
+        return answer
+```
+
+이 문제는 Greedy로 접근해야 해결할 수 있는 문제였다;
+
+원리는 다음과 같다.
+
+우린 (i, j)에 적당한 값을 넣으려고 한다.
+(0, 0)부터 시작하는데 여기 올 수 있는 값은 rowSum(0), colSum(0) 보다 크지 않은 임의의 값이다.
+그럼 rowSum(0), colSum(0) 중에서 작은 값을 (0,0)에 할당해줄 수 있다.
+만약 rowSum(0)과 colSum(0)이 같다면 0번 row와 0번 col에는 (0,0)에 할당해준 값으로 모든 조건을 만족한다. 그래서 (0,1) ~ (0, N) 범위의 값과 (1,0) ~ (M, 0) 범위의 값은 탐색하거나 고려할 필요 없이 (1,1) 위치부터 채우기 시작하면 된다.
+만약 값이 다르다면 row, col 중 큰 값이 있는 쪽으로 i나 j만 +1 해서 탐색하면 된다.
+
+이 방법을 이용하면 2차원 배열의 모든 좌표에 대해서 고려할 필요 없이 불필요한 탐색을 skip 하면서 진행할 수 있다.
+
+우선 Greedy라는 생각 자체가 안 들었는데 들었어도 방법을 찾아내진 못 했을 것 같다...

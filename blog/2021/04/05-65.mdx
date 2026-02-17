@@ -1,0 +1,41 @@
+---
+slug: 65
+title: "/dev/null 2>&1"
+authors: seokjae
+tags: ["tistory"]
+enableComments: true
+keywords: ["tistory"]
+date: 2021-04-05T10:30:14+09:00
+---
+
+> 원문: https://doljae.tistory.com/65
+
+![cover](https://blog.kakaocdn.net/dna/BLcNc/btq1KA8gSk2/AAAAAAAAAAAAAAAAAAAAAGdKXmsUgYQOPfhhxPb7awBJgndWRPSex7ao6xwuL3Qx/img.png?credential=yqXZFxpELC7KVnFOS48ylbz2pIh7yKj8&expires=1772290799&allow_ip=&allow_referer=&signature=rXajp0LFMZzGhp9UgrraH%2Fs2CHw%3D)
+
+/dev/null
+리눅스에서 위 파일은 항상 비어있다고 한다. 그러니깐 예약어 같은 느낌이라고 생각하면 될 것 같다.
+
+이 곳으로 전송된 결과는 모두 버려진다는 특징을 가지고 있다.
+
+<!-- truncate -->
+
+2 &gt; &1
+
+요컨대 0, 1, 2는 파일 디스크립터로 불리는 숫자이고 각각 표준 입력, 표준 출력, 표준 에러를 의미하는 예약어다.
+
+&gt;는 표준 출력을 의미하는 리다이렉션 기호이다.
+
+1은 표준 출력을, 2는 표준 에러를 의미한다.
+
+정리
+어떤 명령어 &gt; /dev/null 2&gt;&1 은
+
+어떤 명령어를 수행하고 표준 출력(1)으로 나오는 결과를 /dev/null이라는 곳으로 보내고,
+
+표준 에러(2)의 결과는 표준 출력(1)으로 리다이렉트 하라는 뜻이다.
+
+표준 출력은 /dev/null에 결과를 버리게 했는데, 표준 에러도 표준 출력으로 보내라고 했으니깐 표준 에러도 결국 /dev/null로 결과를 보내게 되는 의미가 된다.
+
+이 명령어의 효과는 터미널에 아무것도 뜨지 않게 해주는 효과가 있다. 즉 쓸데없는 에러나 출력 결과를 생략하게 만든다.
+
+댓글 중에 원리를 설명해준 댓글이 있다. 나중에 한번 보면 유익할 것 같다.

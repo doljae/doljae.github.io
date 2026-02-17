@@ -1,0 +1,109 @@
+---
+slug: 285
+title: "[springdoc-openapi 전환기 01] Spring Boot 2.6.x 버전에서 springfox와의 충돌 관련 이슈 & 임시 해결책"
+authors: seokjae
+tags: ["tistory"]
+enableComments: true
+keywords: ["tistory"]
+date: 2022-03-20T18:27:08+09:00
+---
+
+> 원문: https://doljae.tistory.com/285
+
+![cover](https://blog.kakaocdn.net/dna/bKfWuw/btrwon5RYBu/AAAAAAAAAAAAAAAAAAAAAAIHJFg5xJGtKmEAgRKUlcbk4WTRlnoyAxCgmAMKoyes/img.png?credential=yqXZFxpELC7KVnFOS48ylbz2pIh7yKj8&expires=1772290799&allow_ip=&allow_referer=&signature=xuFQeNZGhfNs9x%2FKkv8aei6VgSU%3D)
+
+이 글은 springdoc-openapi 전환기 1편에 해당하는 글입니다.
+
+이 글을 작성하는 시점 기준 최신 Spring Boot 버전은 2.6.4이다.
+
+<!-- truncate -->
+
+Spring Boot 2.6 Release note를 보면 다음과 같은 변경 사항이 눈에 들어온다.
+
+기본 PathPattern 매칭 전략이 AntPathMatcher &rarr; PathPatternParser로 변경되었다.
+
+Release note에도 springfox를 사용하고 있다면 정상적으로 프로젝트가 실행되지 않을 것이라고 언급하고 있다.
+
+springfox는 Spring Web Component를 기반으로 별다른 설정 없이 지원하는 API를 기반으로 Swagger-ui를 그려주는 의존성이다.
+관련 이슈 링크
+
+https://github.com/springfox/springfox/issues/3462
+
+원인
+springfox 의존성이 swagger-ui를 그릴 때 사용하는 클래스 중 하나인 **WebMvcRequestHandlerProvider**에서 원인을 발견할 수 있었다.
+
+handlerMappings도 Spring Component Scan에 의해 주입되는 파라미터다. Spring Boot 2.5 버전까지는 RequestMappingInfoHanderMapping의 URL 패턴 매칭 전략이 AntPathMatcher인 구체 클래스가 주입되었을 텐데, 2.6 버전부터는 기본 패턴 매칭 전략이 PathPatternParser 변경되면서 발생하는 문제다.
+
+임시방편
+springfox Issue를 확인해보면 현재 총 3가지 임시방편이 있다.
+
+1.  패턴 매칭 전략을 properties 변경을 통해 AntPathMatcher로 설정하기
+spring.mvc.pathmatch.matching-strategy = ant-path-matcher
+전역 패턴 매칭 전략을 기존에 사용하던 AntPathMatcher로 변경하는 방법이다.
+
+참고로 기본 전략을 변경하는 것, 게다가 AntPathMatcher를 개선한 PathPatternParser를 버리는 방법은 이후 버전 업 및 호환성을 고려해보았을 때 권장하기 어렵다.
+
+2. springfox module의 **WebMvcRequestHandlerProvider.java**와 동일한 java 파일을 프로젝트 경로에 복사 후(ctrl+c, v) 생성자를 다음과 같이 수정
+// 기존
+public WebMvcRequestHandlerProvider(Optional&lt;ServletContext&gt; servletContext, HandlerMethodResolver methodResolver, List&lt;RequestMappingInfoHandlerMapping&gt; handlerMappings) &#123;
+    this.handlerMappings = handlerMappings;
+    this.methodResolver = methodResolver;
+    this.contextPath = servletContext.map(ServletContext::getContextPath).orElse(ROOT);
+  &#125;
+
+// 변경
+    ...
+    this.handlerMappings = handlerMappings.stream().filter(mapping -&gt; mapping.getPatternParser() == null)
+                                          .collect(Collectors.toList());
+    ...
+제목 그대로 WebMvcRequestHandlerProvider.java 파일을 그대로 복사해서(IDE에서 뿜어내는 빨간 줄 무시하고) SpringBootApplication.java 파일이 있는 디렉터리에 복사, 붙여 넣기 후 생성자만 수정하는 방법이다.
+
+this.handlerMappings =
+	handlerMappings.stream().filter(mapping -&gt; mapping.getPatternParser() == null)
+                                      .collect(Collectors.toList());
+**mapping.getPatternParser() == null이라는** 것은 이 handlerMapping 클래스의 패턴 매칭 전략이 PathPatternParser이 아니라는 것, 즉 AntPathMatcher를 사용하고 있다는 뜻이고, 이렇게 수정하면 2.5 이하 버전에서 사용하던 HandlerMapping 구체 클래스를 필드 값으로 가지는 WebMvcRequestHandlerProvider를 생성하게 된다.
+
+3.  2번 방법을 @Bean으로 추가
+@Bean
+public static BeanPostProcessor springfoxHandlerProviderBeanPostProcessor() &#123;
+    return new BeanPostProcessor() &#123;
+
+        @Override
+        public Object postProcessAfterInitialization(Object bean, String beanName) throws BeansException &#123;
+            if (bean instanceof WebMvcRequestHandlerProvider || bean instanceof WebFluxRequestHandlerProvider) &#123;
+                customizeSpringfoxHandlerMappings(getHandlerMappings(bean));
+            &#125;
+            return bean;
+        &#125;
+
+        private &lt;T extends RequestMappingInfoHandlerMapping&gt; void customizeSpringfoxHandlerMappings(List&lt;T&gt; mappings) &#123;
+            List&lt;T&gt; copy = mappings.stream()
+                    .filter(mapping -&gt; mapping.getPatternParser() == null)
+                    .collect(Collectors.toList());
+            mappings.clear();
+            mappings.addAll(copy);
+        &#125;
+
+        @SuppressWarnings("unchecked")
+        private List&lt;RequestMappingInfoHandlerMapping&gt; getHandlerMappings(Object bean) &#123;
+            try &#123;
+                Field field = ReflectionUtils.findField(bean.getClass(), "handlerMappings");
+                field.setAccessible(true);
+                return (List&lt;RequestMappingInfoHandlerMapping&gt;) field.get(bean);
+            &#125; catch (IllegalArgumentException | IllegalAccessException e) &#123;
+                throw new IllegalStateException(e);
+            &#125;
+        &#125;
+    &#125;;
+&#125;
+2번과 구현 방식은 동일하지만 BeanPostProcessor로 WebMvcRequestHandlerProvider가 생성된 후에 생성된 Bean을 조작해서 2번과 동일하게 필터링하도록 하는 방법이다.
+
+springfox의 대응은?
+
+Spring boot 2.6은 22년 1월 19일에 정식 버전이 release 되었다. 즉 마일스톤 버전부터 발생했던 이슈인데 해결은커녕 프로젝트 자체가 관리가 되고 있지 않다. 오죽하면 springfox에 올라온 PR 코멘트 내용을 보면 "이 프로젝트는 관리 안 되는 것 같으니깐 다른 곳에 PR 올려라"라는 내용도 있다.
+
+사실 위에서 제시한 1, 2, 3번 모두 정상적인 방법이 아니다. 거기에 현시점에서 springfox 프로젝트는 사실상 관리되지 않는 것으로 보인다.
+
+이것이 springdoc-openapi로 이주하게 된 계기가 되었다.
+
+2편에서 springdoc-openapi를 적용하는 내용의 포스트가 올라갈 예정입니다.

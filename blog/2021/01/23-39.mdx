@@ -1,0 +1,93 @@
+---
+slug: 39
+title: "웹을 지탱하는 기술 04"
+authors: seokjae
+tags: ["tistory"]
+enableComments: true
+keywords: ["tistory"]
+date: 2021-01-23T19:00:56+09:00
+---
+
+> 원문: https://doljae.tistory.com/39
+
+![cover](http://bimage.interpark.com/goods_image/4/2/0/8/208294208h.jpg)
+
+POST vs PUT
+POST와 PUT은 둘 다 비슷한 기능을 구현할 수 있다.
+
+POST
+POST로 리소스를 작성할 경우, 클라이언트는 리소스의 URI를 지정할 수 없다.
+
+<!-- truncate -->
+
+URI의 결정권은 서버측에 있다.
+
+글을 포스팅하는 경우 그 글의 URI는 서버가 결정한다.
+
+PUT
+PUT으로 리소스를 작성할 경우, 리소스의 URI는 클라이언트가 결정한다.
+
+WIKI의 수정은 클라이언트가 결정한 타이틀이 그래도 URI가 된다. 이 경우는 PUT이 적합하다.
+
+단 PUT은 리소스가 중복되어 덮어쓰기 되는 것을 방지하기 위해 클라이언트에서 사전에 URI 존재 여부를 체크해야 할 수도 있다.
+
+일반적으로 클라이언트가 적합한 URI를 결정하기 위해선 클라이언트단이 서버 내부 구조를 숙지하고 있어야 한다. 이런 점 때문에 PUT이 서버 단과 더 밀접하고, **특별한 이유가 없는 한 리소스 작성은 POST로 수행해 URI를 서버 측에서 결정하는 설계가 바람직하다.**
+
+GET과 POST밖에 사용이 안되는 상황에서 PUT과 DELETE를 사용하려면?
+1. _method 파라미터를 이용한다
+
+form의 숨겨진 파라미터 "hidden"을 이용한다.
+
+```
+<form action="#" method="post">  
+	<input type="hidden" name="_method" value="put" />
+</form>
+```
+
+
+2. X-HTTP-Method-Override 를 사용한다.
+
+```
+POST /articles
+X-HTTP-Method-Override=PUT
+
+---payload---
+title=...&content=...
+```
+
+
+조건부 요청
+If-Modified-Since 헤더를 사용해 GET 리소스가 이 시간 이후 갱신되어 있으면 GET 한다는 의미를 보낸다.
+
+PUT과 조합하면 이 시간 이후로 갱신되어 있지 않으면 리소스를 갱신한다는 의미다.
+
+멱등성과 안정성
+
+메서드
+성질
+
+GET, HEAD
+멱등이고 안전하다
+
+PUT, DELETE
+멱등이지만 안전하지 않다
+
+POST
+멱등이지도 안전하지도 않다
+
+멱등
+
+동일한 조작을 반복해도 결과가 동일하다
+
+안전
+
+동일한 조작을 반복해도 리소스의 상태를 변화시키지 않는다
+
+HTTP Method를 각각의 성질과 특징에 맞춰 사용하는 것이 바람직하다.
+
+웹을 지탱하는 기술
+국내도서
+저자 : 야마모토 요헤이(Yamamoto Yohei) / 김성훈역
+출판 : 멘토르출판사 2011.05.30
+
+상세보기

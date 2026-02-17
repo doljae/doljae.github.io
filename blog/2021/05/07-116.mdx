@@ -1,0 +1,56 @@
+---
+slug: 116
+title: "230. Kth Smallest Element in a BST"
+authors: seokjae
+tags: ["tistory"]
+enableComments: true
+keywords: ["tistory"]
+date: 2021-05-07T09:46:15+09:00
+---
+
+> 원문: https://doljae.tistory.com/116
+
+![cover](https://blog.kakaocdn.net/dna/AhvpL/btq4lkf8lOi/AAAAAAAAAAAAAAAAAAAAACyCkXi7P82kEaQe_aQqMlAFXSMdFZqqNV7T-YUrDW8T/img.png?credential=yqXZFxpELC7KVnFOS48ylbz2pIh7yKj8&expires=1772290799&allow_ip=&allow_referer=&signature=vF75erhnoalkyZqHwANe%2BUGUmCE%3D)
+
+1. In-Order Traversal using Iteration
+
+
+```
+class Solution:
+    def kthSmallest(self, root: TreeNode, k: int) -> int:
+        answers=[]
+        def inorder(cur):
+            global count
+            if not cur:
+                return
+            inorder(cur.left)
+            answers.append(cur.val)
+            inorder(cur.right)
+            
+        inorder(root)
+        return answers[k-1]
+```
+
+<!-- truncate -->
+
+이진 탐색 트리는 in-order로 순회하면 오름차순으로 정렬된 값을 얻을 수 있다.
+
+2. In-Order Traversal using Stack
+
+
+```
+class Solution:
+    def kthSmallest(self, root: TreeNode, k: int) -> int:
+        stack, count = [], 0
+        while True:
+            while root:
+                stack.append(root)
+                root = root.left
+            root = stack.pop()
+            count += 1
+            if count == k:
+                return root.val
+            root = root.right
+```
+
+in-order 순회는 stack으로도 구현이 가능하다.

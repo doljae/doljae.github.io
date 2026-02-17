@@ -1,0 +1,60 @@
+---
+slug: 106
+title: "53. Maximum Subarray"
+authors: seokjae
+tags: ["tistory"]
+enableComments: true
+keywords: ["tistory"]
+date: 2021-05-02T23:05:13+09:00
+---
+
+> 원문: https://doljae.tistory.com/106
+
+1. prefix sum을 이용한 풀이
+
+
+```
+class Solution:
+    def maxSubArray(self, nums: List[int]) -> int:
+        if len(nums) == 1:
+            return sum(nums)
+        prefix = [nums[0]]
+        for index, num in enumerate(nums):
+            if index == 0:
+                continue
+            prefix.append(num + prefix[-1])
+
+        result, min_prefix = -float("inf"), 0
+        for item in prefix:
+            result = max(result, item - min_prefix)
+            min_prefix = min(min_prefix, item)
+        return result
+```
+
+<!-- truncate -->
+
+
+처음에 prefix에 0 패딩을 하나 넣고 시작해서 prefix sum 배열이 이상하게 나와서 조금 삽질했지만, prefix sum을 생각해냈다는 사실만으로 기분이 좋았다.
+
+2....
+
+
+```
+    def maxSubArray2(self, nums: List[int]) -> int:
+        if not nums:
+            return 0
+        cur_sum = result = nums[0]
+        for num in nums[1:]:
+            cur_sum = max(cur_sum + num, num)
+            result = max(result, cur_sum)
+            print(cur_sum, result)
+```
+
+
+cur_sum은 기존까지의 연속된 값의 합이거나, 현재의 값이다.
+
+연속된 수의 합이 최대가 되는 경우를 찾아야하기 때문에 경우는 2가지다.
+
+max(기존 연속된 수의 합에 다음 수를 더한 값, 그냥 다음 수) -&gt; 이 값을 result로 경신한다.
+
+이런 게 바로 보이는 사람은 무슨 느낌일까.

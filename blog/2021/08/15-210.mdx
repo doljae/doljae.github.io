@@ -1,0 +1,57 @@
+---
+slug: 210
+title: "2021번: 최소 환승 경로"
+authors: seokjae
+tags: ["tistory"]
+enableComments: true
+keywords: ["tistory"]
+date: 2021-08-15T17:16:06+09:00
+---
+
+> 원문: https://doljae.tistory.com/210
+
+![cover](https://blog.kakaocdn.net/dna/SxUkV/btrb7u33ICB/AAAAAAAAAAAAAAAAAAAAABUI_QCwg_7igdS8UvBGu4j0RF1C9bF0Sl15yDYWnpmb/img.png?credential=yqXZFxpELC7KVnFOS48ylbz2pIh7yKj8&expires=1772290799&allow_ip=&allow_referer=&signature=1fHxam0lYkSkNe3lVhSSICiTas0%3D)
+
+```
+import sys
+from collections import deque, defaultdict
+
+r = sys.stdin.readline
+
+<!-- truncate -->
+
+node_num, flag_num = map(int, r().split())
+graph = defaultdict(set)
+
+for i in range(1, flag_num + 1):
+    temp = list(map(int, r().split()))
+    temp.pop()
+    for node in temp:
+        graph[node].add(i + node_num)
+        graph[i + node_num].add(node)
+
+start, end = map(int, r().split())
+q = deque([])
+q.append(start)
+visited = set()
+visited.add(start)
+cost = {start: 0}
+while q:
+    cur_node = q.popleft()
+    if cur_node == end:
+        break
+
+    for adj in graph[cur_node]:
+        if adj not in visited:
+            if adj >= node_num + 1:
+                cost[adj] = cost[cur_node]
+            else:
+                cost[adj] = cost[cur_node] + 1
+            visited.add(adj)
+            q.append(adj)
+
+if start == end:
+    print(0)
+else:
+    print(cost[end] - 1 if end in cost else -1)
+```

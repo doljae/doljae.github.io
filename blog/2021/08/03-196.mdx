@@ -1,0 +1,100 @@
+---
+slug: 196
+title: "938. Range Sum of BST"
+authors: seokjae
+tags: ["tistory"]
+enableComments: true
+keywords: ["tistory"]
+date: 2021-08-03T09:36:05+09:00
+---
+
+> 원문: https://doljae.tistory.com/196
+
+![cover](https://blog.kakaocdn.net/dna/cWesdf/btraZLlQhN5/AAAAAAAAAAAAAAAAAAAAAENmVjwQjMek7hd339BVKxJtB0TmuXq5g91wHIZh9BxT/img.png?credential=yqXZFxpELC7KVnFOS48ylbz2pIh7yKj8&expires=1772290799&allow_ip=&allow_referer=&signature=WcCj2x1BmuT%2FSfLmHO5N2ro0X%2Fs%3D)
+
+이진 탐색 트리의 low, high 값을 주면 low 이상 high 이하의 모든 노드의 값을 더해서 반환하는 문제다.
+
+1. DFS, 완전 탐색
+
+<!-- truncate -->
+
+
+```
+class Solution:
+    answer = 0
+
+    def rangeSumBST(self, root: TreeNode, low: int, high: int) -> int:
+        def dfs(cur):
+            if low <= cur.val <= high:
+                self.answer += cur.val
+
+            if not cur.left and not cur.right:
+                return
+
+            if cur.left:
+                dfs(cur.left)
+
+            if cur.right:
+                dfs(cur.right)
+
+        dfs(root)
+        return self.answer
+```
+
+이진 탐색 트리를 전부 탐색하면서 조건에 해당하는 값을 더한 뒤 반환한다.
+
+이진 탐색 트리의 특징을 사용하지 않았다.
+
+2. DFS, 이진 탐색 트리의 특징을 사용한 탐색
+
+
+```
+class Solution:
+    def rangeSumBST(self, root: TreeNode, low: int, high: int) -> int:
+        def dfs(cur):
+            if not cur:
+                return 0
+            answer = 0
+            if low < cur.val:
+                answer += dfs(cur.left)
+
+            if cur.val < high:
+                answer += dfs(cur.right)
+
+            if low <= cur.val <= high:
+                answer += cur.val
+
+            return answer
+
+        return dfs(root)
+```
+
+1번 방법과 비슷하지만 조건에 해당하는 범위만을 탐색하고 있다.
+
+low는 이진 탐색 트리의 왼쪽 서브 트리에 해당하는 방향인데, 현재 노드의 값이 low보다 작다는 것은 적어도 현재 노드의 왼쪽 서브 트리는 탐색하지 않아도 된다는 뜻이다.
+
+high는 이진 탐색 트리의 오른쪽 서브 트리에 해당하는 방향인데, 현재 노드의 값이 high보다 크다는 것은 적어도 현재 노드의 오른쪽 서브 트리는 탐색하지 않아도 된다는 뜻이다.
+
+필요한 부분만을 탐색했기 때문에 소요시간도 줄었다.
+
+3. Stack
+
+
+```
+class Solution:
+    def rangeSumBST(self, root: TreeNode, low: int, high: int) -> int:
+        answer = 0
+        stack = [root]
+        while stack:
+            cur = stack.pop()
+            if cur:
+                if low < cur.val:
+                    stack.append(cur.left)
+                if cur.val < high:
+                    stack.append(cur.right)
+                if low <= cur.val <= high:
+                    answer += cur.val
+        return answer
+```
+
+2번 풀이와 동일한 방법을 stack으로 구현했다.

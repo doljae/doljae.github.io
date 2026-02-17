@@ -1,0 +1,47 @@
+---
+slug: 78
+title: "13549번: 숨바꼭질 3"
+authors: seokjae
+tags: ["tistory"]
+enableComments: true
+keywords: ["tistory"]
+date: 2021-04-15T15:04:00+09:00
+---
+
+> 원문: https://doljae.tistory.com/78
+
+```
+import sys
+from collections import deque
+
+r = sys.stdin.readline
+src, dst = map(int, r().split())
+visited = set()
+q = deque([])
+q.append((src, 0))
+
+result = 0
+while q:
+    cur_pos, cur_val = q.popleft()
+    if cur_pos == dst:
+        result = cur_val
+        break
+    if 0 <= cur_pos * 2 <= 100002 and cur_pos * 2 not in visited:
+        visited.add(cur_pos * 2)
+        q.appendleft((cur_pos * 2, cur_val))
+    if 0 <= cur_pos + 1 <= 100000 and cur_pos + 1 not in visited:
+        visited.add(cur_pos + 1)
+        q.append((cur_pos + 1, cur_val + 1))
+    if 0 <= cur_pos - 1 <= 100000 and cur_pos - 1 not in visited:
+        visited.add(cur_pos - 1)
+        q.append((cur_pos - 1, cur_val + 1))
+
+<!-- truncate -->
+
+print(result)
+```
+
+
+이 문제의 정해는 **0-1 BFS**를 사용한 풀이다.
+
+자세한 것은 링크를 참고.

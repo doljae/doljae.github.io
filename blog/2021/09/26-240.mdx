@@ -1,0 +1,145 @@
+---
+slug: 240
+title: "367. Valid Perfect Square"
+authors: seokjae
+tags: ["tistory"]
+enableComments: true
+keywords: ["tistory"]
+date: 2021-09-26T10:58:37+09:00
+---
+
+> 원문: https://doljae.tistory.com/240
+
+![cover](https://blog.kakaocdn.net/dna/sWsUC/btrfWNyBKxR/AAAAAAAAAAAAAAAAAAAAAB_z9LPqkfDrmK9dAWOoxGpdlfwEsatd2rvL1W91k985/img.png?credential=yqXZFxpELC7KVnFOS48ylbz2pIh7yKj8&expires=1772290799&allow_ip=&allow_referer=&signature=P%2F%2F7LlbV5qvJmy1PKTB7GDOw00I%3D)
+
+입력된 num이 완전 제곱수인지 판단해 반환하는 문제다. 단 내장 함수 중 sqrt()를 사용하지 말 것.
+
+완전 제곱수의 조건은 임의의 양수 m에 대해서 m*m에 해당하는 값으로 1, 4, 9, 16, 25.... 등이 있다.
+
+<!-- truncate -->
+
+1. Brute Force
+
+
+```
+class Solution:
+    def isPerfectSquare(self, num: int) -> bool:
+
+        if num == 1:
+            return True
+
+        cur = num
+        temp = 2
+        answer = []
+        while cur != 1:
+            temp2 = 0
+            while cur % temp == 0:
+                temp2 += 1
+                cur = cur // temp
+
+            answer.append(temp2)
+            temp += 1
+
+        for item in answer:
+            if item % 2 != 0:
+                return False
+
+        return True
+```
+
+아니나 다를까 너무 어렵게 접근하고 있었고, TLE가 났다.
+
+입력된 수가 완전제곱수려면 소인수분해를 했을 때 지수들이 모두 짝수면 만족하기 때문에 이런 접근 방식으로 구현했다.
+
+예를 들어 36은 2의 제곱 * 3의 제곱 이기 때문에 answer 배열은 [2,2]이 된다. answer 배열 안의 정수가 모두 짝수이기 때문에 완전 제곱수다.
+
+반대로 12는 2의 제곱 * 3 이기 때문에 answer 배열은 [2,1]이 된다. answer 배열 안의 정수가 모두 짝수가 아니기 때문에 완전 제곱수가 아니다.
+
+이 코드가 TLE가 발생하는 원인은 cur이 1이 될 때까지 반복한다는 점인데, 예를 들어 num = (2 * 엄청나게 큰 임의의 소수)이라면 temp가 엄청나게 큰 임의의 소수가 될 때까지 +1을 반복해서 결국 cur을 나눌 때까지 while문이 돌아간다.
+
+2. 1번 최적화
+
+
+```
+class Solution:
+    def isPerfectSquare(self, num: int) -> bool:
+
+        if num == 1:
+            return True
+
+        max_target = 2
+        while (max_target + 1) * (max_target + 1) <= num:
+            max_target += 1
+
+        cur = num
+        temp = 2
+        answer = []
+        while cur != 1:
+            temp2 = 0
+            while cur % temp == 0:
+                temp2 += 1
+                cur = cur // temp
+
+            answer.append(temp2)
+            temp += 1
+            if temp > max_target:
+                break
+
+        if cur != 1:
+            answer.append(1)
+
+        for item in answer:
+            if item % 2 != 0:
+                return False
+
+        return True
+```
+
+1번에서 temp를 반복하는 범위를 sqrt(num)으로 줄였다. 1부터 임의의 양의 정수 n 범위에 존재하는 소수는 1 ~ sqrt(n) 범위에 존재하는 법칙을 이용했다. 하지만 겨우 통과했다.
+
+3. 홀수의 합 공식을 이용한 풀이
+
+
+```
+class Solution:
+    def isPerfectSquare(self, num: int) -> bool:
+        odd = 1
+        while num > 0:
+            num -= odd
+            odd += 2
+
+        return True if num == 0 else False
+```
+
+홀수의 합 공식이라는 게 있다.
+
+1 + 3 + 5 +.... + (2n+1) = n* n
+이것을 이용한 풀이인데, 그냥 num에서 1, 3, 5,... 순서대로 num이 0보다 같거나 작아질 때까지 빼준다.
+
+반복문이 종료되었을 때 0이라면 num은 완전 제곱수가 된다.
+
+1, 2번 풀이에 비해 단순하고 빠른 데다 명료해졌다.
+
+4. 뉴턴 방법(바빌로니안 방법)을 이용한 풀이
+
+
+```
+class Solution:
+    def isPerfectSquare(self, num: int) -> bool:
+        r = num
+        while r*r > num:
+            r = (r + num//r) // 2
+        return r*r == num
+```
+
+바빌로니안 방법, 혹은 뉴턴 방법이라고 부르는 이것은 제곱근의 근삿값을 빠르게 구할 수 있게 하는 방법이다.
+
+예를 들어 S가 125348이라는 정수이고 우리가 구하려는 건 sqrt(S)라고 한다면...
+
+우선 대충 제곱했을 때 125348과 근사한 임의의 값에서 시작한다. 여기선 6*10*10이 된다.
+
+이 값을 이용해 위 공식에 대입해서 값이 변경되지 않을 때까지, 즉 극한으로 보내면 실제로 sqrt(S)를 구할 수 있다.
+
+위 풀이는 이 방법을 이용한 것인데, r을 1부터 증가시키면서 r*r = num이 되는지 체크하는 Brute Force 방식이 아니라 r을 훨씬 더 적은 반복 횟수로 증감시켜 현저히 반복 횟수를 줄인다.
+
+이 외에도 비트 마스킹을 이용한 방법도 있다고 한다.

@@ -1,0 +1,45 @@
+---
+slug: 52
+title: "Vue.js 01"
+authors: seokjae
+tags: ["tistory"]
+enableComments: true
+keywords: ["tistory"]
+date: 2021-02-14T15:22:42+09:00
+---
+
+> 원문: https://doljae.tistory.com/52
+
+![cover](https://blog.kakaocdn.net/dna/bGtupW/btqWX5ybAHO/AAAAAAAAAAAAAAAAAAAAAHCCVz00sXjnbnaqB0EEi3Kskg95j6viNtWhc-W-AYLF/img.png?credential=yqXZFxpELC7KVnFOS48ylbz2pIh7yKj8&expires=1772290799&allow_ip=&allow_referer=&signature=sIQ6z0Y%2BPC0S%2BeR%2FwXZRr2b0CjM%3D)
+
+Vue.js
+
+Versatile에서 full-featured framework는 Angular를, library는 React를 의미한다. 유명한 두 프런트엔드 프레임워크의 장점을 적절히 따왔다고 소개하고 있다.
+
+<!-- truncate -->
+
+TMI
+
+React는 에러가 났을 때 에러 메시지가 매우 정교하다고 한다. 아무래도 contributor가 많은 상대적으로 오래된 프레임워크여서 그런 것 같다.
+
+Vue.js는 이에 비하면 에러 찾기가 좀 힘들다.
+
+Virtual Dom
+
+가상 돔
+
+직접 돔을 조작하는 것이 아니라, 이벤트가 발생하면 저장된 상태를 저장하는 변수인 상태 변수(state variable)를 선언하고, 이벤트가 발생하면 변하는 상태 변수의 값만 DOM에 전달해서 DOM을 조작하는 개념
+
+MVVM
+Model(javascript) + View(Dom) + ViewModel(Model과 Dom의 sync)
+
+여기서 말하는 ViewModel이 Vue.js 등의 가상 돔 기반 프런트엔드 프레임워크가 맡는 부분이라고 생각하면 된다.
+
+Webpack, Babel
+Webpack
+
+Javascript 모듈 시스템 번들러.
+
+Babel
+
+최신 자바스크립트 문법(ES6+)을 오래된 브라우저에서도 지원하는 자바스크립트 문법(ES5)으로 컴파일해주는 오픈소스 컴파일러

@@ -1,0 +1,53 @@
+---
+slug: 75
+title: "763. Partition Labels"
+authors: seokjae
+tags: ["tistory"]
+enableComments: true
+keywords: ["tistory"]
+date: 2021-04-13T11:25:07+09:00
+---
+
+> 원문: https://doljae.tistory.com/75
+
+![cover](https://blog.kakaocdn.net/dna/GBefb/btq2s3OCc55/AAAAAAAAAAAAAAAAAAAAAM4ItEv3_t6g12sYsLBA07CTPPeJoUOTKnGf2bLW2zS_/img.png?credential=yqXZFxpELC7KVnFOS48ylbz2pIh7yKj8&expires=1772290799&allow_ip=&allow_referer=&signature=SJ%2FPTA933Yq8eplEl7kOk9RScZA%3D)
+
+1. 문자의 첫 출현, 마지막 출현 정보 + Queue를 이용한 선형탐색
+
+
+```
+from typing import *
+from collections import deque, defaultdict
+
+<!-- truncate -->
+
+
+class Solution:
+    def partitionLabels(self, s: str) -> List[int]:
+        answer = []
+        q = []
+        dict1 = defaultdict(list)
+        for i in range(len(s)):
+            if len(dict1[s[i]]) > 1:
+                dict1[s[i]].pop()
+            dict1[s[i]].append(i)
+
+        for key in dict1:
+            if len(dict1[key]) == 1:
+                dict1[key] = [dict1[key][0]] * 2
+            q.append(dict1[key])
+        q.sort()
+        q = deque(q)
+        while q:
+            cur = q.popleft()
+            while q and q[0][1] < cur[1]:
+                q.popleft()
+            if q and cur[1] > q[0][0]:
+                continue
+            else:
+                answer.append(cur[1])
+        aanswer = [answer[0]+1]
+        for i in range(1, len(answer)):
+            aanswer.append(answer[i] - answer[i - 1])
+        return aanswer
+```

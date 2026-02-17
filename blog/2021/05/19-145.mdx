@@ -1,0 +1,61 @@
+---
+slug: 145
+title: "300. Longest Increasing Subsequence"
+authors: seokjae
+tags: ["tistory"]
+enableComments: true
+keywords: ["tistory"]
+date: 2021-05-19T20:43:59+09:00
+---
+
+> 원문: https://doljae.tistory.com/145
+
+![cover](https://blog.kakaocdn.net/dna/MI4z3/btq5f3SEfyH/AAAAAAAAAAAAAAAAAAAAAObtX-AHfTz9W-iI_812SsibaL4e9Lm9n-Z9USPGW0E0/img.png?credential=yqXZFxpELC7KVnFOS48ylbz2pIh7yKj8&expires=1772290799&allow_ip=&allow_referer=&signature=FTr4xj8i2IA1g1SxAL4qfFrEZl0%3D)
+
+1. 스택과 이진 탐색을 이용한 풀이
+
+
+```
+from typing import *
+from bisect import bisect_left
+
+<!-- truncate -->
+
+
+class Solution:
+    def lengthOfLIS(self, nums: List[int]) -> int:
+        stack = []
+        for num in nums:
+            if not stack:
+                stack.append(num)
+            else:
+                target_index = bisect_left(stack, num)
+                if target_index == len(stack):
+                    stack.append(num)
+                else:
+                    stack[target_index] = num
+                    
+        return len(stack)
+```
+
+LIS문제는 굉장히 유명한 문제이고, 다양한 풀이법이 있다.
+
+보통 Brute-Forcc로 접근하게 되면 TLE가 나게 되어있고, DP 등 나름대로 알고리즘을 사용해 최적화를 해야 통과할 수 있다.
+
+위 방법은 그 여러 가지 방법 중 스택과 이진 탐색을 이용한 풀이이고, 일반적으로 이 방법이 알려진 보편적인 방법들 중 가장 빠른 방법으로 알고 있다.
+
+스택은 입력과 출력하는 위치가 같고, 이를 이용해서 스택 내부 값을 오름차순, 내림차순으로 값을 관리할 수 있다.
+
+이 문제의 접근법은 다음과 같다.
+
+1. 스택이 비어있다면 값을 삽입한다.
+
+2. 현재 값이 삽입될 위치를 이진 탐색을 이용해 빠르게 탐색한다
+
+3-1. 만일 그 위치가 스택의 길이와 같다면 현재 스택의 어떠한 값들보다 큰 값이기 때문에 그냥 삽입하면 된다.
+
+3-2. 만일 그 위치가 스택의 길이와 같지 않다면 그 위치의 스택의 값을 현재 값으로 치환한다.
+
+실제로 굉장히 빠르다.
+
+LIS 문제에 대해 잘 정리해주신 링크가 있어서 첨부한다.

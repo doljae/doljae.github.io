@@ -1,0 +1,95 @@
+---
+slug: 51
+title: "Spring 05"
+authors: seokjae
+tags: ["tistory"]
+enableComments: true
+keywords: ["tistory"]
+date: 2021-02-14T15:14:09+09:00
+---
+
+> 원문: https://doljae.tistory.com/51
+
+Logging
+
+Spring Boot의 Logging 기본 인터페이스는 slf4j를 사용하고 있다.
+
+Spring Boot의 Logging 기본 구현체는 Logback이다.
+
+<!-- truncate -->
+
+log4j2는 slf4j의 구현체 중 하나로 Logback 보다 여러 가지 면에서 보완되었다고 한다.
+
+보통 log4j2를 많이 사용하는 것 같다.
+
+Logging Level
+
+레벨
+설명
+
+ALL
+All levels including custom levels.
+
+TRACE
+Designates finer-grained informational events than the DEBUG.
+
+DEBUG
+Designates fine-grained informational events that are most useful to debug an application.
+
+INFO
+Designates informational messages that highlight the progress of the application at coarse-grained level.
+
+WARN
+Designates potentially harmful situations.
+
+ERROR
+Designates error events that might still allow the application to continue running.
+
+FATAL
+Designates very severe error events that will presumably lead the application to abort.
+
+OFF
+The highest possible rank and is intended to turn off logging.
+
+코드의 용도에 따라서 로깅 레벨을 다르게 해서 로그를 관리하면, 유지 보수에 용이하고 문제가 발생했을 때 빠르게 해당 지점을 찾을 수 있다는 장점이 있다.
+
+레벨이 낮을수록 하위 레벨의 로그를 함께 출력한다. 그러니깐 ALL 레벨은 모든 레벨의 로그가 뜨고, OFF는 프로그램이 아예 종료될 때의 로그만 뜬다.
+
+GetMapping을 쓸 때 결과와 오류 메시지(만약 있다면)를 동시에 보내는 방법
+
+ResponseEntity를 사용한다.
+
+```
+// ResponseEntity를 이용해서 데이터와 status코드를 반환하는 방법
+	@GetMapping("/{id}")
+	public ResponseEntity<?> getTodo(@PathVariable("id") Long id) {
+		TodoVo todo = service.getTodo(id);
+		if (todo == null)
+			return new ResponseEntity<>("Todo Not Found", HttpStatus.NOT_FOUND);
+		return ResponseEntity.status(HttpStatus.OK).body(todo);
+	}
+
+	@PostMapping("")
+	public ResponseEntity<?> registerTodo(@RequestBody TodoVo todo) {
+		int cnt = service.registerTodo(todo);
+		if (cnt == 1)
+			return ResponseEntity.status(HttpStatus.OK).body(service.getTodoList());
+		//500 에러
+		return new ResponseEntity<>("Todo Not Found", HttpStatus.INTERNAL_SERVER_ERROR);
+	}
+```
+
+
+일반적으로 ModelAndView로 데이터와 화면단을 같이 넘기거나, REST API의 경우 해당하는 결과를 객체로 반환하면 json형태로 받을 수 있게 만드는 게 아주 기초적인 구현이다.
+
+ResponseEntity를 사용하면 RestController에서 데이터를 반환하는 것과 비슷한데, HTTP 상태, 메시지 등을 커스텀해서 보낼 수 있다는 차이점이 있다. 예를 들어 잘못된 요청을 보냈을 때 HTTP상태 메시지를 404로 설정하고, 빈 body를 반환하는 것이 가능하다.
+
+즉 데이터뿐만 아니라 HTTP 상태 코드 및 메시지까지 직접 제어를 해야 할 경우에는 ResponseEntity를 사용하는 것이 올바르다.
+
+Synchronized vs Concurrent
+
+요약하면 동기화가 필요한 곳에만 동기화를 해야 한다. 동기화는 매우 비싼 작업이기 때문이다.
+
+HashTable은 기본적으로 동기화를 보장하는 자료구조이다. 그래서 코딩 테스트에는 이것을 보장하지 않지만 처리 속도가 상대적으로 빠르고 가벼운 HashMap을 사용한다.
+
+만일 동기화가 필요하다면, JAVA 1.5 버전부터 제공하는 ConcurrentUtil이라는 인터페이스에서 제공하는 ConcurrentHashMap을 사용하면 된다. HashTable에 비해서 Map의 필요한 부분에만 락을 걸기 때문에 속도도 빠르면서 동기화 작업을 수행할 수 있다.

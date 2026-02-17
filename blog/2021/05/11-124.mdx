@@ -1,0 +1,112 @@
+---
+slug: 124
+title: "39. Combination Sum"
+authors: seokjae
+tags: ["tistory"]
+enableComments: true
+keywords: ["tistory"]
+date: 2021-05-11T10:01:29+09:00
+---
+
+> 원문: https://doljae.tistory.com/124
+
+![cover](https://blog.kakaocdn.net/dna/bJEC87/btq4ErFR15R/AAAAAAAAAAAAAAAAAAAAAPsu2uNZ_Ly1lQmWgcnXFhCFDXWIvuqN5scFh6Fjq-XL/img.png?credential=yqXZFxpELC7KVnFOS48ylbz2pIh7yKj8&expires=1772290799&allow_ip=&allow_referer=&signature=AW%2FxCjuBYe6cZnWSHDH%2F%2BXZ0iY4%3D)
+
+1. 내 Trash Garbage Code
+
+
+```
+from typing import *
+
+<!-- truncate -->
+
+
+# DP로 풀어야할 것 같다
+# 완전탐색으로 하면 반드시 TLE가 날 것 같은 문제
+# 라고 생각했는데 노트에 써보니깐 백트래킹 문제 같다.
+class Solution:
+    def combinationSum(self, candidates: List[int], target: int) -> List[List[int]]:
+        answer = []
+        set1 = set()
+
+        def dfs(cur):
+            if sum(cur) >= target:
+                if sum(cur) == target:
+                    if "".join(list(map(str, sorted(cur)))) not in set1:
+                        answer.append(cur[:])
+                        set1.add("".join(list(map(str, sorted(cur)))))
+                return
+
+            for candidate in candidates:
+                cur.append(candidate)
+                dfs(cur)
+                cur.pop()
+
+        dfs([])
+
+        return answer
+```
+
+이 풀이는 백트래킹을 한다고 했지만 실제로는 백트래킹을 하지 못하는 코드다.
+
+실제로 [2,2,3], [2,3,2], [3,2,2]는 동일한 결과로 한 개만 찾아야 하는데 위 코드는 이 모두를 찾는다.
+
+결과 리스트에는 따로 집합을 하나 만들어서 해당 리스트가 있는지를 찾고 없으면 삽입하는 것으로 처리했다.
+
+2. 최적화
+
+
+```
+from typing import *
+
+
+class Solution:
+    def combinationSum(self, candidates: List[int], target: int) -> List[List[int]]:
+        answer = []
+
+        def dfs(cur, pos):
+            if sum(cur) >= target:
+                if sum(cur) == target:
+                    answer.append(cur[:])
+                return
+
+            for index, candidate in enumerate(candidates):
+                if index >= pos:
+                    cur.append(candidate)
+                    dfs(cur, index)
+                    cur.pop()
+
+        dfs([], 0)
+
+        return answer
+```
+
+이 문제의 포인트는 위에 말했던 중복된 결과를 보지 않게 DFS를 도는 것이고 이것을 탐색하는 배열의 인덱스를 조정해서 해결할 수 있다.
+
+[2, 3, 6, 7]이라는 배열이 있다고 가정하면 후보 배열이 [3]으로 시작할 때는 3 뒤에 있는 2를 보지 않아도 된다.
+
+왜냐하면 [2]로 시작하는 배열에서 2와 3을 포함한 결과가 이미 구해질 것이기 때문이다.
+
+그 점을 이용하면 중복된 결과를 탐색하지 않을 수 있고, 그로 인해 집합을 이용할 필요도 없어진다.
+
+3. 더 예쁘게...
+
+
+```
+class Solution(object):
+    def combinationSum(self, candidates, target):
+        ret = []
+        self.dfs(candidates, target, [], ret)
+        return ret
+    
+    def dfs(self, nums, target, path, ret):
+        if target < 0:
+            return 
+        if target == 0:
+            ret.append(path)
+            return 
+        for i in range(len(nums)):
+            self.dfs(nums[i:], target-nums[i], path+[nums[i]], ret)
+```
+
+DFS 디자인을 좀 더 잘하고 싶다.

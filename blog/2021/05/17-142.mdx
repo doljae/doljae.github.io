@@ -1,0 +1,51 @@
+---
+slug: 142
+title: "Flask 사용법"
+authors: seokjae
+tags: ["tistory"]
+enableComments: true
+keywords: ["tistory"]
+date: 2021-05-17T14:20:36+09:00
+---
+
+> 원문: https://doljae.tistory.com/142
+
+JSON 받고, 반환하기
+
+
+```
+@app.route('/user', methods=['POST'])
+def userLogin():
+    user = request.get_json()  # json 데이터를 받아옴
+    return jsonify(user)  # 받아온 데이터를 다시 전송
+```
+
+URI Path값 읽고 사용하기
+
+<!-- truncate -->
+
+
+```
+# Spring의 @PathVariable 사용법
+@app.route('/env/<language>')
+def environments(language):
+    return jsonify({"language": language})
+```
+
+URI를 HTTP Method로 분기하기
+
+
+```
+@app.route('/user', methods=['GET', 'POST'])
+def userLogin():
+    if request.method == "GET":
+        # do something
+        pass
+    elif request.method == "POST":
+        # do something
+        pass
+```
+
+처음에는 Django를 사용하려고 하다가 사용 용도 및 주어진 상황을 고려했을 때 빠르게 사용할 수 있는 Flask를 선택했다.
+
+Application Server 용도가 아닌, 기존 Python으로 개발한 프로젝트나 서비스에 대해 단순 데이터 반환용 서버로 적절할 것 같다.

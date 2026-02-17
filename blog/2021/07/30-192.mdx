@@ -1,0 +1,45 @@
+---
+slug: 192
+title: "807. Max Increase to Keep City Skyline"
+authors: seokjae
+tags: ["tistory"]
+enableComments: true
+keywords: ["tistory"]
+date: 2021-07-30T22:01:39+09:00
+---
+
+> 원문: https://doljae.tistory.com/192
+
+2차원 배열이 주어진다.
+
+2차원 배열을 4방으로 보았을 때 생기는 등고선(skyline)을 유지하면서 최대로 올릴 수 있는 건물의 사이즈를 반환하는 문제다.
+
+예를 들어서 [5,2]라는 1차원 배열을 왼쪽에서 바라보면 5만 보일 것이고, 2가 있는 자리에 3을 더해서 [5, 5]로 만들어도 보이는 모습은 같을 것이다. 이걸 2차원 배열의 경우로 생각할 때 더할 수 있는 최댓값을 반환하는 문제다.
+
+<!-- truncate -->
+
+1. row, col의 최댓값을 이용한 계산
+
+
+```
+class Solution(object):
+    def maxIncreaseKeepingSkyline(self, grid):
+        row, col = {}, {}
+        for i, item in enumerate(grid):
+            row[i] = max(item)
+
+        for i, item in enumerate(list(zip(*grid))):
+            col[i] = max(item)
+
+        answer = 0
+        for i in range(len(grid)):
+            for j in range(len(grid[0])):
+                answer += (min(row[i], col[j]) - grid[i][j])
+        return answer
+```
+
+조금 생각해보면 (i, j) 위치에 놓을 수 있는 최대 높이는 i번째 row의 최댓값과 j번째 col의 최댓값 중 작은 값이다.
+
+두 최댓값 중 최댓값을 또 사용하면 기존 skyline이 무너지기 때문이다.
+
+구하는 값은 더 세울 수 있는 건물 높이의 합이기 때문에 위 코드의 점화식을 더해주는 것으로 해결할 수 있다.

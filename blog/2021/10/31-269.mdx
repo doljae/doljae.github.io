@@ -1,0 +1,118 @@
+---
+slug: 269
+title: "k8s commands 04"
+authors: seokjae
+tags: ["tistory"]
+enableComments: true
+keywords: ["tistory"]
+date: 2021-10-31T12:00:18+09:00
+---
+
+> 원문: https://doljae.tistory.com/269
+
+kubectl get pods --selector env=dev
+
+kubectl get pods --selector bu=finance
+
+kubectl get all
+
+<!-- truncate -->
+
+kubectl get all --selector env=prod
+
+kubectl get pods --selector env=prod,bu=finance,tier=frontend
+
+kubectl taint nodes NODE_NAME key=value:TAINT_EFFECT
+
+kubectl taint nodes node1 app=blue:NoSchedule
+
+kubectl describe node kubemaster | grep Taint
+
+kubectl get nodes
+
+kubectl describe node node01 | grep Taints
+
+kubectl taint nodes node01 spray=mortein:noSchedule
+
+apiVersion: v1
+kind: Pod
+metadata:
+  name: bee
+spec:
+  containers:
+  - image: nginx
+    name: bee
+  tolerations:
+  - key: spray
+    value: mortein
+    effect: NoSchedule
+    operator: Equal
+kubectl taint nodes controlplane node-role.kubernetes.io/master:NoSchedule-
+
+kubectl label nodes NODE_NAME LABEL_KEY=LABEL_VALUE
+
+kubectl label nodes node-1 size=Large
+
+kubectl label nodes node01 color=blue
+
+kubectl create deployment blue --image=nginx --replicas=3
+
+kubectl describe node controlplane | grep -i taints
+
+kubectl get pods -o wide
+
+kubectl get pods -o wide | grep XXX
+
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: blue
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      run: nginx
+  template:
+    metadata:
+      labels:
+        run: nginx
+    spec:
+      containers:
+      - image: nginx
+        imagePullPolicy: Always
+        name: nginx
+      affinity:
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+            - matchExpressions:
+              - key: color
+                operator: In
+                values:
+                - blue
+
+kind: Deployment
+metadata:
+  name: red
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      run: nginx
+  template:
+    metadata:
+      labels:
+        run: nginx
+    spec:
+      containers:
+      - image: nginx
+        imagePullPolicy: Always
+        name: nginx
+      affinity:
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+            - matchExpressions:
+              - key: node-role.kubernetes.io/master
+                operator: Exists

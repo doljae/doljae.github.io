@@ -1,0 +1,119 @@
+---
+slug: 177
+title: "207. Course Schedule"
+authors: seokjae
+tags: ["tistory"]
+enableComments: true
+keywords: ["tistory"]
+date: 2021-07-06T11:57:58+09:00
+---
+
+> 원문: https://doljae.tistory.com/177
+
+![cover](https://blog.kakaocdn.net/dna/b9jBA3/btq8SCq0AYI/AAAAAAAAAAAAAAAAAAAAAKG0eYeumyrklDKaF8Gsp1uWDU-XgLyg9OGGwhoIyN_J/img.png?credential=yqXZFxpELC7KVnFOS48ylbz2pIh7yKj8&expires=1772290799&allow_ip=&allow_referer=&signature=UK1PxQWwKsj%2FJ4VDYklTyzVd9uI%3D)
+
+특정 과목을 수강하기 위해 반드시 선수강해야 하는 과목의 조합이 입력으로 주어진다.
+
+해당 조합이 유효한지를 판단하는 문제다.
+
+<!-- truncate -->
+
+예를 들어서 [[1,0], [2,1]]이라고 주어지면
+
+1번 과목은 0번을 선수강해야, 2번 과목은 1번 과목을 선수강해야 하는 조건이다. 문제없기 때문에 True 반환한다.
+
+[[1,0], [0,1]]의 경우는 False를 반환해야 한다.
+
+1번 과목은 0번을 선수강하면서 0번 과목은 1번을 선수강해야 하는 조건은 불가능하기 때문이다.
+
+1. DFS를 이용한 Cycle 판단
+
+
+```
+from collections import defaultdict
+from typing import *
+
+
+class Solution:
+    def __init__(self):
+        self.has_cycle = False
+
+    def canFinish(self, numCourses: int, prerequisites: List[List[int]]) -> bool:
+        graph = defaultdict(set)
+        for item in prerequisites:
+            src, dsc = item
+            if src == dsc:
+                return False
+            graph[src].add(dsc)
+
+        visited, finished = set(), set()
+
+        def dfs(cur_node):
+            visited.add(cur_node)
+            for adj_node in graph[cur_node]:
+                if adj_node not in visited:
+                    dfs(adj_node)
+                elif adj_node not in finished:
+                    self.has_cycle = True
+            finished.add(cur_node)
+
+        for node in range(numCourses):
+            if node not in visited:
+                dfs(node)
+
+        return True if self.has_cycle is False else False
+```
+
+결국 주어진 입력으로 그래프를 만들고 사이클 유무를 판단하는 문제와 같다.
+
+유효하지 않은 입력이라 하는 것은 특정 노드 a와 특정 노드 b의 양방향 이동이 가능하다는 뜻이다.
+
+단방향 그래프에서 사이클을 판단하는 대표적인 알고리즘을 이용해서 해결했다.
+
+요약하면 어떤 노드에 A에 대해서 DFS를 시작하고 끝나기 전에 내부 DFS에서 A를 만나면 사이클이 있다고 판단하는 방법이다.
+
+모든 노드에 대해 DFS를 사용하는 것은 TLE가 나기 때문에 DFS 한 번에 사이클 유무를 판단할 수 있다.
+
+사이클 판단 알고리즘은 관련 포스팅을 검색하면 잘 정리된 자료들이 나와서 참고하면 좋다.
+
+2. 위상 정렬
+
+
+```
+from collections import defaultdict, deque
+from typing import *
+
+
+class Solution:
+    def canFinish(self, numCourses: int, prerequisites: List[List[int]]) -> bool:
+        in_degree = [0] * numCourses
+        graph = defaultdict(set)
+        for item in prerequisites:
+            src, dsc = item
+            graph[src].add(dsc)
+            in_degree[dsc] += 1
+        q = deque([])
+        for node in range(numCourses):
+            if in_degree[node] == 0:
+                q.append(node)
+
+        visited = set()
+        while q:
+            cur = q.popleft()
+            visited.add(cur)
+            for adj in graph[cur]:
+                in_degree[adj] -= 1
+                if in_degree[adj] == 0:
+                    q.append(adj)
+        return len(visited) == numCourses
+```
+
+Topological Sort라고 불리는 대표적인 정렬 기법을 이용해서 해결할 수 있다.
+
+방향 그래프의 간선 방향을 뒤집은 역방향 그래프를 만들고, in_degree값을 하나씩 제거하면서 방문하는 방법이다.
+
+이 정렬방법을 통해 방문한 노드 개수가 총 노드 개수와 같다면 사이클이 없다는 뜻이기 때문에 적용할 수 있다.
+
+참고로 사이클을 구성하는 노드 정보까지 필요하다면 방문하지 않은 노드가 그것이다.
+
+위상 정렬의 경우 신입 기준 코딩 테스트에서 나올법한 주제는 아니라고 생각하는데 최근 들어서 적용하면 쉽게 갈 수 있는 문제들이 종종 나오는 것 같다.

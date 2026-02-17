@@ -1,0 +1,35 @@
+---
+slug: 128
+title: "62. Unique Paths"
+authors: seokjae
+tags: ["tistory"]
+enableComments: true
+keywords: ["tistory"]
+date: 2021-05-12T15:13:47+09:00
+---
+
+> 원문: https://doljae.tistory.com/128
+
+![cover](https://blog.kakaocdn.net/dna/crFf9E/btq4HH4AAJg/AAAAAAAAAAAAAAAAAAAAAFZQHWPPLD7wiFRIcASJjhoLWsFsNeDfd3o8WK4VN3sX/img.png?credential=yqXZFxpELC7KVnFOS48ylbz2pIh7yKj8&expires=1772290799&allow_ip=&allow_referer=&signature=e2myg36%2Fd%2FObdrrDvUH2CVpTM%2B0%3D)
+
+1. Dynamic Programming
+
+
+```
+class Solution:
+    def uniquePaths(self, height: int, width: int) -> int:
+        board = [[0] * width for _ in range(height)]
+        for i in range(height):
+            board[i][0] = 1
+        for i in range(width):
+            board[0][i] = 1
+
+<!-- truncate -->
+
+        for i in range(1, height):
+            for j in range(1, width):
+                board[i][j] = board[i - 1][j] + board[i][j - 1]
+        return board[-1][-1]
+```
+
+예전엔 DP라고 생각도 안 났던 것 같은데 쉬운 문제지만 그래도 장족의 발전이라고 생각한다 ㅎㅎ;

@@ -1,0 +1,78 @@
+---
+slug: 58
+title: "pandas csv 읽기/쓰기 인코딩 정리(read_csv, to_csv)"
+authors: seokjae
+tags: ["tistory"]
+enableComments: true
+keywords: ["tistory"]
+date: 2021-03-29T15:08:15+09:00
+---
+
+> 원문: https://doljae.tistory.com/58
+
+요약
+pandas는 python에서 제공하는 데이터 처리, 분석에 사용되는 라이브러리다.
+
+csv, xls등 table 기반 데이터를 Dataframe이라는 자료구조로 가져와 다양한 조작을 할 수 있다.
+
+최근에 회사 작업으로 table 기반 데이터를 조작해야 할 일이 있었는데
+
+<!-- truncate -->
+
+pandas의 함수 중 하나인 read_csv를 이용해 csv파일을 읽을 때 발생하는 한글 깨짐과,
+
+to_csv를 이용해 csv파일을 생성했을 때 Excel에서 한글이 깨지는 조건을 정리해봤다.
+
+정말 단순한 옵션으로 했기 때문에 모든 경우에 통용되지 않겠지만, 원리를 이해할 겸...
+
+소스 코드
+
+
+```
+# dict으로 테이블에 들어갈 데이터를 구성
+# key값은 column 이름이, list에는 row 데이터가 들어간다.
+temp_dict = {}
+temp_dict["종류"] = ["식사", "간식"]
+temp_dict["이름"] = ["된장국", "쇼콜라케익"]
+temp_dict["가격"] = [5000, 10000]
+
+# dict을 이용해 Dataframe 객체를 생성
+df = pd.DataFrame(temp_dict)
+# 아래와 같은 옵션들로 Dataframe을 csv 파일로 저장한다.
+# Excel로 아래 파일들을 열어보면...
+df.to_csv("default.csv")  # 한글 깨짐
+df.to_csv("encoding_utf8.csv", encoding="utf-8")  # 깨짐
+df.to_csv("encoding_cp949.csv", encoding="cp949")  # 안깨짐
+df.to_csv("encoding_euckr.csv", encoding="euc-kr")  # 안깨짐
+
+# read_csv를 이용해 데이터를 불러보자
+df_default = pd.read_csv("default.csv")
+print(df_default) # 한글 안깨짐
+df_utf8 = pd.read_csv("encoding_utf8.csv")
+print(df_utf8) # 안깨짐
+df_cp949 = pd.read_csv("encoding_cp949.csv", encoding="cp949")
+print(df_cp949) # encoding 옵션이 없으면 깨짐, 있으면 안깨짐
+df_euckr = pd.read_csv("encoding_euckr.csv", encoding="euc-kr")
+print(df_euckr) # encoding 옵션이 없으면 깨짐, 있으면 안깨짐
+```
+
+
+결론
+1. Excel의 기본 인코딩은 utf-8이 아니다.
+위와 같은 이유로 utf-8 인코딩으로 생성한 csv 파일을 직접 열면 Excel에선 한글이 깨져서 보인다.
+
+2. 그러므로 Excel로 생성한 csv파일은 encoding 옵션 없이 Python에서 읽을 때 한글이 깨진다.
+왜나면 Excel로 생성한 csv파일은 utf-8로 인코딩한 파일이 아니니깐...
+
+최근 버전의 Excel에선 csv파일로 저장할 때 utf-8 인코딩으로 할지 말지를 결정할 수 있다.
+
+하지만 옛날 버전의 Excel에선 csv파일로 저장할 때 옵션이 따로 있지 않기 때문에 utf-8 csv파일로 저장하려면 메모장을 이용해 인코딩을 변경하는 등의 방법을 사용해야 한다.
+
+3. 특정 인코딩을 강제해서 작성된 프로그램은 오작동을 일으킬 가능성이 있다.
+예를 들면,
+
+개발자는 이런 이슈에 익숙하기 때문에 프로그램에 맞춰서 csv파일을 수정할 수도 있다.
+
+하지만 일반적으로 Excel이라는 프로그램의 기본 상태에서 무언가 사용하고 싶지, 이걸 프로그램에 맞춰서 설정을 해주는 친절한 경우는 없다고 생각해야 한다.
+
+내 경우 사용자가 Excel로 작업한 파일을 이용해 무언가 해야 했기 때문에, 사용자 입장에서 인코딩 부분을 신경 쓰지 않고 작업할 수 있게 만드는 것이 옳다고 생각했다. 결국 프로그램 쪽에서 인코딩을 맞추는 것으로 해결했다.

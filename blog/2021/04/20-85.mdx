@@ -1,0 +1,52 @@
+---
+slug: 85
+title: "14. Longest Common Prefix"
+authors: seokjae
+tags: ["tistory"]
+enableComments: true
+keywords: ["tistory"]
+date: 2021-04-20T16:42:27+09:00
+---
+
+> 원문: https://doljae.tistory.com/85
+
+1. 완전 탐색
+
+
+```
+from typing import *
+
+
+class Solution:
+    def sol(self, strs, length):
+        if length == 0:
+            return True
+        for strr in strs:
+            # length 보다 문자열이 짧은 상황은 불가능하니깐 반환
+            if len(strr) < length:
+                return False
+            if strs[0][:length] != strr[:length]:
+                return False
+        else:
+            return True
+
+<!-- truncate -->
+
+    def longestCommonPrefix(self, strs: List[str]) -> str:
+        # 빈 list가 오면 반환
+        if not strs:
+            return ""
+        # list에 문자열이 하나만 있으면 반환
+        if len(strs) == 1:
+            return strs[0]
+        answer_length = 0
+        while True:
+            if not self.sol(strs, answer_length):
+                break
+            answer_length += 1
+        return strs[0][:answer_length - 1]
+```
+
+
+2. (내가 생각하는 정해) 이진 탐색
+추후 기술

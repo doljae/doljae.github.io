@@ -1,0 +1,65 @@
+---
+slug: 186
+title: "Mockito.doNothing()"
+authors: seokjae
+tags: ["tistory"]
+enableComments: true
+keywords: ["tistory"]
+date: 2021-07-21T16:36:17+09:00
+---
+
+> 원문: https://doljae.tistory.com/186
+
+비즈니스 로직 구현상의 편의와 하위 호환성을 위해 아무것도 하지 않는 메서드를 호출하게 되는 경우가 있다.
+
+```
+public abstract class Beer {
+
+    private String name;
+    private LocalDateTime expirationDate;
+
+<!-- truncate -->
+
+    abstract void addAlcohol(int amount);
+}
+```
+
+주류회사의 서비스이고, Beer 클래스의 구현체가 굉장히 많다고 가정하자.
+
+비즈니스 로직에는 반드시 addAlcohol()을 호출하고 있다.
+
+```
+public class Coffee extends Beer {
+
+    @Override
+    void addAlcohol(int amount) {
+        // do nothing
+    }
+}
+```
+
+
+그런데 갑자기 커피를 만들어 팔려고 한다면...?
+
+커피는 알코올이 들어가지 않으니깐 메서드를 오버라이드하고 빈 상태가 된다.
+
+이렇게 하면 기존 코드에서 분기문이 나오거나, 혹은 유효성 체크를 할 필요가 없어진다.
+
+Mockito.doNothing()
+
+
+```
+@Test
+    void addAlcohol() {
+        Coffee coffee = Mockito.mock(Coffee.class);
+        Mockito.doNothing().when(coffee).addAlcohol(0);
+        
+    }
+```
+
+
+Mockito의 메서드인 doNothing()을 사용해 테스트 코드의 의도를 표현할 수 있다.
+
+빈 메서드에 대한 테스트 코드를 작성해야 하는지는 의문이다.
+
+작성하지 않으면 커버리지에 반영되지 않지만 의미가 있는지는 잘...

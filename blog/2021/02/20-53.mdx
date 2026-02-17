@@ -1,0 +1,532 @@
+---
+slug: 53
+title: "Linux 01"
+authors: seokjae
+tags: ["tistory"]
+enableComments: true
+keywords: ["tistory"]
+date: 2021-02-20T13:28:21+09:00
+---
+
+> 원문: https://doljae.tistory.com/53
+
+```
+tty
+
+date > /dev/pts/0
+date > /tmp/date.txt
+cat /tmp/date.txt
+```
+
+
+진짜 기초 기초 기초 명령어
+
+<!-- truncate -->
+
+
+```
+# 에코 내용으로 txt 파일을 만들기
+echo 'Hello World' >> sample.txt
+
+# a를 복사해서 b라는 이름의 파일로 만들기
+cp sample.txt test.txt
+
+# 디렉토리 생성
+mkdir src
+
+# 해당 파일을 해당 디렉토리로 옮기기
+mv sample.txt src
+
+# 원본을 복사해서 타겟이름으로 만들기, -r 은 디렉토리 내부 내용도 포함
+cp -r src tgt
+
+# 원본이름을 타겟이름으로 바꾸고 대상은 이것이다.
+rename src src_old src
+# 이것도 동일한 기능을 한다
+mv src src_old
+
+# 해당 파일을 삭제하는데, 삭제할껀지 한번 물어보고 삭제함
+# -i 는 interactive의 약자로 대화형 이라는 뜻임
+rm -i test.txt
+
+# 해당 디렉토리 및 내부 파일을 삭제하는데 각각 삭제할껀지 물어보고 삭제함
+# 기본적으로 디렉토리 삭제는 비어있어야 함
+
+rm -rf -i src_old
+```
+
+
+문서 편집기
+
+
+```
+# vim ~/.vimrc
+
+set number
+set smartindent
+set tabstop=4
+set expandtab
+set shiftwidth=4
+```
+
+
+shell 2 - 표준 출력, 표준 오류
+
+
+```
+# 모든 프로세스중 httpd 관련 파일만 뽑아냄
+ps -e | grep httpd
+
+# 출력 결과를 타겟 파일을 새로 생성 후 저장
+python3 test.py > result.txt
+
+# 출력 결과를 타겟 파일이 있으면 뒤에 이어서 쓰고, 없으면 새로 생성 후 저장
+python3 test.py > result.txt
+
+# 정상 결과를 mylist에 저장하기
+ls test.py > mylist
+
+# 에러 결과를 mylist에 저장하기
+ls test.py 2> result.txt
+
+# 다 저장하기, 오류 메시지를 1번 디스크립터에 저장하시는데 
+# 1번 디스크립터는 mylist와 연결되어있습니다
+ls test.py > mylist 2>&1
+
+# 표준 입출력 재지정
+write ktds < letter
+```
+
+
+환경 변수
+
+
+```
+echo $PATH
+# 일부로 PATH 변수 깨트리기
+export PATH=
+
+echo $PWD
+현재 경로
+
+$ export PS1='[$PWD]`
+```
+
+
+alias
+
+
+```
+alias
+#단축 명령어 목록 다 뜸
+
+alias c=`clear`
+#이제 c만 치면 clear 기능이 됨
+
+alias rm='rm -i'
+#이젠 항상 rm에는 i 옵션이 붙음
+#위 내용을 .bashrc에 작성하고 source ~/.bashrc 라고 하면 영구적용됨
+
+#환경 변수 추가하기(예시)
+export PATH=$PATH:/opt/ktds/bin
+```
+
+
+chmod
+
+
+```
+chmod g+x test.txt
+chomd g-r test.txt
+
+chmod 777 test.txt
+chmod 555 test.txt
+
+umask
+touch 도 기본권한이 다름
+
+.bashrc 에서 uamsk 기본 권한을 022로 설정해서 쓰곤 함.
+```
+
+
+SetUID
+
+
+```
+SetUID가 설정된 파일을 실행하면 해당 파일이 실행되는 동안에는
+파일을 실행한 사용자의 권한이 아니라 파일 소유자의 권한이 적용
+
+# root 계정으로 스위칭
+su root
+
+# chmod 권한이 아무것도 없는 파일 중 하나가 etc/shadow 임
+# shadow는 계정의 비밀번호를 보관하고 있는 파일임
+
+SetUID를 쓰면 된다고 하는데 어떻게 해야할지는 잘 모르겠다.
+```
+
+
+예제
+
+
+```
+#backup.sh
+filename=$(date +%Y%m%d)
+ls -R /home/ktds > ktds_backup${filename}
+```
+
+
+```
+#잘 안됨 실행 권한이 없기 때문임
+chmod a+x backup.sh
+ls -l backup.sh
+
+# 이제는 실행 가능
+./backup.sh
+```
+
+
+리눅스 프로세스 상태 전이 & 코드
+리눅스 프로세스2
+
+프로세스 상태 전이 &gt; 도리의 디지털라이프
+
+```
+cd proc/sys/kernel
+# 이 시스템에서 동시에 존재할 수 있는 프로세스의 최대 갯수
+# 좀비 프로세스가 많아져서 pid_max에 가까워지면 위험함
+# 유일한 해결법은 셧다운 후 리부트인데, 서버 기준에서 상당히 위험한 행동임
+# 좀비 프로세스는 그 자체로는 아무런 문제가 없는데 프로세스 갯수는 차지하니깐...
+# 그래서 좀비 프로세스가 보이면 무조건 빠르게 해결해야한다
+# 그래서 좀비 프로세스를 만든 부모 프로세스를 체크해서 문제를 해결해야한다.
+cat pid_max
+
+# process 보기 옵션
+ps
+ps -f
+ps -l
+# PPID 부모 프로세스 아이디
+# TTY 실행되고 있는 터미널 주소
+# SZ 사용하고 있는 페이지 갯수(1 페이지 당 4KB)
+
+ps -ef | wc -l
+pstree
+pstree -p | more
+tree -a | more
+
+pgrep
+
+kill 프로세스ID
+pkill 프로세스이름
+
+# 터미널 2개 띄우고
+ps -e | grep sleep
+# ? 는 커널이 만든 프로세스여서 제어 불가
+# 터미널 창 하나 sleep 해놓은 상태에서
+kill PID
+# 이렇게 하면 작동함
+
+pstree -p | grep PID번호
+# 이렇게 하면 부모 프로세스 즉, 해당 명령을 실행한 프로세스인 shell이 보임
+
+kill shellPID번호
+# 이렇게 하면 죽인 쉘에서 만든 자식은 안죽음(?)
+
+kill -9 shellPID번호
+# 이렇게 하면 확실히 죽임
+# 이렇게 하면 데몬 프로세스까지 죽임
+kill -2 shellPID번호
+# 이건 인터럽트
+^C 를 다른 터미널에선 terminate, interrupt 로 쓰기도 함
+
+# 안전하게 프로세스 죽이기
+pgrep sleep
+kill $(pgrep sleep)
+
+# 주기적으로 프로세스 상태를 업데이트해서 자세한 요약정보를 상단에 출력함
+# 디폴트는 CPU를 많이 사용하는 순위로 보여줌, 3초 간격 업데이트
+top
+```
+
+
+포그라운드, 백그라운드
+
+
+```
+# 사용자가 입력하는 일반적인 명령어.
+# 터미널 앞쪽에서 도는 명령어.
+# & 명령어가 없는 명렁어를 의미함
+
+# 백그라운드 작업
+# 이렇게 쓰면 바로 다음 터미널 명령어를 입력해서 결과를 볼 수 있다
+sleep 100 & 
+
+# 현재 터미널에서 실행되는 백그라운드 작업 보기
+jobs
+
+# ctrl + z 하면 현재 프로세스가 백그라운드로 떨어지고
+# 동일한 명령어를 실행하면 충돌 에러 메시지가 뜨곤 함
+fg
+# 포그라운드로 옮겨서 정상종료 할 것
+# 혹은 swp 파일 등 job 파일을 삭제 후 재실행할것
+```
+
+
+at, crontab 명령
+리눅스 크론탭(Linux Crontab) 사용법
+
+```
+# 정해진 시간에 항상 실행하는 명령어를 설정한다
+at 17:50
+poweroff
+# ctrl + D
+# 현재 등록된 작업을 볼 수 있음, 1회성임.
+at -l
+
+# 크론 테이블 실행 명령어 내용 보기
+crontab -e
+# vim이 열림
+# 30분, 11시 월요일부터 금요일까지 home디렉토리의 bash.sh 명령어를 실행해라
+# 근데 실행하는 명령어가 어떤 파일이고, 그것의 실행권한이 없으면 당연히 실행이 안될 것.
+30 11 * * 1-5 ~/backup.sh
+# 작업 목록 보기
+crontab -l
+```
+
+
+파일 시스템
+운영체제 마다 나름대로 파일을 관리하는 시스템을 가지고 있다.
+
+윈도우는 NTFS 라는 파일 시스템을 기본적으로 사용한다.
+
+USB는 FAT를 사용한다.
+
+리눅스는 ext를 사용한다.
+
+현재 ext4 와 XFS가 가장 많이 사용되는 파일 시스템이다.
+
+리눅스는 다른 os의 파일 시스템 (ms-dos, fat, ntfs, sysv 등)도 호환을 한다.
+
+swap, proc 등 물리적인 디스크에 구성된 것이 아닌 가상의 파일시스템도 있다. 특수한 목적으로 사용되어서 대상이 메모리인 그런 파일 시스템.
+
+마운트 포인트
+/etc/fstab 파일의 기능
+
+파일 시스템의 마운트 설정 정보를 가지고 있음
+
+이 파일에 오류가 있으면 시스템 부팅이 중지가 됨
+
+```
+# 디스크 사용량 확인
+# 단위가 좀 지저분함
+df
+# -h 붙이면 보기 좋게 나옴
+# -T 붙이면 파일 시스템 종류도 같이 나옴
+
+# 특정 디렉터리나 사용자별 디스크 사용량 확인하기
+# -s 붙이면 합계로 보여줌
+du
+du -s ~user1
+du -sh ~
+
+# log 처럼 계속 늘어나는 파일 디렉토리는 home 디렉토리와 분리해서
+# 관리해주는 게 일반적이다.
+cd /var/log
+```
+
+
+SELinux
+
+강력한 보안 시스템, 너무 강력해서 불편한게 많은데 서버같은데선 씀, 안전해야하니깐.
+
+데몬은 크게 독립형과 슈퍼데몬으로 나뉜다.
+
+systemd가 만드는 데몬 프로세스는 독립형 데몬이다.
+
+```
+systemctl status
+```
+
+
+SSH와 텔넷의 차이
+
+텔넷은 패킷을 보면 데이터가 그대로 보임
+
+SSH는 암호화가 되어있다.
+
+```
+ip addr show
+ip a
+# putty로 inet 주소(ipv4)를 입력해서 접속하면
+# 리눅스 쉘로 접속할 수 있음
+# 현업에서 가장 많이 하는 패턴.
+# ssh 방식으로 접속하기. 단 리눅스 서버가 ssh 서비스가 활성화되어있어야 함
+
+systemctl stop sshd
+systemctl status sshd
+systemctl start sshd
+# 부팅할때 활성화할건지말건지
+systemctl enable sshd
+systemctl disable sshd
+```
+
+
+dnf
+
+
+```
+dnf repolist
+ls /etc/yum.repos.d/
+dnf list
+dnf list openssh
+dnf list wireshark
+sudo dnf install wireshark
+dnf info openssh
+dnf search apache
+
+sudo dnf install httpd
+rpm -ql httpd
+
+# 실행파일들이 있는 경로들
+# 데몬파일은 끝에 d가 붙곤함, httpd
+/usr/sbin/httpd
+/usr/sbin/rotatelogs
+/usr/sbin/suexec
+
+systemctl start httpd
+systemctl stop httpd
+systemctl status httpd
+
+#localhost
+cat /etc/hosts
+```
+
+
+파일 아카이브
+
+
+```
+tar
+파일과 디렉터리를 묶어 하나의 아카이브 파일을 생성한다(windows의 winzip)
+
+tar cvzf mybackup.tar.gz src web_project/ sample mylist letter
+tar tvzf mybackup.tar.gz
+tar xvzf mybackup.tar.gz
+
+su -
+cd /var/log/httpd
+ls
+# access_log error_log
+
+tar cvzf /tmp/weblog_${filename}.tar.gz /var/log/httpd
+```
+
+
+ftp.gnu.org
+
+사용자 추가
+
+
+```
+useradd hkd
+id hkd
+grep ^hkd /etc/passwd
+grep ^hkd /etc/shadow
+
+디렉토리 권한에 쓰기 줘야 다른 사용자가 파일 쓰기 가능
+디렉토리 생성자, 파일 생성자를 보는 법은 ls -l 쓰면 볼 수 있다.
+sudo chmod 777 디렉토리이름/
+
+이젠 원격이나 혹은 다른 사용자(이 디렉토리를 만들지 않은 사용자)가 
+이 안에서 파일을 쓸 수가 있음
+
+디렉토리의 쓰기 권한이 필요한 경우엔 sticky 권한을 주어서
+본인이 만든 파일 이외에 다른 파일은 삭제를 못 하게 막아야 한다.
+sudo chmod 1777 디렉토리이름/
+
+리눅스 시스템 관리자 계정은 root, UID는 0번, /root 가 홈 디렉토리다
+일반 사용자 계정은 1000번 이상이고, 홈 디렉토리는 /home/사용자이름 이 기본이다.
+
+UID, GID, 홈 디렉토리, 로그인 쉘 등 사용자의 정보가 저장되는 파일은
+etc/passwd 에 있다
+
+비밀번호는
+etc/shadow 에 있다.
+
+사용자 그룹 정보는
+etc/group 에 있다.
+```
+
+
+etc/sudoers
+
+
+```
+특정 사용자에게 특정 명령어를 sudo로 실행할 수 있는 권한을 설정하는 방법이 있다.
+이렇게 하면 일반 사용자가 관리자 암호를 알려주지 않아도 sudo가 가능하다
+
+root ALL(=ALL) ALL
+
+user2를 콘솔 안에서 sbin/useradd, usermod 명령어를 허용하겠습니다.
+user2 localhost=/sbin/useradd, /sbin/usermod
+
+#sudoer를 위한 특별한 편집기
+visudo
+```
+
+
+일반적으로 관리자 암호는 관리자 본인만 알고 있고, 권한을 위임해서 sudo 작업을 일부 허용하는 식으로 운영한다.
+
+네트워크 설정
+
+
+```
+ip addr show
+ip route show
+ip a
+
+# 관리자 모드에서 네트워크 모드를 변경할 때 GUI를 이용할 수 있는 방법
+nmtui
+# dns 서버 잘 설정되었는지 체크하기
+nsloopup
+
+# hostname 관련 명령어
+hostname
+hostnamectl
+
+# ip ping, 연결이 되어있는지를 체크하는 방법
+# ping을 공격으로도 사용하는 경우가 있어서 웬만한 웹 서버는 ping에 대한 요청을 응답하지 않는다.
+
+ping 자신의 아이피
+ping -c 3 자신의 아이피
+
+# 현재 시스템에서 어떤 네트워크 서비스가 활성화되어있는지 확인하기
+# 안 쓰는 서비슨데 포트를 잡고 쓰고있으면 바로 죽여줘야함
+netstat
+netstat -at
+netstat -au
+netstat -aup
+```
+
+
+웹 서버 올려보기
+
+
+```
+systemctl status httpd
+systemctl start httpd
+systemctl enable httpd
+
+firewall-cmd --list-all
+firewall-cmd --add-service=http --permanent
+firewall-cmd --add-service=https --permanent
+sudo firewall-cmd --list-all
+
+cd conf
+ls
+vi httpd.conf
+cd /var/www/html
+cp /home/web_project/index.html .
+
+이렇게 해놓고 리눅스 머신의 ip주소로 접속해보면... index.html이 뜬다
+```

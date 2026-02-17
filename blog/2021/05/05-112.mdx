@@ -1,0 +1,57 @@
+---
+slug: 112
+title: "206. Reverse Linked List"
+authors: seokjae
+tags: ["tistory"]
+enableComments: true
+keywords: ["tistory"]
+date: 2021-05-05T21:18:41+09:00
+---
+
+> 원문: https://doljae.tistory.com/112
+
+![cover](https://blog.kakaocdn.net/dna/HjA73/btq4cgF7khH/AAAAAAAAAAAAAAAAAAAAAGv0FvzAzApb9pLR_4rAF7EwvThSQ3iThzokcPD0UfiU/img.png?credential=yqXZFxpELC7KVnFOS48ylbz2pIh7yKj8&expires=1772290799&allow_ip=&allow_referer=&signature=O4CSt7Qj8c2yIn%2FC0wLhokFX7og%3D)
+
+1. Stack을 사용한 풀이
+
+
+```
+class Solution:
+    def reverseList(self, head: ListNode) -> ListNode:
+        if not head:
+            return None
+        stack = []
+        cur = head
+        while cur:
+            stack.append(cur)
+            cur = cur.next
+        new_head = stack.pop()
+        cur = new_head
+        while stack:
+            cur.next = stack[-1]
+            cur = cur.next
+            stack.pop()
+        cur.next = None
+        return new_head
+```
+
+<!-- truncate -->
+
+스택에 노드를 삽입하고 빼면서 next값을 갱신하면서 주어진 연결 리스트를 뒤집었다.
+
+2. Pointer를 사용한 (나름) 우아한 풀이
+
+
+```
+class Solution:
+    def reverseList(self, head: ListNode) -> ListNode:
+        if not head:
+            return None
+        rev = None
+        cur = head
+        while cur:
+            rev, rev.next, cur = cur, rev, cur.next
+        return rev
+```
+
+이전에 풀었던 문제를 응용했다. 확실히 이젠 구조가 눈에 들어와서 바로 작성할 수 있었다.

@@ -1,0 +1,99 @@
+---
+slug: 42
+title: "Java 02"
+authors: seokjae
+tags: ["tistory"]
+enableComments: true
+keywords: ["tistory"]
+date: 2021-02-07T17:23:15+09:00
+---
+
+> 원문: https://doljae.tistory.com/42
+
+JDBC(Java Database Connectivity)
+Java에서 제공하는 DB 접속 관련 API. Interface의 묶음으로 DB 벤더가 본인들의 제품 스펙에 맞게 구현체를 만들어 제공한다.
+
+J2SE의 경우 JDBC의 인터페이스는 DB 벤더가 구현한다.
+
+J2EE의 경우 JDBC의 인터페이스는 WAS 벤더가 구현한다.
+
+<!-- truncate -->
+
+WAS(Web Application Server)
+Web Server + Web Container
+
+weblogic, webshpere, jeus 등이 있다.
+
+자세한 내용은 추후 기술
+
+WS(Web Server)
+Apache, nginx 등이 있다.
+
+자세한 내용은 추후 기술
+
+static, non-static
+static
+
+특정 변수의 값이 생성되는 객체 모두 같다.
+
+non-static
+
+특정 변수의 값이 생성되는 객체 모두 다르다.
+
+class 구현체는 heap 영역에 저장되지만, static 변수는 class 영역에 저장된다.
+
+static initializer
+
+static 변수를 초기화할 때 사용한다. 방법이 있다는 것지 일반적으로 잘 써본 경험은 없음
+
+Collection에 적용된 Generics
+
+Java 5 이전
+
+```
+List list=new ArrayList();
+list.add(new String("aa"));
+list.add(new Integer(100));
+
+for(int i=0;i<list.size();i++{
+	String val=(String)list.get(i);
+}
+```
+
+
+Java 5 이후
+
+```
+List<String> list=new ArrayList<String>();
+```
+
+
+Java 7 이후
+
+```
+List<String> list=new ArrayList<>();
+```
+
+instanceof, getClass()
+instanceof는 상속받은 클래스나 인터페이스도 체크한다.
+
+B extends A인 경우
+
+B instanceof A는 true를 반환한다.
+
+정확한 클래스를 체크하고 싶다면 getClass()를 사용해야 한다
+
+Default Method
+
+원래 interface의 method에는 body가 없었다.
+
+그런데 개발을 하다 보니깐 이런 엄격함이 불편한 경우가 생겼다.
+
+예를 들어서 확장을 하다 보니깐 인터페이스에서 동일한 기능을 하는 method가 생겼다고 가정해보자.
+
+그런데 extends를 할 순 없으니깐 모든 클래스에 동일한 기능을 하는 method를 추가로 적게 되는 상황이 되었다.
+
+default method는 body가 있는 method로 기존에 만들어진 구현체들도 자유롭게 사용할 수 있는 메서드다.
+
+Functional Interface
+추상 메서드 하나 이외에 아무것도 없는 인터페이스

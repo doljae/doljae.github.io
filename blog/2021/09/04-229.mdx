@@ -1,0 +1,105 @@
+---
+slug: 229
+title: "1829. Maximum XOR for Each Query"
+authors: seokjae
+tags: ["tistory"]
+enableComments: true
+keywords: ["tistory"]
+date: 2021-09-04T11:04:33+09:00
+---
+
+> 원문: https://doljae.tistory.com/229
+
+![cover](https://blog.kakaocdn.net/dna/bWX9ze/btrd2ypbIXU/AAAAAAAAAAAAAAAAAAAAANQ8-n8PrgiS59Fsz525yk4dMG3jgUV-qxREf6y6BEux/img.png?credential=yqXZFxpELC7KVnFOS48ylbz2pIh7yKj8&expires=1772290799&allow_ip=&allow_referer=&signature=vYxIUaqqie6tcF6RiISAe%2BcbUdk%3D)
+
+조건에 대한 범위의 모든 음이 아닌 정수들을 XOR 연산한 후의 값을 A라고 한다면,
+
+A XOR B = 2진수 maximumBit 길이의 가장 큰 값을 만족하는 B를 구해 반환하는 문제다.
+
+<!-- truncate -->
+
+예시
+
+```
+maximumBit = 2 인 경우,
+조건에 맞는 범위의 모든 정수 값을 XOR 연산한 값이 1 이라고 한다면
+1 ^ B = 길이 2의 가장 큰 이진수 = 11(2) = 3 을 만족하는 B를 구하면 된다
+위 경우 B = 2가 된다.
+```
+
+
+1. 구현 1
+
+
+```
+from functools import reduce
+from typing import *
+
+
+class Solution:
+    def getMaximumXor(self, nums: List[int], maximumBit: int) -> List[int]:
+        answer = []
+
+        for i in range(len(nums)):
+            temp = nums[:len(nums) - i]
+            target = reduce(lambda x, y: x ^ y, temp)
+            answer.append(int("1" * maximumBit, 2) ^ target)
+
+        return answer
+```
+
+정직하게 그대로 구현해주면 된다.
+
+하지만 매번 구간에 대한 XOR 값을 계산하고 있어서 TLE가 났다.
+
+2. 구현 2
+
+
+```
+from functools import reduce
+from typing import *
+
+
+class Solution:
+    def getMaximumXor(self, nums: List[int], maximumBit: int) -> List[int]:
+        answer = []
+        target = None
+        for i in range(len(nums)):
+            if target is None:
+                target = reduce(lambda x, y: x ^ y, nums[:len(nums) - i])
+            else:
+                target ^= nums[len(nums) - i]
+            answer.append(int("1" * maximumBit, 2) ^ target)
+
+        return answer
+```
+
+XOR연산은 A ^ B ^ C  = D 라면 A ^ B = C ^ D 도 참이다. 교환 법칙도 성립한다.
+
+처음에만 XOR 연산으로 전 범위를 한번 계산하고 그 뒤로는 마지막에 연산한 XOR만 한 번씩 연산해주면 속도를 개선할 수 있다.
+
+3. 구현 3
+
+
+```
+from functools import reduce
+from typing import *
+
+
+class Solution:
+    def getMaximumXor(self, nums: List[int], maximumBit: int) -> List[int]:
+        answer = []
+        target = None
+        
+        maximum_xor = (1 << maximumBit) - 1
+        for i in range(len(nums)):
+            if target is None:
+                target = reduce(lambda x, y: x ^ y, nums[:len(nums) - i])
+            else:
+                target ^= nums[len(nums) - i]
+            answer.append(maximum_xor ^ target)
+
+        return answer
+```
+
+좀 더 줄일 수 있는데 마지막에 문자열 조작해서 정수로 변환하는 과정을 생략하고 maximum_xor 값을 미리 만들어준 뒤에 가져다 쓰게 바꾸었다.

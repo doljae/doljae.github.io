@@ -1,0 +1,94 @@
+---
+slug: 246
+title: "타겟 넘버"
+authors: seokjae
+tags: ["tistory"]
+enableComments: true
+keywords: ["tistory"]
+date: 2021-10-07T23:32:27+09:00
+---
+
+> 원문: https://doljae.tistory.com/246
+
+![cover](https://blog.kakaocdn.net/dna/b14w01/btrg96CKS11/AAAAAAAAAAAAAAAAAAAAALkFdXbZ7n-DwyRsKJscvUFdOz20Ta97NehOhiQzuDAv/img.png?credential=yqXZFxpELC7KVnFOS48ylbz2pIh7yKj8&expires=1772290799&allow_ip=&allow_referer=&signature=8eG9viGQtIi%2B5gu8UBM4S1bvDkk%3D)
+
+반올림 2년 전 코드
+
+
+```
+def solution(list1, target):
+    stack1=[(1,list1[0])]
+    visited1=[]
+    length=len(list1)
+
+<!-- truncate -->
+
+    while stack1:
+        item=stack1.pop()
+        if item[0]==length:
+            visited1.append(item)
+        if item[0]<length:
+            visited1.append(item)
+            stack1.append((item[0]+1,item[1]+list1[item[0]]))
+            stack1.append((item[0] + 1, item[1]-list1[item[0]]))
+
+    stack2 = [(1, -list1[0])]
+    visited2 = []
+    length = len(list1)
+
+    while stack2:
+        item = stack2.pop()
+        if item[0]==length:
+            visited2.append(item)
+        if item[0]<length:
+            visited2.append(item)
+            stack2.append((item[0] + 1, item[1] + list1[item[0]]))
+            stack2.append((item[0] + 1, item[1] - list1[item[0]]))
+
+    # print(visited1)
+    # print(visited2)
+    # print(visited1+visited2)
+    visited_merge=visited1+visited2
+    visited_merge.sort(key=lambda x:x[0],reverse=True)
+    counter=0
+    # print(visited_merge)
+    for i in range(len(visited_merge)):
+        if visited_merge[i][0]==length and visited_merge[i][1]==target:
+            counter+=1
+    return counter
+```
+
+다시 쓴 코드
+
+
+```
+def solution(nums, target):
+    stack = [(0, 0)]
+    answer = 0
+    while stack:
+        cur_val, cur_length = stack.pop()
+        if cur_length == len(nums):
+            answer += 1 if cur_val == target else 0
+            continue
+
+        stack.append((cur_val + nums[cur_length], cur_length + 1))
+        stack.append((cur_val - nums[cur_length], cur_length + 1))
+    return answer
+```
+
+itertools.product()
+
+
+```
+from itertools import product
+
+
+def solution(nums, target):
+    products = product([-1, 1], repeat=len(nums))
+    answer = 0
+    for p in products:
+        answer += 1 if sum(x * y for x, y in zip(nums, p)) == target else 0
+    return answer
+```
+
+과거의 나는 무슨 생각을 하고 있었던 걸까...

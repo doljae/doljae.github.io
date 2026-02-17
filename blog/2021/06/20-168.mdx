@@ -1,0 +1,142 @@
+---
+slug: 168
+title: "36. Valid Sudoku"
+authors: seokjae
+tags: ["tistory"]
+enableComments: true
+keywords: ["tistory"]
+date: 2021-06-20T00:13:43+09:00
+---
+
+> 원문: https://doljae.tistory.com/168
+
+![cover](https://blog.kakaocdn.net/dna/tV1hw/btq7EhAPyXJ/AAAAAAAAAAAAAAAAAAAAAKV1Z8VZ2e2xM-wRrBYG9BMccPRkbUVnNA4KnpUchIT2/img.png?credential=yqXZFxpELC7KVnFOS48ylbz2pIh7yKj8&expires=1772290799&allow_ip=&allow_referer=&signature=jqI9RKYvhK7qq8jxCkEM6%2FsjSkA%3D)
+
+스도쿠 판이 주어진다.
+
+빈칸을 제외하고 현재 채워진 숫자가 스도쿠에 적합한지를 반환하는 문제다.
+
+<!-- truncate -->
+
+1. 뇌를 비운 풀이
+
+
+```
+class Solution:
+    def isValidSudoku(self, board):
+        for i in range(len(board)):
+            board[i] = list(map(lambda x: int(x) if x.isdigit() else 0, board[i]))
+        rows, cols, squares = defaultdict(set), defaultdict(set), defaultdict(set)
+
+        for i in range(9):
+            for j in range(9):
+                item = board[i][j]
+                if item != 0:
+                    if item in rows[i]:
+                        return False
+                    else:
+                        rows[i].add(item)
+
+                    if item in cols[j]:
+                        return False
+                    else:
+                        cols[j].add(item)
+
+                    if 0 <= i < 3 and 0 <= j < 3:
+                        if item in squares[0]:
+                            return False
+                        squares[0].add(item)
+                    elif 0 <= i < 3 and 3 <= j < 6:
+                        if item in squares[1]:
+                            return False
+                        squares[1].add(item)
+                    elif 0 <= i < 3 and 6 <= j < 9:
+                        if item in squares[2]:
+                            return False
+                        squares[2].add(item)
+                    elif 3 <= i < 6 and 0 <= j < 3:
+                        if item in squares[3]:
+                            return False
+                        squares[3].add(item)
+                    elif 3 <= i < 6 and 3 <= j < 6:
+                        if item in squares[4]:
+                            return False
+                        squares[4].add(item)
+                    elif 3 <= i < 6 and 6 <= j < 9:
+                        if item in squares[5]:
+                            return False
+                        squares[5].add(item)
+                    elif 6 <= i < 9 and 0 <= j < 3:
+                        if item in squares[6]:
+                            return False
+                        squares[6].add(item)
+                    elif 6 <= i < 9 and 3 <= j < 6:
+                        if item in squares[7]:
+                            return False
+                        squares[7].add(item)
+                    elif 6 <= i < 9 and 6 <= j < 9:
+                        if item in squares[8]:
+                            return False
+                        squares[8].add(item)
+        return True
+```
+
+이 스도쿠를 완성하는 게 아니라 현재 입력받은 숫자로 스도쿠판이 유효한지만 판단하면 된다.
+
+set을 이용해 row, col, square를 조건 분기를 통해 판단해줬다.
+
+2. 뇌를 약간 쓴 풀이
+
+
+```
+from collections import defaultdict
+
+
+class Solution:
+    def isValidSudoku(self, board):
+        rows, cols, squares = defaultdict(set), defaultdict(set), defaultdict(set)
+        for i in range(9):
+            for j in range(9):
+                item = board[i][j]
+                if item != ".":
+                    if item in rows[i]:
+                        return False
+                    rows[i].add(item)
+                    if item in cols[j]:
+                        return False
+                    cols[j].add(item)
+                    if item in squares[i // 3 * 3 + j // 3]:
+                        return False
+                    squares[i // 3 * 3 + j // 3].add(item)
+        return True
+```
+
+squrare 조건을 어떻게 인덱싱 하는지 기억이 안 나서 이전에 풀었던 문제를 참고했다.
+
+3. 뇌를 쓴 풀이
+
+
+```
+class Solution:
+    def isValidSudoku(self, board):
+        set1 = set()
+        for i in range(9):
+            for j in range(9):
+                item = board[i][j]
+                if item != ".":
+                    if f"row {i} {item}" not in set1 and \
+                            f"col {j} {item}" not in set1 and \
+                            f"square {i // 3} {j // 3} {item}" not in set1:
+                        set1.add(f"row {i} {item}")
+                        set1.add(f"col {j} {item}")
+                        set1.add(f"square {i // 3} {j // 3} {item}")
+                    else:
+                        return False
+        return True
+```
+
+사실 set을 3개나 사용할 필요도 없다.
+
+그냥 정직하게 "i번 row에 n이라는 값이 있다", "j번 col에 n이라는 값이 있다", "i/3, j/3번 square에 n이라는 값이 있다"를 의미하는 문자열을 그냥 넣으면 된다.
+
+감이 진짜 많이 떨어진 것 같아서 좀 우울하다.

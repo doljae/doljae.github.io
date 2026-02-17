@@ -1,0 +1,201 @@
+---
+slug: 55
+title: "우아한 스프링 부트"
+authors: seokjae
+tags: ["tistory"]
+enableComments: true
+keywords: ["tistory"]
+date: 2021-02-20T21:10:21+09:00
+---
+
+> 원문: https://doljae.tistory.com/55
+
+![cover](https://blog.kakaocdn.net/dna/Nop0b/btqXXjikaMH/AAAAAAAAAAAAAAAAAAAAACnsmLFl1_5G-ZnOf8TAMFu_e0777gGudHepgiR6SXeZ/img.png?credential=yqXZFxpELC7KVnFOS48ylbz2pIh7yKj8&expires=1772290799&allow_ip=&allow_referer=&signature=l0%2B7RWMZVv5k3WG4QBOG6kn5L4A%3D)
+
+우아한 형제들에서 주관하는 테크 세미나인 "우아한 테크 세미나"에서 백기선 님의 스프링 부트 관련 세미나를 듣고 정리한 내용입니다.
+
+Speaker: 백기선
+
+<!-- truncate -->
+
+Spring Initialier
+
+SNAPSHOT
+베타 버전. 최신 버전의 SNAPSHOT은 새로운 기능이나 최적화가 있을 수도 있지만 완벽하게 검증이 되지 않은 단계
+
+M(Milestone)
+정식 배포 전 테스팅 버전
+
+RC(Release Candidate)
+정식 배포되기 직전 버전. 특별히 문제가 없으면 GA로 넘어감.
+
+GA(Generally Available)
+버전 뒤에 아무것도 붙지 않았거나, GA라고 붙은 것은 stable 한 상용 버전이라고 보면 됨.
+
+Group, Artifact, Version
+
+위 3개는 프로젝트를 식별하는 정보로 약속한 것인데 boot-starter 관련 의존성은 버전이 없는데도 문제없이 잘 돌아간다. 이유가 뭘까?
+
+XML은 태그로 구조를 나타내는 언어다. pom.xml의 태그는 위와 같다. 이 태그를 타고 ctrl + 클릭하면...
+
+spring-boot-dependencies라는 의존성이 안에 있다. 또 ctrl + 클릭하면...
+
+수많은 의존성들이 설정되어있는 것을 볼 수 있다. 여기서 $&#123;value&#125;의 값들은 유동적인데 이는 스프링 부트가 설치된 의존성들이 충돌이 일어나지 않는 최적의 버전으로 자동으로 설치해준다고 보면 된다.
+
+즉 Spring Boot는 Spring에서 설정해야 했던 의존성과 의존성 간의 호환 문제를 개발자가 고려하지 않고도 쉽게 의존성을 사용할 수 있게 해주는 기능을 가지고 있다.
+
+백기선 님 왈...
+추가 의존성을 설치했을 때 스프링 부트가 관리해주는 의존성이라면 버전을 지우는 것이 좋다. 그렇지 않다면(ModelMapper 등) 버전을 명시해줘야 한다.
+
+boot 프로젝트에서 view 단을 수정했는데 값이 바뀌지 않는 이유는?
+서버 사이드 렌더링에선 당연한 결과다.
+
+Thymeleaf라는 템플릿 엔진을 써도 내부적으로 Spring MVC가 이 View를 변환하는 과정이 있어야 변화가 보인다.
+
+즉 빌드를 다시 해 주어서 리소스를 갱신해야 한다.
+
+빌드
+작업한 개발 내용을 컴파일하는 과정
+
+재기동
+서버가 재시작되는 것
+
+재기동 메커니즘
+1. 앱을 띄움
+
+2. 특정한 디렉터리를 봄(watcher가 이 역할을 함)
+
+3. 그 디렉터리의 클래스 파일이 변경이 되었는지 봄
+
+4. 변경이 되었으면 애플리캐이션을 재기동함
+
+5. 근데 변경이 되게 하려면 빌드를 해야 함
+
+6. 빌드를 해야 새로운 클래스 파일이 생길 것
+
+7. 빌드를 하면 watcher가 새로운 클래스 파일의 생성을 보고 재기동을 한다.
+
+spring-dev-tools는 배포할 때 빼야 하는 의존성일까?
+dev tools는 기본적으로 배포할 때 무시가 된다.
+
+만일 배포하거나 패키징 할 때도 개발 의존성을 추가하고 싶다면 추가적인 설정을 해주어야 한다.
+
+하지만 기본적으로 배포할 때는 개발용 의존성은 자동으로 무시가 된다.
+
+```
+spring.devtools.livereload.enabled=true
+```
+
+
+팁: 참고로 devtools의 live reload 기능을 할 때 사용할 port도 수정이 가능하다.
+
+boot의 EnableAutoConfiguration의 역할
+
+@SpringBootApplication은 다양한 어노테이션의 집합이다. 여기서 @EnableAutoConfiguration라는 어노테이션이 있는 것을 볼 수 있다.
+
+@EnableAutoConfiguration의 jar 파일의 META-INF/spring.factories를 보면 위 사진과 같이 수많은 설정과 의존성들이 기본으로 세팅이 되어 들어간다.
+
+다시 말해서 Spring을 사용할 때 Servlet을 만들어주거나, Bean으로 등록해주어야 했던 것들, 예를 들면 JDBC를 사용하기 위해서 DataSource -&gt; SqlSessionFactory -&gt; SqlSession의 단계로 거치는 Bean을 등록해주었던 것들과 Spring으로 Web 서비스를 구현하기 위한 다양한 설정과 필터가 기본으로 세팅된다.
+
+이것이 boot가 가진 편리함이다.
+
+팁: @ConditionalOn(조건)이라는 어노테이션을 활용하면 특정 조건에서 특정 설정을 사용하는 것을 세팅할 수 있다.
+
+Bean 주입 우선순위
+
+1. 애플리케이션에서 직접 사용한 빈 어노테이션, 즉 개발자가 작성한 코드(Controller, bean, ComponentScan 등)
+
+2. 그다음 자동 설정으로 제공하는 빈이 등록됨(META-INF/spring.factories, EnableAutoConfiguration, @Configuration && ConditionOnXxx)
+
+만일 1번이랑 2번이 이름이나 ID가 같으면 충돌돼서 실행이 되지 않는다.(스프링 2.x 버전 업데이트) 또 주입할 bean이 모호해도 실행이 되지 않는다.
+
+@Component는 어디에 쓸까?
+Service, Repository, Controller 가 아닌데 만들어 써야 하는 Bean에 사용한다.
+
+properties 관련 내용
+1. properties 파일은 JAVA 스펙상 문자를 유니코드로 인코딩을 하지 않는다.
+
+그래서 추가로 utf-8로 설정해줘야 한글이 깨져서 보이지 않는다. intellij에서 transparent 해주면 내가 볼 땐 한글로 타이핑한 거지만 컴퓨터는 이 한글을 아스키로 인식해서 나도 컴퓨터도 문제가 없다.
+
+properties 파일에 기술하고 밖으로 꺼낸 값은
+
+```
+@Configuration
+@ConfigurationProperties("my")
+```
+
+
+과 같은 어노테이션을 활용해 사용할 수 있다.
+
+configuraion 관련
+우선순위 (번호가 클수록 우선순위가 높음)
+1. resources/config/application.properties 에 기술된 설정(config 디렉터리는 WEB-INF 처럼 이미 예약되어있는 디렉토리 명 중 하나라고 한다. 바꿀 순 있음)
+
+2. resources/application.properties 에 기술된 설정
+
+3. 배포한 jar 파일 내부가 아니라 같은 경로에 있는 application.properties 파일
+
+application.properties 파일은 오버 라이딩이 된다.
+
+이를 이용하면...
+
+JAR 외부에서 정의한, 즉 파일 시스템에서 정의한 properties를 이용해 변경할 설정을 빌드 없이 할 수 있다.
+
+또 우선순위가 높은 properties 값이 다 적용되고 나서 남은 값들이 차례대로 할당된다.
+
+예를 들면
+
+resources/application.properties에
+
+spring.a = apple 라는 설정을 하고 build 해서 jar 파일을 만들었다고 가정 하자.
+
+jar 파일과 동일한 경로에 application.properties 라는 파일을 만들고 spring.a = pear, spring.b=orange 라는 설정을 하면 spring.a 는 pear가 되고, spring.b 라는 build 전에는 하지 않았던 설정값도 추가할 수 있다.
+
+docker로 배포하기
+Spring Boot는 docker 이미지 빌드를 계층형 이미지 빌드를 지원한다.
+이전에는 의존성의 라이브러리 + 내 코드를 JAR로 배포해서 올려야 했다.
+
+그런데 일반적으로 의존성 및 라이브러리는 거의 바뀌지 않는다.
+
+내 코드 부분만 APP으로 따로 이미지로 하면 훨씬 더 빠르고 가볍게, 기존 계층을 캐시로 재사용할 수 있어 효율적이다.
+
+크게 4 계층으로 이미지가 나뉜다
+
+1. application
+
+2. snapshot-dependencies
+
+3. springboot-loader
+
+4. dependencies
+
+팁: docker 콘솔에 dive라는 명령어를 쓰면 이미지를 어떻게 쌓아왔는지를 볼 수 있다.
+
+Actuator
+애플리케이션 관련 데이터 및 모니터링 정보 제공
+
+```
+management.endpoints.web.exposure.include=*
+
+localhost:8080/actuator
+위 주소에서 모든 엔드포인트를 확인할 수 있다
+
+이거 한번 꼭 해볼 것 모든 리소스들이 어디서 왔는지 어떻게 오는지를 볼 수 있다.
+여기는 데이터 뿐만 아니라 bean으로 등록된 것들까지도 볼 수 있음.
+
+httpie 설치 -> curl보다 좋다는데 뭐가 좋은진 모름, 찾아봐야겠다
+
+console
+http localhost:8080/actuator/loggers/org.springframework.web
+
+로그레벨 바꾸기
+http localhost:8080/actuator/loggers/org.springframework.web/여기에뭔가더써야함
+
+참고로 액츄에이터도 security 걸어야함...
+```
+
+
+Spring Boot Admin
+actuator에서 제공하는 정보들을 시각화해 볼 수 있다.
+
+거기에 loger level 변경, heap dump 등도 클릭으로 해결할 수 있다.

@@ -1,0 +1,48 @@
+---
+slug: 80
+title: "104. Maximum Depth of Binary Tree"
+authors: seokjae
+tags: ["tistory"]
+enableComments: true
+keywords: ["tistory"]
+date: 2021-04-16T10:51:41+09:00
+---
+
+> 원문: https://doljae.tistory.com/80
+
+![cover](https://blog.kakaocdn.net/dna/csWweX/btq2E9okp6J/AAAAAAAAAAAAAAAAAAAAAGMvSOcDgTsrwWwNU4qZMNZQaP0dtEKA5SRie0GeWIm_/img.png?credential=yqXZFxpELC7KVnFOS48ylbz2pIh7yKj8&expires=1772290799&allow_ip=&allow_referer=&signature=oiVLoXPESB8JIiBhWSxH0%2F9Tol0%3D)
+
+1. DFS를 이용한 내 풀이
+
+
+```
+class Solution:
+    answer = 0
+
+<!-- truncate -->
+
+    def maxDepth(self, root: TreeNode) -> int:
+
+        def dfs(cur, depth):
+            self.answer = max(self.answer, depth)
+            if cur.left:
+                dfs(cur.left, depth + 1)
+            if cur.right:
+                dfs(cur.right, depth + 1)
+        if not root:
+            return 0
+        dfs(root, 0)
+        return self.answer+1
+```
+
+2. 직관적이고 섹시한 풀이
+
+
+```
+class Solution:
+
+    def maxDepth(self, root: TreeNode) -> int:
+        if not root:
+            return 0
+        return 1 + max(self.maxDepth(root.right), self.maxDepth(root.left))
+```

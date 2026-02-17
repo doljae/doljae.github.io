@@ -1,0 +1,175 @@
+---
+slug: 46
+title: "Spring 01"
+authors: seokjae
+tags: ["tistory"]
+enableComments: true
+keywords: ["tistory"]
+date: 2021-02-07T18:27:31+09:00
+---
+
+> 원문: https://doljae.tistory.com/46
+
+GET, POST
+
+프레임워크, 라이브러리
+코드 플로우의 주도권을 누가 가지느냐의 차이
+
+프레임워크는 개발자가 작성한 클래스를 설정해주면(xml에 적어주기, 어노테이션 달아주기 등) 개발자가 아니라 프레임워크가 클래스의 인스턴스를 생성한다.
+
+<!-- truncate -->
+
+프레임워크는 비기능적 요구사항(성능, 보안, 확장성, 안정성 등)을 만족하는 구조와 구현된 기능을 안정적으로 실행하도록 제어해주는 잘 만들어진 구조의 라이브러리 덩어리
+
+프레임워크는 애플리케이션들의 최소한의 공통점을 찾아 하부 구조를 제공함으로써 개발자들로 하여금 시스템의 하부 구조(비즈니스 로직을 제외한 부분)를 구현하는데 최소한의 자원을 사용하게 만들어 줌
+
+EJB(Enterprise Java Bean)
+
+WAS 상에서 동작하고 트랜잭션 처리, 인증 기능을 제공하는 서버 측 컴포넌트 모델
+
+문제점
+
+JAR + WAR = EAR이라는 파일로 만들어서 배포해야지 WAS에서 테스트할 수 있었음
+
+그러니깐 코드 수정이 일어나면 JAR 만들고 WAR 만들어서 EAR 만드는 걸 계속 반복해야 했고, 코드 작성보다 테스트하는데 시간이 더 많이 걸리는 상황이 되었다.
+
+그럼 EJB 없이, WAS에 종속적이지 않게 웹 애플리케이션 만들 수 없을까? &rarr; Spring의 탄생
+
+Spring
+Java 엔터프라이즈 개발을 편하게 해주는 **오픈소스** **경량급** **애플리케이션** 프레임워크.
+
+**애플리케이션** &rarr; 엔터프라이즈 개발 용이
+
+개발자가 복잡하고 실수하기 쉬운 low level에 많이 신경 쓰지 않고 비즈니스 로직에 전념할 수 있다.
+
+**경량급** &rarr; 서블릿 엔진이 필요 없다.
+
+**오픈소스** &rarr; 오픈소스의 장점과 오픈소스의 단점, 한계를 상당 극복했다.(지원이 빵빵함)
+
+Spring의 전략
+**전략**
+
+**POJO**를 기반으로 **DI, AOP, Portable Service Abstraction**을 적용해 웹 서비스 개발을 구현하자
+
+**Portable Service Abstraction**
+
+LOW LEVEL의 기술을 기술 구현과 기술을 사용하는 인터페이스로 분리했다. &rarr; 종속성을 없앴음
+
+OXM 추상화 &rarr; Object와 XML을 Mapping 하는 기술
+
+**IoC**
+
+프레임워크, 컨테이너가 객체를 생성해서 주입해준다. Spring 은 IoC 컨테이너를 제공한다.
+
+SPRING-BOOT
+핵심 키워드 - STAND ALONE
+
+서블릿 엔진(tomcat, jetty, undertow 등) 없이 JAR 파일만으로 즉시 실행할 수 있는 Spring 기반 프레임워크
+
+HIKARI_CP, JACKSON, MYBATIS 등의 특정 서드파티 라이브러리를 적용할 때 혼란을 최소화하도록 의존성 부분의 설정을 최소화시켰다.
+
+"starter&rdquo; 의존성을 통해 많이 사용하는 의존성을 충돌 없이 묶어놓은 의존성 묶음을 제공한다.
+
+**어노테이션으로 web.xml 등에 설정을 작성할 필요가 없도록 구현 &rarr; XML 이 없다.**
+
+HEALTH CHECKS(모니터링) 기능을 제공하는 액츄에이터를 제공한다.
+
+POJO
+JVM만 있으면 작동하는 JAVA 오브젝트를 의미함
+
+컨테이너의 HTTPSERVLET 등을 상속받지 않고, 특정 기술에 종속된 클래스를 상속받지 않는 JAVA 오브젝트
+
+POJO CLASS DIAGRAM
+interface는 API가 제공하고 실제 구현체는 벤더가 제공한다.
+
+즉 실제 구현체는 언제든지 바뀔 수 있게 코드에는 **상위 인터페이스 타입만 적어주고**, **어떤 구현체를 사용할지는 xml에 기술된 것을 참고해서** 그것을 생성해서 주입한다.
+
+이렇게 하면 이식성도 좋아지고, 특정 회사의 특정 기술에 종속받지 않는 로직을 구현할 수 있다.
+
+Bean과 xml 예제
+
+
+```
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
+	<!-- interface는 객체를 생성할 수 없다, 그래서 등록할 필요가 없음 -->
+
+	<!-- String Printer 클래스를 bean으로 등록함 -->
+	<bean id="strPrinter" class="myspring.di.xml.StringPrinter">
+	</bean>
+
+	<!-- ConsolePrinter Bean 설정 -->
+	<bean id="conPrinter" class="myspring.di.xml.ConsolePrinter">
+	</bean>
+	<!-- Hello Bean 설정 -->
+	<bean id="hello" class="myspring.di.xml.Hello">
+		<!-- setter injection 설정 -->
+		<property name="name" value="스프링"></property>
+		<property name="printer" ref="conPrinter"></property>
+	</bean>
+</beans>
+```
+
+BeanFactory
+
+
+```
+package myspring.di.xml.test;
+
+import org.junit.Test;
+import org.springframework.beans.factory.BeanFactory;
+import org.springframework.context.support.GenericXmlApplicationContext;
+
+public class HelloBeanTest {
+	@Test
+	public void setterInjection() {
+		// BeanFactory는 최상위 인터페이스, GenericXmlApplicationContext는 그 구현체
+		// Bean spec을 알려주는 xml파일을 적어줌
+		BeanFactory factory = new GenericXmlApplicationContext("config/springbeans.xml");
+		
+	}
+
+}
+```
+
+
+팩토리를 생성하면 xml에 기술한 bean 객체가 자동으로 생성된 상태로 시작함
+
+```
+package myspring.di.xml.test;
+
+import org.junit.Test;
+import org.springframework.beans.factory.BeanFactory;
+import org.springframework.context.support.GenericXmlApplicationContext;
+
+import myspring.di.xml.Hello;
+
+public class HelloBeanTest {
+	@Test
+	public void setterInjection() {
+		// BeanFactory는 최상위 인터페이스, GenericXmlApplicationContext는 그 구현체
+		// Bean spec을 알려주는 xml파일을 적어줌
+		BeanFactory factory = new GenericXmlApplicationContext("config/springbeans.xml");
+		// xml에 기술한 bean id로 bean을 가져옴, 기본적으로 Object 형태로 가져옴
+		Hello hello = (Hello) factory.getBean("hello");
+		// 위에 거랑 똑같음, hello 라는 id의 bean을 Hello 형태로 가져오는 방법
+		Hello hello2 = factory.getBean("hello", Hello.class);
+		// 이거 true임
+		// 기본적으로 singleton 패턴으로 객체를 생성하기 때문에
+		// 객체를 하나만 생성해서 재사용을 하고 있음
+		// singleton은 생성자가 private 이여야하는데 우리 코드는 public임
+		// 컨테이너가 주도권을 가져와서 byte code injection을 통해 기본적으로 singleton 스타일을 가미시켜서
+		// bean을 생성하기 때문이다.
+		System.out.println(hello == hello2);
+	}
+
+}
+```
+
+그럼 singleton으로 안 만들고 싶으면?
+
+bean 기술할 때 scope 태그에 설정해주면 된다. default 값은 singleton

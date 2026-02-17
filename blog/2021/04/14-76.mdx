@@ -1,0 +1,98 @@
+---
+slug: 76
+title: "787. Cheapest Flights Within K Stops"
+authors: seokjae
+tags: ["tistory"]
+enableComments: true
+keywords: ["tistory"]
+date: 2021-04-14T18:34:38+09:00
+---
+
+> 원문: https://doljae.tistory.com/76
+
+![cover](https://blog.kakaocdn.net/dna/D2TUw/btq2zB5Zutb/AAAAAAAAAAAAAAAAAAAAADOIUN0A2kmAAoEcV9qLFxqSSKXQZlFKAqSV3w7VqkrU/img.png?credential=yqXZFxpELC7KVnFOS48ylbz2pIh7yKj8&expires=1772290799&allow_ip=&allow_referer=&signature=iyMp84ZdpGcQoKhC0u84%2F6gWbyI%3D)
+
+1. Dijkstra와 경유지 횟수를 고려한 최단 거리 알고리즘 (실패)
+**원인**
+
+결국 최단거리 배열에 저장되는 거리는 경유지 횟수를 고려하지 않은 최단거리가 될 수밖에 없음
+
+<!-- truncate -->
+
+```
+from typing import *
+from heapq import *
+from collections import defaultdict
+
+
+# k번 이하의 경유지를 이용할 수 있을 경우의 최단거리를 구하시오
+# 내가 생각하는 해결법
+# 다익스트라 알고리즘을 쓰는데 pq에 경유횟수까지 넣어서
+# 경유 횟수를 오버하는 경우는 그냥 값을 날려버립시다.
+class Solution:
+    def findCheapestPrice(self, n: int,
+                          flights: List[List[int]],
+                          src: int,
+                          dst: int,
+                          K: int) -> int:
+        graph = defaultdict(set)
+        for edge in flights:
+            cur_src, cur_dsc, cur_cost = edge
+            graph[cur_src].add((cur_cost, cur_dsc))
+        dist = [float("inf")] * n
+        dist[src] = 0
+        # cost, 현재 노드, 경유지 거친 횟수
+        q = [(0, src, 0)]
+        heapify(q)
+
+        while q:
+            # print(q)
+            cur_cost, cur_node, cur_k = heappop(q)
+            if dist[cur_node] < cur_cost:
+                continue
+            if cur_k > K:
+                continue
+            for adj in graph[cur_node]:
+                # print(adj)
+                adj_cost, adj_node = adj
+                new_cost = cur_cost + adj_cost
+                if new_cost < dist[adj_node] and cur_k <= K:
+                    # print("!")
+                    dist[adj_node] = new_cost
+                    heappush(q, (new_cost, adj_node, cur_k + 1))
+        # print(dist, dist[dst])
+        return dist[dst] if dist[dst] != float("inf") else -1
+```
+
+2. 동일한 알고리즘, 목적지를 만난 순간 바로 반환
+우선순위 큐에는 항상 최단거리가 우선적으로 나오기 때문에 뭐가 어찌 되었든 큐에 나온 값이 목적지라면 그것이 최단거리이고 바로 반환하는 것으로 해결.
+
+```
+from typing import *
+from heapq import *
+from collections import defaultdict
+
+
+class Solution:
+    def findCheapestPrice(self, n: int,
+                          flights: List[List[int]],
+                          src: int,
+                          dst: int,
+                          K: int) -> int:
+        graph = defaultdict(set)
+        for edge in flights:
+            cur_src, cur_dsc, cur_cost = edge
+            graph[cur_src].add((cur_cost, cur_dsc))
+        # cost, 현재 노드, 경유지 거친 횟수
+        q = [(0, src, K)]
+        heapify(q)
+        while q:
+            cur_cost, cur_node, cur_k = heappop(q)
+            if cur_node == dst:
+                return cur_cost
+            for adj in graph[cur_node]:
+                adj_cost, adj_node = adj
+                if cur_k >= 0:
+                    heappush(q, (cur_cost + adj_cost, adj_node, cur_k - 1))
+        return -1
+```

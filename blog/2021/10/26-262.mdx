@@ -1,0 +1,61 @@
+---
+slug: 262
+title: "k8s commands 03"
+authors: seokjae
+tags: ["tistory"]
+enableComments: true
+keywords: ["tistory"]
+date: 2021-10-26T23:20:44+09:00
+---
+
+> 원문: https://doljae.tistory.com/262
+
+kubectl run nginx-pod --image=nginx:alpine
+
+kubectl run redis --image=redis:alpine --dry-run=client -o=yaml &gt; redis-pod.yaml
+
+kubectl expose pod redis --port=6379 --name redis-service
+
+<!-- truncate -->
+
+kubectl create deployment webapp --image=nginx --replicas=3
+
+kubectl run custom-nginx --image=nginx --port=8080
+
+kubectl create deployment redis-deploy --image redis --namespace dev-ns --replicas=2
+
+kubectl run httpd --image=httpd:alpine --port=80 --expose
+
+kubectl run nginx --image=nginx
+
+kubectl run nginx --image=nginx --dry-run=client -o yaml
+
+kubectl create deployment --image=nginx nginx
+
+kubectl create deployment --image=nginx nginx --dry-run=client -o yaml
+
+kubectl create deployment nginx --image=nginx --replicas=4
+
+kubectl scale deployment nginx --replicas=4
+
+kubectl create deployment nginx --image=nginx --dry-run=client -o yaml &gt; nginx-deployment.yaml
+
+**Create a Service named redis-service of type ClusterIP to expose pod redis on port 6379**
+
+**kubeclt expose pod redis --port=6379 --name redis-service --dry-run=client -o yaml**
+
+(THis will automatically use the pod's labels as selectors)
+
+**kubectl create service clusterip redis --tcp=6379:6379 --dry-run=client -o yaml**
+
+(This will not use the pods labels as selectors, instead it will assume selectors as app=redis. You cannot pass in selectors as an option. So it does not work very well if your pod has a differenct label set. So generate the file and modify the selectors before creating the service)
+
+**Create a Service name nginx of type NodePort to expose pod nginx's port 80 on port 30080 on the nodes**
+
+**kubectl expose pod nginx --type=-NodePort --port=80 --name=nginx-service --dry-run=client o yaml**
+
+(This will automatically use the pod's labels as selectors, but cannot specify the node port)
+
+**kubectl create service nodeport nginx --tcp=80:80 --node-port=30080 --dry-run=client o yaml**
+
+(This will not use the pods labels as selectors)

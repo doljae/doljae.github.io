@@ -1,0 +1,56 @@
+---
+slug: 67
+title: "94. Binary Tree Inorder Traversal"
+authors: seokjae
+tags: ["tistory"]
+enableComments: true
+keywords: ["tistory"]
+date: 2021-04-05T14:09:52+09:00
+---
+
+> 원문: https://doljae.tistory.com/67
+
+![cover](https://blog.kakaocdn.net/dna/EdoLa/btq1OMAlot0/AAAAAAAAAAAAAAAAAAAAAGwUCZYLZu_Dzc4NIPG7rTFFoMMmHkvF_ASP4zXAoxwJ/img.png?credential=yqXZFxpELC7KVnFOS48ylbz2pIh7yKj8&expires=1772290799&allow_ip=&allow_referer=&signature=UaXeFdL%2FoZWJeO6lZiJWGpWPg5E%3D)
+
+1. DFS를 이용한 Inorder 구현
+
+
+```
+from typing import *
+
+<!-- truncate -->
+
+
+class Solution:
+    def inorderTraversal(self, root: TreeNode) -> List[int]:
+        answer = []
+
+        def move(cur):
+            if cur.left:
+                move(cur.left)
+            answer.append(cur.val)
+            if cur.right:
+                move(cur.right)
+
+        move(root)
+        return answer
+```
+
+2. Stack을 이용한 Inorder 구현
+
+
+```
+class Solution:
+    def inorderTraversal(self, root: TreeNode) -> List[int]:
+        answer = []
+        stack = []
+        cur = root
+        while cur or stack:
+            while cur:
+                stack.append(cur)
+                cur = cur.left
+            cur = stack.pop()
+            answer.append(cur.val)
+            cur = cur.right
+        return answer
+```

@@ -1,0 +1,65 @@
+---
+slug: 130
+title: "621. Task Scheduler"
+authors: seokjae
+tags: ["tistory"]
+enableComments: true
+keywords: ["tistory"]
+date: 2021-05-14T11:34:27+09:00
+---
+
+> 원문: https://doljae.tistory.com/130
+
+![cover](https://blog.kakaocdn.net/dna/bX6Isr/btq4SbQ1sSh/AAAAAAAAAAAAAAAAAAAAADA6Trn6drjRc_KUEMrTf3jE7BD8OJdMI7KqQYo8s2TR/img.png?credential=yqXZFxpELC7KVnFOS48ylbz2pIh7yKj8&expires=1772290799&allow_ip=&allow_referer=&signature=8jK1gaBpQCCa5sxMaeC4oH1WjZ8%3D)
+
+1. 내 Trash Garbage Code
+
+
+```
+from typing import *
+from heapq import *
+from collections import defaultdict
+
+<!-- truncate -->
+
+
+class Solution:
+    def leastInterval(self, tasks: List[str], n: int) -> int:
+        dict1 = defaultdict(int)
+        for task in tasks:
+            dict1[task] += 1
+        q = []
+        for task in dict1:
+            q.append([0, -dict1[task], task])
+        heapify(q)
+        seq, time = [], 0
+        while q:
+            for i in range(len(q)):
+                if q[i][0] > 0:
+                    q[i][0] -= 1
+            heapify(q)
+            gap, left_task, task_name = heappop(q)
+            left_task = -left_task
+            if gap > 0:
+                for i in range(gap):
+                    seq.append("idle")
+                for i in range(len(q)):
+                    if q[i][0] > 0:
+                        q[i][0] -= gap
+            seq.append(task_name)
+            if left_task - 1 > 0:
+                q.append([n + 1, -(left_task - 1), task_name])
+        return len(seq)
+```
+
+우선순위 큐를 이용해 풀이했다. 기준은 다음과 같다.
+
+1. 현재 타임 슬라이스가 가장 작은 작업
+
+2. 1번이 같다면 남은 작업량이 가장 많은 작업
+
+문제가 있다면, Heap 공간의 값에 대한 조작을 하면 Heap 정렬이 풀린다. 그러니깐 변화하는 상태 값이 PQ 원소에 있다면 그 내부 값을 조작할 때 heapify가 풀려서 다시 heapify를 해줘야 한다.
+
+참고로 Java나 C++ 에선 Heap 내부 값을 조작해도 정렬을 유지해주는 자료구조를 지원하는 것으로 알고 있다. 하지만 Python에선 이런 자료구조가 기본적으로 없는 것으로 알고 있다.
+
+그래서 간신히 통과했지만 분명히 이것이 정해는 아닐 것이다. 조금 더 생각해보고 수정 코드는 업데이트할 예정.

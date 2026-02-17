@@ -1,0 +1,91 @@
+---
+slug: 63
+title: "2105. [모의 SW 역량테스트] 디저트 카페"
+authors: seokjae
+tags: ["tistory"]
+enableComments: true
+keywords: ["tistory"]
+date: 2021-04-04T23:34:10+09:00
+---
+
+> 원문: https://doljae.tistory.com/63
+
+```
+from collections import deque
+
+
+def is_possible(x, y, length):
+    if 0 <= x < length and 0 <= y < length:
+        return True
+    return False
+
+
+def dfs(cur_x, cur_y, cur_dir, seq, visited, tx, ty):
+    global answer, board, direction
+    if len(seq) == 0:
+        if (cur_x, cur_y) == (tx, ty):
+            answer = max(answer, len(visited))
+            return
+        
+    if cur_dir == 0:
+        for direc in direction:
+            new_dir = direc
+            new_x, new_y = cur_x + direction[direc][0], cur_y + direction[direc][1]
+            if is_possible(new_x, new_y, cafe_length):
+                visited.add(board[new_x][new_y])
+                temp = list(seq)
+                n_seq = deque(temp[temp.index(direc):temp.index(direc) + 4])
+                n_seq.popleft()
+                dfs(new_x, new_y, new_dir, n_seq, visited, tx, ty)
+                visited.remove(board[new_x][new_y])
+    else:
+        new_x, new_y = cur_x + direction[cur_dir][0], cur_y + direction[cur_dir][1]
+        if is_possible(new_x, new_y, cafe_length):
+            if board[new_x][new_y] not in visited:
+                visited.add(board[new_x][new_y])
+                dfs(new_x, new_y, cur_dir, seq, visited, tx, ty)
+                visited.remove(board[new_x][new_y])
+        if seq:
+            direc = seq.popleft()
+            new_dir = direc
+            new_x, new_y = cur_x + direction[direc][0], cur_y + direction[direc][1]
+            if is_possible(new_x, new_y, cafe_length):
+                if board[new_x][new_y] not in visited:
+                    visited.add(board[new_x][new_y])
+                    dfs(new_x, new_y, new_dir, seq, visited, tx, ty)
+                    visited.remove(board[new_x][new_y])
+            seq.appendleft(direc)
+
+<!-- truncate -->
+
+
+test_case = int(input())
+
+for t in range(1, test_case + 1):
+    cafe_length = int(input())
+    answer = -1
+    board = []
+    direction = {2: [-1, -1],
+                 1: [-1, 1],
+                 -1: [1, -1],
+                 -2: [1, 1]}
+    seq1 = [1, -2, -1, 2, 1, -2, -1, 2]
+    for i in range(cafe_length):
+        board.append(list(map(int, input().split())))
+    for i in range(cafe_length):
+        for j in range(cafe_length):
+            q1 = deque(seq1)
+            visited1 = set()
+            dfs(i, j, 0, q1, visited1, i, j)
+    print(f"#{t} {answer}")
+```
+
+1. Python으론 특정 좌표에서 4방을 모두 진입하는 방법으론 시간 초과가 난다. (Java는 가능한 것을 확인했음)
+
+2. 어떻게 처리를 해도 꺾인 횟수로만 판단하는 것은 시간 초과가 난다.
+
+3. 사각형은 꺾는 방향의 변화가 총 4번만 일어나야 하니깐 그것을 고려해서 코드를 작성하면 간신히 통과한다.
+
+**4. 이 문제의 정해는 그냥 모든 좌표에 대해서 해당 좌표에서 만들 수 있는 사각형의 가로, 세로 길이를 조합해서 그 사각형이 조건에 맞는 사각형인지 판단하는 문제다.**
+
+**혹시나 누군가 이 글을 본다면 바로 뒤로 가기 눌러서 다른 글을 보길 권장한다.**

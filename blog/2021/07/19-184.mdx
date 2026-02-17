@@ -1,0 +1,65 @@
+---
+slug: 184
+title: "Chapter9. 디플로이먼트: 선언적 애플리케이션 업데이트"
+authors: seokjae
+tags: ["tistory"]
+enableComments: true
+keywords: ["tistory"]
+date: 2021-07-19T11:01:30+09:00
+---
+
+> 원문: https://doljae.tistory.com/184
+
+쿠버네티스 인 액션의 챕터 9 진행에 사용되는 커맨드 목록입니다.
+
+```
+minikube start
+
+kubectl apply -f kubia-rc-and-service-v1.yaml
+
+<!-- truncate -->
+
+kubectl get services kubia
+
+minikube service kubia
+
+curl -i 주소
+
+while true;
+do curl 주소
+done
+
+kubectl delete rc --all
+
+kubectl get po
+
+kubectl create -f kubia-deployment-v1.yaml --record
+
+kubectl get po
+
+kubectl rollout status deployment kubia
+
+kubectl get rs
+
+kubectl describe deployments
+
+kubectl set image deployment kubia nodejs=luksa/kubia:v2 --record
+
+kubectl rollout undo deploy kubia
+
+kubectl rollout history deploy kubia
+
+kubectl rollout undo deployment kubia --to-revision=1
+
+kubectl set image deploy kubia nodejs=luksa/kubia:v4 --record
+
+kubectl rollout pause deploy kubia
+
+kubectl get po
+
+kubectl rollout resume deploy kubia
+
+kubectl describe deploy kubia
+
+kubectl rollout undo deployment kubia
+```

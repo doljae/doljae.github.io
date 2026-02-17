@@ -1,0 +1,61 @@
+---
+slug: 99
+title: "160. Intersection of Two Linked Lists"
+authors: seokjae
+tags: ["tistory"]
+enableComments: true
+keywords: ["tistory"]
+date: 2021-04-30T13:52:53+09:00
+---
+
+> 원문: https://doljae.tistory.com/99
+
+![cover](https://blog.kakaocdn.net/dna/bYZ8Fk/btq3O55aGuK/AAAAAAAAAAAAAAAAAAAAACONPp2Xc2k1AVs_F-VNq5gII6WQsO3y6EAJAzSAynUO/img.png?credential=yqXZFxpELC7KVnFOS48ylbz2pIh7yKj8&expires=1772290799&allow_ip=&allow_referer=&signature=qtAgzYjo2BvbLRAL1Jmlh0K4wuA%3D)
+
+1. 객체 ID값을 이용한 분기점 반환
+
+
+```
+class Solution:
+    def getIntersectionNode(self, headA: ListNode, headB: ListNode) -> ListNode:
+        a_id_list = []
+        b_id_list = []
+        p_a, p_b = headA, headB
+        while p_a:
+            a_id_list.append(id(p_a))
+            p_a = p_a.next
+        while p_b:
+            b_id_list.append(id(p_b))
+            p_b = p_b.next
+        temp = set(a_id_list) & set(b_id_list)
+        if not temp:
+            return None
+        p_a = headA
+        # print(temp)
+        while p_a:
+            # print(id(p_a))
+            if id(p_a) in temp:
+                print("!")
+                return p_a
+            p_a = p_a.next
+```
+
+<!-- truncate -->
+
+객체 고유의 주소값을 저장하면서 두 LinkedList의 겹치는 경로를 집합으로 저장한다.
+
+그 후 다시 한 번 선형 탐색을 하면서 위에서 만든 집합의 주 솟값과 동일한 주소값이 된 순간이 분기하는 순간이다.
+
+2. Cycle 그래프의 특성을 이용한 풀이
+
+
+```
+    def getIntersectionNode(self, headA, headB):
+        p1, p2 = headA, headB
+        while p1 != p2:
+            p1 = headB if not p1 else p1.next
+            p2 = headA if not p2 else p2.next
+        return p1
+```
+
+이해가 안 된다면 손으로 그려볼 것.

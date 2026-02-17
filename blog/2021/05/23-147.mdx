@@ -1,0 +1,63 @@
+---
+slug: 147
+title: "191. Number of 1 Bits"
+authors: seokjae
+tags: ["tistory"]
+enableComments: true
+keywords: ["tistory"]
+date: 2021-05-23T22:29:56+09:00
+---
+
+> 원문: https://doljae.tistory.com/147
+
+![cover](https://blog.kakaocdn.net/dna/l8hgF/btq5to4sRU1/AAAAAAAAAAAAAAAAAAAAAJSPOQat1DOLNqMiD3i7G4mOzPlSH5nrKezVdgTWUzzE/img.png?credential=yqXZFxpELC7KVnFOS48ylbz2pIh7yKj8&expires=1772290799&allow_ip=&allow_referer=&signature=7Ie6bbLeZaEfzLQvS0EZnD%2FrHiU%3D)
+
+1. Bit 성질을 이용한 풀이
+
+
+```
+class Solution:
+    def hammingWeight(self, n: int) -> int:
+        answer = 0
+        while n:
+            n = n & (n - 1)
+            answer += 1
+        return answer
+```
+
+<!-- truncate -->
+
+비트 조작은 굉장히 재밌는 성질들이 많다.
+
+내가 아는 몇 안 되는 비트 조작 중 하나가 이것인데,
+
+양의 정수 a와 a-1을 AND 연산하면 양의 정수 a에서 최하단의 2진수 비트 1이 사라진다.
+시뮬레이션해보면 다음과 같다.
+
+```
+11로 시작하면...
+
+11 -> 1011(2)
+
+1011 & 1010 = 1010
+1010 & 1001 = 1000
+1000 & 0111 = 0000
+3
+```
+
+
+2. Counter를 사용한 풀이
+
+
+```
+from collections import Counter
+
+
+class Solution:
+    def hammingWeight(self, n: int) -> int:
+        return Counter(bin(n)[2:])["1"]
+```
+
+주어진 양의 정수를 2진수로 표현하는 문자열로 바꿔주는 내장 함수 bin을 사용해 앞의 "0x"이후의 문자열에 대해서 Counter 모듈을 이용해 문자열 1과 0의 개수를 가지고 있는 Dictionary를 만들어 "1"에 해당하는 value를 반환한다.
+
+물론 이 문제는 1번처럼 비트 조작을 사용해보라는 문제인 것 같다.

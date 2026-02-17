@@ -1,0 +1,66 @@
+---
+slug: 125
+title: "102. Binary Tree Level Order Traversal"
+authors: seokjae
+tags: ["tistory"]
+enableComments: true
+keywords: ["tistory"]
+date: 2021-05-11T10:32:57+09:00
+---
+
+> 원문: https://doljae.tistory.com/125
+
+![cover](https://blog.kakaocdn.net/dna/bfY3DA/btq4ErTqD7H/AAAAAAAAAAAAAAAAAAAAAAy3zfnlevdQQViA-isg93UBaCm0yUxpSXmCWfH2PJ1E/img.png?credential=yqXZFxpELC7KVnFOS48ylbz2pIh7yKj8&expires=1772290799&allow_ip=&allow_referer=&signature=fq07uzOuI6SsfgeAUxHDT7%2BA%2FG4%3D)
+
+1. Queue를 사용한 풀이
+
+
+```
+class Solution:
+    def levelOrder(self, root: TreeNode) -> List[List[int]]:
+        answer = []
+        if not root:
+            return []
+        q = deque([])
+        q.append((root, 0))
+        trace = {}
+        while q:
+            cur_node, cur_level = q.popleft()
+            if cur_level not in trace:
+                trace[cur_level] = [cur_node.val]
+            else:
+                trace[cur_level].append(cur_node.val)
+            if cur_node.left:
+                q.append((cur_node.left, cur_level + 1))
+            if cur_node.right:
+                q.append((cur_node.right, cur_level + 1))
+        for level in trace:
+            answer.append(trace[level])
+        return answer
+```
+
+<!-- truncate -->
+
+Queue를 이용하면 트리의 높이 순서대로 노드를 탐색할 수 있다.
+
+2. 리팩토링
+
+
+```
+class Solution:
+    def levelOrder(self, root: TreeNode) -> List[List[int]]:
+        if not root:
+            return []
+        answer = []
+        q, trace = deque([(root, 0)]), defaultdict(list)
+        while q:
+            cur_node, cur_level = q.popleft()
+            trace[cur_level].append(cur_node.val)
+            if cur_node.left:
+                q.append((cur_node.left, cur_level + 1))
+            if cur_node.right:
+                q.append((cur_node.right, cur_level + 1))
+        for level in trace:
+            answer.append(trace[level])
+        return answer
+```

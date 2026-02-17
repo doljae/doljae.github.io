@@ -1,0 +1,78 @@
+---
+slug: 222
+title: "1079. Letter Tile Possibilities"
+authors: seokjae
+tags: ["tistory"]
+enableComments: true
+keywords: ["tistory"]
+date: 2021-08-29T12:36:55+09:00
+---
+
+> 원문: https://doljae.tistory.com/222
+
+![cover](https://blog.kakaocdn.net/dna/Vn9u7/btrdr4o2BGl/AAAAAAAAAAAAAAAAAAAAAAFo9gNUOgiZtA9Pa-CLUYnq9GUEpQH9UqrwQAAOqHwS/img.png?credential=yqXZFxpELC7KVnFOS48ylbz2pIh7yKj8&expires=1772290799&allow_ip=&allow_referer=&signature=ZHazyUlO9LwN6Mpg9GWB6ZvHEmU%3D)
+
+알파벳으로 구성된 문자열이 주어진다.
+
+이 문자열의 문자들을 이용해 만들 수 있는 모든 문자열의 개수를 반환하는 문제다. 단 빈 문자열은 제외한다.
+
+<!-- truncate -->
+
+```
+Input: tiles = "AAB"
+Output: 8
+Explanation: The possible sequences are "A", "B", "AA", "AB", "BA", "AAB", "ABA", "BAA".
+```
+
+접근법
+문자 최대 길이가 7인 것을 보아선 Brute-Force 풀이법이 가능할 것 같았지만, 보통 이런 문제는 더 효율적인 방법이 있기 마련이라서 그런 방법이 있는지 생각해보았다.
+
+우선 문자열이 주어지면 그 문자열을 key로, 해당 문자열의 빈도수를 value로 하는 key-value map을 하나 만들 수 있겠다.
+
+예를 들어 "AAABBCC"가 입력값으로 주어진다면 key-value map은 다음과 같다.
+
+```
+map = {"A" : 3, "B" : 2, "C" : 1}
+```
+
+
+이후 해당 key를 가지고 만들 수 있는 모든 후보 문자열을 만든다. 위 map을 사용하면 다음과 같다.
+
+```
+"A" -> {"A", "AA", "AAA"}
+"B" -> {"B", "BB"}
+"C" -> {"C"}
+```
+
+만들어진 이 부분 문자열들을 조합해서 개수를 반환할 수 있지 않을까라고 생각했는데...
+
+그러니깐 수식 한 줄로 값을 반환받을 수 있는 방법이 있을까라고 생각했는데 떠오르지 않았다.
+
+1. DFS
+
+
+```
+from collections import Counter
+
+
+class Solution:
+    def numTilePossibilities(self, tiles: str) -> int:
+        count_map = Counter(tiles)
+
+        answer = set()
+
+        def dfs(cur_val):
+            answer.add(cur_val)
+
+            for key in count_map:
+                if count_map[key]:
+                    count_map[key] -= 1
+                    dfs(cur_val + key)
+                    count_map[key] += 1
+
+        dfs("")
+
+        return len(answer) - 1
+```
+
+Discussion에도 most voted 풀이가 DFS니깐 한 줄로 풀 수 있는 수식 같은 건 없는 모양이다.

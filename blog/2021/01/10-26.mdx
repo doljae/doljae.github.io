@@ -1,0 +1,179 @@
+---
+slug: 26
+title: "1781번: 컵라면 (Python)"
+authors: seokjae
+tags: ["tistory"]
+enableComments: true
+keywords: ["tistory"]
+date: 2021-01-10T18:26:26+09:00
+---
+
+> 원문: https://doljae.tistory.com/26
+
+문제 링크
+
+접근 방법
+1. N이 200,000이기 때문에 순열로 모든 경우를 고려하는 것은 시간 초과
+
+2. 특정 상황에서 가장 큰 컵라면 값을 뽑아내야 하기 때문에 우선순위 큐 사용
+
+<!-- truncate -->
+
+3. 입력된 문제를 시간순 오름차순, 컵라면 값 내림차순 정렬해 deque에 넣는다.
+
+4. deque에서 값을 뽑아내면서 현재 시간보다 데드라인이 크거나 같은 문제의 컵라면 값을 우선순위 큐에 넣어줌
+
+5. 만약에 우선순위 큐의 peek 값이 현재 문제의 컵라면 값보다 작다면 우선순위 큐에서 값을 빼고, 현재 문제의 컵라면 값을 우선순위 큐에 넣어줌
+
+6. 최종적으로 모든 문제를 순회했을 때 우선순위 큐에 남아있는 컵라면의 값의 합을 반환
+
+당위성
+왜 저 접근방법이 유효한가에 대해서 제대로 전달될지 모르겠지만 설명해보면 다음과 같다.
+
+1. 이 문제는 1분마다 단 한 문제를 풀 수 있다.
+
+2. 생각해보면 컵라면의 값이 최대가 되려면 매 순간 풀 수 있는 문제들 중 가장 컵라면 값이 큰 문제를 선택하면 된다.
+
+3. 그 순서가 어찌 되었든 매시간마다 내가 풀 수 있는 문제들 중 가장 컵라면 값이 큰 문제만을 풀고 넘어가면 결국 그 문제들의 컵라면 값의 합은 우리가 원하는 값이 될 것이다.
+
+풀이 1
+
+
+```
+import sys
+from heapq import *
+from collections import deque
+
+r = sys.stdin.readline
+
+length = int(r())
+board = []
+for i in range(length):
+    deadline, cup_noodle = map(int, r().split())
+    board.append((deadline, cup_noodle,))
+board.sort(key=lambda x: (x[0], -x[1]))
+
+board = deque(board)
+pq, time = [], 1
+while board:
+    cur = board.popleft()
+    if cur[0] >= time:
+        heappush(pq, cur[1])
+        time += 1
+    elif pq[0] < cur[1]:
+        heappop(pq)
+        heappush(pq, cur[1])
+print(sum(pq))
+```
+
+좋은 테스트 케이스는 다음과 같다.
+
+```
+9
+1 1
+1 1
+2 10
+2 10
+3 100
+3 100
+3 100
+6 300
+6 300
+```
+
+풀이 2
+예를 들어 (2, 20)라는 입력값이 있다고 가정해보자. 이 입력값은 데드라인이 2, 컵라면 값이 20이다. 즉 이 문제는 2분 안에 풀었을 때 20의 보상을 얻는 문제이다.
+
+그럼 이 문제는 1분에도 풀 수 있고, 2분에도 풀 수 있을 것이다. 그럼 언제 푸는 게 더 효율적일까? 결론은 2분에 푸는 것이 효율적일 가능성이 높다.
+
+그 이유는 다음과 같다.
+
+1. 결국 컵라면의 값이 최대가 되려면 주어진 문제들 중 가장 컵라면 값이 큰 문제는 반드시 풀어야 한다.
+
+2. 그 문제의 deadline을 d라고 한다면 이 문제는 1 ~ d 분 안에 풀 수 있다.
+
+3. 그런데 이 문제를 d분이 아니라 1분에 푸는 것은 비효율적이다.
+
+4. 왜냐하면 1분에는 1분이 deadline인 문제를 풀고, 그다음에 위 문제를 푸는 것이 훨씬 컵라면 값의 합이 클 수밖에 없기 때문이다.
+
+5. 즉 deadline이 주어졌을 때 이 문제를 최대한 deadline에 가깝게 푸는 것이 더 많은 문제를 풀어 더 큰 컵라면 값의 합을 얻을 수 있는 기회가 생긴다.
+
+위 예제로 보면 (6, 300)이 있는데 가능하면 6분, 이미 6분에 푼 문제가 있다면 5분, 5분에 푼 문제가 있다면 4분과 같은 식으로 반복해서 풀 수 있는 범위 중 가장 데드라인에 가깝게 문제를 푸는 것이 좋다.
+
+이것을 착안한 풀이는 다음과 같다.
+
+```
+import sys
+from heapq import *
+
+
+r = sys.stdin.readline
+
+length = int(r())
+pq = []
+for i in range(length):
+    deadline, cup_noodle = map(int, r().split())
+    pq.append((-cup_noodle, deadline))
+heapify(pq)
+
+visited = [0] * (length + 1)
+# parents = [i for i in range(length + 1)]
+result = 0
+
+while pq:
+    cur = heappop(pq)
+    cur_noodle, cur_deadline = -cur[0], cur[1]
+
+    while visited[cur_deadline]:
+        cur_deadline -= 1
+    if cur_deadline == 0:
+        continue
+    visited[cur_deadline] = 1
+    result += cur_noodle
+print(result)
+```
+
+우선순위 큐에서 컵라면 값이 큰 순서대로 뽑는다. 뽑고 데드라인부터 선형 탐색을 하면서 아직 문제를 풀지 않은 시간대에 해당 문제를 풀었다고 체크하고 컵라면 값을 더한다.
+
+실제로 N이 200000이어서 통과가 안될 것 같은데 통과한다.
+
+풀이 3
+위 풀이와 로직은 동일하나 현재 시간대에서 가장 왼쪽으로 가까운 시간대를 기억해 선형 탐색 시간을 줄인 방법이 아래와 같다.
+
+```
+import sys
+from heapq import *
+sys.setrecursionlimit(10**4)
+r = sys.stdin.readline
+
+length = int(r())
+pq = []
+for i in range(length):
+    deadline, cup_noodle = map(int, r().split())
+    pq.append((-cup_noodle, deadline))
+heapify(pq)
+
+candidate = [i for i in range(length + 1)]
+visited = [0] * (length + 1)
+result = 0
+
+
+def sol(deadline):
+    if deadline == 0 or candidate[deadline] == 0:
+        return 0
+    if not visited[deadline]:
+        visited[deadline] = 1
+        return deadline
+    candidate[deadline] = sol(deadline - 1)
+    return candidate[deadline]
+
+
+while pq:
+    cur = heappop(pq)
+    cur_noodle, cur_deadline = -cur[0], cur[1]
+
+    candidate_date = sol(cur_deadline)
+    if candidate_date != 0:
+        result += cur_noodle
+print(result)
+```

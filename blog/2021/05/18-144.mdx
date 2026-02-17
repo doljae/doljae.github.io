@@ -1,0 +1,63 @@
+---
+slug: 144
+title: "208. Implement Trie (Prefix Tree)"
+authors: seokjae
+tags: ["tistory"]
+enableComments: true
+keywords: ["tistory"]
+date: 2021-05-18T10:23:07+09:00
+---
+
+> 원문: https://doljae.tistory.com/144
+
+![cover](https://blog.kakaocdn.net/dna/py3zL/btq44O3qmMr/AAAAAAAAAAAAAAAAAAAAAGKEC3XtboyLjhQ5OIeCwH_aUs7D9wh4sJJch0JoZJij/img.png?credential=yqXZFxpELC7KVnFOS48ylbz2pIh7yKj8&expires=1772290799&allow_ip=&allow_referer=&signature=3wQ4f114DYDmloZnaTDJTFNS1Qs%3D)
+
+1. Trie 자료구조 구현
+
+
+```
+class Trie:
+    def __init__(self):
+        self.head = Node()
+
+<!-- truncate -->
+
+    def insert(self, word: str) -> None:
+        cur = self.head
+        for char in word:
+            if char not in cur.child:
+                new_node = Node(char)
+                cur.child[char] = new_node
+            cur = cur.child[char]
+        cur.child["*"] = "!"
+
+    def search(self, word: str) -> bool:
+        cur = self.head
+        for char in word:
+            if char not in cur.child:
+                return False
+            cur = cur.child[char]
+        if "*" in cur.child:
+            return True
+
+    def startsWith(self, prefix: str) -> bool:
+        cur = self.head
+        for char in prefix:
+            if char not in cur.child:
+                return False
+            cur = cur.child[char]
+        return True
+
+
+class Node:
+    def __init__(self, val="0"):
+        self.val = val
+        self.child = {}
+
+    def __str__(self):
+        return f"val: {self.val}, child:{self.child}"
+```
+
+스스로도 한 번에 통과해서 놀랐다.
+
+Trie 정도는 어느샌가 그냥 구현할 수 있게 되어서 나름대로 만족한다.

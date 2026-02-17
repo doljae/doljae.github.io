@@ -1,0 +1,131 @@
+---
+slug: 111
+title: "Spring Study 04"
+authors: seokjae
+tags: ["tistory"]
+enableComments: true
+keywords: ["tistory"]
+date: 2021-05-05T15:17:12+09:00
+---
+
+> 원문: https://doljae.tistory.com/111
+
+온라인 강의를 듣고 배운 점들을 기록한다.
+
+ServiceResult
+- 서비스 단의 결과물도 하나의 모델에 반환하는 식으로 코드를 작성한다.
+
+- 서비스단 코드가 간결해지는 효과도 있고, 가독성도 좋아진다.
+
+<!-- truncate -->
+
+- ResponseResult라는 모델을 만들어서 결과를 반환하게 하는 것과 비슷한 맥락 같다.
+
+- 이렇게 Model을 만들어서 따로 관리해주면 각 코드가 실제로 해야 하는 일에 집중할 수 있는 코드가 된다고 한다.
+
+JpaResultMapper
+
+
+```
+// https://mvnrepository.com/artifact/ch.simas.qlrm/qlrm
+    implementation group: 'ch.simas.qlrm', name: 'qlrm', version: '1.7.1'
+```
+
+
+- Native Query 결과인 Object 배열을 key-value로 맵핑하는 함수를 지원하는 의존성.
+
+- 단 맵핑 대상이 되는 모델에 생성자가 있어야 한다.
+
+- 사용할 일이 있으면 사용하는 것도 좋을 것 같다.
+
+Method 합치기
+- 예를 들어서 "값을 1로 변경하는 메서드", "값을 2로 변경하는 메서드" 이렇게 2개의 메서드가 있다고 가정하자.
+
+- 이 2개는 간단하게 합칠 수 있다.
+
+- 이처럼 함수를 구현하다가 value값만 다르고 로직이 같은 경우가 발생하면 의도가 적합한지 고민해보고 괜찮다면 합치는 것도 리팩터링이다.
+
+Model을 여러 개 만들기
+- 귀찮더라도 model과 entity를 만들어서 관리하는 게 적합한 경우가 있다.
+
+- 예를 들어 게시글 좋아요 기능을 추가하고 누가 좋아요를 눌렀는지 관리하려면 어떤 유저가 어떤 게시글에 좋아요를 눌렀다는 데이터를 가진 테이블이 만들어지는 것이 자연스럽다.
+
+- 이런 경우에 맞게 유기적으로 Entity를 만들어준다면 JPA를 이용해 더 객체지향적으로 DB 작업을 할 수 있다.
+
+(게시글 좋아요를 이렇게 관리하는 걸 처음 알았다;)
+
+- 이렇게 생각하면 게시글 하나에도 굉장히 파생될 수 있는 테이블이 많이 있다는 걸 알 수 있다.(좋아요, 스크랩, 방문, 댓글 등...)
+
+BizException
+- 에러 처리는 굉장히 중요하다.
+
+- 예를 들어서 사용자가 특정 작업을 요청했다. 그런데 중간에 문제가 생겼다. 그럼 그대로 서비스를 종료시키는 것은 별로 좋지 못하다.
+
+- 문제가 생기면 문제에 따라 분기하는 식으로 유기적으로 서비스를 개발해야 한다.
+
+- 관례적으로 BizException은 서비스단에서 비즈니스 로직을 수행하다가 에러가 발생했을 때 사용하는 클래스명이다.(프레임워크 제공 클래스가 아님)
+
+Log 관련
+- 로그는 서비스 에러 디버깅 및 데이터 수집 용도로 상용 서비스에선 거의 대부분 사용하고 있다.
+
+- 서버 콘솔에 출력을 막고 일반적으로 외부로 로그파일을 빼서 기록한다.
+
+- 즉 로그도 Entity를 만들어서 DB에서 관리해주면 좋다.
+
+- 그래서 로그 관련돼서 아예 Service, Repository를 따로 만들어서 사용할 수도 있다.
+
+- 일반적으로 로그 데이터를 저장할 때는 LOB 타입의 스키마를 사용한다. 구조화되지 않은 다량의 데이터를 저장하는 데 사용한다고 한다.
+
+AOP, @EnableAspectJAutoProxy, @Aspect, @Around
+- 제대로 이해하지 못했기 때문에 자세한 내용은 구글링으로 공부할 것
+
+- 관점 지향 프로그래밍
+
+- 내가 이해한 대로 설명하면 AOP를 사용하면 비즈니스 로직에서 공통적으로 반복되는 작업을 모듈화하고 한 곳으로 빼서 정리해 실제 비즈니스 로직 코드 구현에 집중하게 하는 효과가 있다.
+
+- Spring AOP는 Spring Bean(컨테이너에서 관리하는 객체)에 대한 프락시 패턴을 제공한다.
+
+- 프락시 패턴
+
+- 내가 이해한 대로 설명하면 특정한 작업을 프락시로 감싸고, 그 작업의 수행 전반에 대한 상태(입력값, 결과, 출력 값 등)를 다룰 수 있는 디자인 패턴 같다.
+
+- @Aspect로 해당 클래스를 AOP Proxy로 사용할 것을 선언하고 내부에 Object 객체를 반환하는 메서드를 선언한다.
+
+```
+ public Object log(ProceedingJoinPoint proceedingJoinPoint) throws Throwable { }
+```
+
+
+- @Around 어노테이션으로 Spring Bean 중 어떤 Bean에 프락시를 걸지 제한을 한다.
+
+- 메서드 내부에 proceedingJobPoint.proceed();를 수행하고 이 코드 위는 이 프락시가 감싼 객체가 실행 전, 아래는 실행 후를 의미하게 된다.
+
+- 로깅 작업의 경우 굉장히 이것을 사용하기 적합하다고 볼 수 있는데, 로깅은 필요하지만 비즈니스 로직에는 전혀 관계가 없음에도 모든 곳에 로깅 코드가 한 줄씩 들어가야 하기 때문이다.
+
+- AOP를 이용해 서비스 수행 후 logging을 하도록 걸어버리는 식으로 사용하면 굉장히 유용하다.
+
+- pseudo code
+
+```
+@Slf4j
+@Component
+@Aspect
+@RequiredArgsConstructor
+public class CustomLogger {
+    private final LogsService logsService;
+
+    @Around("execution(* com.example.sample1..*.*Service*.*(..))")
+    public Object log(ProceedingJoinPoint proceedingJoinPoint) throws Throwable {
+        log.info("######################### 서비스 호출 전 #########################");
+
+        // proceedingJoinPoint가 모든 서비스의 결과물을 담고 있다.
+        // proxy 패턴으로 모든 서비스를 감싸고 있고, 그 결과가 이곳에 담긴다.
+        Object result = proceedingJoinPoint.proceed();
+
+        // 기능 구현
+        log.info("######################### 서비스 호출 후 #########################");
+        return result;
+    }
+
+}
+```

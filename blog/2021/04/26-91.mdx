@@ -1,0 +1,85 @@
+---
+slug: 91
+title: "21. Merge Two Sorted Lists"
+authors: seokjae
+tags: ["tistory"]
+enableComments: true
+keywords: ["tistory"]
+date: 2021-04-26T12:56:02+09:00
+---
+
+> 원문: https://doljae.tistory.com/91
+
+![cover](https://blog.kakaocdn.net/dna/4yXX6/btq3udoRMYP/AAAAAAAAAAAAAAAAAAAAABrN22MgcimKH7LhvAOX4Zg5J9OanfxmUsV_POmdtYeu/img.png?credential=yqXZFxpELC7KVnFOS48ylbz2pIh7yKj8&expires=1772290799&allow_ip=&allow_referer=&signature=Qrm9kw9FNDgTtGZfplz6R%2F46p6E%3D)
+
+1. 내 Trash Garbage 코드
+
+
+```
+class Solution:
+    def mergeTwoLists(self, l1: ListNode, l2: ListNode) -> ListNode:
+        zero_node = ListNode()
+        cur = zero_node
+        while l1 and l2:
+            if l1.val >= l2.val:
+                cur.next = l2
+                l2 = l2.next
+            else:
+                cur.next = l1
+                l1 = l1.next
+            cur = cur.next
+        while l1:
+            cur.next = l1
+            l1 = l1.next
+            cur = cur.next
+        while l2:
+            cur.next = l2
+            l2 = l2.next
+            cur = cur.next
+        return zero_node.next
+```
+
+<!-- truncate -->
+
+2. 개선된 코드
+
+
+```
+class Solution:
+    def mergeTwoLists(self, l1: ListNode, l2: ListNode) -> ListNode:
+        zero_node = ListNode()
+        cur = zero_node
+        while l1 and l2:
+            if l1.val >= l2.val:
+                cur.next = l2
+                l2 = l2.next
+            else:
+                cur.next = l1
+                l1 = l1.next
+            cur = cur.next
+        cur.next = l1 or l2
+        return zero_node.next
+```
+
+특정 Linked-list를 먼저 다 사용했다면, 나머지를 그냥 붙여주기만 하면 되기 때문에 굳이 반복문을 돌릴 필요가 없다.
+
+3. Recursive Solution
+
+
+```
+class Solution:
+    def mergeTwoLists(self, l1: ListNode, l2: ListNode) -> ListNode:
+        if not l1 or not l2:
+            return l1 or l2
+
+        if l1.val <= l2.val:
+            l1.next = self.mergeTwoLists(l1.next, l2)
+            return l1
+        else:
+            l2.next = self.mergeTwoLists(l1, l2.next)
+            return l2
+```
+
+재귀 코드는 정말 보면 볼수록 디자인을 하는 게 너무 신기한 것 같다.
+
+특히 Python은 다른 언어보다 문법이 간결한데 재귀까지 예쁘게 사용하면 정말...

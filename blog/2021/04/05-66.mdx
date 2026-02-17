@@ -1,0 +1,82 @@
+---
+slug: 66
+title: "22. Generate Parentheses"
+authors: seokjae
+tags: ["tistory"]
+enableComments: true
+keywords: ["tistory"]
+date: 2021-04-05T13:30:30+09:00
+---
+
+> 원문: https://doljae.tistory.com/66
+
+![cover](https://blog.kakaocdn.net/dna/bfV4We/btq1KBTXgFr/AAAAAAAAAAAAAAAAAAAAAL2NxE2seaht-HBysWCAWv-MRR6QqwSCvV4TVVznOUDH/img.png?credential=yqXZFxpELC7KVnFOS48ylbz2pIh7yKj8&expires=1772290799&allow_ip=&allow_referer=&signature=lWXp%2BWac%2BhSRceeK5Xlx2LviY1Y%3D)
+
+1. Brute Force (특정 길이의 괄호 문자열을 전부 만들고 적합한지 판단)
+
+
+```
+from typing import *
+
+<!-- truncate -->
+
+
+class Solution:
+    answer = []
+
+    def generateParenthesis(self, n: int) -> List[str]:
+        self.answer=[]
+        self.dfs("", n)
+        return self.answer
+    def dfs(self, cur, target):
+        if len(cur) == target * 2:
+            if self.check(cur):
+                self.answer.append(cur)
+            return
+        else:
+            self.dfs(cur + "(", target)
+            self.dfs(cur + ")", target)
+
+    def check(self, input_str):
+        stack = []
+        for i in range(len(input_str)):
+            if not stack or input_str[i] == "(":
+                stack.append(input_str[i])
+            else:
+                if not stack or stack[-1] != "(":
+                    return False
+                else:
+                    stack.pop()
+        if not stack:
+            return True
+        return False
+```
+
+2. 창의적인 Backtracking
+
+
+```
+from typing import *
+
+
+class Solution:
+    def generateParenthesis(self, n: int) -> List[str]:
+        answer = []
+
+        def dfs(string_list, left, right):
+            if len(string_list) == 2 * n:
+                answer.append("".join(string_list))
+                return
+
+            if left < n:
+                string_list.append("(")
+                dfs(string_list, left + 1, right)
+                string_list.pop()
+            if right < left:
+                string_list.append(")")
+                dfs(string_list, left, right + 1)
+                string_list.pop()
+
+        dfs([], 0, 0)
+        return answer
+```

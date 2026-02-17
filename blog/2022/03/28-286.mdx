@@ -1,0 +1,23 @@
+---
+slug: 286
+title: "데이터 중심 애플리케이션 설계"
+authors: seokjae
+tags: ["tistory"]
+enableComments: true
+keywords: ["tistory"]
+date: 2022-03-28T22:12:09+09:00
+---
+
+> 원문: https://doljae.tistory.com/286
+
+![cover](https://blog.kakaocdn.net/dna/7qEWb/btrxB4DWtK5/AAAAAAAAAAAAAAAAAAAAAEwrVsmX3SIvLopg5keFQ1YYgZ5viarMT-YQGP0mBBV5/img.jpg?credential=yqXZFxpELC7KVnFOS48ylbz2pIh7yKj8&expires=1772290799&allow_ip=&allow_referer=&signature=IlLEit9i9Qa1ClKkBVrr1daVIIg%3D)
+
+모든 내용을 이해하고 넘어가기에는 지금에 나에겐 어려운 책이었고, 읽는 속도가 잘 나질 않아서 키워드 중심으로 훑어 읽었다.
+
+이 책은 서버 개발자가 개발 시 고려해야 하는 다양한 개념에 대해 다루고 있다. 시스템 디자인 시 고려해야 하는 트랜잭션, 파티셔닝, 일관성, 선형성 등 중요한 개념들을 다이어그램과 사례를 통해 설명한다. 우리가 사용하고 있는 RDB, 메시지 브로커 등 다양한 인프라성 도구들이 대신 구현하고 있는 그 원리와 개념이 무엇인지 알 수 있었다.
+
+<!-- truncate -->
+
+어려운 개념을 애플리케이션 레벨에서 코드로 구현하는 것이 올바른 방향인가라는 생각이 들었다. 코드 레벨에서 쉽게 구현할 수 없는 것을 구현해서 사용했을 때 성능과 신뢰성을 동시에 잡을 수 있을까? 2PC와 같은 어려운 개념의 실제 로직을 구현한 도구를 적절한 곳에 잘 사용하는 것이 노력 대비 더 많은 효과를 얻을 수 있지 않을까?
+
+책에서 다루는 다양한 개념들을 정확히 이해하고 있는 것만으로도 이를 구현한 도구를 더 쉽고 효율적으로 사용할 수 있을 것이라 확신하기 때문에 나중에 다시 한번 읽어볼 계획.

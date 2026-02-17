@@ -1,0 +1,89 @@
+---
+slug: 260
+title: "56. Merge Intervals"
+authors: seokjae
+tags: ["tistory"]
+enableComments: true
+keywords: ["tistory"]
+date: 2021-10-26T00:04:15+09:00
+---
+
+> 원문: https://doljae.tistory.com/260
+
+![cover](https://blog.kakaocdn.net/dna/bK4Su4/btriRUaccKk/AAAAAAAAAAAAAAAAAAAAAKAfw-cXmL_TqBDcTJQFoW-IGiy4V0n87nCd1cv-0hV4/img.png?credential=yqXZFxpELC7KVnFOS48ylbz2pIh7yKj8&expires=1772290799&allow_ip=&allow_referer=&signature=Ilssd%2Fr0vap7QOc6sWHXQ0%2BgJKE%3D)
+
+양의 정수 2개로 이루어진 배열이 담긴 배열이 주어진다.
+
+각 양의 정수는 시작과 끝을 의미하고 이 배열 하나를 interval로 한다.
+
+<!-- truncate -->
+
+만일 interval 간의 끝과 시작이 같거나 겹친다면 하나의 interval로 만들 수 있을 때 interval 들을 합친 결과를 반환하는 문제다.
+
+예시
+
+
+```
+Input: intervals = [[1,3],[2,6],[8,10],[15,18]]
+Output: [[1,6],[8,10],[15,18]]
+Explanation: Since intervals [1,3] and [2,6] overlaps, merge them into [1,6].
+
+Input: intervals = [[1,4],[4,5]]
+Output: [[1,5]]
+Explanation: Intervals [1,4] and [4,5] are considered overlapping.
+```
+
+1. 구현, Greedy(?)
+
+
+```
+from typing import *
+from collections import deque
+
+
+class Solution:
+    def merge(self, intervals: List[List[int]]) -> List[List[int]]:
+        intervals.sort()
+
+        q = deque(intervals)
+        answer = []
+
+        while q:
+            start, end = q.popleft()
+            while q and end >= q[0][0]:
+                end = max(end, q.popleft()[1])
+            answer.append([start, end])
+        
+        return answer
+```
+
+2. 좀 더 정해에 가까운 구현
+
+
+```
+class Solution:
+    def merge(self, intervals: List[List[int]]) -> List[List[int]]:
+        start, end = [], []
+        length = len(intervals)
+        answer = []
+
+        for interval in intervals:
+            s, e = interval
+            start.append(s)
+            end.append(e)
+
+        start.sort()
+        end.sort()
+        j = 0
+        for i in range(length):
+            if i == length - 1 or start[i + 1] > end[i]:
+                answer.append([start[j], end[i]])
+                j = i + 1
+
+        return answer
+```
+
+설명은 아래 링크를 참고.
+
+3. 트리로 구현
+도 가능하나 가장 비효율적인 방법.

@@ -1,0 +1,86 @@
+---
+slug: 224
+title: "890. Find and Replace Pattern"
+authors: seokjae
+tags: ["tistory"]
+enableComments: true
+keywords: ["tistory"]
+date: 2021-08-30T12:00:32+09:00
+---
+
+> 원문: https://doljae.tistory.com/224
+
+![cover](https://blog.kakaocdn.net/dna/xszXO/btrdqLc7Mjt/AAAAAAAAAAAAAAAAAAAAAJTBuEanTzpF_yGhucJEv8cd083FDcV4hYGDffdkq8B0/img.png?credential=yqXZFxpELC7KVnFOS48ylbz2pIh7yKj8&expires=1772290799&allow_ip=&allow_referer=&signature=H6HqeZoGWVaM%2B3zvID%2BxJZM9Jrc%3D)
+
+```
+Input: words = ["abc","deq","mee","aqq","dkd","ccc"], pattern = "abb"
+Output: ["mee","aqq"]
+Explanation: "mee" matches the pattern because there is a permutation {a -> m, b -> e, ...}. 
+"ccc" does not match the pattern because {a -> c, b -> c, ...} is not a permutation,
+since a and b map to the same letter.​
+```
+
+알파벳 소문자로 구성된 문자열 pattern과 알파벳 소문자로 구성된 문자열이 담긴 list가 주어진다.
+
+<!-- truncate -->
+
+임의의 규칙에 의해서 알파벳 문자를 다른 알파벳 문자로 변경(permutation)할 수 있다고 가정할 때, 주어진 문자열가 pattern 문자열로 변경이 가능한지 판단해 변경 가능한 문자열 목록을 반환하는 문제다.
+
+예시
+
+
+```
+Input: words = ["abc","deq","mee","aqq","dkd","ccc"], pattern = "abb"
+Output: ["mee","aqq"]
+Explanation: "mee" matches the pattern because there is a permutation {a -> m, b -> e, ...}. 
+"ccc" does not match the pattern because {a -> c, b -> c, ...} is not a permutation,
+since a and b map to the same letter.
+```
+
+
+접근법
+그러니깐 어떤 규칙에 의해 문자 하나를 다른 문자로 변경할 수 있다고 했으니깐 이 규칙은 함수라고 생각할 수 있다. 함수는 입력값이 같다면 같은 값을 반환하기 때문에(항상 그런 건 아니지만 문제 설명을 보면 그런 것 같다) 예를 들어서 a를 입력하면 b가 나오는 함수의 경우 a를 입력하면 반드시 b가 나와야 한다.
+
+그러니깐 그 함수를 구현하고, word를 함수로 변환한 결과와 pattern을 함수로 변환한 결과가 같은 word 만 모아서 반환하면 된다.
+
+1. 구현
+
+
+```
+from typing import *
+
+
+class Solution:
+    def findAndReplacePattern(self, words: List[str], pattern: str) -> List[str]:
+
+        def convert(word):
+            index = 0
+            check, answer = {}, []
+            for char in word:
+                if char not in check:
+                    check[char] = index
+                    index += 1
+                answer.append(check[char])
+
+            return answer
+
+        result = []
+        converted_pattern = convert(pattern)
+        for word in words:
+            if convert(word) == converted_pattern:
+                result.append(word)
+
+        return result
+```
+
+convert()라는 함수를 구현했다. 이 함수는 문자를 0부터 시작하는 정수로 변환해 문자열을 정수 list로 바꿔 반환한다.
+
+해당 문자열의 변환 값은 dict을 이용해 저장했고, dict에 없는 문자열인 경우 index값을 올려서 저장해줬다.
+
+예를 들어서 "aab" -&gt; [0, 0, 1]로 변환된다.
+
+"mme" -&gt; [0, 0, 1]로 변환된다.
+
+"mee" -&gt; [0, 1, 1]로 변환된다.
+
+이런 식으로 pattern 문자열을 list로 바꾸고 word도 바꿔서 비교해주는 것으로 해결할 수 있다.

@@ -1,0 +1,132 @@
+---
+slug: 185
+title: "Class.isAssignableFrom"
+authors: seokjae
+tags: ["tistory"]
+enableComments: true
+keywords: ["tistory"]
+date: 2021-07-20T22:06:58+09:00
+---
+
+> 원문: https://doljae.tistory.com/185
+
+![cover](https://blog.kakaocdn.net/dna/r9rKX/btq99mscLG7/AAAAAAAAAAAAAAAAAAAAAEmkW1ttAZRluKbKR8FC0xJv93njGUF18uCcrknAOR1P/img.png?credential=yqXZFxpELC7KVnFOS48ylbz2pIh7yKj8&expires=1772290799&allow_ip=&allow_referer=&signature=XD5hLhsnQmNIXeWEmW3mR8C7f00%3D)
+
+서비스에서 생성된 객체에 대한 검증 과정은 반드시 필요하다.
+
+검증하는 방법 및 검증하는 대상은 도메인과 비즈니스 로직에 따라 다르기 때문에 이에 맞는 테스트 코드를 작성하는 건 쉽지 않다.
+
+<!-- truncate -->
+
+그럼 객체가 특정 인터페이스 및 클래스를 상속받았다는 것을 테스트 코드로 작성하려면 어떻게 해야 할까?
+
+AppleSilicon.java
+
+
+```
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
+public abstract class AppleSilicon {
+
+    private int ram;
+    private int ssd;
+    private int gpu;
+    private String deviceType;
+
+    public static AppleSilicon makeAppleDevice(int ram, int ssd, int gpu, String deviceType)
+        throws IllegalAccessException {
+        switch (deviceType) {
+            case "laptop":
+                return new Macbook(ram, ssd, gpu, deviceType);
+            case "desktop":
+                return new Imac(ram, ssd, gpu, deviceType);
+            case "tablet":
+                return new Ipad(ram, ssd, gpu, deviceType);
+        }
+        throw new IllegalAccessException("error");
+    }
+}
+```
+
+
+코드를 보면 makeAppleDevice로 AppleSilicon을 상속받는 객체들을 만들어서 사용하는 것 같다.
+
+```
+@Getter
+@Setter
+public class Macbook extends AppleSilicon {
+
+    protected Macbook(int ram, int ssd, int gpu, String deviceType) {
+        super(ram, ssd, gpu, deviceType);
+    }
+}
+```
+
+
+```
+@Getter
+@Setter
+public class Imac extends AppleSilicon {
+
+    public Imac(int ram, int ssd, int gpu, String deviceType) {
+        super(ram, ssd, gpu, deviceType);
+    }
+}
+```
+
+
+```
+@Getter
+@Setter
+public class Ipad extends AppleSilicon {
+
+    public Ipad(int ram, int ssd, int gpu, String deviceType) {
+        super(ram, ssd, gpu,deviceType);
+    }
+}
+```
+
+
+Concrete Class는 다음과 같다.
+
+Class.isAssignableFrom()
+isAssignableFrom은 Class에 있는 메서드다. 이 메서드를 이용하면 해당 객체가 특정한 클래스나 인터페이스를 상속받고 있는 것을 체크할 수 있다.
+
+테스트 코드
+
+
+```
+class AppleSiliconTest {
+    @Test
+    void makeMacbook() throws IllegalAccessException {
+        final int ram = 16;
+        final int gpu = 5500;
+        final int ssd = 512;
+        final String deviceType = "laptop";
+
+        final AppleSilicon device = AppleSilicon.makeAppleDevice(ram, gpu, ssd, deviceType);
+
+        assertTrue(Macbook.class.isAssignableFrom(device.getClass()));
+    }
+
+    @Test
+    void makeMacbookWithException() throws IllegalAccessException {
+        final int ram = 16;
+        final int gpu = 5500;
+        final int ssd = 512;
+        final String deviceType = "desktop";
+
+        final AppleSilicon device = AppleSilicon.makeAppleDevice(ram, gpu, ssd, deviceType);
+
+        assertTrue(Macbook.class.isAssignableFrom(device.getClass()));
+    }
+
+}
+```
+
+
+테스트 결과
+
+makeMacbookWithException 코드는 deviceType을 desktop으로 주었으나 Macbook 클래스를 상속받았는지 체크하기 때문에 기대했던 대로 테스트를 통과하지 못했다.

@@ -1,0 +1,82 @@
+---
+slug: 219
+title: "1557. Minimum Number of Vertices to Reach All Nodes"
+authors: seokjae
+tags: ["tistory"]
+enableComments: true
+keywords: ["tistory"]
+date: 2021-08-25T13:45:32+09:00
+---
+
+> 원문: https://doljae.tistory.com/219
+
+![cover](https://blog.kakaocdn.net/dna/blpxCZ/btrdaFvZYEn/AAAAAAAAAAAAAAAAAAAAANu5U6oc-sq0R4mddBuz0FHPe-6CRWld3m6yBBnDnc2b/img.png?credential=yqXZFxpELC7KVnFOS48ylbz2pIh7yKj8&expires=1772290799&allow_ip=&allow_referer=&signature=MLtolNibYmF0Hzq71FG23Rl35Qo%3D)
+
+방향 그래프가 주어진다. 모든 그래프의 노드를 탐색할 수 있는 최소 개수의 노드 목록을 list로 반환하는 문제다.
+
+답은 유일하다는 것이 보장되어있다.
+
+<!-- truncate -->
+
+```
+Input: n = 6, edges = [[0,1],[0,2],[2,5],[3,4],[4,2]]
+Output: [0,3]
+Explanation: It's not possible to reach all the nodes from a single vertex. 
+From 0 we can reach [0,1,2,5]. 
+From 3 we can reach [3,4,2,5]. So we output [0,3].
+```
+
+
+이 그래프의 경우 0번, 3번 노드에서 탐색을 시작한다면 주어진 그래프를 최소 개수의 시작 지점으로 전부 탐색할 수 있다.
+
+1. 위상 정렬
+
+
+```
+class Solution:
+    def findSmallestSetOfVertices(self, n: int, edges: List[List[int]]) -> List[int]:
+
+        graph = {}
+        in_degree = {}
+        min_degree = float("inf")
+        for i in range(n):
+            graph[i] = set()
+            in_degree[i] = 0
+
+        for edge in edges:
+            src, dsc = edge
+            graph[src].add(dsc)
+            in_degree[dsc] += 1
+
+        for node in graph:
+            min_degree = min(min_degree, in_degree[node])
+
+        candi = []
+        for node in graph:
+            if in_degree[node] == min_degree:
+                candi.append(node)
+
+        return candi
+```
+
+우선 위상 정렬로 해결할 수 있다는 당위성은 다음과 같다.
+
+방향 그래프에서 노드 a로 들어오는 간선이 존재하지 않는다면 노드 a를 직접 방문하지 않고 다른 임의의 노드를 통해 노드 a를 방문하는 것은 불가능하다.
+문제의 정답은 단 하나밖에 없다.
+
+1번에 의해 임의의 노드로 들어오는 간선이 존재하지 않는 경우, **해당 노드를 방문하려면 직접 노드를 방문하는 것 말고는 방법이 없다.**
+
+2번에 의해 입력으로 들어오는 그래프는 사이클이 존재하지 않는다. 만약에 그래프에 사이클이 존재한다고 한다면 사이크를 구성하는 임의의 노드 중 아무거나 하나를 골라도 해당 사이클을 구성하는 노드를 탐색할 수 있다. 즉 **사이클이 있다면 이를 구성하는 노드를 탐색하기 위한 답이 여러 개가 나올 수 있고 이것은 2번 조건에 위반된다.**
+
+그러므로 위상 정렬을 통해서 진입점이 없는 노드만을 골라서 탐색을 시작한다면, 정확히는** 탐색 없이 위상 정렬의 진입점 후보가 될 노드만 찾아내고 반환**하면 주어진 그래프를 최소 개수의 진입점으로 탐색할 수 있다.
+
+2. 최적화
+
+
+```
+class Solution:
+    def findSmallestSetOfVertices(self, n: int, edges: List[List[int]]) -> List[int]:
+        return list(set(i for i in range(n)) - set(dsc for src, dsc in edges))
+```
+
+그럼 그냥 0 ~ (n-1) 번의 노드 중 주어진 edge에서 dsc가 없는 노드만을 반환하면 된다...

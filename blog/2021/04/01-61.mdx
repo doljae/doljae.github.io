@@ -1,0 +1,63 @@
+---
+slug: 61
+title: "5. Longest Palindromic Substring"
+authors: seokjae
+tags: ["tistory"]
+enableComments: true
+keywords: ["tistory"]
+date: 2021-04-01T23:39:22+09:00
+---
+
+> 원문: https://doljae.tistory.com/61
+
+![cover](https://blog.kakaocdn.net/dna/cEmGj5/btq1FAlyoQB/AAAAAAAAAAAAAAAAAAAAAFpCRKLzASyo8eTBZpTlL9SXA4Iw6YF8t2ExrAEVHQGy/img.png?credential=yqXZFxpELC7KVnFOS48ylbz2pIh7yKj8&expires=1772290799&allow_ip=&allow_referer=&signature=DO4Wd3rl2HeAiHP8Oo8b2vNZ2iA%3D)
+
+1. DP를 이용한 풀이
+
+
+```
+class Solution(object):
+    def longestPalindrome(self, s):
+        dp=[[0]*len(s) for _ in range(len(s))]
+        answer=s[0]
+        for i in range(len(s)):
+            dp[i][i]=1
+        
+        for i in range(len(s)-1):
+            if s[i]==s[i+1]:
+                dp[i][i+1]=1
+                answer=s[i:i+2]
+        
+        for i in range(3,len(s)+1):
+            for start in range(len(s)-i+1):
+                end=start+i-1
+                if s[start]==s[end] and dp[start+1][end-1]:
+                    dp[start][end]=1
+                    answer=s[start:end+1]
+        return answer
+```
+
+<!-- truncate -->
+
+2. 투 포인터(?)를 사용한 풀이
+
+
+```
+class Solution(object):
+    def longestPalindrome(self, s):
+        res=""
+        for i in range(len(s)):
+            res=max(self.solution(s,i,i),
+                   self.solution(s,i,i+1),
+                   res, key=len)
+        return res
+    
+    
+    def solution(self,s,start,end):
+        while 0<=start and end<len(s):
+            if s[start]==s[end]:
+                start,end = start-1, end+1
+            else:
+                break
+        return s[start+1:end]
+```

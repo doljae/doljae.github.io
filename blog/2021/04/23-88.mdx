@@ -1,0 +1,54 @@
+---
+slug: 88
+title: "169. Majority Element"
+authors: seokjae
+tags: ["tistory"]
+enableComments: true
+keywords: ["tistory"]
+date: 2021-04-23T11:01:47+09:00
+---
+
+> 원문: https://doljae.tistory.com/88
+
+![cover](https://blog.kakaocdn.net/dna/dwCH27/btq3gcErOiT/AAAAAAAAAAAAAAAAAAAAANeyvU13dpntwEQh4HPRwXf5p3N3Pqs2TZqJdmtVkhcO/img.png?credential=yqXZFxpELC7KVnFOS48ylbz2pIh7yKj8&expires=1772290799&allow_ip=&allow_referer=&signature=pjm2xGS%2BO6%2FFLb%2FcecMSGejQvn8%3D)
+
+1. 해시맵 스타일(Dict, Counter 사용)
+
+
+```
+from collections import Counter
+
+<!-- truncate -->
+
+class Solution:
+    def majorityElement(self, nums: List[int]) -> int:
+        counter = Counter()
+        for num in nums:
+            counter[num] += 1
+        return counter.most_common(1)[0][0]
+```
+
+2. 정렬 후 중앙값 반환
+
+
+```
+class Solution:
+    def majorityElement(self, nums: List[int]) -> int:
+        return sorted(nums)[len(nums) // 2]
+```
+
+3. Boyer-Moore Voting Algorithm
+
+
+```
+class Solution:
+    def majorityElement(self, nums: List[int]) -> int:
+        target, count = 0, 0
+        for num in nums:
+            if count == 0:
+                target = num
+            count += 1 if num == target else -1
+        return target
+```
+
+굉장히 유익한 문제였다.

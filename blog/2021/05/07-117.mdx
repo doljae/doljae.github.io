@@ -1,0 +1,94 @@
+---
+slug: 117
+title: "647. Palindromic Substrings"
+authors: seokjae
+tags: ["tistory"]
+enableComments: true
+keywords: ["tistory"]
+date: 2021-05-07T11:21:42+09:00
+---
+
+> 원문: https://doljae.tistory.com/117
+
+![cover](https://blog.kakaocdn.net/dna/6JSy6/btq4js7absu/AAAAAAAAAAAAAAAAAAAAANFb2Pkl6d0hr0x2kn7QC-fBjVi2sNO_KOanBWxWW9tr/img.png?credential=yqXZFxpELC7KVnFOS48ylbz2pIh7yKj8&expires=1772290799&allow_ip=&allow_referer=&signature=NCjF55VtupYCYQe%2B6R8LKDEsn1s%3D)
+
+1. Brute Force (실패)
+
+
+```
+class Solution:
+    def countSubstrings(self, s: str) -> int:
+        def check(input_string):
+            start, end = 0, len(input_string) - 1
+            while start < end:
+                if input_string[start] != input_string[end]:
+                    return False
+                start += 1
+                end -= 1
+            return True
+
+<!-- truncate -->
+
+        answer = len(s)
+        for length in range(2, len(s) + 1):
+            for i in range(len(s) - length + 1):
+                if check(s[i:i + length]) is True:
+                    answer += 1
+        return answer
+```
+
+모든 부분 문자열이 회문인지 체크하는 방법.
+
+당연하게도 TLE가 났다.
+
+2. Dynamic Programming
+
+
+```
+class Solution:
+    def countSubstrings(self, s: str) -> int:
+        answer = 0
+        if len(s) == 1:
+            return 1
+        elif len(s) == 2:
+            return len(s) + 1 if s[0] == s[1] else len(s)
+
+        dp = [[0] * len(s) for _ in range(len(s) + 1)]
+
+        for i in range(len(s)):
+            dp[1][i] = 1
+
+        for i in range(len(s) - 2 + 1):
+            dp[2][i] = 1 if s[i] == s[i + 1] else 0
+
+        for length in range(3, len(s) + 1):
+            for i in range(len(s) - length + 1):
+                dp[length][i] = 1 if s[i] == s[i + length - 1] and dp[length - 2][i + 1] == 1 else 0
+        for item in dp:
+            answer += sum(item)
+
+        return answer
+```
+
+DP로 해결할 수 있었다.
+
+코드 주요 점화식은 다음과 같다.
+
+```
+if s[i] == s[i + length -1] and dp[length - 2][i + 1] == 1:
+	dp[length][i] = 1
+else:
+	dp[length][i] = 0
+```
+
+
+s가 입력받은 문자열이고 length가 현재 문자열의 길이다.
+
+현재 문자열의 길이를 5라고 가정하고 점화식을 설명하면 다음과 같다.
+
+string [i : i + 5] 은 string [i]와 string [i+4]가 같은 문자고, string [i+1 : i+4]가 회문이면 회문이다.
+
+i                        i+4
+
+a    x     b     x    a
+그러면 이전에 구한 회문을 사용해서 빠르게 유무를 판단할 수 있다.

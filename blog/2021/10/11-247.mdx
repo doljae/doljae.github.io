@@ -1,0 +1,92 @@
+---
+slug: 247
+title: "34. Find First and Last Position of Element in Sorted Array"
+authors: seokjae
+tags: ["tistory"]
+enableComments: true
+keywords: ["tistory"]
+date: 2021-10-11T11:14:25+09:00
+---
+
+> 원문: https://doljae.tistory.com/247
+
+![cover](https://blog.kakaocdn.net/dna/dBK25F/btrhshDRxMD/AAAAAAAAAAAAAAAAAAAAAPb4NY1IY8NNUGU5nlm-aMdHXhpdggzJ_kxXBM4DX5uW/img.png?credential=yqXZFxpELC7KVnFOS48ylbz2pIh7yKj8&expires=1772290799&allow_ip=&allow_referer=&signature=oPrZEdvVUJsWNqpudjFDPaiiF6U%3D)
+
+오름차순으로 정렬된 1차원 list와 정수 target이 주어진다.
+
+주어진 list에서 target이 존재하는 범위의 시작과 끝 인덱스 값을 반환하는 문제다.
+
+<!-- truncate -->
+
+만일 target이 list 안에 존재하지 않는다면 [-1, -1]을 반환한다.
+
+예시
+
+
+```
+Input: nums = [5,7,7,8,8,10], target = 8
+Output: [3,4]
+
+Input: nums = [5,7,7,8,8,10], target = 6
+Output: [-1,-1]
+
+Input: nums = [], target = 0
+Output: [-1,-1]
+```
+
+
+1. lower_bound, upper_bound
+
+
+```
+from typing import *
+
+
+class Solution:
+    def searchRange(self, nums: List[int], target: int) -> List[int]:
+        if not nums or nums[0] > target or nums[-1] < target:
+            return [-1, -1]
+
+        start, end = 0, len(nums) - 1
+
+        while start <= end:
+            mid = (start + end) // 2
+
+            if nums[mid] >= target:
+                end = mid - 1
+            else:
+                start = mid + 1
+
+        t1 = start if nums[start] == target else -1
+
+        start, end = 0, len(nums) - 1
+
+        while start <= end:
+            mid = (start + end) // 2
+
+            if nums[mid] <= target:
+                start = mid + 1
+            else:
+                end = mid - 1
+
+        t2 = start - 1 if nums[start - 1] == target else -1
+
+        return [t1, t2]
+```
+
+이진 탐색을 직접 구현해 lower_bound, upper_bound를 찾아서 반환한다. 만일 반환한 인덱스에 해당하는 값이 target이 아닌 경우에는 -1로 넣어준다. 최상단에는 이진 탐색을 통과하지 않고 바로 결과를 반환할 수 있는 조건을 넣어줬다.
+
+2. bisect 모듈 사용
+
+
+```
+class Solution:
+    def searchRange(self, nums: List[int], target: int) -> List[int]:
+        if not nums or nums[0] > target or nums[-1] < target:
+            return [-1, -1]
+            
+        a, b = bisect_left(nums, target), bisect_right(nums, target) - 1
+        return [a if nums[a] == target else -1, b if nums[b] == target else -1]
+```
+
+위 과정과 동일한 구현을 내장 함수로 제공하고 있다. 적절하게 사용하면 편리하다.

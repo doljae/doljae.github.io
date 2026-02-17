@@ -1,0 +1,83 @@
+---
+slug: 73
+title: "338. Counting Bits"
+authors: seokjae
+tags: ["tistory"]
+enableComments: true
+keywords: ["tistory"]
+date: 2021-04-09T11:24:10+09:00
+---
+
+> 원문: https://doljae.tistory.com/73
+
+![cover](https://blog.kakaocdn.net/dna/90ofl/btq2bKvmcEN/AAAAAAAAAAAAAAAAAAAAAH6a0ysGRT4fFsQjEEvi1NBigXD0NoyFEmqwGVBidimn/img.png?credential=yqXZFxpELC7KVnFOS48ylbz2pIh7yKj8&expires=1772290799&allow_ip=&allow_referer=&signature=hyaGT8RbO9hNhOY1ILiQwP5Uf6w%3D)
+
+1. 내장 함수를 이용한 탐색
+
+
+```
+    def countBits(self, num: int) -> List[int]:
+        answer = []
+        for i in range(num + 1):
+            answer.append(format(i, "b").count("1"))
+        return answer
+```
+
+<!-- truncate -->
+
+
+2. 비트의 성질을 이용한 반복 사용
+
+
+```
+    def countBits(self, num: int) -> List[int]:
+        answer = []
+        for cur in range(num + 1):
+            temp = 0
+            while cur != 0:
+                cur = cur & (cur - 1)
+                temp += 1
+            answer.append(temp)
+        return answer
+```
+
+
+3. Offset의 성질을 이용한 Dynamic Programming
+
+
+```
+    def countBits(self, num: int) -> List[int]:
+        answer = [0]
+        dp = [0] * (num + 1)
+        offset = 1
+        for i in range(1, num + 1):
+            if offset * 2 == i:
+                offset *= 2
+            dp[i] = dp[i - offset] + 1
+            answer.append(dp[i])
+        return answer
+```
+
+
+4. 분할 정복을 이용한 방법
+아이디어 참고 링크
+
+```
+    def countBits(self, vv: int) -> List[int]:
+        answer = [0]
+        for v in range(1, vv + 1):
+            v = (v & 0x55555555) + ((v >> 1) & 0x55555555)
+            v = (v & 0x33333333) + ((v >> 2) & 0x33333333)
+            v = (v & 0x0f0f0f0f) + ((v >> 4) & 0x0f0f0f0f)
+            v = (v & 0x00ff00ff) + ((v >> 8) & 0x00ff00ff)
+            v = (v & 0x0000ffff) + ((v >> 16) & 0x0000ffff)
+            answer.append(v)
+        return answer
+```
+
+느낀 점
+**내장 함수(메서드)를 제대로 이해하고 적극적으로 활용하자**
+
+특히 Python의 경우 몇몇 내장 함수가 C로 작성되어있고, 다양한 알고리즘을 통해 최적화까지 되어있다.
+
+어설프게 최적화 할바에는 STL을 적극적으로 활용하면 실제 소요 시간을 줄일 수도 있다.

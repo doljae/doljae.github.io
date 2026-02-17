@@ -1,0 +1,57 @@
+---
+slug: 257
+title: "k8s commands 01"
+authors: seokjae
+tags: ["tistory"]
+enableComments: true
+keywords: ["tistory"]
+date: 2021-10-23T18:35:16+09:00
+---
+
+> 원문: https://doljae.tistory.com/257
+
+kubectl get pods
+
+kubectl run POD_NAME --image=IMAGE_NAME
+
+kubectl get pods -o wide
+
+<!-- truncate -->
+
+kubectl describe pod POD_NAME | grep image
+
+kubectl delete pod POD_NAME
+
+kubectl run POD_NAME --image=IMAGE_NAME --dry-run=client -o yaml &gt; pod-definition.yaml
+
+kubectl apply -f application.yaml
+
+kubectl edit pod POD_NAME
+
+kubectl get replicaset
+
+kubectl get rs
+
+kubectl create -f replicaset-definition-1.yaml
+
+kubectl delete replicaset REPLICA_SET_NAME
+
+kubectl delete -f REPLICA_SET_DEFINITION.yaml
+
+kubectl apply -f XXX_DEFINITION.yaml
+
+kubectl get rs REPLICA_SET_NAME -o=yaml &gt; REPLICA_SET.yaml
+
+kubectl scale rs REPLICA_SET_NAME --replicas=5
+
+kubectl get all
+
+kubectl create deployment --image=nginx nginx
+
+kubectl create deployment --image=nginx nginx --dry-run=client -o yaml
+
+kubectl create -f nginx-deployment.yaml
+
+kubectl create deployment --image=nginx nginx --replicas=4 --dry-run=client -o yaml &gt; nginx-deployment.yaml
+
+kubectl create deploy DEPLOYMENT_NAME --image=nginx nginx --replicas=2

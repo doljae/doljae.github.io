@@ -1,0 +1,100 @@
+---
+slug: 223
+title: "95. Unique Binary Search Trees II"
+authors: seokjae
+tags: ["tistory"]
+enableComments: true
+keywords: ["tistory"]
+date: 2021-08-29T13:30:04+09:00
+---
+
+> 원문: https://doljae.tistory.com/223
+
+![cover](https://blog.kakaocdn.net/dna/bkgnHK/btrdqhhXLu9/AAAAAAAAAAAAAAAAAAAAAA-sPkGTLOZJYZZCDITjD5-yIrWy52AXEGsExhPhSgL9/img.jpg?credential=yqXZFxpELC7KVnFOS48ylbz2pIh7yKj8&expires=1772290799&allow_ip=&allow_referer=&signature=quDi4zWGUBCeD6wB6VLpfzUkREU%3D)
+
+정수 n이 주어진다.
+
+1 ~ n의 값을 가지는 노드로 구성된 만들 수 있는 모든 이진 탐색 트리를 반환하는 문제다.
+
+<!-- truncate -->
+
+```
+n = 3
+TreeNode(1), TreeNode(2), TreeNode(3)의 총 3개의 노드를 이용해 만들 수 있는 이진 탐색 트리는 총 5가지다.
+
+여기서 중요한 점은 갯수가 아니라 트리를 반환해야하는 거고, 그러니깐 진짜 트리를 만들어서 반환해야한다.
+위 예시에선 저렇게 실제 트리를 만들어서 트리의 root 목록을 list로 반환해야한다.
+
+expected return value = [TreeNode(1), TreeNode(1), TreeNode(2), TreeNode(3), TreeNode(3)]
+```
+
+이전에 풀었던 문제는 개수만 반환하면 되었지만 이번엔 실제 트리를 만들어서 반환해야 한다.
+
+접근법
+우선 실제로 트리를 만들어서 반환해야 하기 때문에 TreeNode를 새로 만들어주면서 해야 할 것 같다. 최근에 풀었던 문제처럼 가능한 모든 subtree 후보를 미리 저장해서 엮는 식으로 접근할 수 있을까?라고 생각해보았지만, 지금은 이진 탐색 트리이기 때문에 root의 값이 전부 다른 상황이고 바리에이션이 너무 많을 것 같았다.
+
+상황을 일반화해보면 아래와 같다.
+
+N이 주어지면 우리가 반환해야 하는 트리의 root 값은 1 ~ N이 될 수 있다.
+이진 탐색 트리이기 때문에 루트의 왼쪽 노드의 모든 값은 루트보다 작고, 루트의 오른쪽 노드의 모든 값은 루트보다 크다.
+예를 들어 N이 5이고 현재 루트의 값이 3이라고 하면
+
+왼쪽 서브 트리는 [1, 2], 오른쪽 서브 트리는 [4, 5]로 구성된 임의의 트리가 될 것이다.
+[1, 2]로 만들 수 있는 모든 서브 트리 목록을 구하고
+[4, 5]로 만들 수 있는 모든 서브 트리 목록을 구해서
+현재 노드에 왼쪽, 오른쪽에 연결해준다
+
+3번 과정을 1 ~ N까지 반복한다.
+
+이렇게 하면 원하는 결과를 얻을 수 있을 것 같다.
+
+1. DFS
+
+
+```
+# Definition for a binary tree node.
+
+from typing import *
+
+
+class TreeNode:
+    def __init__(self, val=0, left=None, right=None):
+        self.val = val
+        self.left = left
+        self.right = right
+
+
+class Solution:
+    def generateTrees(self, n: int) -> List[Optional[TreeNode]]:
+        if n == 1:
+            return [TreeNode(1)]
+
+        def dfs(cur_list):
+            if len(cur_list) == 1:
+                return [TreeNode(cur_list[0])]
+            if not cur_list:
+                return [None]
+
+            answer = []
+            for index, value in enumerate(cur_list):
+                left_subtrees = dfs(cur_list[:index])
+                right_subtrees = dfs(cur_list[index + 1:])
+                for left_subtree in left_subtrees:
+                    for right_subtree in right_subtrees:
+                        new_root = TreeNode(value)
+                        new_root.left = left_subtree
+                        new_root.right = right_subtree
+                        answer.append(new_root)
+
+            return answer
+
+        return dfs([i for i in range(1, n + 1)])
+```
+
+dfs() 함수를 설명하면 다음과 같다.
+
+cur_list 길이가 1이라는 것은 현재 트리의 노드 개수가 1이라는 것이기 때문에 노드 개수가 1인 트리밖에 만들지 못해서 그 값으로 TreeNode를 만들어 반환한다.
+cur_list 길이가 0이라는 것은 현재 트리를 만들 수 있는 노드가 존재하지 않는다는 뜻이기 때문에 None을 반환한다.
+이런 식으로 left_subtrees, right_subtrees를 반환받고, 2중 for문을 통해서 매번 새 트리를 만들어주면 된다.
+
+기존에 트리 문제들에서 사용했던 여러 가지 기법들을 응용해서 풀 수 있었다.

@@ -1,0 +1,118 @@
+---
+slug: 163
+title: "454. 4Sum II"
+authors: seokjae
+tags: ["tistory"]
+enableComments: true
+keywords: ["tistory"]
+date: 2021-06-13T14:10:50+09:00
+---
+
+> 원문: https://doljae.tistory.com/163
+
+![cover](https://blog.kakaocdn.net/dna/1u2lb/btq64gDUWAt/AAAAAAAAAAAAAAAAAAAAAAb4k8HrPfRqhjPbwswniynHC0t250xAIDFK1-oSfPEn/img.png?credential=yqXZFxpELC7KVnFOS48ylbz2pIh7yKj8&expires=1772290799&allow_ip=&allow_referer=&signature=9HcsS3NjA3G8UXstfbUMw%2F0hpaM%3D)
+
+1. 틀림
+
+
+```
+from typing import *
+
+<!-- truncate -->
+
+
+class Solution:
+    def fourSumCount(self, nums1: List[int], nums2: List[int], nums3: List[int], nums4: List[int]) -> int:
+        set1, set2 = set(), set()
+        for num1 in nums1:
+            for num2 in nums2:
+                set1.add(num1 + num2)
+        for num3 in nums3:
+            for num4 in nums4:
+                set2.add(num3 + num4)
+
+        answer = 0
+        for num in set1:
+            if -num in set2:
+                answer += 1
+        return answer
+```
+
+4개의 길이가 같은 list가 주어진다. list안에는 정수가 들어있다. 이 list에서 숫자를 한 개씩 뽑았을 때 그 합이 0이 되는 경우의 수를 구하는 문제다.
+
+집합으로 처리하게 되면 인덱스가 다르지만 합하는 4가지 숫자가 같은 경우를 무시하기 때문에 원하는 답을 얻을 수 없다.
+
+2. TLE
+
+
+```
+class Solution:
+    def fourSumCount(self, nums1: List[int], nums2: List[int], nums3: List[int], nums4: List[int]) -> int:
+        set1, set2 = set(), set()
+        for i1, num1 in enumerate(nums1):
+            for i2, num2 in enumerate(nums2):
+                set1.add((num1 + num2, i1, i2))
+        for i3, num3 in enumerate(nums3):
+            for i4, num4 in enumerate(nums4):
+                set2.add((num3 + num4, i3, i4))
+
+        answer = 0
+        for item in set1:
+            sum1, i1, i2 = item
+            for item2 in set2:
+                sum2, i3, i4 = item2
+                if sum1 + sum2 == 0:
+                    answer += 1
+        return answer
+```
+
+list를 2개씩 묶어서 비교하려고 했다. 그리고 index의 구분 또한 해줘야 하기 때문에 index값도 집합에 넣어서 분기했다.
+
+위 코드의 문제점은 2가지가 있다.
+
+1. 2번째 for문에서 바로 조건을 구분하고 처리할 수 있다.
+
+2. set을 list처럼 사용하고 있다. 즉 for문 2개 이후에 아래의 2중 for문에서 집합 원소를 순회하고 있다. 이러면 set을 사용하는 이유가 전혀 없다. 오히려 list 사용 때 보다 cost마저 크다.
+
+3. 개선
+
+
+```
+class Solution:
+    def fourSumCount(self, nums1: List[int], nums2: List[int], nums3: List[int], nums4: List[int]) -> int:
+        dict1 = defaultdict(int)
+        for n1 in nums1:
+            for n2 in nums2:
+                dict1[n1 + n2] += 1
+        dict2 = defaultdict(int)
+        for n3 in nums3:
+            for n4 in nums4:
+                dict2[n3 + n4] += 1
+        answer = 0
+        for key in dict1:
+            if -key in dict2:
+                answer += dict1[key] * dict2[-key]
+        return answer
+```
+
+생각해보면 index 관리 필요 없이 하나의 dict(hashmap)으로 처리할 수 있다.
+
+1,2번 list의 조합으로 map을 만들고, 3,4번 list 조합으로 map을 또 만들어서 map1에 존재하는 key값들 중 map2에 -key값이 존재하면 그 값을 곱해 더해주는 것을 반복하면 된다.
+
+사실 map 2개를 만들 필요도 없지만 일단 이렇게 했다.
+
+4. Counter를 사용한 개선
+
+
+```
+class Solution:
+    def fourSumCount(self, nums1: List[int], nums2: List[int], nums3: List[int], nums4: List[int]) -> int:
+        c1 = Counter(num1 + num2 for num1 in nums1 for num2 in nums2)
+        return sum(c1[-(num3 + num4)] for num3 in nums3 for num4 in nums4)
+```
+
+내장 함수 Counter를 사용해 단 2줄로 끝낼 수도 있다.
+
+리트코드 discuss 페이지에 most voted 게시글을 보면 굉장히 자주 등장하는 아저씨가 있는데, 풀이나 접근법 자체가 정말 대단하다.
+
+위 풀이도 그 아저씨 풀이다.

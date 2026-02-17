@@ -1,0 +1,46 @@
+---
+slug: 135
+title: "17. Letter Combinations of a Phone Number"
+authors: seokjae
+tags: ["tistory"]
+enableComments: true
+keywords: ["tistory"]
+date: 2021-05-15T20:22:14+09:00
+---
+
+> 원문: https://doljae.tistory.com/135
+
+![cover](https://blog.kakaocdn.net/dna/bz4PJU/btq4XDmXfbY/AAAAAAAAAAAAAAAAAAAAAPl_OevWBbCv-S2x1BEWkqss7g8Hyul07ZK_QU6donNF/img.png?credential=yqXZFxpELC7KVnFOS48ylbz2pIh7yKj8&expires=1772290799&allow_ip=&allow_referer=&signature=Pr9%2F0tJi6AQv%2BFS3bhgguzmbeQM%3D)
+
+1. DFS
+
+
+```
+class Solution(object):
+    def letterCombinations(self, digits):
+        dict1 = {2: ["a", "b", "c"],
+                 3: ["d", "e", "f"],
+                 4: ["g", "h", "i"],
+                 5: ["j", "k", "l"],
+                 6: ["m", "n", "o"],
+                 7: ["p", "q", "r", "s"],
+                 8: ["t", "u", "v"],
+                 9: ["w", "x", "y", "z"]}
+        if digits == "":
+            return []
+        answer = []
+
+<!-- truncate -->
+
+        def dfs(cur, target, result):
+            if cur == len(target):
+                answer.append(result)
+                return
+            for char in dict1[int(target[cur])]:
+                dfs(cur + 1, target, result + char)
+
+        dfs(0, digits, "")
+        return answer
+```
+
+주말은 가볍게.

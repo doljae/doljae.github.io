@@ -1,0 +1,95 @@
+---
+slug: 45
+title: "Java 05"
+authors: seokjae
+tags: ["tistory"]
+enableComments: true
+keywords: ["tistory"]
+date: 2021-02-07T18:09:13+09:00
+---
+
+> 원문: https://doljae.tistory.com/45
+
+Servlet, JSP
+
+Servlet은 Java class 내부에 html을 포함한다
+
+JSP는 html이 Java code를 포함한다.
+
+<!-- truncate -->
+
+JSP는 서블릿 엔진을 지원하는 웹 서버에서 사용할 수 있는 (비교적) 서버 독립적인 템플릿 엔진
+
+PHP의 경우 Apache 서버에서만 사용할 수 있다.
+
+JSP의 단점
+
+1. 배포할 때 JAR로 배포가 불가능하다.
+
+JAR로 배포한다는 것은 서블릿 엔진이 없이 JRE만 있으면 서버에서 실행할 수 있다.
+
+WAR로 배포한다는 것은 서블릿 엔진이 있는 웹 서버에서만 실행할 수 있다. 왜냐하면 JSP가 Servlet으로 변환되어 컴파일되고 사용되기 때문이다.
+
+2. View에 비즈니스 로직이 같이 포함되는 경우가 있다.
+
+동시성 문제를 고려해야 하고, 디버깅이 어렵다.
+
+이런 문제에 대한 대안으로 Thymeleaf라는 템플릿 엔진을 사용할 수 있다.
+
+HTML, XML
+
+XML
+
+eXtensible Markup Language
+
+tag를 이용해 구조를 표현하는 마크업 언어
+
+XML = XSD(DTD + XSD) + XSL
+
+Servlet 사용법
+
+```
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns="http://xmlns.jcp.org/xml/ns/javaee"
+	xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd"
+	id="WebApp_ID" version="4.0">
+	<display-name>Servlet_JSP_MyBatis</display-name>
+	<welcome-file-list>
+		<welcome-file>index.html</welcome-file>
+		<welcome-file>index.htm</welcome-file>
+		<welcome-file>index.jsp</welcome-file>
+		<welcome-file>default.html</welcome-file>
+		<welcome-file>default.htm</welcome-file>
+		<welcome-file>default.jsp</welcome-file>
+	</welcome-file-list>
+	
+	<!-- servlet 선언 -->
+	<servlet>
+		<servlet-name>UserServlet</servlet-name>
+		<servlet-class>jdbc.user.controller.UserServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>UserServlet</servlet-name>
+		<!-- base_uri/*.do 라는 모든 호출에 대해서 해당 서블릿이 호출된다-->
+		<url-pattern>*.do</url-pattern>
+	</servlet-mapping>
+</web-app>
+```
+
+
+일반적으로 Servlet 클래스는 @WebServlet 어노테이션과 함께 경로를 적어준다. 이 경로로 들어오는 HTTP Method를 처리하는 doGet()과 같은 메서드를 오버라이드 해서 작업을 하게 된다.
+
+하지만 Servlet 자체를 WAS에 등록해서 쓰는 법도 있는데 방법은 다음과 같다.
+
+1. &lt;Servlet&gt; 태그를 이용해 서블릿을 등록한다.
+
+2. &lt;servlet-mapping&gt; 태그를 이용해 &lt;uri-pattern&gt;에 적은 그 uri 패턴으로 입력이 오면 타깃이 될 &lt;servlet-name&gt;에 적어준다
+
+그러니깐 이런 느낌이다
+
+JSP1 &rarr; 서블릿 &rarr; JSP2
+
+JSP1이 어떤 서블릿을 호출하면 그 서블릿은 호출된 HTTP METHOD에 따라서 비즈니스 로직 작업을 수행한다. 서블릿의 request에는 보낼 데이터를 저장한다. 그리고 forward(JSP2) 이렇게 데이터를 JSP2로 넘겨주면서 JSP2화면으로 이동한다
+
+JSP2로 넘어오면 서블릿이 담아온 데이터를 JSTL을 이용해서 꺼내거나 할 수 있는 것!

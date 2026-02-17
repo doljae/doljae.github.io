@@ -1,0 +1,54 @@
+---
+slug: 87
+title: "136. Single Number"
+authors: seokjae
+tags: ["tistory"]
+enableComments: true
+keywords: ["tistory"]
+date: 2021-04-22T14:31:45+09:00
+---
+
+> 원문: https://doljae.tistory.com/87
+
+1. 집합 사용
+
+
+```
+class Solution:
+    def singleNumber(self, nums: List[int]) -> int:
+        set1 = set()
+        for num in nums:
+            if num not in set1:
+                set1.add(num)
+            else:
+                set1.remove(num)
+        return set1[0]
+```
+
+2. 조건의 특성 사용, 2*(a+b+c) - (2a+2b+c) = c
+
+<!-- truncate -->
+
+
+```
+class Solution:
+    def singleNumber(self, nums: List[int]) -> int:
+        nums2 = list(set(nums))
+        return sum(nums2) * 2 - sum(nums)
+```
+
+
+3. 비트 마스킹, XOR
+
+
+```
+class Solution:
+
+    def singleNumber(self, nums: List[int]) -> int:
+        bag = 0
+        for num in nums:
+            bag ^= num
+        return bag
+```
+
+아이디어 자체는 2번이 제일 괜찮다고 생각하지만, 추가 공간도 쓰지 않는 3번 방법이 최적이라고 볼 수 있다.

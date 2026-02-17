@@ -1,0 +1,74 @@
+---
+slug: 62
+title: "15. 3Sum"
+authors: seokjae
+tags: ["tistory"]
+enableComments: true
+keywords: ["tistory"]
+date: 2021-04-02T16:18:47+09:00
+---
+
+> 원문: https://doljae.tistory.com/62
+
+![cover](https://blog.kakaocdn.net/dna/dcKzYC/btq1C2DMubb/AAAAAAAAAAAAAAAAAAAAADaOjG3Am2mpx8VHnRpI4rqKcaPLIbE5EnzmNq9CzuWp/img.png?credential=yqXZFxpELC7KVnFOS48ylbz2pIh7yKj8&expires=1772290799&allow_ip=&allow_referer=&signature=I6uvIzPJ8vsodaynJA28gitB6ds%3D)
+
+1. Two Pointer를 사용한 풀이(내 풀이, start, index, end)
+
+
+```
+from typing import *
+
+<!-- truncate -->
+
+
+class Solution:
+    def threeSum(self, nums: List[int]) -> List[List[int]]:
+        answer = []
+        nums.sort()
+        # -4 -1 -1 0 1 2
+        for i in range(1, len(nums) - 1):
+            start, end = 0, len(nums) - 1
+            while 0 <= start < i < end < len(nums):
+                # print(start, i, end)
+                cur_value = nums[start] + nums[i] + nums[end]
+                if cur_value == 0:
+                    answer.append((nums[start], nums[i], nums[end]))
+                    start += 1
+                elif cur_value > 0:
+                    end -= 1
+                elif cur_value < 0:
+                    start += 1
+        return list(map(lambda x:list(x),set(answer)))
+```
+
+2. Two Pointer를 사용한 풀이(최적화, index, start, end, 중복 결과 continue)
+
+
+```
+from typing import *
+
+
+class Solution:
+    def threeSum(self, nums: List[int]) -> List[List[int]]:
+        answer = []
+        nums.sort()
+        # -4 -1 -1 0 1 2
+        for i in range(len(nums) - 2):
+            start, end = i+1, len(nums) - 1
+            while start < end:
+                # print(start, i, end)
+                cur_value = nums[i] + nums[start] + nums[end]
+                if cur_value == 0:
+                    answer.append((nums[i], nums[start], nums[end]))
+                    while start<end and nums[start]==nums[start+1]:
+                        start+=1
+                    while start<end and nums[end]==nums[end-1]:
+                        end-=1
+                    start+=1
+                    end-=1
+                elif cur_value > 0:
+                    end -= 1
+                elif cur_value < 0:
+                    start += 1
+        return list(map(lambda x:list(x),set(answer)))
+```

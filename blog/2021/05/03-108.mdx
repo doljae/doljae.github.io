@@ -1,0 +1,57 @@
+---
+slug: 108
+title: "226. Invert Binary Tree"
+authors: seokjae
+tags: ["tistory"]
+enableComments: true
+keywords: ["tistory"]
+date: 2021-05-03T11:14:45+09:00
+---
+
+> 원문: https://doljae.tistory.com/108
+
+![cover](https://blog.kakaocdn.net/dna/QbUoD/btq3TXgeI33/AAAAAAAAAAAAAAAAAAAAAG5VJd6y-2QX5A7YY1miXcc2QaJtF392hSRKSo7DGYwD/img.png?credential=yqXZFxpELC7KVnFOS48ylbz2pIh7yKj8&expires=1772290799&allow_ip=&allow_referer=&signature=PhPyWt8KfvzcBZrGXFOrSzvTVCc%3D)
+
+1. Queue를 이용한 풀이
+
+
+```
+from collections import deque
+
+<!-- truncate -->
+
+
+class Solution:
+    def invertTree(self, root: TreeNode) -> TreeNode:
+        if not root:
+            return None
+        if not root.left and not root.right:
+            return root
+        q = deque([])
+        q.append(root)
+        while q:
+            print(q)
+            cur = q.popleft()
+            if not cur:
+                continue
+            q.append(cur.left)
+            q.append(cur.right)
+            cur.left, cur.right = cur.right, cur.left
+        return root
+```
+
+2. 재귀를 이용한 풀이
+
+
+```
+class Solution:
+    def invertTree(self, root: TreeNode) -> TreeNode:
+        if not root:
+            return None
+        root.left = self.invertTree(root.left)
+        root.right = self.invertTree(root.right)
+        root.left, root.right = root.right, root.left
+        return root
+```
+
+자료구조의 입출력 연산의 오버헤드에 대해 생각해볼 수밖에 없는 문제.

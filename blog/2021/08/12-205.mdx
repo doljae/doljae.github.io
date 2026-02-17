@@ -1,0 +1,174 @@
+---
+slug: 205
+title: "297. Serialize and Deserialize Binary Tree"
+authors: seokjae
+tags: ["tistory"]
+enableComments: true
+keywords: ["tistory"]
+date: 2021-08-12T12:41:40+09:00
+---
+
+> 원문: https://doljae.tistory.com/205
+
+![cover](https://blog.kakaocdn.net/dna/mujc3/btrbR4dEKKP/AAAAAAAAAAAAAAAAAAAAANJ5eOHxO1cOqKsExEkQ9Hoebrtu3OtPEXbWidWH_3KX/img.png?credential=yqXZFxpELC7KVnFOS48ylbz2pIh7yKj8&expires=1772290799&allow_ip=&allow_referer=&signature=6EHBDgI1bqCMpvSUBxseL8MlalM%3D)
+
+이진트리가 주어진다.
+
+이진트리를 직렬화(serialize)해 문자열로 반환하고, 반환된 문자열을 역직렬화(deserialize)해서 이진트리를 복원하는 메서드를 작성하는 문제다.
+
+<!-- truncate -->
+
+직렬화 및 역직렬화 방법에 제한은 없다.
+
+1. 초기 접근법
+처음에 나는 이 문제를 전위(pre-order), 중위(in-order) 순회 정보를 가지고 트리를 복구하는 문제와 결이 같다고 생각했다. 수십 분의 삽질 끝에 접근법이 잘못된 것을 알게 되었고 그 이유는 다음과 같다.
+
+주어지는 트리는 이진 탐색 트리가 아닌 이진트리다.
+주어지는 트리의 value값은 unique하지 않다. 그래서 초기 형태로 복원하려면 추가적인 정보를 넣어서 직렬 화해 줘야 한다.
+직감적으로 이렇게 푸는 문제가 아닌 것 같다는 생각이 들었다(...)
+
+전위 순회를 한 결과가 [1, 1, 1, 1, 1]이라고 한다면...
+
+value값만 직렬화 해선 이진트리의 모양이 어떻게 생겼는지 알 수 없다. 그러니깐 root가 어떤 인덱스인지 알 수 없다.
+
+설령 첫 root의 index가 몇 번이다라는 정보를 저장한다고 하더라도 그 index 기준으로 좌, 우의 subtree에서의 root는 또 무엇이며, 이 root의 어떤 depth의 root인지에 대한 정보까지 있어야 완벽하게 복원할 수 있다.
+
+2. BFS
+
+
+```
+class Codec:
+
+    def serialize(self, root):
+        if not root:
+            return ""
+
+        answer = [str(root.val)]
+        q = deque([root])
+
+        while q:
+            cur = q.popleft()
+            if cur.left:
+                q.append(cur.left)
+                answer.append(str(cur.left.val))
+            else:
+                answer.append("#")
+            if cur.right:
+                q.append(cur.right)
+                answer.append(str(cur.right.val))
+            else:
+                answer.append("#")
+
+        # print(answer)
+        return "_".join(answer)
+
+    def deserialize(self, data):
+        if not data:
+            return None
+
+        nodes = data.split("_")
+        root = TreeNode(int(nodes[0]))
+        q2 = deque([root])
+        q1 = deque(nodes[1:])
+        while q2:
+            cur = q2.popleft()
+
+            left, right = q1.popleft(), q1.popleft()
+
+            if left != "#":
+                left_node = TreeNode(int(left))
+                cur.left = left_node
+                q2.append(left_node)
+
+            if right != "#":
+                right_node = TreeNode(int(right))
+                cur.right = right_node
+                q2.append(right_node)
+
+        return root
+```
+
+왼쪽 트리를 기준으로 생각해보면 다음과 같다.
+
+우선 트리를 BFS탐색을 한다. 탐색할 때 노드가 있는 경우는 노드의 값을 문자열로 저장하고, 자식 노드가 없는 경우에는 "#"를 저장한다.
+
+BFS 탐색을 마치면 저장되는 결과는 다음과 같다.
+
+[1, 2, 3, #, #,4, 5, #, #, #, #]
+
+이걸 구분자를 적당히 넣어서 문자열로 만들어 반환하면 직렬 화가 끝난다.
+
+역직렬화는 동일하게 BFS로 진행하는데 다음번 방문할 노드를 저장하는 queue, 위 문자열을 구분자로 나누어 만든 queue 이렇게 2개를 준비한다. 코드에선 전자가 q2, 후자가 q1이다.
+
+시뮬레이션은 다음과 같다.
+
+root 노드는 직렬화 결과의 맨 첫 번째 기 때문에 미리 node로 만들어서 q2에 넣어둔다. q1은 root노드를 만들었기 때문에 popleft()를 한 번 해준다.
+q2에 노드가 있을 때까지 반복하는데...
+
+q2에서 노드를 꺼낸다.
+q1에서 값 2개를 꺼낸다. 각각 왼쪽, 오른쪽에 해당하는 값이다.
+만일 꺼낸 값이 우리가 null 체크를 한 문자인 "#"이 아니라면, 즉 꺼낸 값이 문자로 된 정수라면 노드를 만들어서 현재 노드의 왼쪽, 오른쪽에 연결해준다.
+연결되었다면 3번에서 만든 노드를 q2에 넣어준다.
+
+root를 반환한다.
+
+2. DFS
+
+
+```
+from collections import deque
+
+
+class Codec:
+
+    def serialize(self, root):
+        if not root:
+            return ""
+        answer = []
+
+        def dfs(cur):
+            if not cur:
+                answer.append("#")
+                return
+            else:
+                answer.append(str(cur.val))
+
+            dfs(cur.left)
+            dfs(cur.right)
+
+        dfs(root)
+        result = "_".join(answer)
+        return result
+
+    def deserialize(self, data):
+        if not data:
+            return None
+        q = deque(data.split("_"))
+        root = TreeNode(int(q[0]))
+        q.popleft()
+
+        def dfs(seq, cur):
+
+            if seq[0] != "#":
+                left = seq.popleft()
+                left_node = TreeNode(int(left))
+                cur.left = left_node
+                dfs(seq, left_node)
+            else:
+                seq.popleft()
+
+            if seq[0] != "#":
+                right = seq.popleft()
+                right_node = TreeNode(int(right))
+                cur.right = right_node
+                dfs(seq, right_node)
+            else:
+                seq.popleft()
+
+        dfs(q, root)
+        return root
+```
+
+BFS와 결은 비슷하다. 설명은 생략.
+
+처음부터 그냥 전부 다 돌아서 null 위치까지 기록할 생각을 하지 못해서 굉장히 어려웠던 문제.

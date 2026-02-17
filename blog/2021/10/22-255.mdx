@@ -1,0 +1,82 @@
+---
+slug: 255
+title: "55. Jump Game"
+authors: seokjae
+tags: ["tistory"]
+enableComments: true
+keywords: ["tistory"]
+date: 2021-10-22T22:12:27+09:00
+---
+
+> 원문: https://doljae.tistory.com/255
+
+![cover](https://blog.kakaocdn.net/dna/dsKOEm/btrizTRgEiT/AAAAAAAAAAAAAAAAAAAAAM0tWeba700tnbJ_NRXNeywGcW8jfFPAxHmUbogzaUw-/img.png?credential=yqXZFxpELC7KVnFOS48ylbz2pIh7yKj8&expires=1772290799&allow_ip=&allow_referer=&signature=DzDnOnVFKwnCO4SxKIVoU2%2BuFWw%3D)
+
+0과 같거나 큰 정수로 구성된 1차원 배열이 주어진다.
+
+0번 인덱스에서 시작해서 해당 인덱스가 가리키는 값만큼 인덱스를 이동할 수 있을 때 정수 배열의 마지막 인덱스로 이동이 가능한지를 판단하는 문제다.
+
+<!-- truncate -->
+
+예시
+
+
+```
+Input: nums = [2,3,1,1,4]
+Output: true
+Explanation: Jump 1 step from index 0 to 1, then 3 steps to the last index.
+
+Input: nums = [3,2,1,0,4]
+Output: false
+Explanation: You will always arrive at index 3 no matter what.
+Its maximum jump length is 0, which makes it impossible to reach the last index.
+```
+
+
+접근
+DP 문제라고 되어있는데 Greedy 하게 풀 수 있을 것 같았다.
+
+1. Greedy
+
+
+```
+class Solution:
+    def canJump(self, nums: List[int]) -> bool:
+
+        maximum = 0
+        for index, num in enumerate(nums[:len(nums) - 1]):
+            if index > maximum:
+                return False
+            maximum = max(maximum, index + num)
+
+        return maximum >= len(nums) - 1
+```
+
+index 0을 기준으로 최대로 뛸 수 있는 거리를 maximum에 저장한다.
+
+배열의 마지막 값을 제외하고 반복문을 돌면서 만일 index가 maximum보다 크다는 것은 해당 index에 도달할 수 있는 방법이 존재하지 않는다는 뜻과 같기 때문에 False를 반환한다.
+
+그리고 maximum의 최댓값을 index+num과 비교해서 갱신한다.
+
+반복문이 끝난 이후 maximum이 배열의 최대 인덱스보다 크거나 같다면 True를 반환한다.
+
+2. 최적화
+
+
+```
+class Solution:
+    def canJump(self, nums: List[int]) -> bool:
+        
+        if nums[0] == 0 and len(nums) == 1:
+            return True
+        
+        maximum = 0
+        for index, num in enumerate(nums):
+            if index > maximum:
+                return False
+            maximum = max(maximum, index + num)
+            if maximum >= len(nums) - 1:
+                return True
+```
+
+중간에 조건에 도달하면 탈출할 수 있게 해 주면 약간 더 빠르게 통과한다. 큰 차이는 없다.

@@ -1,0 +1,73 @@
+---
+slug: 250
+title: "986. Interval List Intersections"
+authors: seokjae
+tags: ["tistory"]
+enableComments: true
+keywords: ["tistory"]
+date: 2021-10-14T09:55:02+09:00
+---
+
+> 원문: https://doljae.tistory.com/250
+
+![cover](https://blog.kakaocdn.net/dna/0FXHU/btrhKsrzNBc/AAAAAAAAAAAAAAAAAAAAAO85s-SjpA4FGOIMgswpCHddAJyFZ9SWx8F1heUnSCzj/img.png?credential=yqXZFxpELC7KVnFOS48ylbz2pIh7yKj8&expires=1772290799&allow_ip=&allow_referer=&signature=ucv5JPA%2BHMXfSFsjLvdqeSTXiq0%3D)
+
+구간 정보를 담은 2개의 list가 주어진다.
+
+두 list에 담긴 구간 정보를 비교해서 겹치는 구간의 시작과 끝 정보를 담아 반환하는 문제다.
+
+<!-- truncate -->
+
+예시
+
+```
+firstList = [[0,2],[5,10],[13,23],[24,25]]
+secondList = [[1,5],[8,12],[15,24],[25,26]]
+
+Output: [[1,2],[5,5],[8,10],[15,23],[24,24],[25,25]]
+```
+
+
+접근법
+이런 문제는 보통 우선순위 큐를 사용할 수 있을 것 같다는 경험에 의해 우선순위 큐를 이용해서 접근했다.
+
+하지만 생각보다 예쁘게 코드가 나오지 않아서 이중 우선순위 큐를 사용하려고 코드를 작성해보려 하다가 굳이 우선순위 큐를 사용하지 않고 선형 탐색으로 가능한 문제라는 것을 알게 되었다.
+
+1. Two Pointers
+
+
+```
+from typing import *
+
+
+class Solution:
+    def intervalIntersection(self, firstList: List[List[int]], secondList: List[List[int]]) -> List[List[int]]:
+        answer = []
+
+        p1, p2 = 0, 0
+        while p1 < len(firstList) and p2 < len(secondList):
+            c1, c2 = firstList[p1], secondList[p2]
+            s1, e1 = c1
+            s2, e2 = c2
+
+            if e1 < s2:
+                p1 += 1
+            elif e2 < s1:
+                p2 += 1
+            else:
+                answer.append([max(s1, s2), min(e1, e2)])
+                if e1 <= e2:
+                    p1 += 1
+                else:
+                    p2 += 1
+
+        return answer
+```
+
+두 개의 구간에 대한 포인터 p1, p2를 이용하고, p1, p2가 가리키는 시작과 끝 정보를 s1, e1, s2, e2로 사용했다.
+
+우선 구간이 겹치지 않는 경우는 e1 &lt; s2 이거나 e2 &lt; s1 인 경우다. 이 경우는 더 일찍 끝나는 구간을 가리키는 포인터를 전진시킨다.
+
+겹치는 경우에 대한 구간 정보는 [max(s1, s2), min(e1, e2)]로 표현할 수 있고, 둘 중 더 일찍 끝나는 구간을 가리키는 포인터를 전진시킨다.
+
+너무 어렵게 생각하다가 못 풀 뻔한 문제.

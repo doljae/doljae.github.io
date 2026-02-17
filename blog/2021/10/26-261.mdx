@@ -1,0 +1,86 @@
+---
+slug: 261
+title: "42. Trapping Rain Water"
+authors: seokjae
+tags: ["tistory"]
+enableComments: true
+keywords: ["tistory"]
+date: 2021-10-26T15:50:14+09:00
+---
+
+> 원문: https://doljae.tistory.com/261
+
+![cover](https://blog.kakaocdn.net/dna/bNudLW/btriQ6Xs15W/AAAAAAAAAAAAAAAAAAAAAOuGmiCNKxiJ97JBzjKjdvekpS6TBUcwFLkpGUIGz-pq/img.png?credential=yqXZFxpELC7KVnFOS48ylbz2pIh7yKj8&expires=1772290799&allow_ip=&allow_referer=&signature=OXxEU7IIvPTXdPkZRN2iPvCugSA%3D)
+
+0보다 같거나 큰 양의 정수로 이루어진 배열이 주어진다.
+
+주어진 배열을 이용해 해당 index에 value 길이의 벽을 세운다고 가정하고 비가 올 때 최대로 받을 수 있는 빗물의 양을 구하는 문제다.
+
+<!-- truncate -->
+
+1. Stack
+
+
+```
+from typing import *
+
+
+class Solution:
+    def trap(self, heights: List[int]) -> int:
+        stack, answer = [], 0
+
+        def calculate(wall):
+            result = 0
+
+            while stack and wall > heights[stack[-1]]:
+
+                left_wall_index = stack.pop()
+                if not stack:
+                    break
+
+                width = i - stack[-1] - 1
+                height = min(wall, heights[stack[-1]]) - heights[left_wall_index]
+                result += width * height
+
+            return result
+
+        for i in range(len(heights)):
+            cur = heights[i]
+            if not stack or (stack and heights[stack[-1]] >= cur):
+                stack.append(i)
+
+            else:
+                answer += calculate(cur)
+                stack.append(i)
+        return answer
+```
+
+2. Two-Pointer
+
+
+```
+from typing import *
+
+
+class Solution:
+    def trap(self, heights: List[int]) -> int:
+        left, right = 0, len(heights) - 1
+        left_max, right_max = heights[left], heights[right]
+        answer = 0
+        while left < right:
+            left_max = max(left_max, heights[left])
+            right_max = max(right_max, heights[right])
+
+            if left_max <= right_max:
+                answer += (left_max - heights[left])
+                left += 1
+            else:
+                answer += (right_max - heights[right])
+                right -= 1
+
+        return answer
+```
+
+개인적으로 스택을 이용한 풀이보다도 투 포인터를 저렇게 사용하면 원하는 결과를 얻을 수 있다는 사실이 더 신기하다. 저게 연상이 되나;
+
+유명한 문제여서 푸는 방법은 알고 있었는데 구현하는데 시간이 오래 걸렸다...

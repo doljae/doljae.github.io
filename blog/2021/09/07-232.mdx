@@ -1,0 +1,169 @@
+---
+slug: 232
+title: "1314. Matrix Block Sum"
+authors: seokjae
+tags: ["tistory"]
+enableComments: true
+keywords: ["tistory"]
+date: 2021-09-07T18:44:33+09:00
+---
+
+> 원문: https://doljae.tistory.com/232
+
+![cover](https://blog.kakaocdn.net/dna/21nbl/btreh25T9KH/AAAAAAAAAAAAAAAAAAAAALWFwDJvpdmyEUaGYPiph6W4qgdp2_L4Imw6W6PSM0nr/img.png?credential=yqXZFxpELC7KVnFOS48ylbz2pIh7yKj8&expires=1772290799&allow_ip=&allow_referer=&signature=2CFNaoYxJOKUSaf4ydJ2YfhIGXI%3D)
+
+2차원 배열과 양의 정수 k가 주어진다.
+
+2차원 배열의 특정한 좌표 (i, j)에 대해서 해당 좌표를 중심으로 k 길이만큼의 범위에 해당하는 모든 값을 더한 값을 저장한 배열을 반환하는 문제다.
+
+<!-- truncate -->
+
+예시
+
+```
+Input: mat = [[1,2,3],[4,5,6],[7,8,9]], k = 1
+Output: [[12,21,16],[27,45,33],[24,39,28]]
+
+[1,2,3]
+[4,5,6]
+[7,8,9]
+
+이렇게 생긴 배열을 길이 k 만큼의 범위에 해당하는 모든 값을 더하면
+
+[12,21,16]
+[27,45,33]
+[24,39,28]
+
+이렇게 된다.
+
+k = 2인 경우는
+
+[45,45,45]
+[45,45,45]
+[45,45,45]
+
+이렇게 된다.
+```
+
+
+접근법
+문제를 보고 바로 매번 탐색해서 계산해 넣으면 시간 초과가 나는 문제라고 생각했다.
+
+2차원 누적합을 이용해 해결하기로 했다.
+
+1. 2D prefix sum(2차원 누적합)
+
+
+```
+from typing import *
+
+
+class Solution:
+    def matrixBlockSum(self, mat: List[List[int]], k: int) -> List[List[int]]:
+        height, width = len(mat), len(mat[0])
+        new_mat = [[0] * (width + 2 * k) for _ in range(height + 2 * k)]
+        answer = [[0] * width for _ in range(height)]
+
+        for i in range(height):
+            for j in range(width):
+                new_mat[i + k][j + k] = mat[i][j]
+
+        height2, width2 = height + 2 * k, width + 2 * k
+        for i in range(1, height2):
+            for j in range(1, width2):
+                new_mat[i][j] += new_mat[i][j - 1]
+
+        for j in range(1, width2):
+            for i in range(1, height2):
+                new_mat[i][j] += new_mat[i - 1][j]
+
+        def sol(x1, y1, x2, y2):
+            result = new_mat[x2][y2]
+            a = new_mat[x2][y1 - 1] if y1 - 1 >= 0 else 0
+            b = new_mat[x1 - 1][y2] if x1 - 1 >= 0 else 0
+            c = new_mat[x1 - 1][y1 - 1] if x1 - 1 >= 0 and y1 - 1 >= 0 else 0
+
+            return result - a - b + c
+
+        for i in range(height):
+            for j in range(width):
+                x1, y1 = i, j
+                x2, y2 = i + 2 * k, j + 2 * k
+                answer[i][j] = sol(x1, y1, x2, y2)
+
+        return answer
+```
+
+주어진 2차원 배열을 한 번 탐색해 2차원 누적합 배열을 만들 수 있다.
+
+이후 구한 2차원 배열을 이용해 해당 범위에 대한 값을 O(1)로 구할 수 있다.
+
+구현 방법 및 시뮬레이션은 아래와 같다.
+
+```
+주어진 배열에 k = 1 만큼 zero-padding을 한다. -> 0-padding 배열
+[0, 0, 0, 0, 0]
+[0, 1, 2, 3, 0]
+[0, 4, 5, 6, 0]
+[0, 7, 8, 9, 0]
+[0, 0, 0, 0, 0]
+
+만든 배열을 이용해 2차원 누적합 배열을 만든다.
+[0, 0, 0, 0, 0]
+[0, 1, 3, 6, 6]
+[0, 5, 12, 21, 21]
+[0, 12, 27, 45, 45]
+[0, 12, 27, 45, 45]
+
+2차원 누적합 배열을 이용해 원하는 값을 구한다.
+0,0에 들어갈 값은 0-padding 배열의 (0,0) ~ (2,2) 범위의 값의 합
+0,1에 들어갈 값은 0-padding 배열의 (0,1) ~ (2,3) 범위의 값의 합
+0,2에 들어갈 값은 0-padding 배열의 (0,2) ~ (2,4) 범위의 값의 합
+1,0에 들어갈 값은 0-padding 배열의 (1,0) ~ (3,2) 범위의 값의 합
+1,1에 들어갈 값은 0-padding 배열의 (1,1) ~ (3,3) 범위의 값의 합
+1,2에 들어갈 값은 0-padding 배열의 (1,2) ~ (3,4) 범위의 값의 합
+2,0에 들어갈 값은 0-padding 배열의 (2,0) ~ (4,2) 범위의 값의 합
+2,1에 들어갈 값은 0-padding 배열의 (2,1) ~ (4,3) 범위의 값의 합
+2,2에 들어갈 값은 0-padding 배열의 (2,2) ~ (4,4) 범위의 값의 합
+
+[12, 21, 16]
+[27, 45, 33]
+[24, 39, 28]
+```
+
+```
+주어진 배열에 k = 2 만큼 zero-padding을 한다. -> 0-padding 배열
+[0, 0, 0, 0, 0, 0, 0]
+[0, 0, 0, 0, 0, 0, 0]
+[0, 0, 1, 2, 3, 0, 0]
+[0, 0, 4, 5, 6, 0, 0]
+[0, 0, 7, 8, 9, 0, 0]
+[0, 0, 0, 0, 0, 0, 0]
+[0, 0, 0, 0, 0, 0, 0]
+
+만든 배열을 이용해 2차원 누적합 배열을 만든다.
+[0, 0, 0, 0, 0, 0, 0]
+[0, 0, 0, 0, 0, 0, 0]
+[0, 0, 1, 3, 6, 6, 6]
+[0, 0, 5, 12, 21, 21, 21]
+[0, 0, 12, 27, 45, 45, 45]
+[0, 0, 12, 27, 45, 45, 45]
+[0, 0, 12, 27, 45, 45, 45]
+
+2차원 누적합 배열을 이용해 원하는 값을 구한다.
+0,0에 들어갈 값은 0-padding 배열의 (0,0) ~ (4,4) 범위의 값의 합
+0,1에 들어갈 값은 0-padding 배열의 (0,1) ~ (4,5) 범위의 값의 합
+0,2에 들어갈 값은 0-padding 배열의 (0,2) ~ (4,6) 범위의 값의 합
+1,0에 들어갈 값은 0-padding 배열의 (1,0) ~ (5,4) 범위의 값의 합
+1,1에 들어갈 값은 0-padding 배열의 (1,1) ~ (5,5) 범위의 값의 합
+1,2에 들어갈 값은 0-padding 배열의 (1,2) ~ (5,6) 범위의 값의 합
+2,0에 들어갈 값은 0-padding 배열의 (2,0) ~ (6,4) 범위의 값의 합
+2,1에 들어갈 값은 0-padding 배열의 (2,1) ~ (6,5) 범위의 값의 합
+2,2에 들어갈 값은 0-padding 배열의 (2,2) ~ (6,6) 범위의 값의 합
+
+[45, 45, 45]
+[45, 45, 45]
+[45, 45, 45]
+```
+
+2차원 누적합 배열 관련 포스팅은 아래 링크를 참고할 것.

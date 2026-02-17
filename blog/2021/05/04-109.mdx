@@ -1,0 +1,100 @@
+---
+slug: 109
+title: "234. Palindrome Linked List"
+authors: seokjae
+tags: ["tistory"]
+enableComments: true
+keywords: ["tistory"]
+date: 2021-05-04T14:36:11+09:00
+---
+
+> 원문: https://doljae.tistory.com/109
+
+![cover](https://blog.kakaocdn.net/dna/dzLaY7/btq36Q1BUKh/AAAAAAAAAAAAAAAAAAAAADKuBiNcD_mRaqK2L9WmvywV_P_VWc2MS8__7_cBh8uV/img.png?credential=yqXZFxpELC7KVnFOS48ylbz2pIh7yKj8&expires=1772290799&allow_ip=&allow_referer=&signature=WSu4FSDVgcN0MGPz4oJaQLoy4GY%3D)
+
+1. 단순한 풀이
+
+
+```
+class Solution:
+    def isPalindrome(self, head: ListNode) -> bool:
+        cur = head
+        trace = []
+        while cur:
+            trace.append(cur.val)
+            cur = cur.next
+        return trace == trace[::-1]
+```
+
+<!-- truncate -->
+
+경로를 저장하고 경로와 뒤집은 경로가 같은지를 반환한다.
+
+2. Pointer 2개를 이용한 풀이
+
+
+```
+class Solution:
+    def isPalindrome(self, head: ListNode) -> bool:
+        fast = slow = head
+        rev = None
+        while fast and fast.next:
+            fast = fast.next.next
+            rev, rev.next, slow = slow, rev, slow.next
+        if fast:
+            slow = slow.next
+        while slow and slow.val == rev.val:
+            slow, rev = slow.next, rev.next
+        return not slow
+```
+
+굉장의 창의적인 풀이고, 예전에 풀었는데도 이 방법을 정확히 구현하지 못했다.
+
+주어진 연결 리스트의 절반을 뒤집고 나머지 절반과 값을 비교하는 방법이다.
+
+주의할 점이 있는데
+
+```
+a,b,c = b,c,a
+```
+
+
+Python에 있는 이런 문법이 있다.
+
+일반적으로 포인터 조작할 때는 이전 포인터 주 솟값을 임시 변수에 저장해서 가져다 사용하는 코드가 일반적인데, python은 임시 변수 없이도 값을 swap 하거나 조작할 수 있다.
+
+이 문법은 a와 b와 c에 현재 b와 c와 a값을 대입하라는 뜻이다.
+
+```
+a, b = b, c
+c = a
+```
+
+
+이걸 이렇게 쪼개면 c에는 a의 원래 값이 아니라 b의 값이 들어간다. 두 코드를 자세히 보면 이해할 수 있다.
+
+이런 식으로 현재 순간의 값을 임시 배열 없이 옮길 수 있기 때문에 유용하게 사용할 수 있고, 반대로 이런 특징을 모르고 남발했다간 에러를 잡지 못할 수도 있으니깐 주의해야 한다.
+
+2. Deque를 이용한 풀이
+
+
+```
+from collections import deque
+class Solution:
+    def isPalindrome(self, head: ListNode) -> bool:
+        q=[]
+        if not head.next:
+            return True
+        while head:
+            q.append(head.val)
+            head=head.next
+        q=deque(q)
+        while len(q)>=2:
+            if q.popleft()!=q.pop():
+                return False
+        return True
+```
+
+
+
+오히려 이게 생각이 안 났다.

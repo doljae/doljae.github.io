@@ -1,0 +1,258 @@
+---
+slug: 214
+title: "894. All Possible Full Binary Trees"
+authors: seokjae
+tags: ["tistory"]
+enableComments: true
+keywords: ["tistory"]
+date: 2021-08-20T13:57:54+09:00
+---
+
+> 원문: https://doljae.tistory.com/214
+
+![cover](https://blog.kakaocdn.net/dna/zIMtD/btrcB3rYZkh/AAAAAAAAAAAAAAAAAAAAAOcydgof1P7M2TRooHE5vG6gM9ZeOY0UKnkLFC5Ylzl1/img.png?credential=yqXZFxpELC7KVnFOS48ylbz2pIh7yKj8&expires=1772290799&allow_ip=&allow_referer=&signature=69U0O14z7o%2FpeevOHH4Ct08Op3Y%3D)
+
+트리를 구성하는 노드 개수가 정수로 주어진다.
+
+주어진 노드 개수를 전부 소비해서 만들 수 있는 가능한 모든 포화 이진트리(full-binary tree)를 반환하는 문제다.
+
+<!-- truncate -->
+
+물론 중복은 제외한다. 여기서 말하는 중복이란 동일한 모양을 가진 포화 이진트리를 말한다.
+
+여기서 포인트는 가짓수를 반환하는 게 아니다.
+
+실제로 트리를 반환해야 한다. 위의 예시 같은 경우 위 그림에 나와있는 5개의 트리를 만들고, 그 트리의 루트 노드를 list에 담아 반환하면 된다.
+
+1. 실패한 풀이
+
+
+```
+from typing import *
+from copy import deepcopy
+
+
+class Solution:
+    def allPossibleFBT(self, n: int) -> List[Optional[TreeNode]]:
+        answer = []
+
+        root = TreeNode(0)
+        stack = [[n - 1, root]]
+
+        while stack:
+            cur_tree = stack.pop()
+            cur_left_num, cur_tree_root = cur_tree[0], cur_tree[1]
+
+            if cur_left_num == 0:
+                answer.append(cur_tree_root)
+
+            else:
+                if cur_tree_root.left is None and cur_tree_root.right is None:
+                    left_node, right_node = TreeNode(0), TreeNode(0)
+                    cur_tree_root.left = left_node
+                    cur_tree_root.right = right_node
+                    cur_tree.append(left_node)
+                    cur_tree.append(right_node)
+                    cur_tree[0] -= 2
+                    stack.append(cur_tree)
+                else:
+                    new_tree = deepcopy(cur_tree)
+                    new_tree_left = new_tree[-1]
+
+                    left_node, right_node = TreeNode(0), TreeNode(0)
+                    new_tree_left.left = left_node
+                    new_tree_left.right = right_node
+                    new_tree.append(left_node)
+                    new_tree.append(right_node)
+                    new_tree[0] -= 2
+                    stack.append(new_tree)
+
+                    new_tree = deepcopy(cur_tree)
+                    new_tree_right = new_tree[-2]
+                    left_node, right_node = TreeNode(0), TreeNode(0)
+                    new_tree_right.left = left_node
+                    new_tree_right.right = right_node
+                    new_tree.append(left_node)
+                    new_tree.append(right_node)
+                    new_tree[0] -= 2
+                    stack.append(new_tree)
+                    
+        return answer
+```
+
+
+코드만 봐도 어질어질한데...
+
+이 문제의 포인트는 진짜 트리를 만들어야 한다. 단순히 트리를 탐색하면서 내려가다가 노드 개수가 0이 되면 그때의 root를 반환하는 식의 방법은 불가능하다. 정확히는 DFS로 내려가다가 노드 개수가 0이 되는 순간 현재 트리의 상태를 깊은 복사(deep copy)해서 메모리에 잔류시키고, 만든 트리의 루트만을 결과 list에 넣으면 된다. 나는 이 부분에서 굉장히 비효율적이라고 생각을 했고, 어차피 만들 거 그냥 재귀를 탈 때마다 새 트리를 만드는 식으로 내려가게 구현했다.
+
+결과적으로 이 코드는 시간 초과가 나진 않는다. 하지만 대칭 모양의 포화 이진트리의 경우를 찾을 수가 없다.
+
+2. Iteration
+
+
+```
+from typing import *
+from collections import defaultdict
+from copy import deepcopy
+
+
+class TreeNode:
+    def __init__(self, val=0, left=None, right=None):
+        self.val = val
+        self.left = left
+        self.right = right
+
+
+class Solution:
+    def allPossibleFBT(self, n: int) -> List[Optional[TreeNode]]:
+        cache = defaultdict(list)
+        cache[1].append(TreeNode(0))
+        if n == 1:
+            return cache[1]
+
+        max_cache_length = n - 2
+
+        for index in range(3, max_cache_length + 1, 2):
+            for left in range(1, index, 2):
+                right = index - 1 - left
+                for left_sub_tree in cache[left]:
+                    for right_sub_tree in cache[right]:
+                        root = TreeNode(0)
+                        root.left = left_sub_tree
+                        root.right = right_sub_tree
+                        cache[index].append(root)
+
+        answer = []
+        for left_length in range(1, max_cache_length + 1, 2):
+            right_length = max_cache_length - left_length + 1
+            for left_sub_tree in cache[left_length]:
+                for right_sub_tree in cache[right_length]:
+                    root = TreeNode(0)
+                    root.left = deepcopy(left_sub_tree)
+                    root.right = deepcopy(right_sub_tree)
+                    answer.append(root)
+        return answer
+```
+
+재귀 없이 반복으로 해결할 수 있다.
+
+접근법은 아래와 같다.
+
+7개의 노드로 만들 수 있는 포화 이진트리는 다음과 같다.
+
+루트를 기준으로 왼쪽 서브 트리의 총 노드 개수가 1개, 오른쪽 서브 트리의 총 노드 개수가 5개
+
+루트 노드까지 포함하면 총 7개가 된다
+서브 트리의 노드 개수는 반드시 홀수개여야 한다. 왜냐하면 짝수개는 포화 이진트리를 만들 수 없기 때문이다. 서브 트리도 포화 이진트리가 되어야 하기 때문에 트리를 구성하는 서브 트리의 노드 개수는 반드시 홀수개가 되어야 한다.
+
+루트를 기준으로 왼쪽 서브 트리의 총 노드 개수가 3개, 오른쪽 서브 트리의 총 노드 개수가 3개
+루트를 기준으로 왼쪽 서브 트리의 총 노드 개수가 5개, 오른쪽 서브 트리의 총 노드 개수가 1개
+
+주어진 노드 개수로 만들 수 있는 서브 트리를 전부 구한다.
+
+위의 경우 1개, 3개, 5개로 구성된 모든 서브 트리를 구해야 한다.
+1개로 구성된 서브 트리는 root만 있는 1가지가 있다.
+3개로 구성된 서브 트리는 root + 왼쪽 서브 트리 길이가 1 + 오른쪽 서브 트리의 길이가 1인 경우 밖에 없다. 즉 1가지가 있다.
+5개로 구성된 서브 트리는 root +
+
+왼쪽 서브 트리의 길이가 1, 오른쪽 서브 트리의 길이가 3인 경우
+왼쪽 서브 트리의 길이가 3, 오른쪽 서브 트리의 길이가 1인 경우를 다 고려해줘야 한다.
+1~3번에서 구한 서브 트리를 이용해 구할 수 있다.
+
+이제 n개의 노드로 만들 수 있는 서브 트리를 모두 구했기 때문에 실제 트리를 이 서브 트리를 이용해 구한다.
+
+여기서 새 트리를 계속 만들어야 하기 때문에 deepcopy를 이용해 복사해서 연결한다.
+
+요약하면 미리 1개 ~ (n-2) 개의 노드로 만들 수 있는 서브 트리를 전부 구해놓은 다음에
+
+왼쪽 1개, 오른쪽 n-2개
+왼쪽 3개, 오른쪽 n-4개
+왼쪽 5개, 오른쪽 n-6개
+...
+왼쪽 n-4개, 오른쪽 3개
+왼쪽 n-2개, 오른쪽 1개
+
+이렇게 반복해서 트리를 만들고 루트를 저장해 반환하는 방법이다.
+
+```
+class Solution:
+    def clone(self, tree: TreeNode) -> TreeNode:
+        if not tree:
+            return None
+        new_tree = TreeNode(0)
+        new_tree.left = self.clone(tree.left)
+        new_tree.right = self.clone(tree.right)
+        return new_tree
+
+    def allPossibleFBT(self, n: int) -> List[Optional[TreeNode]]:
+        cache = defaultdict(list)
+        cache[1].append(TreeNode(0))
+        if n == 1:
+            return cache[1]
+
+        max_cache_length = n - 2
+
+        for index in range(3, max_cache_length + 1, 2):
+            for left in range(1, index, 2):
+                right = index - 1 - left
+                for left_sub_tree in cache[left]:
+                    for right_sub_tree in cache[right]:
+                        root = TreeNode(0)
+                        root.left = left_sub_tree
+                        root.right = right_sub_tree
+                        cache[index].append(root)
+
+        answer = []
+        for left_length in range(1, max_cache_length + 1, 2):
+            right_length = max_cache_length - left_length + 1
+            for left_sub_tree in cache[left_length]:
+                for right_sub_tree in cache[right_length]:
+                    root = TreeNode(0)
+                    root.left = self.clone(left_sub_tree)
+                    root.right = self.clone(right_sub_tree)
+                    answer.append(root)
+        return answer
+```
+
+로직은 동일하나 deepcopy 대신 직접 copy를 구현해서 사용했고, 속도는 2배 정도 줄었다.
+
+deepcopy는 편하긴 하지만 클래스의 모든 것을 복사하는 굉장히 느린 작업이다.
+
+3. DFS
+
+
+```
+from typing import *
+
+class Solution:
+
+    def allPossibleFBT(self, n: int) -> List[Optional[TreeNode]]:
+        
+        def dfs(node_num):
+            if node_num % 2 == 0:
+                return []
+            if node_num == 1:
+                return [TreeNode(0)]
+
+            result = []
+
+            for i in range(1, node_num, 2):
+                left_sub_tree_list = self.allPossibleFBT(i)
+                right_sub_tree_list = self.allPossibleFBT(node_num - 1 - i)
+
+                for left_sub_tree in left_sub_tree_list:
+                    for right_sub_tree in right_sub_tree_list:
+                        root = TreeNode(0)
+                        root.left = left_sub_tree
+                        root.right = right_sub_tree
+                        result.append(root)
+            return result
+
+        return dfs(n)
+```
+
+내가 짠 DFS가 안 되는 거지 DFS가 안될리는 없다.
+
+하향식이 아니라 상향식으로 접근하고, 2번 방법과 실제 수행하는 과정은 동일하다.
+
+혹시나 이렇게 복제하지 않고 하는 방법이 있을까?라는 생각을 할 수도 있는데 내가 찾아본 바로는 불가능하고 없다. Discussion 탭에서도 사용하지 않고 통과했다는 글을 몇 개 보았는데 코멘트가 굉장히 부정적이었던 걸로 보아선 이게 맞는 것 같다. 혹시 가능한 방법이 있다면 댓글 부탁드립니다.

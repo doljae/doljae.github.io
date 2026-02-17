@@ -1,0 +1,68 @@
+---
+slug: 68
+title: "46. Permutations"
+authors: seokjae
+tags: ["tistory"]
+enableComments: true
+keywords: ["tistory"]
+date: 2021-04-05T16:00:34+09:00
+---
+
+> 원문: https://doljae.tistory.com/68
+
+![cover](https://blog.kakaocdn.net/dna/cHRlNI/btq1V291MIU/AAAAAAAAAAAAAAAAAAAAAN0lNz7HVds682-5PTocUtxhEXrBQq13hIhnvgLwCXb3/img.png?credential=yqXZFxpELC7KVnFOS48ylbz2pIh7yKj8&expires=1772290799&allow_ip=&allow_referer=&signature=VZI3Y0dTRvSIPgtEBEmJCBCMWm0%3D)
+
+1. 전형적인 DFS
+
+
+```
+from typing import *
+from copy import deepcopy
+
+<!-- truncate -->
+
+
+class Solution:
+    def permute(self, nums: List[int]) -> List[List[int]]:
+        answer = []
+        visited = [0] * len(nums)
+
+        def sol(permu_list, visited_list):
+            if len(permu_list) == len(nums):
+                answer.append(permu_list)
+                return
+            else:
+                for i in range(len(nums)):
+                    if not visited_list[i]:
+                        new_list = deepcopy(permu_list)
+                        new_list.append(nums[i])
+                        visited_list[i] = 1
+                        sol(new_list, visited_list)
+                        visited_list[i] = 0
+
+        sol([], visited)
+        return answer
+```
+
+2. 아직도 이해하지 못한 DFS
+
+
+```
+class Solution:
+    def permute(self, nums):
+        def backtrack(start, end):
+            # print(start, end)
+            if start == end:
+                ans.append(nums[:])
+                print(nums[:])
+            for i in range(start, end):
+                # print(start, i, end)
+                nums[start], nums[i] = nums[i], nums[start]
+                # print(f"{start} {i} {end} 진입")
+                backtrack(start + 1, end)
+                # print(f"{start} {i} {end} 탈출")
+                nums[start], nums[i] = nums[i], nums[start]
+        ans = []
+        backtrack(0, len(nums))
+        return ans
+```

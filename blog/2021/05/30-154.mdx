@@ -1,0 +1,50 @@
+---
+slug: 154
+title: "202. Happy Number"
+authors: seokjae
+tags: ["tistory"]
+enableComments: true
+keywords: ["tistory"]
+date: 2021-05-30T22:22:52+09:00
+---
+
+> 원문: https://doljae.tistory.com/154
+
+![cover](https://blog.kakaocdn.net/dna/yee41/btq57Hguf4X/AAAAAAAAAAAAAAAAAAAAAL71nlafNx0ozjMvcQ-fHfvzeMojsbEynnZO3a1IkHxy/img.png?credential=yqXZFxpELC7KVnFOS48ylbz2pIh7yKj8&expires=1772290799&allow_ip=&allow_referer=&signature=Yw2goN4xfdbRjxhVytkcN4huv%2FQ%3D)
+
+1. 집합을 이용한 풀이
+
+
+```
+from functools import reduce
+
+<!-- truncate -->
+
+
+class Solution:
+    def isHappy(self, n: int) -> bool:
+        def phase_one(num):
+            return list(map(int, list(str(num))))
+
+        def phase_two(input_list):
+            return reduce(lambda acc, cur: acc + cur * cur, input_list, 0)
+
+        cur = n
+        set1 = set()
+        set1.add(cur)
+        while cur != 1:
+            temp = phase_two(phase_one(cur))
+            if temp in set1:
+                return False
+            set1.add(cur)
+            cur = temp
+        return True if cur == 1 else False
+```
+
+자연수가 주어지면 그 자연수의 자릿수를 제곱해서 더한 값이 1이 될 때까지 반복하다가 1이 되면 True를, 1이 될 수 없다면 False를 반환하는 문제다.
+
+처음에는 뭔가 수학적인 원리가 있나 해서 고민해봤지만 떠오르진 않았다.
+
+결국 1이 된다면 기존에 등장한 숫자가 반복해서 등장하지 않을 것이고, 기존에 등장한 숫자가 또 발생한다면 무한 루프를 돌고 결국 1이 될 수 없기 때문에 중간에 반환했다.
+
+그리고 굳이 사용하지 않아도 괜찮지만 reduce를 오랜만에 써봤다.

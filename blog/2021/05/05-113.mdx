@@ -1,0 +1,39 @@
+---
+slug: 113
+title: "1. Two Sum"
+authors: seokjae
+tags: ["tistory"]
+enableComments: true
+keywords: ["tistory"]
+date: 2021-05-05T21:20:54+09:00
+---
+
+> 원문: https://doljae.tistory.com/113
+
+![cover](https://blog.kakaocdn.net/dna/dNLhvc/btq4diQMUm2/AAAAAAAAAAAAAAAAAAAAACf_Qg536M46EmcJZ0-7WsKAEoTqo3Qso3Tu4rt35Q-d/img.png?credential=yqXZFxpELC7KVnFOS48ylbz2pIh7yKj8&expires=1772290799&allow_ip=&allow_referer=&signature=6dRBJ6Rdh9wW2en8D0IzaeKgNjY%3D)
+
+1. Sliding Window
+
+
+```
+class Solution:
+    def twoSum(self, nums: List[int], target: int) -> List[int]:
+        index_list = [i for i in range(len(nums))]
+        new_nums = list(map(lambda x, y: (x, y), nums, index_list))
+        new_nums.sort()
+        start, end = 0, len(new_nums) - 1
+        while start < end:
+            temp = new_nums[start][0] + new_nums[end][0]
+            if temp < target:
+                start += 1
+            elif temp == target:
+                return [new_nums[start][1], new_nums[end][1]]
+            elif temp > target:
+                end -= 1
+```
+
+<!-- truncate -->
+
+너무나 유명한 문제여서 설명은 이하 생략.
+
+개인적으로 요즘 코딩 테스트에 자주 등장하는 알고리즘 기법인 것 같다.

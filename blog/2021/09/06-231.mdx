@@ -1,0 +1,89 @@
+---
+slug: 231
+title: "861. Score After Flipping Matrix"
+authors: seokjae
+tags: ["tistory"]
+enableComments: true
+keywords: ["tistory"]
+date: 2021-09-06T12:20:08+09:00
+---
+
+> 원문: https://doljae.tistory.com/231
+
+![cover](https://blog.kakaocdn.net/dna/bM9LQL/btrea2DNWgR/AAAAAAAAAAAAAAAAAAAAABuoI7xn8AvKkfFRQ-cXgIwtVFnI1c-ZfyuOCzKV2CXG/img.jpg?credential=yqXZFxpELC7KVnFOS48ylbz2pIh7yKj8&expires=1772290799&allow_ip=&allow_referer=&signature=PHB5VuyEhf0jG8iZJlV6jasc6x8%3D)
+
+0과 1로 이루어진 2차원 배열이 주어진다.
+
+2차원 배열에 대한 한 가지 조작이 가능한데, 그 조작은 **행 또는 열을 고르고 그 안의 모든 0은 1로, 1은 0으로 스위칭하는 것**이다.
+
+<!-- truncate -->
+
+조작을 수행하는 횟수는 제한이 없다.
+
+해당 조작을 통해 2차원 배열을 조작하고, 행을 구성하는 1과 0을 2진수 취급한 뒤 모든 행의 합이 가장 크게 되는 경우 그 합을 반환하는 문제다.
+
+예시
+
+초기 배열이 좌측 상단의 2차원 배열이라면
+
+1행에 대해 조작한다.
+3열에 대해 조작한다.
+4열에 대해 조작한다.
+
+이렇게 조작했을 때 우측 하단의 배열이 나오는데, 이때 합은 1111(2) + 1011(2) + 1111(2) = 39로 가장 크게 되는 경우다.
+
+1. Greedy
+
+
+```
+from typing import *
+
+
+class Solution:
+    def matrixScore(self, grid: List[List[int]]) -> int:
+        def switch(input_list):
+            return list(map(lambda x: 1 if x == 0 else 0, input_list))
+
+        height, width = len(grid), len(grid[0])
+
+        for i in range(height):
+            if grid[i][0] == 0:
+                result = switch(grid[i])
+                grid[i] = result
+
+        for j in range(1, width):
+            temp = []
+            for i in range(height):
+                temp.append(grid[i][j])
+            result = None
+            if height - sum(temp) > height // 2:
+                result = switch(temp)
+            if result:
+                for i in range(height):
+                    grid[i][j] = result[i]
+
+        answer = 0
+        for i in range(height):
+            temp = grid[i]
+            temp = list(map(str, temp))
+            answer += int("".join(temp), 2)
+
+        return answer
+```
+
+그리디 하게 접근해서 해결할 수 있다.
+
+우선 행을 2진수로 만들어서 가장 큰 값이 되게 하려면 0열을 무조건 1로 만들어야 한다.
+왜냐면 1000(2) &gt; 0111(2)라는N진법 숫자 특징 때문에 상위 비트가 무조건 켜져 있는 게 다른 비트가 전부 켜져 있는 것보다 크기 때문이다.
+그러니깐 1차적으로 0열을 순회하면서 비트가 0인 행을 전부 뒤집는다. 이렇게 하면 0열은 전부 1로 채워진다.
+이후 1열부터 순회를 하는데 해당 열의 0과 1의 개수를 센 뒤, 0이 더 많다면 해당 열을 뒤집는다.
+
+예를 들어서 0열 ~ 3열까지 있는 오른쪽 배열을 본다면...
+
+우선적으로 0열을 모두 1로 바꾸어 줘야 하기 때문에 0행을 뒤집어 0열을 모두 1로 만든다.
+그다음 1열부터 3열까지 탐색을 하는데 1, 3열의 경우는 0이 2개 1이 한 개이기 때문에 뒤집어준다.
+2열의 경우는 1이 2개 0이 한 개이기 때문에 유지한다.
+
+이렇게 하면 결과 배열은 오른쪽 배열에서 (2,2)가 0이고 (1,2)가 1인 상태가 되는데 이때가 최댓값이 된다.
+
+결국 순서 상관없이 그리디 한 접근 방법으로 왼쪽 열부터 최대한 1을 많이 가지도록 조작해주면 원하는 최댓값을 만드는 배열을 만들 수 있다.

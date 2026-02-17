@@ -1,0 +1,76 @@
+---
+slug: 149
+title: "378. Kth Smallest Element in a Sorted Matrix"
+authors: seokjae
+tags: ["tistory"]
+enableComments: true
+keywords: ["tistory"]
+date: 2021-05-25T14:18:10+09:00
+---
+
+> 원문: https://doljae.tistory.com/149
+
+![cover](https://blog.kakaocdn.net/dna/2DzAJ/btq5L3DFoHP/AAAAAAAAAAAAAAAAAAAAAAHqpeRdh1Qu88ffn8RmeyKrCw078sR6A12vRIHtLkBw/img.png?credential=yqXZFxpELC7KVnFOS48ylbz2pIh7yKj8&expires=1772290799&allow_ip=&allow_referer=&signature=M4dPgcL9yVGbE8xZuW8msBqVhuk%3D)
+
+1. 단순하게...
+
+
+```
+class Solution:
+    def kthSmallest(self, matrix: List[List[int]], k: int) -> int:
+        temp = []
+        for item in matrix:
+            temp += item
+        return sorted(temp)[k-1]
+```
+
+<!-- truncate -->
+
+2차원 배열에서 k번째로 큰 수를 반환하는 문제다.
+
+그냥 2차원 배열을 1차원으로 바꾼 뒤 정렬 후 k-1번째 인덱스 값을 반환하게 했다.
+
+통과했고, 당연히 이렇게 풀라고 낸 문제가 아니다.
+
+2. 이진 탐색
+
+
+```
+from typing import *
+
+
+class Solution:
+    def kthSmallest(self, matrix: List[List[int]], k: int) -> int:
+        height, width = len(matrix), len(matrix[0])
+
+        def count(number):
+            x, y = 0, height - 1
+            cnt = 0
+            while x < height and y >= 0:
+                if matrix[x][y] < number:
+                    cnt += (y + 1)
+                    x += 1
+                else:
+                    y -= 1
+            return cnt
+
+        def solution():
+            low, high = matrix[0][0], matrix[-1][-1]
+            while low <= high:
+                mid = (low + high) // 2
+                if count(mid) >= k:
+                    high = mid - 1
+                else:
+                    low = mid + 1
+            return high
+
+        return solution()
+```
+
+솔직히 이해를 아직 완벽하게 못했다.
+
+정확히는 결과적으로만 이해했다.
+
+행, 열 단위로 정렬되어있는 2차원 배열에서 이진 탐색을 응용할 수 있는 것은 알고 있지만 아직까진 익숙하지 않다.
+
+cnt 값을 업데이트하는 로직을 이해할 수 있도록 좀 더 비슷한 문제를 풀어봐야겠다.

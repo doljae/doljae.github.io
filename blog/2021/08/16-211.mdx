@@ -1,0 +1,113 @@
+---
+slug: 211
+title: "1008. Construct Binary Search Tree from Preorder Traversal"
+authors: seokjae
+tags: ["tistory"]
+enableComments: true
+keywords: ["tistory"]
+date: 2021-08-16T16:57:10+09:00
+---
+
+> 원문: https://doljae.tistory.com/211
+
+![cover](https://blog.kakaocdn.net/dna/1Onpz/btrb7zLTx1F/AAAAAAAAAAAAAAAAAAAAAPcOq3Ds0MZoFSIRwKMa16vac3-uUCW0fmKZH8xVKxhY/img.png?credential=yqXZFxpELC7KVnFOS48ylbz2pIh7yKj8&expires=1772290799&allow_ip=&allow_referer=&signature=PR68ji9ICnOUBFMEL5URNTDZHQ8%3D)
+
+이진 탐색 트리의 전위 순회 결과가 list로 주어진다.
+
+이를 이용해 이진 탐색 트리를 복원하는 문제다.
+
+<!-- truncate -->
+
+1. DFS
+
+
+```
+from typing import *
+from collections import deque
+
+
+class Solution:
+    def bstFromPreorder(self, preorder: List[int]) -> Optional[TreeNode]:
+        if not preorder:
+            return None
+
+        def dfs(cur_list):
+            cur = cur_list[0]
+            cur_node = TreeNode(cur)
+
+            # point
+            new_list = cur_list[1:]
+            if new_list:
+                target = len(new_list)
+                for i in range(len(new_list)):
+                    if new_list[i] > cur:
+                        target = i
+                        break
+
+                left_list = new_list[:target]
+                right_list = new_list[target:]
+
+                if left_list:
+                    cur_node.left = dfs(left_list)
+
+                if right_list:
+                    cur_node.right = dfs(right_list)
+
+            return cur_node
+
+        return dfs(preorder)
+
+
+        return dfs(preorder)
+```
+
+그림을 보면서 설명하면 다음과 같다.
+
+전위 순회의 결과는 얼핏 보면 DFS와 같다. 정확히는 왼쪽 방향을 우선시하는 DFS처럼 보인다.
+
+하지만 복원해야 하는 건 이진 탐색 트리이기 때문에 어떤 노드를 기준으로 왼쪽 서브 트리는 부모 노드보다 작은 값만이, 오른쪽 서브 트리에는 부모 노드보다 큰 값만이 존재해야 한다.
+
+이를 복원하는 것은 결국 조건을 걸고 DFS를 해야 가능하다.
+
+작성한 코드 순서는 다음과 같다.
+
+재귀는 preorder 배열을 들고 들어간다.
+들고 간 배열의 0번 인덱스 값을 이용해 현재 노드를 만든다.
+현재 노드의 값을 기준으로 왼쪽, 오른쪽 서브 트리를 나눌 pivot이 될 index를 구한다.
+
+위 그림에선 TreeNode(8)을 만들고 8보다 큰 값이 최초로 출현하는 10의 위치를 저장한다.
+
+3번에서 구한 인덱스를 가지고 list를 slicing 해서 왼쪽, 오른쪽으로 재귀를 탄다.
+만일 slicing 한 list의 길이가 0이라면 자식 노드라는 뜻이기 때문에 재귀를 타지 않는다.
+3번에서 현재 노드의 값보다 큰 값이 없을 수도 있다.
+
+예를 들면 [4, 2] 이렇게 주어지면 TreeNode(4)를 만들고 왼쪽 서브 트리는 [2]를 들고 들어가면 되지만,
+오른쪽 서브 트리는 들고 들어갈 값이 없다. 4보다 큰 값이 없기 때문이다.
+그렇기 때문에 pivot(=target)의 초기값은 slicing 할 list의 길이로 초기화를 한다.
+이렇게 하면 다른 부분을 조건문을 또 걸 필요가 없다.
+
+시뮬레이션하면 다음과 같다.
+
+preorder list를 들고 재귀를 들어간다.
+8로 노드를 만든다
+8보다 큰 값이 최초로 출현하는 위치를 기억한다. 여기선 10의 위치를 저장한다
+list를 쪼갠다. [5, 1, 7], [10, 12]로 쪼개진다
+쪼개진 list를 들고 재귀를 탄다.
+[5 ,1, 7]의 경우
+
+5로 노드를 만든다
+위 방법대로 슬라이싱 한다. [1], [7]로 나뉜다.
+슬라이싱 된 list를 들고 재귀를 탄다.
+1로 노드를 만들고 list가 없기 때문에 만든 노드를 반환하고 탈출
+7도 마찬가지
+
+[10,12]의 경우
+
+10으로 노드를 만든다
+위 방법대로 슬라이싱을 한다. None, [12]로 나뉜다.
+슬라이싱 된 list를 들고 재귀를 탄다.
+오른쪽만 12로 노드를 만들고 반환된다.
+
+이하 생략
+
+트리 복원 문제는 이제 대표적인 건 거의 다 한 번씩은 풀어본 것 같다.

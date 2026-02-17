@@ -1,0 +1,88 @@
+---
+slug: 84
+title: "424. Longest Repeating Character Replacement"
+authors: seokjae
+tags: ["tistory"]
+enableComments: true
+keywords: ["tistory"]
+date: 2021-04-19T14:03:56+09:00
+---
+
+> 원문: https://doljae.tistory.com/84
+
+![cover](https://blog.kakaocdn.net/dna/b48aBK/btq2XkhMlgt/AAAAAAAAAAAAAAAAAAAAAP3gn9exz49X1uk2pGMgfFB3-CdlTzSxme8A1WTHQ0aL/img.png?credential=yqXZFxpELC7KVnFOS48ylbz2pIh7yKj8&expires=1772290799&allow_ip=&allow_referer=&signature=qCfjOWY2K2cFChjXN7wcbxFQbvM%3D)
+
+삽질 1 (실패)
+
+
+```
+from typing import *
+from collections import defaultdict
+
+<!-- truncate -->
+
+
+# 주어진 문자열에서 지정된 횟수만큼 알파벳을 교환했을 때
+# 동일한 문자로 구성된 부분 문자열의 길이의 최댓값을 반환하시오
+class Solution:
+    def characterReplacement(self, s: str, k: int) -> int:
+        answer = 0
+        list1 = list(s)
+        dict1 = defaultdict(list)
+        for index, char in enumerate(list1):
+            dict1[char].append(index)
+        # print(dict1["R"])
+        for key in dict1:
+            target_list = dict1[key]
+            if len(target_list) == 1:
+                temp = 1 + k if 1 + k <= len(s) else len(s)
+                answer = max(answer, temp)
+            else:
+                left = k
+                start, end = 0, 1
+                temp_answer = 1
+                prev = start
+                while 0 <= start < end < len(target_list):
+                    gap = target_list[end] - target_list[prev] - 1
+                    if left - gap >= 0:
+                        left -= gap
+                        temp_answer += (gap + 1)
+                        prev = end
+                        end += 1
+                    else:
+                        end -= 1
+                        left += (target_list[start + 1] - target_list[start] - 1)
+                        temp_answer -= (target_list[start + 1] - target_list[start])
+                        # if key == "R":
+                        #     print(temp_answer, start, end, left)
+                        answer = max(answer, temp_answer + left if temp_answer + left <= len(s) else len(s))
+                        start += 1
+                answer = max(answer, temp_answer)
+        return answer
+```
+
+
+슬라이딩 윈도 까진 떠올렸다. 그런데 그걸 한꺼번에 하지 않고 알파벳마다 인덱스를 담은 배열을 순회하면서 인덱스 간격과 k를 비교하면서 업데이트해줬다. 이론은 맞는데 오류를 잡을 수 없었다.
+
+정해 (성공)
+
+
+```
+from collections import Counter
+
+
+class Solution:
+    def characterReplacement(self, s: str, k: int) -> int:
+        start, end = 0, 0
+        counter = Counter()
+        for end in range(1, len(s) + 1):
+            counter[s[end - 1]] += 1
+            most_common_char_num = counter.most_common(1)[0][1]
+            if end - start - most_common_char_num > k:
+                counter[s[start]] -= 1
+                start += 1
+
+        return end - start
+```
+
+그냥 한꺼번에 처리해도 현재 슬라이딩 윈도 안에 최빈 알파벳을 Counter를 이용해 해결한다.

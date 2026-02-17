@@ -1,0 +1,48 @@
+---
+slug: 159
+title: "118. Pascal's Triangle"
+authors: seokjae
+tags: ["tistory"]
+enableComments: true
+keywords: ["tistory"]
+date: 2021-06-07T21:37:34+09:00
+---
+
+> 원문: https://doljae.tistory.com/159
+
+![cover](https://blog.kakaocdn.net/dna/bzYj3w/btq6HQrsTyK/AAAAAAAAAAAAAAAAAAAAAIKLmDWjxvcfnATeZwQXvS1Ky_xIIYPcFR61qmCWjjhS/img.png?credential=yqXZFxpELC7KVnFOS48ylbz2pIh7yKj8&expires=1772290799&allow_ip=&allow_referer=&signature=73kIbJY%2FfwVER6U8fymzAhMkB7c%3D)
+
+1. 구현
+
+
+```
+from typing import *
+
+<!-- truncate -->
+
+
+class Solution:
+    def generate(self, numRows: int) -> List[List[int]]:
+        answer = [[1]]
+        if numRows == 1:
+            return answer
+        elif numRows == 2:
+            answer.append([1, 1])
+            return answer
+        else:
+            answer.append([1, 1])
+            for index in range(2, numRows):
+                cur, temp = 0, []
+                while cur < index + 1:
+                    if cur in [0, index]:
+                        temp.append(1)
+                    else:
+                        temp.append(answer[index - 1][cur - 1] + answer[index - 1][cur])
+                    cur += 1
+                answer.append(temp)
+            return answer
+```
+
+파스칼의 삼각형을 구하는 문제다.
+
+위 풀이가 DP라고 말할 수 있는가는 약간 의문이지만;

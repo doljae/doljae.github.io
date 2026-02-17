@@ -1,0 +1,96 @@
+---
+slug: 173
+title: "@cache"
+authors: seokjae
+tags: ["tistory"]
+enableComments: true
+keywords: ["tistory"]
+date: 2021-06-28T20:19:43+09:00
+---
+
+> 원문: https://doljae.tistory.com/173
+
+![cover](https://blog.kakaocdn.net/dna/coTAHV/btq8fW3XYwT/AAAAAAAAAAAAAAAAAAAAAMrYbqNXPMhT1g8aOACj-s0h9SwC7ppwiCbIS8nq3yTn/img.png?credential=yqXZFxpELC7KVnFOS48ylbz2pIh7yKj8&expires=1772290799&allow_ip=&allow_referer=&signature=MXEckQkTlX%2BH3ngovW1RASELTL0%3D)
+
+최근에 이런 문제를 풀었었다.
+
+트리 문제가 그러하듯 left, right에 함수 달고 반환 값을 조합해서 구할 수 있는 문제였다.
+
+<!-- truncate -->
+
+방향까진 생각했으나 코드까지는 작성 못했던 걸 풀이를 참고해서(복붙 해서) 작성해봤고 결과는 다음과 같다.
+
+```
+class Solution:
+
+    def numTrees(self, n: int) -> int:
+        if n == 0:
+            return 1
+        answer = 0
+        for i in range(1, n + 1):
+            answer += self.numTrees(i - 1) * self.numTrees(n - i)
+        return answer
+```
+
+대충 봐도 self.numTrees() 함수의 결과를 저장해서 쓰는 게 아니라 매번 불러서 쓰고 있어서 TLE가 난 것 같다.
+
+그래서 뇌를 비우고 아래와 같이 코드를 변경했고 결과는 다음과 같다.
+
+```
+class Solution:
+    dict1 = {}
+
+    def numTrees(self, n: int) -> int:
+        if n == 0:
+            return 1
+        answer = 0
+        for i in range(1, n + 1):
+            a, b = None, None
+            if i - 1 in self.dict1:
+                a = self.dict1[i - 1]
+            else:
+                a = self.numTrees(i - 1)
+            if n - i in self.dict1:
+                b = self.dict1[n - i]
+            else:
+                b = self.numTrees(n - i)
+            answer += a * b
+        self.dict1[n] = answer
+        return answer
+```
+
+당연히 Dict에 결괏값을 저장하기 때문에 통과했다.
+
+그런데 이상한 풀이를 발견했다. 정확히는 이상한 데코레이터를 발견했다.
+
+@cache라는 데코레이터(Java에선 비슷한 걸 어노테이션(Annotation)이라고 부른다, 같은 건 아니지만...)가 Python에서 내장 데코레이터로 지원하고 있다.
+
+요약하면 메모이제이션(Memoization)이라고 부르는 DP의 결괏값을 어딘가에 저장하고, 그 저장된 값을 사용해서 연산량을 줄이는 것을 함수 레벨에서 지원한다는 것이다. 이걸 사용하면 위에 **Dict을 만들어서 함수의 결괏값을 저장하는 로직에 필요한 코드를 작성하지 않아도 된다.**
+
+사용법은 사용하고 싶은 함수 위에 @cache라고 적어주기만 하면 된다.
+
+그래서 위에 TLE나는 코드에 사용해봤고 결과는 다음과 같다.
+
+```
+class Solution:
+    @cache
+    def numTrees(self, n: int) -> int:
+        if n == 0:
+            return 1
+        answer = 0
+        for i in range(1, n + 1):
+            answer += self.numTrees(i - 1) * self.numTrees(n - i)
+        return answer
+```
+
+참고로 **@cache**는 **funtool 모듈에 있는 python 3.9 이상에서 지원하는 데코레이터**이기 때문에 해당 모듈을 사용할 수 없는 환경 및 검정에선 사용할 수 없다.
+
+3.8 버전대에선 비슷한걸로 @lru_cache가 있지만 functool 모듈을 사용할 수 없다면 이것 또한 사용이 불가능하다.
+
+작성일(21.06.28.) 기준 국내 유명한 OJ(Online Judge) Python 버전은 아래와 같다.
+
+백준 / python 3.9.5
+
+프로그래머스 / python 3.8.5
+
+사실 이런 특정 언어에 국한된 풀이법은 실력에 도움이 되는지는 의문이지만 나중에 현업에서 Python으로 개발을 해야 하는 경우에 요긴하게 사용할 수도 있으니깐...

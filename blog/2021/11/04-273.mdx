@@ -1,0 +1,23 @@
+---
+slug: 273
+title: "macOS Monterey의 5000번 포트"
+authors: seokjae
+tags: ["tistory"]
+enableComments: true
+keywords: ["tistory"]
+date: 2021-11-04T13:57:01+09:00
+---
+
+> 원문: https://doljae.tistory.com/273
+
+![cover](https://blog.kakaocdn.net/dna/bZcg20/btrjVNUNRB8/AAAAAAAAAAAAAAAAAAAAALMt50Ey7mDDTgPMycf268Yq84rFiGDMc5G25oT31uNx/img.png?credential=yqXZFxpELC7KVnFOS48ylbz2pIh7yKj8&expires=1772290799&allow_ip=&allow_referer=&signature=SRQksG7QbWpmrSpZShW3BIHnNTc%3D)
+
+요약하면 새로 추가된 기능 중 하나인 **airplay to mac**을 위한 listener가 디폴트로 켜져 있고, 그 포트가 로컬 5000번 포트를 점유하고 있다는 내용이다.
+
+Airplay 수신 모드를 끄면 점유하고 있단 포트를 내려놓긴 한다.
+
+<!-- truncate -->
+
+물론 강제로 kill 하면 될 것 같지만(해보진 않음), 점유하고 있는 프로세스 명령어가 좀 무서워서 이걸 강제로 죽여도 되나 싶을 수 있겠다 싶다. 개발할 때 5000번 포트를 사용하고 있는 서비스가 있다면 기능을 끄고 사용하거나 포트번호를 바꿔줘야 될 것 같다.
+
+참고로 docker registry의 default 포트 번호가 5000번이라고 한다.

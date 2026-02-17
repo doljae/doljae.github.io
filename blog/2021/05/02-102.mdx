@@ -1,0 +1,114 @@
+---
+slug: 102
+title: "101. Symmetric Tree"
+authors: seokjae
+tags: ["tistory"]
+enableComments: true
+keywords: ["tistory"]
+date: 2021-05-02T00:37:29+09:00
+---
+
+> 원문: https://doljae.tistory.com/102
+
+![cover](https://blog.kakaocdn.net/dna/cRWQEk/btq3WmyJShK/AAAAAAAAAAAAAAAAAAAAAM8KpFQDCWZUJcuzSf1vbuWZk7PRoqjMvX2da5Yn_vBp/img.png?credential=yqXZFxpELC7KVnFOS48ylbz2pIh7yKj8&expires=1772290799&allow_ip=&allow_referer=&signature=G1YA4hG%2F0Avcr7nt%2FeA6NFdmSZ4%3D)
+
+1. in-order 접근(실패)
+
+
+```
+class Solution:
+    def isSymmetric(self, root: TreeNode) -> bool:
+        trace = []
+
+<!-- truncate -->
+
+        def dfs(cur):
+            if not cur:
+                trace.append(None)
+            else:
+                if not (not cur.left and not cur.right):
+                    dfs(cur.left)
+                trace.append(cur.val)
+                if not (not cur.left and not cur.right):
+                    dfs(cur.right)
+
+        dfs(root)
+        print(trace)
+        if trace[:len(trace) // 2][::-1] == trace[len(trace) // 2 + 1:]:
+            return True
+        return False
+```
+
+
+아무런 근거 없이 테스트 케이스를 그래프로 보다가 왼쪽, 오른쪽 subtree를 각각 in-order로 탐색하고 탐색 경로를 절반으로 나누어서 뒤집은 결과가 같으면 대칭이어서 그렇게 해봤지만 실패...
+
+2. DFS using Stack
+
+
+```
+class Solution:
+    def isSymmetric(self, root: TreeNode) -> bool:
+        if not root:
+            return True
+        stack = [(root.left, root.right)]
+        while stack:
+            cur_left, cur_right = stack.pop()
+            if not cur_left and not cur_right:
+                continue
+            if not cur_left or not cur_right:
+                return False
+            if cur_left.val == cur_right.val:
+                stack.append((cur_left.left, cur_right.right))
+                stack.append((cur_left.right, cur_right.left))
+            else:
+                return False
+        return True
+```
+
+2. DFS using Recursion
+
+
+```
+class Solution:
+    def isSymmetric(self, root: TreeNode) -> bool:
+        if not root:
+            return True
+        return self.check(root.left, root.right)
+
+    def check(self, left: TreeNode, right: TreeNode):
+        if not left and not right:
+            return True
+        if not left or not right:
+            return False
+
+        if left.val == right.val:
+            out_pair = self.check(left.left, right.right)
+            in_pair = self.check(left.right, right.left)
+            return out_pair and in_pair
+        return False
+```
+
+3. BFS using Queue
+
+
+```
+class Solution:
+    def isSymmetric(self, root: TreeNode) -> bool:
+        if not root:
+            return True
+        queue = deque([(root.left, root.right)])
+        while queue:
+            cur_left, cur_right = queue.popleft()
+            if not cur_left and not cur_right:
+                continue
+            if not cur_left or not cur_right:
+                return False
+            if cur_left.val == cur_right.val:
+                queue.append((cur_left.left, cur_right.right))
+                queue.append((cur_left.right, cur_right.left))
+            else:
+                return False
+        return True
+```
+
+leetcode는 어차피 정해라고 부를 수 있는 답이 굉장히 깔끔하다는 것을 알고 있어서 그런지 자꾸 코드에 손이 안 간다. 예쁘게 풀려다가 아예 손도 못 대고 시간만 지나가는 느낌이 없지 않아 있어서 좀 답답하다.

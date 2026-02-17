@@ -1,0 +1,55 @@
+---
+slug: 69
+title: "238. Product of Array Except Self"
+authors: seokjae
+tags: ["tistory"]
+enableComments: true
+keywords: ["tistory"]
+date: 2021-04-06T13:48:46+09:00
+---
+
+> 원문: https://doljae.tistory.com/69
+
+![cover](https://blog.kakaocdn.net/dna/83cvn/btq1U8KHLnW/AAAAAAAAAAAAAAAAAAAAANAGs6qVckt1Ce4x1pP_OBEoNDBMqWrcPabu6MfoO-S8/img.png?credential=yqXZFxpELC7KVnFOS48ylbz2pIh7yKj8&expires=1772290799&allow_ip=&allow_referer=&signature=B8m4VqVBSuCnn6pb6fT6MSkFbUo%3D)
+
+1. 숫자 기준 왼쪽, 오른쪽 곱배열을 구한 뒤 곱배열을 곱해서 반환
+
+
+```
+from typing import *
+
+<!-- truncate -->
+
+
+class Solution:
+    def productExceptSelf(self, nums: List[int]) -> List[int]:
+        answer = []
+        temp1 = [1]
+        for i in range(1, len(nums)):
+            temp1.append(temp1[-1] * nums[i - 1])
+        temp2 = [1]
+        for i in range(len(nums) - 1, 0, -1):
+            temp2.append(temp2[-1] * nums[i])
+        for i in range(len(temp1)):
+            answer.append(temp1[i] * temp2[::-1][i])
+        return answer
+```
+
+2. 동일한 원리, 최적화
+
+
+```
+from typing import *
+
+
+class Solution:
+    def productExceptSelf(self, nums: List[int]) -> List[int]:
+        answer = [1]
+        for i in range(1, len(nums)):
+            answer.append(answer[-1] * nums[i - 1])
+        temp = 1
+        for i in range(len(nums) - 1, -1, -1):
+            answer[i] = answer[i] * temp
+            temp *= nums[i]
+        return answer
+```

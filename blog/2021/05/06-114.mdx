@@ -1,0 +1,53 @@
+---
+slug: 114
+title: "78. Subsets"
+authors: seokjae
+tags: ["tistory"]
+enableComments: true
+keywords: ["tistory"]
+date: 2021-05-06T14:53:56+09:00
+---
+
+> 원문: https://doljae.tistory.com/114
+
+![cover](https://blog.kakaocdn.net/dna/oS9nQ/btq4gayrY3n/AAAAAAAAAAAAAAAAAAAAALrNWExvZfOtVJjzMoymXwXa15zNndMT23k3lbx3Y8zQ/img.png?credential=yqXZFxpELC7KVnFOS48ylbz2pIh7yKj8&expires=1772290799&allow_ip=&allow_referer=&signature=gFXaim4524xw0r1Svqv0AWmTGeQ%3D)
+
+1. 내장 함수 사용
+
+
+```
+from itertools import combinations
+
+<!-- truncate -->
+
+class Solution:
+    def subsets(self, nums: List[int]) -> List[List[int]]:
+        answer=[]
+        for length in range(len(nums)+1):
+            for item in combinations(nums, length):
+                answer.append(list(item))
+        return answer
+```
+
+2. 직접 구현
+
+
+```
+class Solution:
+
+    def subsets(self, nums: List[int]) -> List[List[int]]:
+        answer = []
+
+        def comb(cnt, cur_index, result):
+            if cur_index == len(nums):
+                answer.append(result)
+                return
+
+            comb(cnt + 1, cur_index + 1, result + [nums[cur_index]])
+            comb(cnt, cur_index + 1, result)
+
+        comb(0, 0, [])
+        return answer
+```
+
+오랜만에 직접 구현해봤는데 이쁘게 해보려고 하다가 삽질을 너무 많이 했다.

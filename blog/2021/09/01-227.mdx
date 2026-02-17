@@ -1,0 +1,88 @@
+---
+slug: 227
+title: "1657. Determine if Two Strings Are Close"
+authors: seokjae
+tags: ["tistory"]
+enableComments: true
+keywords: ["tistory"]
+date: 2021-09-01T13:58:07+09:00
+---
+
+> 원문: https://doljae.tistory.com/227
+
+![cover](https://blog.kakaocdn.net/dna/lJn3y/btrdHfkyB2e/AAAAAAAAAAAAAAAAAAAAAMKm3Y9oIRuPB_Ujxy3_OzbepI1q_gTj5zjG6MBP1Ncr/img.png?credential=yqXZFxpELC7KVnFOS48ylbz2pIh7yKj8&expires=1772290799&allow_ip=&allow_referer=&signature=RmEYIyRaFHsQMGstYGvnMBEX0Vc%3D)
+
+문자열 2개가 주어지고, 문자열을 조작할 수 있는 방법 2가지가 주어진다.
+
+해당 방법을 이용해 두 문자열의 관계를 애너그램(anagram)으로 만들 수 있는지 유무를 반환하는 문제다.
+
+<!-- truncate -->
+
+**조작법 2가지**
+
+```
+Operation 1: Swap any two existing characters.
+For example, abcde -> aecdb
+Operation 2: Transform every occurrence of one existing character into another existing character, 
+and do the same with the other character.
+For example, aacabb -> bbcbaa 
+(all a's turn into b's, and all b's turn into a's)
+```
+
+**예시**
+
+```
+Input: word1 = "cabbba", word2 = "abbccc"
+Output: true
+Explanation: You can attain word2 from word1 in 3 operations.
+Apply Operation 1: "cabbba" -> "caabbb"
+Apply Operation 2: "caabbb" -> "baaccc"
+Apply Operation 2: "baaccc" -> "abbccc"
+```
+
+
+접근법
+
+이 문제와 연관문제로 떠서 이제는 슬슬 **편집 거리에** 대한 문제이지 아닐까 하고 편집 거리 알고리즘을 적용해보았다.
+
+하지만 편집 거리 알고리즘은 삽입, 제거, 치환의 3가지 조작법이 주어질 때의 알고리즘이고 몇 번 시뮬레이션하니깐 적합하지 않은 것 같았다.
+
+조작법  2가지는 다음과 같다.
+
+문자열을 구성하는 문자 2개의 위치를 바꾼다
+문자열을 구성하는 특정한 문자 A, B에 대해서 A 문자를 모두 B로, B 문자를 모두 A로 변경한다.
+
+예를 들어 "AABBCC"는 2번 규칙에 의해 "AACCBB"가 될 수 있다.
+예를 들어 "AAB" 2번 규칙에 의해 "BAA"가 될 수 있다.
+예를 들어 "AAB"는 2번 규칙에 의해 "AAC"가 될 수 없다. B를 C로 치환한 것이지만 C는 원래 문자열에 존재하지 않는 문자이기 때문이다.
+
+풀이법
+
+
+```
+from collections import Counter
+
+
+class Solution:
+    def closeStrings(self, word1: str, word2: str) -> bool:
+        a, b = Counter(word1), Counter(word2)
+        return sorted(a.values()) == sorted(b.values()) and sorted(a.keys()) == sorted(b.keys())
+```
+
+생각해보면 의외로 간단했는데...
+
+우선 1번 조건을 해결하려면 특정 문자를 key로 하고 그 빈도수를 value로 했을 때 value 값을 담은 배열이 일치하면 된다.
+
+예를 들어 "AAB" 나 "BAA"는 각각 A가 2번, B가 1번 발생했으니 빈도수 값을 저장한 list로 변환 후 정렬하면 [1, 2]로 동일하게 나온다.
+
+2번 조건을 해결하려면 문자열을 구성하는 key의 종류가 같으면 된다.
+
+예를 들어 "AAB" 나 "BAA"의 key 종류는 ["A", "B"]으로 동일하게 나온다.
+
+결국 두 문자열이 애너그램이려면 문자열 안의 특정 문자열의 빈도수뿐만 아니라 특정 문자열의 종류까지 같아야 한다.
+
+예를 들어 "AAABC"와 "CABBB"를 비교하면 True를 반환해야 하는데, 2번 조건에 의해 "CABBB"는 "CBAAA"로 변경이 가능하고, 1번 조건에 의해 "CBAAA"는 "AAABC"로 변환하는 것이 가능하기 때문이다.
+
+그래서 Counter 모듈 이용해서 두 문자열의 keys(), values()를 구하고 이를 정렬한 뒤 비교했을 때 같다면 가능하게 된다.
+
+항상 문제를 너무 어렵게 생각하는 경향이 있어서 그냥 Greedy 한 문제를 잘 풀어내지 못하는 것 같다. 인터뷰 때 안 나왔으니 다행이다ㅠㅠ

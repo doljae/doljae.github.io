@@ -1,0 +1,83 @@
+---
+slug: 166
+title: "105. Construct Binary Tree from Preorder and Inorder Traversal"
+authors: seokjae
+tags: ["tistory"]
+enableComments: true
+keywords: ["tistory"]
+date: 2021-06-15T23:04:06+09:00
+---
+
+> 원문: https://doljae.tistory.com/166
+
+![cover](https://blog.kakaocdn.net/dna/JtL86/btq7nz2VKyA/AAAAAAAAAAAAAAAAAAAAAKwvy_l-rpFLKZWbSUk96KssMElXyFWvKlPCyTSKURK-/img.png?credential=yqXZFxpELC7KVnFOS48ylbz2pIh7yKj8&expires=1772290799&allow_ip=&allow_referer=&signature=4WCm535rhgEip%2BYr74Tk%2BS3qAiI%3D)
+
+이진트리의 PreOrder 순회 결과와 InOrder 순회 결과를 입력하면 이진트리를 복원해서 반환하는 문제다.
+
+1. 4개의 index 값을 이용한 DFS
+
+<!-- truncate -->
+
+
+```
+from typing import *
+
+
+class Solution:
+    def buildTree(self, preorder: List[int], inorder: List[int]) -> TreeNode:
+        def dfs(s1, e1, s2, e2):
+            if s1 > e1:
+                return None
+            value = preorder[s1:e1 + 1][0]
+            idx = inorder.index(value)
+            left = idx - s2
+            head = TreeNode(value)
+            head.left = dfs(s1 + 1, s1 + left, s2, idx - 1)
+            head.right = dfs(s1 + left + 1, e1, idx + 1, e2)
+
+            return head
+
+        return dfs(0, len(preorder) - 1, 0, len(inorder) - 1)
+```
+
+PreOrder list의 첫 원소는 반드시 head이다.
+
+PreOrder list의 두 번째 원소는 반드시 left subtree의 head이다.
+
+InOrder list에서 PreOrder list에서 찾은 head값을 index로 했을 때
+
+left subtree의 원소 개수는 InOrder list의 시작 ~ index -1까지의 개수이며
+
+right subtree의 원소 개수는 index+1 ~ InOrder list의 끝까지의 개수이다.
+
+(설명을 정말 이해할 수 없게 했지만...)
+
+2. 개선
+
+
+```
+from typing import *
+
+
+class Solution:
+    def buildTree(self, preorder: List[int], inorder: List[int]) -> TreeNode:
+        def dfs(s1, e1, s2, e2):
+            if s1 > e1:
+                return None
+            value = preorder[s1:e1 + 1][0]
+            idx = inorder[s2:e2 + 1].index(value) + s2
+            left = idx - s2
+            head = TreeNode(value)
+            head.left = dfs(s1 + 1, s1 + left, s2, idx - 1)
+            head.right = dfs(s1 + left + 1, e1, idx + 1, e2)
+
+            return head
+
+        return dfs(0, len(preorder) - 1, 0, len(inorder) - 1)
+```
+
+이 문제는 이진트리에서 항상 unique 한 값을 가진다는 조건이 있는데, 그 조건이 없더라도 해결할 수 있는 코드를 작성해봤다.
+
+비슷한 문제를 이전에는 못 풀었고, 이번에는 좀 오래 걸렸지만 그래도 해결했다.
+
+예전부터 그랬지만 인덱스 값을 세밀하게 조작하는 부분에서 여전히 많이 부족한 것 같다.

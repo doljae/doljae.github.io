@@ -1,0 +1,117 @@
+---
+slug: 83
+title: "2174번: 로봇 시뮬레이션"
+authors: seokjae
+tags: ["tistory"]
+enableComments: true
+keywords: ["tistory"]
+date: 2021-04-18T17:37:19+09:00
+---
+
+> 원문: https://doljae.tistory.com/83
+
+1. 소스 코드
+
+
+```
+import sys
+from collections import deque
+
+r = sys.stdin.readline
+
+<!-- truncate -->
+
+width, height = map(int, r().split())
+robot_num, command_num = map(int, r().split())
+board = [[0] * width for _ in range(height)]
+robots = {}
+for i in range(robot_num):
+    y, x, direction = r().split()
+    ny = int(y) - 1
+    nx = height - int(x)
+    robots[i + 1] = [nx, ny, direction]
+    board[nx][ny] = i + 1
+commands = []
+for i in range(command_num):
+    target_robot, direction, iter_num = r().split()
+    commands.append((int(target_robot), direction, int(iter_num)))
+dir_dict = {"N": (-1, 0),
+            "S": (1, 0),
+            "W": (0, -1),
+            "E": (0, 1)}
+dir_dict2 = {0: "N",
+             1: "E",
+             2: "S",
+             3: "W"}
+dir_dict3 = {"N": 0,
+             "E": 1,
+             "S": 2,
+             "W": 3}
+
+
+def bfs(robot_num, x, y, command, iter_num):
+    cur_dir = robots[robot_num][2]
+    rx, ry = x, y
+    if command == "R":
+        temp = iter_num % 4
+        target_index = (dir_dict3[cur_dir] + temp) % 4
+        robots[robot_num][2] = dir_dict2[target_index]
+        return -2
+    elif command == "L":
+        temp_p = iter_num % 4
+        temp = 4 - temp_p
+        target_index = (dir_dict3[cur_dir] + temp) % 4
+        robots[robot_num][2] = dir_dict2[target_index]
+        return -2
+    else:
+        board[x][y] = 0
+        q = deque([(x, y)])
+        visited = [[0] * width for _ in range(height)]
+        visited[x][y] = 1
+        while q and iter_num:
+            cur_x, cur_y = q.popleft()
+            new_x, new_y = cur_x + dir_dict[cur_dir][0], cur_y + dir_dict[cur_dir][1]
+            if 0 <= new_x < height and 0 <= new_y < width:
+                if not visited[new_x][new_y]:
+                    if board[new_x][new_y]:
+                        return board[new_x][new_y]
+                    q.append((new_x, new_y))
+                    rx, ry = new_x, new_y
+                    iter_num -= 1
+        if iter_num:
+            return 0
+    board[rx][ry] = robot_num
+    robots[robot_num] = [rx, ry, cur_dir]
+    return -3
+
+
+for command in commands:
+    target_robot, target_command, iter_num = command
+    result = bfs(target_robot, robots[target_robot][0], robots[target_robot][1], target_command, iter_num)
+    print(robots)
+    if result == -2:
+        continue
+    if result == 0:
+        print(f"Robot {target_robot} crashes into the wall")
+        break
+    elif result > 0:
+        print(f"Robot {target_robot} crashes into robot {result}")
+        break
+    elif result == -3:
+        continue
+else:
+    print("OK")
+```
+
+
+2. 주의할 점
+
+입력 값의 x, y 순서가 아닌 y, x 순서로 들어온다.
+
+그래서 격자를 조건에 맞게 뒤집어서 풀지, 아니면 입력받은 좌표 값을 좌상단을 (0, 0), 우하단을 (height-1, width-1) 기준으로 바꿔줄지를 결정해야 한다. 후자가 더 쉬운 것 같다.
+시계 방향, 반시계 방향 돌리기
+
+제한 시간 내에 푸느라 코드가 예쁘지 못하지만, 돌리는 부분의 로직이 올바른지 체크하자. 나는 시계방향으로 인덱스를 0 ~ 3까지 배치해 처리했다. 그리고 반시계 방향은 시계방향으로 4 - 반복 횟수 돌리는 것과 같아서 위와 같은 방법으로 해결했다.
+DFS, BFS
+
+나는 BFS를 사용했지만, DFS가 더 코드는 예쁘게 나올 것 같다. 주의할 점은 어차피 탐색해야 하는 방향이 한 방향이기 때문에 4 방향 모두 진입하게 하지 말 것.

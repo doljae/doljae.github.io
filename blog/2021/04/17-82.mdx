@@ -1,0 +1,25 @@
+---
+slug: 82
+title: "7. Reverse Integer"
+authors: seokjae
+tags: ["tistory"]
+enableComments: true
+keywords: ["tistory"]
+date: 2021-04-17T21:44:17+09:00
+---
+
+> 원문: https://doljae.tistory.com/82
+
+![cover](https://blog.kakaocdn.net/dna/dg7HIN/btq2Mb0YJcc/AAAAAAAAAAAAAAAAAAAAAG5yZ6A3setbg_6AX1lpOssduu-J3kKKTscGERHt8LSk/img.png?credential=yqXZFxpELC7KVnFOS48ylbz2pIh7yKj8&expires=1772290799&allow_ip=&allow_referer=&signature=BBRMmHBRzsxHWqB6mrVAJ%2F%2FJhJs%3D)
+
+1. 내 풀이
+
+
+```
+class Solution:
+    def reverse(self, x: int) -> int:
+        x = int(str(x)[::-1]) if str(x)[-1] != "-" else int("-" + str(x)[::-1][:-1])
+        return x if abs(x) < 2 ** 31 else 0
+```
+
+<!-- truncate -->

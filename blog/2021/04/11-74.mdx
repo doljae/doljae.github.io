@@ -1,0 +1,43 @@
+---
+slug: 74
+title: "743. Network Delay Time"
+authors: seokjae
+tags: ["tistory"]
+enableComments: true
+keywords: ["tistory"]
+date: 2021-04-11T08:16:00+09:00
+---
+
+> 원문: https://doljae.tistory.com/74
+
+![cover](https://blog.kakaocdn.net/dna/cDgVF5/btq2gCSmRcj/AAAAAAAAAAAAAAAAAAAAABjckX_mew2dwrhr17jtZHg2pfsteptZ3418GQARtT9I/img.png?credential=yqXZFxpELC7KVnFOS48ylbz2pIh7yKj8&expires=1772290799&allow_ip=&allow_referer=&signature=DiWTfHkIscxcmnz9WD3oB%2BOobJY%3D)
+
+1. Floyd-Warshall
+
+
+```
+from typing import *
+
+<!-- truncate -->
+
+
+class Solution:
+    def networkDelayTime(self, times: List[List[int]], n: int, k: int) -> int:
+        dp = [[float("inf")] * (n + 1) for _ in range(n + 1)]
+        for i in range(n + 1):
+            dp[i][i] = 0
+        for time in times:
+            src, dsc, cost = time
+            dp[src][dsc] = cost
+
+        for p in range(1, n + 1):
+            for i in range(1, n + 1):
+                for j in range(1, n + 1):
+                    if dp[i][j] > dp[i][p] + dp[p][j]:
+                        dp[i][j] = dp[i][p] + dp[p][j]
+        target_list = dp[k][1:]
+        for cost in target_list:
+            if cost == float("inf"):
+                return -1
+        return int(max(target_list))
+```

@@ -1,0 +1,65 @@
+---
+slug: 137
+title: "75. Sort Colors"
+authors: seokjae
+tags: ["tistory"]
+enableComments: true
+keywords: ["tistory"]
+date: 2021-05-16T11:48:59+09:00
+---
+
+> 원문: https://doljae.tistory.com/137
+
+![cover](https://blog.kakaocdn.net/dna/SdRnP/btq415CyifT/AAAAAAAAAAAAAAAAAAAAAKromadTGDOFt-OhN69VnrsPrP983_SlTKiaHEh_13Hj/img.png?credential=yqXZFxpELC7KVnFOS48ylbz2pIh7yKj8&expires=1772290799&allow_ip=&allow_referer=&signature=8wsHiRMU36PG722AhjrK7vMU1so%3D)
+
+1. sort()
+
+
+```
+class Solution:
+    def sortColors(self, nums: List[int]) -> None:
+        """
+        Do not return anything, modify nums in-place instead.
+        """
+        nums.sort()
+```
+
+<!-- truncate -->
+
+0,1,2로 이루어진 list를 오름차순 정렬하는 문제다.
+
+이렇게도 그냥 풀린다.
+
+2. Dutch national flag problem
+
+```
+class Solution:
+    def sortColors(self, nums: List[int]) -> None:
+        """
+        Do not return anything, modify nums in-place instead.
+        """
+        start, mid, end = 0, 0, len(nums) - 1
+        while mid <= end:
+            if nums[mid] == 0:
+                nums[start], nums[mid] = nums[mid], nums[start]
+                start += 1
+                mid += 1
+                pass
+            elif nums[mid] == 1:
+                mid += 1
+            elif nums[mid] == 2:
+                nums[mid], nums[end] = nums[end], nums[mid]
+                end -= 1
+```
+
+위 알고리즘을 사용해서 푸는 것이 문제의 정해가 아닐까라고 생각한다.
+
+3개의 포인터(start, mid, end)를 이용해
+
+mid에 해당하는 값이 0이면 start와 swap 하고 start, mid를 전진,
+
+mid에 해당하는 값이 1이면 mid만 전진,
+
+mid에 해당하는 값이 2이면 end와 swap 하고 end를 후진시킨다.
+
+이런 방법도 있구나 하면서 푼 문제.

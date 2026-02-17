@@ -1,0 +1,45 @@
+---
+slug: 259
+title: "k8s commands 02"
+authors: seokjae
+tags: ["tistory"]
+enableComments: true
+keywords: ["tistory"]
+date: 2021-10-25T14:00:16+09:00
+---
+
+> 원문: https://doljae.tistory.com/259
+
+kubectl get namespaces
+
+kubectl get pods --namespace=NAMESPACE_NAME
+
+kubectl run POD_NAME --image=IMAGE_NAME --namespace=NAMESPACE_NAME
+
+<!-- truncate -->
+
+kubectl delete pod POD_NAME --namespace=NAMESPACE_NAME
+
+kubectl get pods --all-namespaces
+
+kubectl -n dev get svc
+
+db-service.dev.svc.cluster.local
+
+kubectl expose deployment nginx --port 80
+
+**Imperative**
+
+kubectl edit deployment nginx
+
+kubectl replace -f nginx.yaml (apply with difference)
+
+kubectl replace --force -f nginx.yaml (remove and apply)
+
+**Declarative**
+
+kubectl apply -f nginx.yaml
+
+kubectl apply -f /path/yo/config-files
+
+kubectl apply -f nginx.yaml

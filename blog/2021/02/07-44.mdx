@@ -1,0 +1,69 @@
+---
+slug: 44
+title: "Java 04"
+authors: seokjae
+tags: ["tistory"]
+enableComments: true
+keywords: ["tistory"]
+date: 2021-02-07T17:54:51+09:00
+---
+
+> 원문: https://doljae.tistory.com/44
+
+MyBatis
+Java 객체와 SQL문 사이의 자동 mapping을 지원하는 프레임워크
+
+SQL을 별도의 파일로 분리해서 객체와 SQL 간의 parameter mapping 작업을 자동으로 지원한다.
+
+장점
+
+<!-- truncate -->
+
+역할 및 업무 분리
+
+SQL을 별도의 파일로 분리한다는 것은 개발자과 SQL을 분리한다는 의미.
+
+즉 SQL 튜닝 작업은 DBA에게 맡기고 개발에 집중할 수 있다.
+
+SQL이 변경되어도 자바 코드를 수정하거나 컴파일하지 않아도 된다.
+
+낮은 러닝 커브
+
+JPA와 같은 새로운 DB 프로그래밍 패러다임을 익혀야 하는 부담이 없다.
+
+JDBC코드 작성의 불편함도 줄어들어 도메인 객체, VO객체를 중심으로 개발이 가능하다
+
+DriverManager, DataSource
+JDBC는 DriverManager를 사용한다.
+
+```
+DriverManager.getConnection(url,user,password);
+```
+
+
+MyBatis는 DataSource라는 interface의 구현체를 사용한다. 이 DataSource가 DriverManager의 상위 호환 대체 제이다.
+
+DataSource는 DBCP라고 불리는 ConnectionPool인데, 미리 Connection을 만들어 두었다가 요청이 들어왔을 때 Connection을 빌려주고 회수하는 식으로 작동한다.
+
+참고로 SpringBoot의 기본 DBCP는 HikariCP로 이것도 DataSource다.
+
+ConnectionPool에 대해서
+
+1. WAS가 실행되면 미리 일정량의 DB Connection 객체를 생성하고 Pool이라는 공간에 저장한다.
+
+2. HTTP 요청에 따라 필요할 때 Pool에서 Connection 객체를 가져다 쓰고 반환한다.
+
+3. 이런 방식은 기존에 DriverManager를 통해 Connection을 매번 생성하는 것에 비해 DB Driver을 로드하고 물리적인 Connection을 위한 객체 생성에 사용되는 비용을 줄일 수 있다.
+
+DataSource에 대해서
+DataSource는 JDCP(Java DBCP) interface다.
+
+끝에 CP가 붙는 ApacheCP, HikariCP는 DataSource의 구현체다. SpringBoot는 HikariCP를 채택해서 사용하고 있다.
+
+PreparedStatement, SqlSessionTemplate에 대해서
+
+SqlSession은 MyBatis를 사용해서 DB작업을 할 때 사용하는 interface
+
+SqlSession은 기본적으로 Thread-Safe 하지 않기 때문에 SQL 작업마다 Session을 만들고 지우 고를 반복해줘야 한다. 이것이 멤버 변수로 SqlSession을 사용하지 않는 이유다.
+
+반면이 SqlSessionTemplate는 SqlSession의 구현체로 Thread-Safe 한 session을 제공한다. 그래서 사용한다.

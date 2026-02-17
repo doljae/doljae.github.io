@@ -1,0 +1,51 @@
+---
+slug: 170
+title: "116. Populating Next Right Pointers in Each Node"
+authors: seokjae
+tags: ["tistory"]
+enableComments: true
+keywords: ["tistory"]
+date: 2021-06-24T17:22:08+09:00
+---
+
+> 원문: https://doljae.tistory.com/170
+
+![cover](https://blog.kakaocdn.net/dna/bfCqav/btq7Zlqs2U5/AAAAAAAAAAAAAAAAAAAAAGQ8qXYc3xgUoE9LUeb5zc-nQIYpLDnvnwI7nHOiKHww/img.png?credential=yqXZFxpELC7KVnFOS48ylbz2pIh7yKj8&expires=1772290799&allow_ip=&allow_referer=&signature=WzaiM2C4z%2BmYS1Sd%2BpUs24bfHtw%3D)
+
+이진트리가 주어진다.
+
+이진트리의 동일한 레벨을 왼쪽에서 오른쪽으로 연결하는 문제다.
+
+<!-- truncate -->
+
+1. BFS
+
+
+```
+from collections import deque, defaultdict
+
+
+class Solution:
+    def connect(self, root: 'Node') -> 'Node':
+        q = deque([(root, 0)])
+        dict1 = defaultdict(list)
+        dict1[0].append(root)
+
+        while q:
+            cur_node, cur_level = q.popleft()
+            if cur_node.left:
+                dict1[cur_level + 1].append(cur_node.left)
+                q.append((cur_node.left, cur_level + 1))
+            if cur_node.right:
+                dict1[cur_level + 1].append(cur_node.right)
+                q.append((cur_node.right, cur_level + 1))
+
+        for level in dict1:
+            for i in range(len(dict1[level]) - 1):
+                dict1[level][i].next = dict1[level][i + 1]
+        return root
+```
+
+Dict에 동일 레벨의 노드를 append 한 뒤에 선형 탐색하면서 연결해줬다.
+
+뭔가 더 멋진 방법이 있을 텐데 생각해내진 못해서 좀 더 고민해봐야겠다.

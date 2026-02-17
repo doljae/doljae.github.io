@@ -1,0 +1,127 @@
+---
+slug: 258
+title: "134. Gas Station"
+authors: seokjae
+tags: ["tistory"]
+enableComments: true
+keywords: ["tistory"]
+date: 2021-10-24T21:35:09+09:00
+---
+
+> 원문: https://doljae.tistory.com/258
+
+![cover](https://blog.kakaocdn.net/dna/bxC7b2/btriLRRvQUm/AAAAAAAAAAAAAAAAAAAAANjS07H96e8wT4l1lcYErxzI092PvCAy3pP-2XMb1HcD/img.png?credential=yqXZFxpELC7KVnFOS48ylbz2pIh7yKj8&expires=1772290799&allow_ip=&allow_referer=&signature=%2F%2Fcuz0EExhuCXVSy1%2F%2BjaZHvAo8%3D)
+
+양의 정수로 이루어진 gas, cost 배열이 주어진다. 두 배열의 길이는 같다.
+
+임의의 index에서 시작해 도착하는 index의 gas [index]를 얻고, index+1로 이동할 때 cost [index] 만큼 잃는다고 가정하자.
+
+<!-- truncate -->
+
+배열에 임의의 인덱스 i에서 (i+1, i+2.... 0, 1, 2,..... i-2, i-1, i) 순서로 순회하는 것이 가능한 i를 반환하는 문제다. 조건을 만족하는 임의의 i는 유일하고, 만일 만족하지 않는다면 -1을 반환하면 된다.
+
+예시
+
+
+```
+Input: gas = [1,2,3,4,5], cost = [3,4,5,1,2]
+Output: 3
+Explanation:
+Start at station 3 (index 3) and fill up with 4 unit of gas. Your tank = 0 + 4 = 4
+Travel to station 4. Your tank = 4 - 1 + 5 = 8
+Travel to station 0. Your tank = 8 - 2 + 1 = 7
+Travel to station 1. Your tank = 7 - 3 + 2 = 6
+Travel to station 2. Your tank = 6 - 4 + 3 = 5
+Travel to station 3. The cost is 5. Your gas is just enough to travel back to station 3.
+Therefore, return 3 as the starting index.
+```
+
+
+```
+Input: gas = [2,3,4], cost = [3,4,3]
+Output: -1
+Explanation:
+You can't start at station 0 or 1, as there is not enough gas to travel to the next station.
+Let's start at station 2 and fill up with 4 unit of gas. Your tank = 0 + 4 = 4
+Travel to station 0. Your tank = 4 - 3 + 2 = 3
+Travel to station 1. Your tank = 3 - 3 + 3 = 3
+You cannot travel back to station 2, as it requires 4 unit of gas but you only have 3.
+Therefore, you can't travel around the circuit once no matter where you start.
+```
+
+
+1. Brute-Force
+
+
+```
+from typing import *
+
+
+class Solution:
+    def canCompleteCircuit(self, gas: List[int], cost: List[int]) -> int:
+        answer = -1
+        list1 = []
+        for i in range(len(gas)):
+            list1.append((gas[i], cost[i]))
+
+        list2 = list1 + list1
+
+        def check(input_list):
+            temp = 0
+            index = 0
+            while index < length:
+                # print(temp)
+                temp += input_list[index][0]
+                temp -= input_list[index][1]
+                if temp < 0:
+                    break
+                index += 1
+            if temp >= 0:
+                return True
+            return False
+
+        length = len(gas)
+        for i in range(length):
+            target_list = list2[i:i + length]
+            # print(i)
+            if check(target_list) is True:
+                answer = i
+                break
+
+        return answer
+```
+
+그냥 모든 인덱스에 대해서 확인해보면 된다.
+
+물론 이렇게 풀라고 낸 문제가 아니다.
+
+2. Greedy
+
+
+```
+from typing import *
+
+
+class Solution:
+    def canCompleteCircuit(self, gas: List[int], cost: List[int]) -> int:
+        if sum(gas) < sum(cost):
+            return -1
+
+        answer, tank = 0, 0
+        for i in range(len(gas)):
+            tank += (gas[i] - cost[i])
+            if tank < 0:
+                tank = 0
+                answer = i + 1
+        return answer
+```
+
+문제의 조건을 고려해보면 아래와 같은 사실을 알 수 있다.
+
+sum(gas) &lt; sum(cost) 라면 만족하는 index는 존재하지 않고 -1을 반환하면 된다.
+-1을 반환하는 조건을 통과했다면 반드시 답은 존재하는 것이 문제 조건으로 보장된다.
+임의의 index에서 시작했을 때 tank(현재 남아있는 연료) + (gas [index]-cost [i])가 0보다 작다면 index는 답이 될 수 없다.
+
+답이 존재한다는 조건이 있기 때문에 현재 index보다 먼저 방문해야 하는 index가 있다는 사실은 참이다.
+즉 현재 index보다 먼저 방문해야 하는 index의 최솟값은 index+1이다.
+그래서 tank &lt; 0이라면 answer = index+1로 갱신해준다.

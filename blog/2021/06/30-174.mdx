@@ -1,0 +1,78 @@
+---
+slug: 174
+title: "11. Container With Most Water"
+authors: seokjae
+tags: ["tistory"]
+enableComments: true
+keywords: ["tistory"]
+date: 2021-06-30T22:16:46+09:00
+---
+
+> 원문: https://doljae.tistory.com/174
+
+![cover](https://blog.kakaocdn.net/dna/l3j8H/btq8rXv6Snj/AAAAAAAAAAAAAAAAAAAAAGeG2UGaOIWDBcs4Aswn0zT1sg_tcN2DcdZgHk0Oie8u/img.png?credential=yqXZFxpELC7KVnFOS48ylbz2pIh7yKj8&expires=1772290799&allow_ip=&allow_referer=&signature=d5zgALhlgMMn%2BhKn2xs3OOYVvvU%3D)
+
+컨테이너 벽의 값이 list로 주어진다.
+
+두 개의 값을 골라서 가장 많은 양의 물을 담을 수 있는 컨테이너의 세로 벽 후보를 고르고, 그때 담을 수 있는 물의 양을 반환하는 문제다.
+
+<!-- truncate -->
+
+1. Brute Force
+
+
+```
+from typing import *
+
+
+class Solution:
+    def maxArea(self, height: List[int]) -> int:
+        set1 = set()
+        answer = 0
+        for i in range(len(height)):
+            for j in range(len(height)):
+                if i == j:
+                    continue
+                if (i, j) in set1:
+                    continue
+                left, right = min(i, j), max(i, j)
+                answer = max(answer, (right - left) * min(height[left], height[right]))
+                set1.add((left, right))
+        return answer
+```
+
+가장 먼저 당연하게도 두 개의 벽의 조합에 대해 모두 계산해보고 비교하는 방법을 생각할 수 있다.
+
+당연히 TLE가 났다.
+
+2. Sliding Window
+
+
+```
+from typing import *
+
+
+class Solution:
+    def maxArea(self, height: List[int]) -> int:
+        left, right = 0, len(height) - 1
+        answer = 0
+        while left < right:
+            gap = right - left
+            length = min(height[left], height[right])
+            answer = max(answer, gap * length)
+            if length == height[left]:
+                left += 1
+            else:
+                right -= 1
+        return answer
+```
+
+이게 왜 Sliding Window가 될까라고 생각을 해봤는데 이 접근이 어떻게 보면 Greedy 하기 때문에 이 부분에서 떠올리지 못하면 생각을 못할 것 같다.
+
+물의 양은 두 벽의 거리(가로) * 두 벽 중 짧은 길이(세로)이고 이것이 최대가 되는 경우를 생각하면 된다.
+
+그럼 가로 * 세로가 크면 되는데...
+
+그럼 가로를 가장 길게 잡은 상태에서 가로를 조금씩 줄여가면서 가로길이를 타협하면서 세로 길이를 취하는 방식으로 포인터를 이동시키면 된다.
+
+그러니깐 left, right 포인터 중 더 작은 값을 가지는 포인터를 앞으로 전진시키면 새로운 벽의 조합을 고르게 되고, 이 방식으로 두 포인터가 겹치기 전까지 계산하면 선형 탐색으로 문제를 해결할 수 있다.

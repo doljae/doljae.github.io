@@ -1,0 +1,271 @@
+---
+slug: 47
+title: "Spring 02"
+authors: seokjae
+tags: ["tistory"]
+enableComments: true
+keywords: ["tistory"]
+date: 2021-02-07T18:44:44+09:00
+---
+
+> 원문: https://doljae.tistory.com/47
+
+Spring 환경에서 Autowired 테스트
+
+
+```
+@RunWith(SpringJUnit4ClassRunner.class)
+@ContextConfiguration(locations = "classpath:config/springbeans.xml")
+public class HelloBeanSpringTest {
+	// BeanFactory factory = new
+	// GenericXmlApplicationContext("config/springbeans.xml");
+	@Autowired
+	Hello hello;
+	@Autowired()
+	Printer printer;
+	// 이건 에러가 난다
+	// Printer Bean이 현재 2개 있는데, printer에 어떤 걸 넣어줘야할지 모르겠기 떄문임;
+
+	
+	@Autowired
+	Hello hello;
+	@Autowired()
+	Printer strPrinter;
+	// 이건 잘 작동한다
+	// Bean은 우선 변수 이름이 같은 Bean을 우선적으로 할당한다
+	
+
+<!-- truncate -->
+
+	@Autowired
+	Hello hello;
+	@Autowired
+	@Qualifier("strPrinter")
+	Printer strPrinter;
+	// 이건 잘 작동한다
+	// 동일 타입의 Bean이 2개 이상 있고, 특정지어줘야할 떄 Qualifier annotaion을 사용하면
+	// 으 특정 bean을 주입해준다.
+```
+
+```
+package myspring.di.xml.test;
+
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+
+import junit.framework.Assert;
+import myspring.di.xml.Hello;
+import myspring.di.xml.Printer;
+
+@RunWith(SpringJUnit4ClassRunner.class)
+@ContextConfiguration(locations = "classpath:config/springbeans.xml")
+public class HelloBeanSpringTest {
+	// BeanFactory factory = new
+	// GenericXmlApplicationContext("config/springbeans.xml");
+	@Autowired
+	Hello hello;
+	@Autowired
+	@Qualifier("strPrinter")
+	Printer printer;
+
+	@Test
+	public void setterInjection() {
+		// 더이상 팩토리도 만들고, 팩토리에서 받아서 아래처럼 주입할 필요가 없음
+		// Hello hello2 = factory.getBean("hello", Hello.class);
+//		Assert.assertEquals("Hello 스프링", hello.sayHello());
+		hello.print();
+		Assert.assertEquals("Hello 스프링", printer.toString());
+		// 저 위에 Autowired한 printer와 hello 생성 시 주입되는 printer가 같다
+		// 왜냐면 strPrinter bean은 싱글톤으로 생성되기 때문임
+		// 다르게 하고 싶다면 strPrinter에 scope를 prototype으로 해줘야함
+		Assert.assertSame(printer, hello.getPrinter());
+	}
+
+}
+```
+
+@Autowired @Resource 차이
+Autowired
+
+Spring에서 사용하는 어노테이션, 정밀한 의존관계 주입에 사용한다.
+
+생성자, setter, method에 다 사용 가능, 기본적으로 type (형)으로 의존성을 주입하고, Qualifier로 특정 지을 수 있다.
+
+Resource
+
+Java 진영에서 만듦
+
+Autowired랑 기능은 같은데 반드시 주입하려는 Bean의 이름을 적어줘야 한다.
+
+XML으로 Bean을 관리할 때 장단점
+장점
+
+XML은 태그를 이용하기 때문에 계층 구조를 한눈에 볼 수 있다.
+
+단점
+
+XML 파일이 여러 개 필요해질 수 있다.
+
+Bean이 많아지면 XML 파일을 관리하기 번거로워질 수 있다.
+
+코드 레벨이 아니라 외부 설정 파일을 사용하는 것이기 때문에 협업 시 충돌이 일어날 가능성이 높다.
+
+해결법 중 하나, @Component + &lt;component-scan&gt;
+
+
+```
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
+	<!-- interface는 객체를 생성할 수 없다, 그래서 등록할 필요가 없음 -->
+	
+	<!-- Component Scan 을 사용해보자 -->
+	<context:component-scan base-package="myspring.di.annot"></context:component-scan>
+	<!-- 와우 이걸 쓰니깐 s가 붙음 -->
+	
+	<!-- String Printer 클래스를 bean으로 등록함 -->
+	<bean id="strPrinter" class="myspring.di.xml.StringPrinter">
+	</bean>
+
+	<!-- ConsolePrinter Bean 설정 -->
+	<bean id="conPrinter" class="myspring.di.xml.ConsolePrinter">
+	</bean>
+	<!-- Hello Bean 설정 -->
+	<!-- scope singleton(default) 객체생성 하나만 prototype 객체 생성 항상 request, session 
+		웹에서 사용함, session이 request 보다 scope이 더 넓다 -->
+	<bean id="hello" class="myspring.di.xml.Hello" scope="singleton">
+		<!-- setter injection 설정 -->
+		<property name="name" value="스프링"></property>
+		<property name="printer" ref="strPrinter"></property>
+	</bean>
+	<bean id="helloC" class="myspring.di.xml.Hello" scope="singleton">
+		<!-- constructor injection 설정 -->
+		<constructor-arg index="0" value="생성자"></constructor-arg>
+		<constructor-arg index="1" ref="conPrinter"></constructor-arg>
+	</bean>
+</beans>
+```
+
+Bean을 관리하는 전략
+전략 1. XML만을 이용하기 ( ~Spring 2.5)
+
+위에 언급한 문제점이 있음
+
+전략 2. Annotation + XML 혼합
+
+@Component + &lt;component-scan&gt;의 조합
+
+전략 3, Annotaion Only (Spring boot)
+
+설정은 @Configuration, Bean은 @Bean을 통해 Spring Container에 새로운 Bean 객체를 제공한다.
+
+Bean의 등록 및 의존 관계를 Java 코드만으로 해결한다.
+
+Spring MVC
+1. MVC 의존성 추가
+
+2. web.xml
+
+DispatcherServlet(Front Controller)을 등록
+
+ContextLoaderListener를 웹 서버(tomcat)의 web.xml에 등록해서 Spring Bean Configuration XML을 웹 서버가 인지할 수 있도록 설정
+
+3. Controller 클래스 작성
+
+```
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd" id="WebApp_ID" version="4.0">
+  <display-name>MySpringMVC</display-name>
+  <welcome-file-list>
+    <welcome-file>index.html</welcome-file>
+    <welcome-file>index.htm</welcome-file>
+    <welcome-file>index.jsp</welcome-file>
+    <welcome-file>default.html</welcome-file>
+    <welcome-file>default.htm</welcome-file>
+    <welcome-file>default.jsp</welcome-file>
+  </welcome-file-list>
+  
+  <!-- needed for ContextLoaderListener -->
+  <!-- tomcat에 beans.xml 을 등록해줌 -->
+	<context-param>
+		<param-name>contextConfigLocation</param-name>
+		<param-value>classpath:config/springbeans.xml</param-value>
+	</context-param>
+
+	<!-- Bootstraps the root web application context before servlet initialization -->
+	<listener>
+		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+	</listener>
+	<!-- The front controller of this Spring Web application, responsible for handling all application requests -->
+	<servlet>
+		<servlet-name>springDispatcherServlet</servlet-name>
+		<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+		<init-param>
+			<param-name>contextConfigLocation</param-name>
+			<!-- web 관련된 설정.xml을 tomcat에 등록해줌 -->
+			<!-- param-value 에 넣어주면됨 -->
+			<param-value>classpath:config/springbeans.xml</param-value>
+		</init-param>
+		<load-on-startup>1</load-on-startup>
+	</servlet>
+
+	<!-- Map all requests to the DispatcherServlet for handling -->
+	<servlet-mapping>
+		<servlet-name>springDispatcherServlet</servlet-name>
+		<!-- front controller 역할을 하기 때문에 이 uri 패턴으로 들어오는 요청은 일단 dispatcherservlet에 옴 -->
+		<url-pattern>*.do</url-pattern>
+	</servlet-mapping>
+</web-app>
+```
+
+```
+package myspring.user.controller;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.ModelAndView;
+
+import myspring.user.dao.IUserDAO;
+import myspring.user.vo.UserVO;
+
+@Controller
+public class UserController {
+	@Autowired
+//	@Qualifier("UserDAOImpl2")
+	private IUserDAO dao;
+
+	@RequestMapping("/userList.do")
+	public ModelAndView getUserList() {
+		List<UserVO> users = dao.getUsers();
+		return new ModelAndView("userList.jsp", "users", users);
+	}
+
+	@GetMapping("/userDetail.do")
+	public String getUser(@RequestParam String userid, Model model) {
+		UserVO user = dao.getUser(userid);
+		model.addAttribute("userOne", user);
+		return "userDetail.jsp";
+	}
+}
+```
+
+
+ModelAndView
+
+Controller로 return "jspName"; 이렇게 String을 반환하면 어떤 일이 벌어질까?
+결론
+
+ModelAndView 객체로 바꿔서 반환한다.

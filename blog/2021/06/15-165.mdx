@@ -1,0 +1,47 @@
+---
+slug: 165
+title: "lower_bound, upper_bound"
+authors: seokjae
+tags: ["tistory"]
+enableComments: true
+keywords: ["tistory"]
+date: 2021-06-15T10:20:13+09:00
+---
+
+> 원문: https://doljae.tistory.com/165
+
+```
+def lower_bound(input_list, target_value):
+    if not input_list:
+        return 0
+    lo, hi = 0, len(input_list)
+    while lo < hi:
+        mid = (lo + hi) // 2
+        if input_list[mid] < target_value:
+            lo = mid + 1
+        else:
+            hi = mid
+
+    return lo
+
+
+def upper_bound(input_list, target_value):
+    if not input_list:
+        return 0
+    lo, hi = 0, len(input_list)
+    while lo < hi:
+        mid = (lo + hi) // 2
+        if target_value < input_list[mid]:
+            hi = mid
+        else:
+            lo = mid + 1
+
+<!-- truncate -->
+
+    return lo
+```
+
+
+bisect_left, bisect_right를 그대로 구현한 코드.
+
+직접 구현해야 할 때 헷갈리면 마지막에 lo를 반환하게만 고정하고, hi 이동은 mid로 고정, lo 이동은 mid+1로 고정하는 걸 의식하자.

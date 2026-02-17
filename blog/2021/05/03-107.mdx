@@ -1,0 +1,51 @@
+---
+slug: 107
+title: "141. Linked List Cycle"
+authors: seokjae
+tags: ["tistory"]
+enableComments: true
+keywords: ["tistory"]
+date: 2021-05-03T10:19:42+09:00
+---
+
+> 원문: https://doljae.tistory.com/107
+
+![cover](https://blog.kakaocdn.net/dna/qNST4/btq3U7bjnY2/AAAAAAAAAAAAAAAAAAAAAJSyD1dmnBOARHnAqz7P2f_NHhficFy2rbqnyorCEeAh/img.png?credential=yqXZFxpELC7KVnFOS48ylbz2pIh7yKj8&expires=1772290799&allow_ip=&allow_referer=&signature=As7cmpkOmzxr2QlFOrtwZweeHgQ%3D)
+
+1. Object id값과 집합을 이용한 풀이
+
+
+```
+class Solution:
+    def hasCycle(self, head: ListNode) -> bool:
+        id_set = set()
+        cur = head
+        while cur:
+            if id(cur) not in id_set:
+                id_set.add(id(cur))
+            else:
+                return True
+            cur = cur.next
+        return False
+```
+
+<!-- truncate -->
+
+객체 id값은 고유하기 때문에 집합에 넣고 이미 현재 객체 id값이 집합에 있다면 사이클이 있음으로 판단한다.
+
+2. Floyd의 순환 알고리즘
+
+
+```
+class Solution:
+    def hasCycle(self, head: ListNode) -> bool:
+        slow = fast = head
+        while fast and fast.next:
+            slow = slow.next
+            fast = fast.next.next
+            if slow == fast:
+                return True
+        return False
+```
+
+시간 복잡도나 공간 복잡도가 별 차이 나진 않지만 이렇게도 풀 순 있다.

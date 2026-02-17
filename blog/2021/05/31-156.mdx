@@ -1,0 +1,82 @@
+---
+slug: 156
+title: "13. Roman to Integer"
+authors: seokjae
+tags: ["tistory"]
+enableComments: true
+keywords: ["tistory"]
+date: 2021-05-31T22:28:07+09:00
+---
+
+> 원문: https://doljae.tistory.com/156
+
+![cover](https://blog.kakaocdn.net/dna/z2DjP/btq6cSXuDmd/AAAAAAAAAAAAAAAAAAAAAJBEtBKheftC3BzQoxb_YCa1FvtKr6mgohGbBkYl6lf6/img.png?credential=yqXZFxpELC7KVnFOS48ylbz2pIh7yKj8&expires=1772290799&allow_ip=&allow_referer=&signature=D8dvZkE0EdHYrsVfKmOI6%2FNOwP4%3D)
+
+1. 내 Trash Garbage Code
+
+
+```
+class Solution:
+    def romanToInt(self, s: str) -> int:
+        dict1 = {'I': 1,
+                 'V': 5,
+                 'X': 10,
+                 'L': 50,
+                 'C': 100,
+                 'D': 500,
+                 'M': 1000}
+        answer, index = 0, 0
+        while index < len(s):
+            if s[index] == 'I' and index + 1 < len(s) and s[index + 1] in ['V', 'X']:
+                answer += (dict1[s[index + 1]] - dict1[s[index]])
+                index += 1
+            elif s[index] == 'X' and index + 1 < len(s) and s[index + 1] in ['L', 'C']:
+                answer += (dict1[s[index + 1]] - dict1[s[index]])
+                index += 1
+            elif s[index] == 'C' and index + 1 < len(s) and s[index + 1] in ['D', 'M']:
+                answer += (dict1[s[index + 1]] - dict1[s[index]])
+                index += 1
+            else:
+                answer += dict1[s[index]]
+            index += 1
+
+<!-- truncate -->
+
+        return answer
+```
+
+그냥 문제 내용 그대로 구현했다.
+
+딱 봐도 별로다.
+
+2. 로마자 특징을 이용한 풀이
+
+
+```
+class Solution:
+    def romanToInt(self, s: str) -> int:
+        dict1 = {'I': 1,
+                 'V': 5,
+                 'X': 10,
+                 'L': 50,
+                 'C': 100,
+                 'D': 500,
+                 'M': 1000}
+        answer, index = 0, 0
+        for i in range(len(s) - 1):
+            if dict1[s[i]] < dict1[s[i + 1]]:
+                answer -= dict1[s[i]]
+            else:
+                answer += dict1[s[i]]
+        return answer + dict1[s[-1]]
+```
+
+로마자는 이런 특징이 있다.
+
+IV -&gt; 5 - 1  = 4
+
+XL -&gt; 50 - 10 = 40
+
+즉 앞에 등장한 로마자 알파벳이 뒤에 등장하는 로마자 알파벳보다 작은 숫자를 의미하는 경우는 앞에 등장하는 로마자는 뺀다.
+
+이런 특성을 이용하면 훨씬 간단하게 선형 탐색으로 해결할 수 있다.

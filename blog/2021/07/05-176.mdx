@@ -1,0 +1,55 @@
+---
+slug: 176
+title: "73. Set Matrix Zeroes"
+authors: seokjae
+tags: ["tistory"]
+enableComments: true
+keywords: ["tistory"]
+date: 2021-07-05T10:15:20+09:00
+---
+
+> 원문: https://doljae.tistory.com/176
+
+![cover](https://blog.kakaocdn.net/dna/cTpbAZ/btq8NvkWa0r/AAAAAAAAAAAAAAAAAAAAAAiyaQ5SIdEI0ZdWWJm5rKy2Wc9K-7iEuiMPyaHC-U9e/img.png?credential=yqXZFxpELC7KVnFOS48ylbz2pIh7yKj8&expires=1772290799&allow_ip=&allow_referer=&signature=vza3P8c16giLuannNfzp0WyITdY%3D)
+
+2차원 배열이 주어진다.
+
+2차원 배열에서 (row, col)에 해당하는 값이 0이라면 해당 row와 col을 배열 끝까지 0의 값으로 채우는 문제다.
+
+<!-- truncate -->
+
+1. 구현
+
+
+```
+from typing import *
+
+
+def set_row(board, row):
+    board[row] = [1] * len(board[row])
+
+
+def set_col(board, col):
+    for row in range(len(board)):
+        board[row][col] = 1
+
+
+class Solution:
+    def setZeroes(self, matrix: List[List[int]]) -> None:
+        board = [[0] * len(matrix[0]) for _ in range(len(matrix))]
+        for row in range(len(matrix)):
+            for col in range(len(matrix[row])):
+                if matrix[row][col] == 0:
+                    set_row(board, row)
+                    set_col(board, col)
+        for row in range(len(matrix)):
+            for col in range(len(matrix[row])):
+                if board[row][col] == 1:
+                    matrix[row][col] = 0
+```
+
+2차원 배열을 하나 더 만든 뒤 입력된 배열을 순회하면서 0의 위치를 함수를 사용해 마킹했다.
+
+이후 한번 더 순회하면서 마킹된 위치의 row, col의 값을 0으로 바꿔줬다.
+
+문제 요구 사항이 2차원 배열 내부에서 해결하라고 되어있었던 것 같은데... 잘 모르겠다.

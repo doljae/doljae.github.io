@@ -1,0 +1,112 @@
+---
+slug: 275
+title: "392. Is Subsequence"
+authors: seokjae
+tags: ["tistory"]
+enableComments: true
+keywords: ["tistory"]
+date: 2021-11-09T12:08:00+09:00
+---
+
+> 원문: https://doljae.tistory.com/275
+
+![cover](https://blog.kakaocdn.net/dna/cCtWAb/btrkiJrWpJL/AAAAAAAAAAAAAAAAAAAAAI3IrRcC1OfVTSl4k2Fhd_PnYhCT1evOedxrC48G5zzj/img.png?credential=yqXZFxpELC7KVnFOS48ylbz2pIh7yKj8&expires=1772290799&allow_ip=&allow_referer=&signature=QugfL8pyxYooIGFuC29r2caq6yA%3D)
+
+문자열 s가 문자열 t의 최장 공통부분 문자열인지 찾는 문제다.
+
+관련 개념을 가장 잘 설명한 블로그 링크.
+
+<!-- truncate -->
+
+1. Brute Force
+class Solution:
+    def isSubsequence(self, s: str, t: str) -&gt; bool:
+
+        for item in combinations(list(t), len(s)):
+            if "".join(list(item)) == s:
+                return True
+        return False
+
+2. DP, O(NM)
+class Solution:
+    def isSubsequence(self, s: str, t: str) -&gt; bool:
+        dp = [[0] * (len(s) + 1) for _ in range(len(t) + 1)]
+        max_length = 0
+        for i in range(1, len(t) + 1):
+            t1 = t[i - 1]
+            for j in range(1, len(s) + 1):
+                t2 = s[j - 1]
+
+                if t1 == t2:
+                    dp[i][j] = dp[i - 1][j - 1] + 1
+
+                else:
+                    dp[i][j] = max(dp[i - 1][j], dp[i][j - 1])
+
+                max_length = max(max_length, dp[i][j])
+
+        return max_length == len(s)
+
+3. Two Pointers, O(N+M)
+class Solution:
+    def isSubsequence(self, s: str, t: str) -&gt; bool:
+        p1, p2 = 0, 0
+
+        while p1 &lt; len(s) and p2 &lt; len(t):
+            p1, p2 = p1 + (s[p1] == t[p2]), p2 + 1
+
+        return p1 == len(s)
+
+4. Binary Search, O(MlogN)
+from bisect import bisect_left
+from collections import defaultdict
+
+class Solution:
+    def isSubsequence(self, s: str, t: str) -&gt; bool:
+        dict1 = defaultdict(list)
+        for index, char in enumerate(t):
+            dict1[char].append(index)
+
+        cur_index = 0
+
+        for char in s:
+            target = bisect_left(dict1[char], cur_index)
+            if target &gt;= len(dict1[char]):
+                return False
+            cur_index = dict1[char][target] + 1
+
+        return True
+
+5. Using Iterator, O(N+M)
+class Solution:
+    def isSubsequence(self, s: str, t: str) -&gt; bool:
+        iterator = iter(t)
+        for char in s:
+            if char not in iterator:
+                return False
+        return True
+
+# 위 풀이를 풀어쓰면 아래와 같다.
+class Solution:
+    def isSubsequence(self, s: str, t: str) -&gt; bool:
+
+        for char in s:
+            index = t.find(char)
+            if index == -1:
+                return False
+
+            t = t[index + 1:]
+
+        return True
+# 위 풀이를 더 줄이면 아래와 같다.
+def isSubsequence(self, s, t):
+    t = iter(t)
+    return all(c in t for c in s)
+
+1번이 TLE인건 당연하고, 2번이 일반적으로 알고 있는 정해다.
+
+3, 4번으로도 해결할 수 있구나를 배웠는데 5번은 3을 iterator를 사용해 훨씬 더 짧은 라인으로 최적화했다.
+
+Python의 iterator는 (x in iterator)라고 하면 iterator가 x를 만날 때까지 이동하고 멈추는데 이를 이용해서 pointer 조작과 동일한 효과를 낼 수 있다.
+
+5번은 뭐 그렇다 치지만 3, 4번 풀이도 기억하자.

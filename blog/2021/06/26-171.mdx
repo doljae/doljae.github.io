@@ -1,0 +1,152 @@
+---
+slug: 171
+title: "380. Insert Delete GetRandom O(1)"
+authors: seokjae
+tags: ["tistory"]
+enableComments: true
+keywords: ["tistory"]
+date: 2021-06-26T16:55:10+09:00
+---
+
+> 원문: https://doljae.tistory.com/171
+
+![cover](https://blog.kakaocdn.net/dna/bn84xv/btq8dt75gUl/AAAAAAAAAAAAAAAAAAAAAJ6aaB4lt3reyR9v1PnNhIsyGIxIzY88pXgk-xnR5DlT/img.png?credential=yqXZFxpELC7KVnFOS48ylbz2pIh7yKj8&expires=1772290799&allow_ip=&allow_referer=&signature=f%2BBqpvVEu3HJLBdzl3utq%2Ff6ITc%3D)
+
+```
+class RandomizedSet:
+
+    def __init__(self):
+        """
+        Initialize your data structure here.
+        """
+        
+
+<!-- truncate -->
+
+    def insert(self, val: int) -> bool:
+        """
+        Inserts a value to the set. Returns true if the set did not already contain the specified element.
+        """
+        
+
+    def remove(self, val: int) -> bool:
+        """
+        Removes a value from the set. Returns true if the set contained the specified element.
+        """
+        
+
+    def getRandom(self) -> int:
+        """
+        Get a random element from the set.
+        """
+        
+
+
+# Your RandomizedSet object will be instantiated and called as such:
+# obj = RandomizedSet()
+# param_1 = obj.insert(val)
+# param_2 = obj.remove(val)
+# param_3 = obj.getRandom()
+```
+
+
+집합 내부의 랜덤 한 하나의 값을 반환하는 메서드를 가진 RandomizedSet 클래스를 만드는 문제다.
+
+1. Set 자료구조 쓰기
+
+
+```
+import random
+
+
+class RandomizedSet:
+
+    def __init__(self):
+        """
+        Initialize your data structure here.
+        """
+        self.pocket = set()
+
+    def insert(self, val: int) -> bool:
+        """
+        Inserts a value to the set. Returns true if the set did not already contain the specified element.
+        """
+        if val in self.pocket:
+            return False
+        self.pocket.add(val)
+        return True
+
+    def remove(self, val: int) -> bool:
+        """
+        Removes a value from the set. Returns true if the set contained the specified element.
+        """
+        if val not in self.pocket:
+            return False
+        self.pocket.remove(val)
+        return True
+
+    def getRandom(self) -> int:
+        """
+        Get a random element from the set.
+        """
+        return random.choice(list(self.pocket))
+```
+
+정직하게 Set 자료구조를 사용했다.
+
+하지만 전체 제출자 중 속도 랭킹이 하위 5퍼센트라고 나와서 문제가 있는 코드다.
+
+getRandom() 함수 구현을 내장 함수를 사용했지만 Set을 매번 List로 변환하는 작업에서 오래 걸리는 게 문제인 것 같다.(정확하지 않음)
+
+2. Set을 List와 Dict으로 구현하기
+
+
+```
+import random
+
+
+class RandomizedSet:
+
+    def __init__(self):
+        """
+        Initialize your data structure here.
+        """
+        self.list1 = []
+        self.dict1 = {}
+
+    def insert(self, val: int) -> bool:
+        """
+        Inserts a value to the set. Returns true if the set did not already contain the specified element.
+        """
+        if val not in self.dict1:
+            self.list1.append(val)
+            self.dict1[val] = len(self.list1) - 1
+            return True
+        return False
+
+    def remove(self, val: int) -> bool:
+        """
+        Removes a value from the set. Returns true if the set contained the specified element.
+        """
+        if val not in self.dict1:
+            return False
+        last_val = self.list1[-1]
+        val_index, last_index = self.dict1[val], self.dict1[self.list1[-1]]
+        self.list1[val_index], self.list1[last_index] = self.list1[last_index], self.list1[val_index]
+        self.dict1[last_val] = val_index
+        self.list1.pop()
+        self.dict1.pop(val)
+        return True
+
+    def getRandom(self) -> int:
+        """
+        Get a random element from the set.
+        """
+        return self.list1[random.randint(0, len(self.list1) - 1)]
+```
+
+Set은 하나의 List, 하나의 Dict을 이용해서 구현할 수 있다.
+
+그런데 Set과 Dict 모두 연관배열을 사용하기 때문에 해당 key 존재 유무를 파악하는데 시간 복잡도가 같은 걸로 알고 있다.
+
+결국 시간이 줄은 원인은 getRandom()에서 (0 ~ List의 길이-1)의 임의의 정수를 하나 고르고, 해당 정수 위치에 해당하는 값을 바로 반환하기 때문이 아닐까라고 생각한다.

@@ -1,0 +1,111 @@
+---
+slug: 158
+title: "26. Remove Duplicates from Sorted Array"
+authors: seokjae
+tags: ["tistory"]
+enableComments: true
+keywords: ["tistory"]
+date: 2021-06-06T22:35:22+09:00
+---
+
+> 원문: https://doljae.tistory.com/158
+
+![cover](https://blog.kakaocdn.net/dna/btOrOA/btq6GpGaIdE/AAAAAAAAAAAAAAAAAAAAAPklsN26oyJWicHao7VRhor4VN0xl7llSZa07WpJBU7e/img.png?credential=yqXZFxpELC7KVnFOS48ylbz2pIh7yKj8&expires=1772290799&allow_ip=&allow_referer=&signature=zDLh%2FdG6gjJuMQkwypitDwcHe0Y%3D)
+
+1. 선형 탐색 로직
+
+
+```
+from typing import *
+
+<!-- truncate -->
+
+
+class Solution:
+    def removeDuplicates(self, nums: List[int]) -> int:
+        if not nums:
+            return 0
+        saved_val, target_index = nums[0], 1
+        for i in range(len(nums)):
+            if i == 0:
+                continue
+            else:
+                if nums[i] == saved_val:
+                    continue
+                else:
+                    saved_val, nums[target_index] = nums[i], nums[i]
+                    target_index += 1
+        gap = len(nums) - target_index
+        while gap > 0:
+            nums.pop()
+            gap -= 1
+        return len(nums)
+```
+
+정수로 구성된 오름차순으로 정렬된 리스트가 주어진다.
+
+이 리스트를 추가 공간 없이, 즉 주어진 리스트 내부의 조작만을 이용해 중복된 정수를 제거하는 로직을 작성하는 문제다.
+
+결국 이 문제는 리스트의 순서를 흐트러트리지 않고 새로운 값이 등장했을 때 다음 인덱스마다 추가해주면 된다.
+
+이 문제를 해결하는 데 2개의 변수를 사용했다.
+
+saved_val은 가장 마지막에 출현한 값을, target_index는 새로운 값이 들어가야 하는 인덱스를 저장하는 변수다.
+
+이제 주어진 nums 리스트를 0번 인덱스부터 선형 탐색하는데 로직은 다음과 같다.
+
+1. 만일 현재 인덱스가 가리키는 값(nums[i])가 가장 마지막에 출현한 값(saved_val)과 같다면 이 값은 중복 값이기 때문에 그냥 지나간다.
+
+2. nums[i]와 saved_val이 같지 않다면 중복이 아닌 새로운 값이기 때문에 그 숫자가 문제에서 요구하는 위치에 있어야 할 곳(nums [target_index])의 값으로 바꿔주고, target_index의 값을 1 올려준다.
+
+3. 위 작업이 끝난 후 불필요한 부분(len(nums) - target_index) 만큼 길이는 pop 연산으로 버려준다.
+
+시뮬레이션하면 다음과 같다.
+
+```
+nums = [0, 0, 1, 1, 1, 2, 2, 3, 3, 4]
+
+saved_val: 0, target_index:1
+nums: [0, 0, 1, 1, 1, 2, 2, 3, 3, 4]
+
+i: 0, saved_val: 0, target_index:1
+nums: [0, 0, 1, 1, 1, 2, 2, 3, 3, 4]
+
+i: 1, saved_val: 0, target_index:1
+nums: [0, 0, 1, 1, 1, 2, 2, 3, 3, 4]
+
+i: 2, saved_val: 1, target_index:2
+nums: [0, 1, 1, 1, 1, 2, 2, 3, 3, 4]
+
+i: 3, saved_val: 1, target_index:2
+nums: [0, 1, 1, 1, 1, 2, 2, 3, 3, 4]
+
+i: 4, saved_val: 1, target_index:2
+nums: [0, 1, 1, 1, 1, 2, 2, 3, 3, 4]
+
+i: 5, saved_val: 2, target_index:3
+nums: [0, 1, 2, 1, 1, 2, 2, 3, 3, 4]
+
+i: 6, saved_val: 2, target_index:3
+nums: [0, 1, 2, 1, 1, 2, 2, 3, 3, 4]
+
+i: 7, saved_val: 3, target_index:4
+nums: [0, 1, 2, 3, 1, 2, 2, 3, 3, 4]
+
+i: 8, saved_val: 3, target_index:4
+nums: [0, 1, 2, 3, 1, 2, 2, 3, 3, 4]
+
+i: 9, saved_val: 4, target_index:5
+nums: [0, 1, 2, 3, 4, 2, 2, 3, 3, 4]
+
+불필요한 부분을 pop으로 제거
+nums: [0, 1, 2, 3, 4, 2, 2, 3, 3]
+nums: [0, 1, 2, 3, 4, 2, 2, 3]
+nums: [0, 1, 2, 3, 4, 2, 2]
+nums: [0, 1, 2, 3, 4, 2]
+nums: [0, 1, 2, 3, 4]
+
+5
+```
+
+이전에 비슷한 접근법을 경험한 적이 있어서 빠르게 풀 수 있었다.

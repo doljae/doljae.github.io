@@ -1,0 +1,57 @@
+---
+slug: 57
+title: "정수 내림차순으로 배치하기"
+authors: seokjae
+tags: ["tistory"]
+enableComments: true
+keywords: ["tistory"]
+date: 2021-03-22T15:48:04+09:00
+---
+
+> 원문: https://doljae.tistory.com/57
+
+programmers.co.kr/learn/courses/30/lessons/12933
+
+내가 짠 Java 코드
+
+```
+import java.util.Arrays;
+
+<!-- truncate -->
+
+class Solution {
+    public long solution(long n) {
+        String nString=Long.toString(n);
+        String[] arr=nString.split("");
+        Arrays.sort(arr);
+        StringBuilder builder=new StringBuilder();
+        for(String a:arr)
+            builder.append(a);
+
+
+        return Long.parseLong(builder.reverse().toString());
+    }
+}
+```
+
+
+내가 짠 Python 코드
+
+```
+def solution(n):
+    return int("".join(sorted(list(str(n)),reverse=True)))
+```
+
+
+다른 분께서 짠 Java 코드
+
+```
+public class ReverseInt {
+    String res = "";
+    public int reverseInt(int n){
+        res = "";
+        Integer.toString(n).chars().sorted().forEach(c -> res = Character.valueOf((char)c) + res);
+        return Integer.parseInt(res);
+    }
+}
+```

@@ -1,0 +1,53 @@
+---
+slug: 100
+title: "155. Min Stack"
+authors: seokjae
+tags: ["tistory"]
+enableComments: true
+keywords: ["tistory"]
+date: 2021-04-30T17:04:21+09:00
+---
+
+> 원문: https://doljae.tistory.com/100
+
+![cover](https://blog.kakaocdn.net/dna/bkSeo9/btq3STRoUA2/AAAAAAAAAAAAAAAAAAAAAPSfWZsDRXT-Kgl4NpAP-A74PcF9s9frYUFzrObLf3mU/img.png?credential=yqXZFxpELC7KVnFOS48ylbz2pIh7yKj8&expires=1772290799&allow_ip=&allow_referer=&signature=B0bdCGBF4AekG%2F77Lq%2FkX93%2B1Zo%3D)
+
+1. event를 flag로 해서 처리하는 풀이
+
+
+```
+from heapq import *
+
+<!-- truncate -->
+
+
+class MinStack:
+
+    def __init__(self):
+        self.stack = []
+        self.min_stack = []
+        self.events = [0] * 30000
+        self.event_cnt = 0
+
+    def push(self, val: int) -> None:
+        self.stack.append((val, self.event_cnt))
+        heappush(self.min_stack, (val, self.event_cnt))
+        self.events[self.event_cnt] = 1
+        self.event_cnt += 1
+
+    def pop(self) -> None:
+        popped_val, popped_event = self.stack.pop()
+        self.events[popped_event] = 0
+
+    def top(self) -> int:
+        return self.stack[-1][0]
+
+    def getMin(self) -> int:
+        while self.events[self.min_stack[0][1]] == 0:
+            heappop(self.min_stack)
+        return self.min_stack[0][0]
+```
+
+이중 우선순위 큐와 같은 문제를 풀 때처럼 push, pop을 하나의 이벤트로 생각하고, 각각의 이벤트에 번호를 달아준다.
+
+스택에서 빠질 때 해당 이벤트를 꺼주고, min_stack에선 가장 최솟값인 이벤트가 꺼지지 않을 때까지 heappop 한 뒤 최솟값을 구한다.

@@ -1,0 +1,40 @@
+---
+slug: 129
+title: "114. Flatten Binary Tree to Linked List"
+authors: seokjae
+tags: ["tistory"]
+enableComments: true
+keywords: ["tistory"]
+date: 2021-05-13T15:35:30+09:00
+---
+
+> 원문: https://doljae.tistory.com/129
+
+![cover](https://blog.kakaocdn.net/dna/bQ7qi2/btq4Sm5bsp0/AAAAAAAAAAAAAAAAAAAAACzkdp1Nkf_B5Ng7HsrFLU9A6eNk6OmfyytB6QyWQ2ye/img.png?credential=yqXZFxpELC7KVnFOS48ylbz2pIh7yKj8&expires=1772290799&allow_ip=&allow_referer=&signature=eQioUE7iXhNfscaBkBjRrEAtvQg%3D)
+
+1. Post - Order
+
+
+```
+class Solution:
+    def flatten(self, root: TreeNode) -> None:
+        stack, temp = [], []
+        cur = root
+        while True:
+            while cur:
+                temp.append(cur)
+                stack.append(cur)
+                cur = cur.left
+            if not stack:
+                break
+            cur = stack.pop()
+            cur = cur.right
+        for i in range(1, len(temp)):
+            temp[i - 1].left = None
+            temp[i - 1].right = temp[i]
+        return temp[0] if temp else []
+```
+
+<!-- truncate -->
+
+Post - Order 순회로 접근이 가능하다.

@@ -1,0 +1,87 @@
+---
+slug: 140
+title: "236. Lowest Common Ancestor of a Binary Tree"
+authors: seokjae
+tags: ["tistory"]
+enableComments: true
+keywords: ["tistory"]
+date: 2021-05-17T10:57:15+09:00
+---
+
+> 원문: https://doljae.tistory.com/140
+
+![cover](https://blog.kakaocdn.net/dna/blzE4D/btq41lfmwTa/AAAAAAAAAAAAAAAAAAAAAJRYhhNqZ5kMWLMFXzTdCAMOZ7tYU199yTUe_4hA5-9S/img.png?credential=yqXZFxpELC7KVnFOS48ylbz2pIh7yKj8&expires=1772290799&allow_ip=&allow_referer=&signature=WN8xmwcIKg7l6n74Sl%2B0OtlH2e4%3D)
+
+1. DFS
+
+
+```
+class Solution:
+    def lowestCommonAncestor(self, root: TreeNode, p: TreeNode, q: TreeNode) -> 'TreeNode':
+        p_seq, q_seq = [], []
+
+<!-- truncate -->
+
+        def dfs(cur, seq):
+            nonlocal p_seq, q_seq
+            if not cur:
+                return
+            seq.append(cur)
+            if not p_seq and cur.val == p.val:
+                p_seq = seq[::]
+            elif not q_seq and cur.val == q.val:
+                q_seq = seq[::]
+
+            dfs(cur.left, seq)
+            dfs(cur.right, seq)
+            seq.pop()
+
+        dfs(root, [])
+        q_seq_set = set(q_seq)
+        while p_seq:
+            cur_node = p_seq.pop()
+            if cur_node in q_seq_set:
+                return cur_node
+```
+
+DFS 탐색을 통해서 타깃이 되는 2개의 노드의 경로를 담는다.
+
+담은 뒤에 두 경로를 뒤에서부터 비교하면서 가장 먼저 매칭 되는 노드가 공통 조상이고 이것을 반환한다.
+
+노드의 값이 아니라 노드 자체를 반환해야 해서 담아서 관리하는 방법을 사용했다.
+
+2. DFS(약간 최적화)
+
+
+```
+class Solution:
+    def lowestCommonAncestor(self, root: TreeNode, p: TreeNode, q: TreeNode) -> 'TreeNode':
+        p_seq, q_seq = [], []
+
+        def dfs(cur, seq):
+            nonlocal p_seq, q_seq
+            if not cur:
+                return
+            seq.append(cur)
+            if not p_seq and cur.val == p.val:
+                p_seq = seq[::]
+            elif not q_seq and cur.val == q.val:
+                q_seq = seq[::]
+            if p_seq and q_seq:
+                return
+
+            dfs(cur.left, seq)
+            dfs(cur.right, seq)
+            seq.pop()
+
+        dfs(root, [])
+        q_seq_set = set(q_seq)
+        while p_seq:
+            cur_node = p_seq.pop()
+            if cur_node in q_seq_set:
+                return cur_node
+```
+
+공통 조상을 찾는 부분을 list 순회가 아니라 set 순회로 바꿔서 시간을 단축시켰다.
+
+또 타깃이 되는 2개의 노드의 탐색이 끝났다면 더 이상 탐색하지 않아도 되기 때문에 중간에 리턴 시켰다.

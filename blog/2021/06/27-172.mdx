@@ -1,0 +1,96 @@
+---
+slug: 172
+title: "96. Unique Binary Search Trees"
+authors: seokjae
+tags: ["tistory"]
+enableComments: true
+keywords: ["tistory"]
+date: 2021-06-27T17:18:25+09:00
+---
+
+> 원문: https://doljae.tistory.com/172
+
+![cover](https://blog.kakaocdn.net/dna/c0SYKD/btq8dSOKsyC/AAAAAAAAAAAAAAAAAAAAAEkpStLs0QBssBJ36hjpKtI3S9O1NhCcfWHv_yp9R_pf/img.png?credential=yqXZFxpELC7KVnFOS48ylbz2pIh7yKj8&expires=1772290799&allow_ip=&allow_referer=&signature=b55Fpr26wsd3NbSVV4aenqWV%2BAI%3D)
+
+노드의 개수가 주어진다.
+
+주어진 노드를 모두 사용해서 만들 수 있는 이진트리의 형태의 가짓수를 반환하는 문제다.
+
+<!-- truncate -->
+
+1. DFS
+처음에 DFS로 해결할 수 있는지를 생각해보았다.
+
+결과적으론 불가능하다고 판단했다.
+
+루트 노드를 기준으로 DFS는 left subtree, right subtree를 한 재귀에서 위 문제에서 확인해야 하는 상태를 볼 수 없다.
+
+2. DP
+
+
+```
+class Solution:
+
+    def numTrees(self, n: int) -> int:
+        dp = [1, 1]
+
+        for i in range(2, n + 1):
+            answer = 0
+            for j in range(i):
+                answer += dp[i - j - 1] * dp[j]
+            dp.append(answer)
+        # print(dp)
+        return dp[-1]
+```
+
+Tree DP랑 비슷한 느낌이라고 생각해서 루트를 기준으로 left subtree의 가짓수, right subtree의 가짓수를 곱하면서 DP가 진행될 것 같은데라는 생각까지만 하고 점화식을 찾진 못해서 Discussion을 참고했다.
+
+왜 이런 점화식이 성립하는지는 Discussion 탭의 Most Voted 최상위에 있는 풀이의 답변을 참고하면 좋다.
+
+3. Catalan Number(카탈랑 수)
+
+사실 이 수는 **카탈랑 수**라는 독특한 수라고 한다.
+
+이것을 알고 있으면 다양한 조합 문제를 한 줄로 해결할 수 있다.
+
+대표적으로 n개의 괄호의 묶음 중 적합한 괄호의 조합이 몇 개인지를 찾는 문제가 있는데 이 문제도 카탈랑 수 구하라는 문제랑 똑같다.
+
+```
+class Solution:
+
+    def numTrees(self, n: int) -> int:
+        dp = [1, 1, 2, 5]
+
+        def sol(val):
+            answer = 0
+            start, end = 0, val - 1
+            while start < val:
+                answer += dp[start] * dp[end]
+                start += 1
+                end -= 1
+            return answer
+
+        if n < len(dp):
+            return dp[n]
+        else:
+            for i in range(4, n + 1):
+                dp.append(sol(i))
+            return dp[n]
+```
+
+위키백과에 나와있는 카탈랑 수를 구하는 방법 그대로 반복문을 통해 구현했다.
+
+List 이름을 DP라고 했지만 DP를 사용한 문제는 아니고, 그래서 시간이 위 코드보다 더 걸렸다.
+
+```
+class Solution:
+    def numTrees(self, n):
+        print(factorial)
+        return factorial(2*n)//factorial(n)//factorial(n)//(n+1)
+```
+
+카탈랑 수 점화식을 수학적으로 계산했을 때 한 줄로 해결할 수 있다.
+
+math 모듈에 factorial() 메서드를 사용하면 n! 을 O(N)으로 구할 수 있기 때문에 위 문제의 시간 복잡도는 O(N)이다.
+
+예전에 문제 대충 보고 생각하다가 이거 삽질하다가 못 풀 문제라고 생각하고 넘겼었는데 아니나 다를까 떠오르지도 않고 삽질만 했다.

@@ -1,0 +1,92 @@
+---
+slug: 121
+title: "48. Rotate Image"
+authors: seokjae
+tags: ["tistory"]
+enableComments: true
+keywords: ["tistory"]
+date: 2021-05-09T12:20:58+09:00
+---
+
+> 원문: https://doljae.tistory.com/121
+
+![cover](https://blog.kakaocdn.net/dna/di3jzZ/btq4oPISWwu/AAAAAAAAAAAAAAAAAAAAAFjznm7cVKiSuwAKYlyfwAEBRKmidvd46fwWINEN-akr/img.png?credential=yqXZFxpELC7KVnFOS48ylbz2pIh7yKj8&expires=1772290799&allow_ip=&allow_referer=&signature=es6lEPti%2FO2yCH1J0Uk%2FRg%2BeFZk%3D)
+
+요약
+2차원 배열이 주어지면 추가 공간 할당 없이 시계 방향으로 회전시키는 문제
+
+1. Swap
+
+<!-- truncate -->
+
+
+```
+class Solution:
+    def rotate(self, matrix: List[List[int]]) -> None:
+        length = len(matrix)
+        for i in range(length // 2 + length % 2):
+            for j in range(length // 2):
+                temp = matrix[length - 1 - j][i]
+                matrix[length - 1 - j][i] = matrix[length - 1 - i][length - 1 - j]
+                matrix[length - 1 - i][length - 1 - j] = matrix[j][length - 1 - i]
+                matrix[j][length - 1 - i] = matrix[i][j]
+                matrix[i][j] = temp
+```
+
+사실 이 인덱스를 다 기억할 수가 없다. 4*4 배열 그려놓고 그냥 끼워 맞춰 가면서 인덱스를 잡았다.
+
+그리고 모든 지점에 대해서 스왑 하면 두 번 돌리는 경우가 생기기 때문에 x좌표, y좌표 중 하나를 (length//2 + length%2) 만큼 반복해주고, 나머지 하나는 (length//2)만큼 반복해야 한다.
+
+2. 시계 방향 배열의 특징을 고려한 풀이
+
+
+```
+from typing import *
+
+
+class Solution:
+    def rotate(self, matrix: List[List[int]]) -> None:
+
+        def reverse(board):
+            for i in range(len(board)):
+                for j in range(i + 1, len(board)):
+                    board[i][j], board[j][i] = board[j][i], board[i][j]
+
+        def reverse2(board):
+            for i in range(len(board)):
+                for j in range(len(board) // 2):
+                    board[i][j], board[i][len(board) - 1 - j] = board[i][len(board) - 1 - j], board[i][j]
+
+        reverse(matrix)
+        reverse2(matrix)
+```
+
+주어진 배열을 시계방향으로 돌리려면 다음과 같은 연산을 하면 된다.
+
+1. 주어진 배열을 (i, i) 축을 중심으로 대칭되게 Swap 한다.
+
+2. 1번 결과 배열을 y=length//2 축 중심으로 대칭되게 Swap 한다.
+
+이렇게 하면 시계방향으로 돌린 결과와 동일한 결과를 얻을 수 있다.
+
+도대체 이런 생각을 어떻게 할까...
+
+3. Pythonic
+
+
+```
+class Solution:
+    def rotate(self, matrix: List[List[int]]) -> None:
+
+        matrix[::] = zip(*matrix[::-1])
+```
+
+Python의 내장 함수 중 zip이 있다. 예전에 문제 풀이할 때 종종 사용했던 방법이다.
+
+어떻게 보면 트릭을 쓰는 건데 matrix가 아니라 matrix [::]으로 값을 받아서 matrix 내부의 값을 zip 연산한 결과로 치환하는 코드다.
+
+이것을 in-place replacement라고 하는데 1차원 배열 이상의 다차원 배열은 배열 안에 주 솟값이 들어있다.
+
+그래서 그냥 복사하면 원하는 복사 연산이 안되는데 저렇게 하면 내부 실제 주솟값에 해당하는 객체에 대해서 zip 연산한 객체로 바뀌게 된다.
+
+근데 문제 의도는 이렇게 풀라는 게 아녔으니깐 위에 방법도 알아둬야겠다.

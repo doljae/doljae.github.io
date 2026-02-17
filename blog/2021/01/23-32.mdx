@@ -1,0 +1,44 @@
+---
+slug: 32
+title: "코딩을 지탱하는 기술 01"
+authors: seokjae
+tags: ["tistory"]
+enableComments: true
+keywords: ["tistory"]
+date: 2021-01-23T13:47:51+09:00
+---
+
+> 원문: https://doljae.tistory.com/32
+
+![cover](http://bimage.interpark.com/goods_image/2/0/8/1/213202081h.jpg)
+
+Stack Machine
+작동 및 연산에 스택을 사용하는 장치 혹은 기법 -&gt; 후위 표기법(postorder)
+
+1과 2를 더한 것에 3을 곱하다 -&gt; 1 2 + 3 *
+
+<!-- truncate -->
+
+2와 3을 곱한 후 1을 더한다 -&gt; 2 3 * 1 +
+
+Java, Python의 VM 형태도 스택 머신의 형태를 띤다.
+
+Python의 dis 라이브러리를 이용하면 VM이 실행할 명령 열을 출력할 수 있다.
+
+LISP
+괄호로 시작해서 명령어가 맨 앞에 나온다. 그다음 공란으로 간격을 만들고 무엇을 더할 것인지를 기술한다.
+
+-&gt; 전위 표기법(preorder)
+
+1과 2를 더한다 -&gt; (+ 1 2)
+
+1과 2를 더한 후 3을 곱한다 -&gt; (* (+ 1 2) 3 )
+
+Python의 ast 라이브러리를 이용하면 특정 코드가 어떤 구문 트릴로 구성되어 있는지 알 수 있다.
+
+코딩을 지탱하는 기술
+국내도서
+저자 : 니시오 히로카즈 / 김완섭역
+출판 : 비제이퍼블릭 2013.10.16
+
+상세보기
