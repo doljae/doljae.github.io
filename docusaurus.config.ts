@@ -7,7 +7,7 @@ import type * as Preset from '@docusaurus/preset-classic';
 function collectLegacyPostPaths() {
   const blogDir = path.join(__dirname, 'blog');
   const stack = [blogDir];
-  const paths = [] as string[];
+  const pathSet = new Set<string>();
 
   while (stack.length > 0) {
     const current = stack.pop();
@@ -27,17 +27,17 @@ function collectLegacyPostPaths() {
       }
 
       const content = fs.readFileSync(fullPath, 'utf8');
-      const slugMatch = content.match(/\nslug:\s*(\d+)\s*\n/);
+      const slugMatch = content.match(/^\s*slug:\s*["']?\/?(\d+)["']?\s*$/m);
       if (!slugMatch) {
         continue;
       }
 
       const slug = slugMatch[1];
-      paths.push(`/${slug}`);
+      pathSet.add(`/${slug}`);
     }
   }
 
-  return paths.sort((a, b) => Number(a.slice(1)) - Number(b.slice(1)));
+  return Array.from(pathSet).sort((a, b) => Number(a.slice(1)) - Number(b.slice(1)));
 }
 
 const legacyRootRedirects = collectLegacyPostPaths();
