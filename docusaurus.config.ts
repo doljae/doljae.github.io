@@ -1,6 +1,46 @@
+import fs from 'node:fs';
+import path from 'node:path';
 import {themes as prismThemes} from 'prism-react-renderer';
 import type {Config} from '@docusaurus/types';
 import type * as Preset from '@docusaurus/preset-classic';
+
+function collectLegacyPostPaths() {
+  const blogDir = path.join(__dirname, 'blog');
+  const stack = [blogDir];
+  const paths = [] as string[];
+
+  while (stack.length > 0) {
+    const current = stack.pop();
+    if (!current) {
+      continue;
+    }
+
+    for (const entry of fs.readdirSync(current, {withFileTypes: true})) {
+      const fullPath = path.join(current, entry.name);
+      if (entry.isDirectory()) {
+        stack.push(fullPath);
+        continue;
+      }
+
+      if (!entry.isFile() || !entry.name.endsWith('.mdx')) {
+        continue;
+      }
+
+      const content = fs.readFileSync(fullPath, 'utf8');
+      const slugMatch = content.match(/\nslug:\s*(\d+)\s*\n/);
+      if (!slugMatch) {
+        continue;
+      }
+
+      const slug = slugMatch[1];
+      paths.push(`/${slug}`);
+    }
+  }
+
+  return paths.sort((a, b) => Number(a.slice(1)) - Number(b.slice(1)));
+}
+
+const legacyRootRedirects = collectLegacyPostPaths();
 
 const config: Config = {
   title: "Zero to Hero",
@@ -21,7 +61,11 @@ const config: Config = {
   deploymentBranch: "gh-pages",
 
   onBrokenLinks: 'throw',
-  onBrokenMarkdownLinks: 'warn',
+  markdown: {
+    hooks: {
+      onBrokenMarkdownLinks: 'warn',
+    },
+  },
 
   // Even if you don't use internationalization, you can use this field to set
   // useful metadata like html lang. For example, if your site is Chinese, you
@@ -49,8 +93,26 @@ const config: Config = {
         //     'https://github.com/facebook/docusaurus/tree/main/packages/create-docusaurus/templates/shared/',
         // },
         blog: {
-          routeBasePath: '/', // Serve the blog at the site's root
+          routeBasePath: 'blog',
           showReadingTime: true,
+          blogTitle: 'Posts',
+          blogDescription: 'Engineering notes, reviews, and migration logs.',
+          postsPerPage: 10,
+          blogSidebarTitle: 'Recent posts',
+          blogSidebarCount: 15,
+          archiveBasePath: 'archive',
+          tagsBasePath: 'tags',
+          feedOptions: {
+            type: 'all',
+            title: 'Zero to Hero Feed',
+            description: 'Latest posts from Zero to Hero',
+            copyright: `Copyright © ${new Date().getFullYear()} Zero to Hero`,
+            language: 'ko',
+            limit: 30,
+          },
+          tags: 'tags.yml',
+          onInlineTags: 'warn',
+          onUntruncatedBlogPosts: 'throw',
           // Please change this to your repo.
           // Remove this to remove the "edit this page" links.
           editUrl:
@@ -60,6 +122,22 @@ const config: Config = {
           customCss: './src/css/custom.css',
         },
       } satisfies Preset.Options,
+    ],
+  ],
+
+  plugins: [
+    [
+      '@docusaurus/plugin-client-redirects',
+      {
+        redirects: [
+          {from: ['/archive'], to: '/blog/archive'},
+          {from: ['/tags'], to: '/blog/tags'},
+          ...legacyRootRedirects.map((fromPath) => ({
+            from: [fromPath],
+            to: `/blog${fromPath}`,
+          })),
+        ],
+      },
     ],
   ],
 
@@ -80,6 +158,9 @@ const config: Config = {
         src: "img/logo.svg",
       },
       items: [
+        {to: '/blog', label: 'Blog', position: 'left'},
+        {to: '/blog/archive', label: 'Archive', position: 'left'},
+        {to: '/blog/tags', label: 'Tags', position: 'left'},
         // {
         //   type: 'docSidebar',
         //   sidebarId: 'tutorialSidebar',

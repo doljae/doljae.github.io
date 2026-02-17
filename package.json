@@ -12,10 +12,14 @@
     "serve": "docusaurus serve",
     "write-translations": "docusaurus write-translations",
     "write-heading-ids": "docusaurus write-heading-ids",
-    "typecheck": "tsc"
+    "typecheck": "tsc",
+    "extract:tistory": "node tools/extract-tistory-rss-item.mjs",
+    "migrate:tistory": "node tools/migrate-tistory-post.mjs",
+    "refine:tags": "node tools/refine-blog-tags.mjs"
   },
   "dependencies": {
     "@docusaurus/core": "3.9.2",
+    "@docusaurus/plugin-client-redirects": "3.9.2",
     "@docusaurus/plugin-pwa": "3.9.2",
     "@docusaurus/preset-classic": "3.9.2",
     "@giscus/react": "^3.1.0",
