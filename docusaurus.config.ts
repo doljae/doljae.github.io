@@ -41,6 +41,10 @@ function collectLegacyPostPaths() {
 }
 
 const legacyRootRedirects = collectLegacyPostPaths();
+const siteUrl = 'https://doljae.github.io';
+const gaTrackingID = process.env.GA_TRACKING_ID;
+const adsenseClientId = process.env.ADSENSE_CLIENT_ID;
+const searchConsoleVerification = process.env.GOOGLE_SITE_VERIFICATION;
 
 const config: Config = {
   title: "Zero to Hero",
@@ -48,7 +52,7 @@ const config: Config = {
   favicon: "img/favicon.ico",
 
   // Set the production url of your site here
-  url: "https://doljae.github.io",
+  url: siteUrl,
   // Set the /<baseUrl>/ pathname under which your site is served
   // For GitHub pages deployment, it is often '/<projectName>/'
   baseUrl: '/',
@@ -85,6 +89,11 @@ const config: Config = {
           ],
         },
         docs: false,
+        sitemap: {
+          changefreq: 'weekly',
+          priority: 0.5,
+          ignorePatterns: ['/search/**'],
+        },
         // docs: {
         //   sidebarPath: './sidebars.ts',
         //   // Please change this to your repo.
@@ -121,8 +130,45 @@ const config: Config = {
         theme: {
           customCss: './src/css/custom.css',
         },
+        ...(gaTrackingID
+          ? {
+              gtag: {
+                trackingID: gaTrackingID,
+                anonymizeIP: true,
+              },
+            }
+          : {}),
       } satisfies Preset.Options,
     ],
+  ],
+
+  scripts: [
+    ...(adsenseClientId
+      ? [
+          {
+            src: 'https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js',
+            async: true,
+            crossorigin: 'anonymous',
+            'data-ad-client': adsenseClientId,
+          },
+        ]
+      : []),
+  ],
+
+  headTags: [
+    {
+      tagName: 'script',
+      attributes: {
+        type: 'application/ld+json',
+      },
+      innerHTML: JSON.stringify({
+        '@context': 'https://schema.org',
+        '@type': 'WebSite',
+        name: 'Zero to Hero',
+        url: siteUrl,
+        inLanguage: 'ko',
+      }),
+    },
   ],
 
   plugins: [
@@ -142,13 +188,14 @@ const config: Config = {
   ],
 
   themeConfig: {
-    themeConfig: {
-      metadata: [
-        {name: 'keywords', content: 'programming'},
-        {name: 'description', content: 'A tech blog focusing on backend development'},
-      ],
-      // This would become <meta name="keywords" content="cooking, blog"/> in the generated HTML
-    },
+    metadata: [
+      {name: 'keywords', content: 'programming, backend, architecture, cloud, ai'},
+      {name: 'description', content: 'A personal engineering blog focused on backend, architecture, and practical development notes.'},
+      {name: 'twitter:card', content: 'summary_large_image'},
+      ...(searchConsoleVerification
+        ? [{name: 'google-site-verification', content: searchConsoleVerification}]
+        : []),
+    ],
     // Replace with your project's social card
     image: 'img/docusaurus-social-card.jpg',
     navbar: {
@@ -161,6 +208,7 @@ const config: Config = {
         {to: '/blog', label: 'Blog', position: 'left'},
         {to: '/blog/archive', label: 'Archive', position: 'left'},
         {to: '/blog/tags', label: 'Tags', position: 'left'},
+        {to: '/privacy', label: 'Privacy', position: 'left'},
         // {
         //   type: 'docSidebar',
         //   sidebarId: 'tutorialSidebar',
@@ -192,6 +240,10 @@ const config: Config = {
             {
               label: "Tistory",
               href: "https://doljae.tistory.com/",
+            },
+            {
+              label: 'Privacy',
+              to: '/privacy',
             },
             // {
             //   label: "Blog",
