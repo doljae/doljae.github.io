@@ -38,25 +38,22 @@ public class Coffee extends Beer {
 }
 ```
 
-
 그런데 갑자기 커피를 만들어 팔려고 한다면...?
 
 커피는 알코올이 들어가지 않으니깐 메서드를 오버라이드하고 빈 상태가 된다.
 
 이렇게 하면 기존 코드에서 분기문이 나오거나, 혹은 유효성 체크를 할 필요가 없어진다.
 
-Mockito.doNothing()
-
+### Mockito.doNothing() 
 
 ```
 @Test
     void addAlcohol() {
         Coffee coffee = Mockito.mock(Coffee.class);
         Mockito.doNothing().when(coffee).addAlcohol(0);
-        
+
     }
 ```
-
 
 Mockito의 메서드인 doNothing()을 사용해 테스트 코드의 의도를 표현할 수 있다.
 

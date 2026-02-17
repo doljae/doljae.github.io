@@ -10,18 +10,25 @@ date: 2021-04-17T21:17:53+09:00
 
 > 원문: https://doljae.tistory.com/81
 
-![cover](https://blog.kakaocdn.net/dna/bWJsyF/btq2OpDpZIZ/AAAAAAAAAAAAAAAAAAAAAFeCqmcVSOVDI5R8p2JFlAgeARtsRWK3G1-jbZve65L8/img.png?credential=yqXZFxpELC7KVnFOS48ylbz2pIh7yKj8&expires=1772290799&allow_ip=&allow_referer=&signature=7%2F9Ykf8absE4L%2BVckdtVCcMugTc%3D)
-
 M1 Docker가 정식 Release 되었다. 열심히 삽질해서 Tomcat 이미지에 HTML 파일을 올려서 접속하는 것을 성공했다. GUI 환경도 잘 되어있어서 가능하지만 이미지 검색할 때 회원가입을 해야 하는 귀찮음(?)때문에 전통적인 CLI방식으로 테스트해봤다.
 
-1. Docker 설치
-이 부분은 기존의 맥 애플리케이션 설치할 때와 동일하게 진행하면 된다.
+ [Docker Desktop for Apple silicon
+
+docs.docker.com](https://docs.docker.com/docker-for-mac/apple-silicon/)
 
 <!-- truncate -->
 
+### 1\. Docker 설치
+
+이 부분은 기존의 맥 애플리케이션 설치할 때와 동일하게 진행하면 된다.
+
+![](https://blog.kakaocdn.net/dna/bWJsyF/btq2OpDpZIZ/AAAAAAAAAAAAAAAAAAAAAFeCqmcVSOVDI5R8p2JFlAgeARtsRWK3G1-jbZve65L8/img.png?credential=yqXZFxpELC7KVnFOS48ylbz2pIh7yKj8&expires=1772290799&allow_ip=&allow_referer=&signature=7%2F9Ykf8absE4L%2BVckdtVCcMugTc%3D)
+
 설치 후에 Docker의 아키텍처가 Apple인 것을 확인한다. Intel이라고 뜨면 M1용을 설치한 것이 아니니깐 주의.
 
-2. Tomcat 이미지 파일 검색 및 다운로드
+### 2\. Tomcat 이미지 파일 검색 및 다운로드
+
+![](https://blog.kakaocdn.net/dna/C9EVu/btq2Mu0esmi/AAAAAAAAAAAAAAAAAAAAAGa8C8mwYdcUgiDWtMilgLjh8PsPQ-9DHwTXUCofs2bq/img.png?credential=yqXZFxpELC7KVnFOS48ylbz2pIh7yKj8&expires=1772290799&allow_ip=&allow_referer=&signature=IgUXx0GKlPoWICNDkpHhkgLafqk%3D)
 
 ```
 // docker hub의 tomcat 관련 이미지를 검색
@@ -31,15 +38,13 @@ docker search tomcat
 docker pull tomcat
 ```
 
-
 가장 최상단에 보이는 이미지가 가장 많은 별을 받은 공식 이미지다.
 
 참고로 이 이미지는 정말 아무것도 없는 리눅스 + Tomcat 조합이기 때문에 이미지 생성 후 CLI에서 웬만한 명령어를 인식하지 못한다.
 
 (심지어 vim도 없다, 물론 다 설치하면 사용할 순 있음)
 
-3. 다운로드한 이미지를 이용해 Container 만들기
-
+### 3\. 다운로드한 이미지를 이용해 Container 만들기
 
 ```
 // 백그라운드에서 실행하는데
@@ -49,23 +54,23 @@ docker pull tomcat
 docker run -d --name tomcat_test -p 8080:8080 tomcat
 ```
 
-
 플래그에 대한 정보는 검색을 통해 확인하자.
+
+![](https://blog.kakaocdn.net/dna/bTpl2c/btq2NE8JmsV/AAAAAAAAAAAAAAAAAAAAAJVUy2cQeTiWjjDfs3PRfVf-WFfgEJwnD6wEJEqjhv-m/img.png?credential=yqXZFxpELC7KVnFOS48ylbz2pIh7yKj8&expires=1772290799&allow_ip=&allow_referer=&signature=DBR%2FEk86iw8MKJYFE4l0Xg%2BIPfY%3D)
 
 ```
 docker containers ls
 ```
 
+컨테이너 목록과 간단한 정보를 볼 수 있다. 아까 만든 tomcat\_test가 있는 것을 확인할 수 있다.
 
-컨테이너 목록과 간단한 정보를 볼 수 있다. 아까 만든 tomcat_test가 있는 것을 확인할 수 있다.
+### 4\. index.html 파일을 Tomcat에 넣어주기
 
-4. index.html 파일을 Tomcat에 넣어주기
 테스트용 웹 페이지 하나를 넣어서 잘 접속되는지 확인하자.
 
 ```
 vi index.html
 ```
-
 
 ```
 <html>
@@ -87,6 +92,8 @@ vi에 접속한 다음 i를 누르고
 
 그다음 Tomcat으로 위 파일을 보내야 하는데 그전에 디렉터리를 만들어주자.
 
+![](https://blog.kakaocdn.net/dna/ciY5AB/btq2MoeK06f/AAAAAAAAAAAAAAAAAAAAAEFvq3RdweRQ4KtvzSj0oUF9Ale1wlAj2S33qXDr_6LS/img.png?credential=yqXZFxpELC7KVnFOS48ylbz2pIh7yKj8&expires=1772290799&allow_ip=&allow_referer=&signature=V891tBZz2arjbQf4P5t88tzBzW8%3D)
+
 ```
 // tomcat_test 컨테이너의 아래 경로로 cli 접속
 docker exec -it tomcat_test /bin/bash
@@ -98,7 +105,7 @@ mkdir ROOT
 exit
 ```
 
-이제 경로도 만들었으니 아까 만든 index.html 파일을 tomcat_test의 다음 경로에 복사한다.
+이제 경로도 만들었으니 아까 만든 index.html 파일을 tomcat\_test의 다음 경로에 복사한다.
 
 ```
 docker cp ~/index.html tomcat_test:/usr/local/tomcat/webapps/ROOT
@@ -108,12 +115,17 @@ docker cp ~/index.html tomcat_test:/usr/local/tomcat/webapps/ROOT
 
 복사가 잘 되었는지 확인하려면 위에 있는 방법으로 ROOT폴더에 index.html이 있는지 확인해보면 된다.
 
-5. 테스트
-브라우저에 아래 주소를 입력한다.
+![](https://blog.kakaocdn.net/dna/9jkDT/btq2MoFK6ck/AAAAAAAAAAAAAAAAAAAAAMvG18H5VlQfaz9SM4HakOo7qhNXwqQo8XzkNYZ-xmaT/img.png?credential=yqXZFxpELC7KVnFOS48ylbz2pIh7yKj8&expires=1772290799&allow_ip=&allow_referer=&signature=POZa7U2qGW6s8pCDIUZh%2FJRtYuo%3D)
+
+### 5\. 테스트
+
+브라우저에 아래 주소를 입력한다.
 
 ```
 localhost:8080/index.html
 ```
+
+![](https://blog.kakaocdn.net/dna/bnYoS8/btq2OPIHirw/AAAAAAAAAAAAAAAAAAAAAAzoZcIjASn2x_PL5mANqsMyedMe7LVZQ2j5UalKbYgV/img.png?credential=yqXZFxpELC7KVnFOS48ylbz2pIh7yKj8&expires=1772290799&allow_ip=&allow_referer=&signature=VcABPonIy2MDojI7nP5e%2Fcmo5v0%3D)
 
 잘 뜬다.
 
@@ -123,6 +135,16 @@ localhost:8080/index.html
  curl -i localhost:8080/index.html
 ```
 
+![](https://blog.kakaocdn.net/dna/xov8O/btq2MzmL6zw/AAAAAAAAAAAAAAAAAAAAAOaiLWYf1SAXSmhgsDI1X-WFBAfcCvy5enfbfs_btAq8/img.png?credential=yqXZFxpELC7KVnFOS48ylbz2pIh7yKj8&expires=1772290799&allow_ip=&allow_referer=&signature=WmVEaCZu7CjtumC05ENtkwnZnB4%3D)
+
+![](https://blog.kakaocdn.net/dna/nQY2C/btq2NyHBCbv/AAAAAAAAAAAAAAAAAAAAAH2BFzkRCtqbOa_FvOYDG1XzvkM8hlSDqeA-MmDRFm_x/img.jpg?credential=yqXZFxpELC7KVnFOS48ylbz2pIh7yKj8&expires=1772290799&allow_ip=&allow_referer=&signature=rxdtN7Q4VZPPd99xAowXFR0i9Vk%3D)
+
 혹시 잘 안된다면 삽질하던 중 기존에 포트가 살아있어서 그럴 수도 있으니깐 포트를 바꾸거나, 사용하던 포트를 죽이고 다시 컨테이너를 실행하거나, 재부팅을 해보면 된다.
+
+ [현재 열려있는 포트 확인 및 닫기(mac)
+
+쉘에서 다음과 같이 치면 된다.sudo lsof -PiTCP -sTCP:LISTEN출처: stackExchange
+
+velog.io](https://velog.io/@taelee/%ED%98%84%EC%9E%AC-%EC%97%B4%EB%A0%A4%EC%9E%88%EB%8A%94-%ED%8F%AC%ED%8A%B8-%ED%99%95%EC%9D%B8mac)
 
 요 링크를 참고할 것.

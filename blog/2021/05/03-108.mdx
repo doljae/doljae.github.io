@@ -10,16 +10,18 @@ date: 2021-05-03T11:14:45+09:00
 
 > 원문: https://doljae.tistory.com/108
 
-![cover](https://blog.kakaocdn.net/dna/QbUoD/btq3TXgeI33/AAAAAAAAAAAAAAAAAAAAAG5VJd6y-2QX5A7YY1miXcc2QaJtF392hSRKSo7DGYwD/img.png?credential=yqXZFxpELC7KVnFOS48ylbz2pIh7yKj8&expires=1772290799&allow_ip=&allow_referer=&signature=PhPyWt8KfvzcBZrGXFOrSzvTVCc%3D)
+[Invert Binary Tree - LeetCode
 
-1. Queue를 이용한 풀이
+Level up your coding skills and quickly land a job. This is the best place to expand your knowledge and get prepared for your next interview.
 
-
-```
-from collections import deque
+leetcode.com](https://leetcode.com/problems/invert-binary-tree/)
 
 <!-- truncate -->
 
+### 1\. Queue를 이용한 풀이
+
+```
+from collections import deque
 
 class Solution:
     def invertTree(self, root: TreeNode) -> TreeNode:
@@ -40,8 +42,9 @@ class Solution:
         return root
 ```
 
-2. 재귀를 이용한 풀이
+![](https://blog.kakaocdn.net/dna/QbUoD/btq3TXgeI33/AAAAAAAAAAAAAAAAAAAAAG5VJd6y-2QX5A7YY1miXcc2QaJtF392hSRKSo7DGYwD/img.png?credential=yqXZFxpELC7KVnFOS48ylbz2pIh7yKj8&expires=1772290799&allow_ip=&allow_referer=&signature=PhPyWt8KfvzcBZrGXFOrSzvTVCc%3D)
 
+### 2\. 재귀를 이용한 풀이
 
 ```
 class Solution:
@@ -53,5 +56,9 @@ class Solution:
         root.left, root.right = root.right, root.left
         return root
 ```
+
+![](https://blog.kakaocdn.net/dna/Y6SDV/btq3U6wHW1E/AAAAAAAAAAAAAAAAAAAAAKgJPpGT4TaHWzn5GeQA1pU_q4U2LZ82U80FNlsTDL-r/img.png?credential=yqXZFxpELC7KVnFOS48ylbz2pIh7yKj8&expires=1772290799&allow_ip=&allow_referer=&signature=Uu1vE4L278UX33goH8R0GJkDasc%3D)
+
+
 
 자료구조의 입출력 연산의 오버헤드에 대해 생각해볼 수밖에 없는 문제.

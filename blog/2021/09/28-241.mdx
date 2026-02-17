@@ -10,16 +10,19 @@ date: 2021-09-28T13:07:43+09:00
 
 > 원문: https://doljae.tistory.com/241
 
-![cover](https://blog.kakaocdn.net/dna/bvKZLh/btrgbblBeIB/AAAAAAAAAAAAAAAAAAAAALcLc31sHx7dAEK5hStgfwiBXCkgxu-QVbLFsWFV2QZN/img.png?credential=yqXZFxpELC7KVnFOS48ylbz2pIh7yKj8&expires=1772290799&allow_ip=&allow_referer=&signature=F84bb3z8SmO2BuAuGIYNw1ArB%2B4%3D)
+[Rotate Array - LeetCode
+
+Level up your coding skills and quickly land a job. This is the best place to expand your knowledge and get prepared for your next interview.
+
+leetcode.com](https://leetcode.com/problems/rotate-array/)
+
+<!-- truncate -->
 
 1차원 정수가 담긴 list와 양의 정수 k가 주어진다.
 
 주어진 list를 k만큼 오른쪽으로 rotate 시킨 결과를 반환하는 문제다. 단 주어진 list를 내부 조작만으로 만 구현해야 한다.
 
-<!-- truncate -->
-
-예시
-
+#### 예시
 
 ```
 Input: nums = [1,2,3,4,5,6,7], k = 3
@@ -29,16 +32,14 @@ rotate 1 steps to the right: [7,1,2,3,4,5,6]
 rotate 2 steps to the right: [6,7,1,2,3,4,5]
 rotate 3 steps to the right: [5,6,7,1,2,3,4]
 
-
 Input: nums = [-1,-100,3,99], k = 2
 Output: [3,99,-1,-100]
-Explanation: 
+Explanation:
 rotate 1 steps to the right: [99,-1,-100,3]
 rotate 2 steps to the right: [3,99,-1,-100]
 ```
 
-1. 구현
-
+### 1\. 구현
 
 ```
 class Solution:
@@ -46,17 +47,19 @@ class Solution:
         """
         Do not return anything, modify nums in-place instead.
         """
-        
+
         stack=nums[::-1]
         k = k%len(nums)
-        
-        left,right=len(nums)-k, k 
-        
+
+        left,right=len(nums)-k, k
+
         stack=stack[:right][::-1]+stack[right:][::-1]
-        
+
         for i in range(len(stack)):
             nums[i]=stack[i]
 ```
+
+![](https://blog.kakaocdn.net/dna/bvKZLh/btrgbblBeIB/AAAAAAAAAAAAAAAAAAAAALcLc31sHx7dAEK5hStgfwiBXCkgxu-QVbLFsWFV2QZN/img.png?credential=yqXZFxpELC7KVnFOS48ylbz2pIh7yKj8&expires=1772290799&allow_ip=&allow_referer=&signature=F84bb3z8SmO2BuAuGIYNw1ArB%2B4%3D)
 
 중요한 부분을 시뮬레이션하면 아래와 같다.
 
@@ -69,15 +72,13 @@ stack = nums를 뒤집은 배열 = [5, 4, 3, 2, 1]
 
 stack[:k] = [5,4,3]
 stack[k:] = [2,1]
-stack[:k]를 뒤집은 list + stack[:k]를 뒤집은 list = 
+stack[:k]를 뒤집은 list + stack[:k]를 뒤집은 list =
 [3,4,5] + [1,2] = [3,4,5,1,2] -> nums를 k 만큼 오른쪽으로 회전한 결과
 ```
 
+이렇게 정답을 가지고 있는 stack을 만들어 nums \[i\]에 대입해주면 된다. k는 % 연산을 통해 회전 횟수를 줄일 수 있다.
 
-이렇게 정답을 가지고 있는 stack을 만들어 nums [i]에 대입해주면 된다. k는 % 연산을 통해 회전 횟수를 줄일 수 있다.
-
-2. 구현 2, 최적화
-
+### 2\. 구현 2, 최적화
 
 ```
 class Solution:
@@ -92,14 +93,15 @@ class Solution:
         nums[:] = nums[length - k:] + nums[:length - k]
 ```
 
+![](https://blog.kakaocdn.net/dna/bLhvdP/btrgbmOnIUt/AAAAAAAAAAAAAAAAAAAAADXiFvS5EwzyMniec_YinyjyUSL-isB-vaoYvn1LTjc_/img.png?credential=yqXZFxpELC7KVnFOS48ylbz2pIh7yKj8&expires=1772290799&allow_ip=&allow_referer=&signature=RablafEqtaIIpHYIZ3%2B4UUMGs48%3D)
+
 1번 구현을 최적화하면 다음과 같다. stack이라는 추가 공간도 필요 없다.
 
-nums에 [:]를 붙인 건 nums 내부 item을 replace 하려는 용도로 사용했다. Leetcode에서 아무래도 초기에 nums라고 선언되면 nums에 할당되는 메모리 주소의 값을 채점 기준으로 삼아서 이렇게 해주어야 하는 것 같다.
+nums에 \[:\]를 붙인 건 nums 내부 item을 replace 하려는 용도로 사용했다. Leetcode에서 아무래도 초기에 nums라고 선언되면 nums에 할당되는 메모리 주소의 값을 채점 기준으로 삼아서 이렇게 해주어야 하는 것 같다. 
 
 그러니깐 정답을 담은 새 배열을 만들어서 **nums = 정답 배열** 이렇게 하면 nums는 기존에 입력된 값에서 변화가 없다고 뜬다. 그래서 nums가 가리키는 주소 값을 변경하는 게 아니라 nums가 초기에 선언된 주소 값이 가리키는 값을 변경해야 한다.
 
-3. deque.rotate()
-
+### 3\. deque.rotate()
 
 ```
 class Solution:
@@ -107,13 +109,15 @@ class Solution:
         """
         Do not return anything, modify nums in-place instead.
         """
-        
+
         q = deque(nums)
-        
+
         q.rotate(k)
 
         nums[:] = list(q)
 ```
+
+![](https://blog.kakaocdn.net/dna/cEa01w/btrgbJCzmtZ/AAAAAAAAAAAAAAAAAAAAAIs0ebOQ-mQgiVsKcB6bkcnsommnn-b9gimzej5VyIg5/img.png?credential=yqXZFxpELC7KVnFOS48ylbz2pIh7yKj8&expires=1772290799&allow_ip=&allow_referer=&signature=ws1BOhuOnYAzuEToDgbj3zET%2BlY%3D)
 
 nums를 deque로 만들어서 내장 함수 rotate(k)를 이용한 다음 그 결과를 nums에 복사해주면 된다.
 

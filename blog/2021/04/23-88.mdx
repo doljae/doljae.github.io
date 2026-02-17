@@ -10,15 +10,18 @@ date: 2021-04-23T11:01:47+09:00
 
 > 원문: https://doljae.tistory.com/88
 
-![cover](https://blog.kakaocdn.net/dna/dwCH27/btq3gcErOiT/AAAAAAAAAAAAAAAAAAAAANeyvU13dpntwEQh4HPRwXf5p3N3Pqs2TZqJdmtVkhcO/img.png?credential=yqXZFxpELC7KVnFOS48ylbz2pIh7yKj8&expires=1772290799&allow_ip=&allow_referer=&signature=pjm2xGS%2BO6%2FFLb%2FcecMSGejQvn8%3D)
+[Majority Element - LeetCode
 
-1. 해시맵 스타일(Dict, Counter 사용)
+Level up your coding skills and quickly land a job. This is the best place to expand your knowledge and get prepared for your next interview.
 
+leetcode.com](https://leetcode.com/problems/majority-element/)
+
+<!-- truncate -->
+
+### 1\. 해시맵 스타일(Dict, Counter 사용)
 
 ```
 from collections import Counter
-
-<!-- truncate -->
 
 class Solution:
     def majorityElement(self, nums: List[int]) -> int:
@@ -28,8 +31,9 @@ class Solution:
         return counter.most_common(1)[0][0]
 ```
 
-2. 정렬 후 중앙값 반환
+![](https://blog.kakaocdn.net/dna/dwCH27/btq3gcErOiT/AAAAAAAAAAAAAAAAAAAAANeyvU13dpntwEQh4HPRwXf5p3N3Pqs2TZqJdmtVkhcO/img.png?credential=yqXZFxpELC7KVnFOS48ylbz2pIh7yKj8&expires=1772290799&allow_ip=&allow_referer=&signature=pjm2xGS%2BO6%2FFLb%2FcecMSGejQvn8%3D)
 
+### 2\. 정렬 후 중앙값 반환
 
 ```
 class Solution:
@@ -37,8 +41,9 @@ class Solution:
         return sorted(nums)[len(nums) // 2]
 ```
 
-3. Boyer-Moore Voting Algorithm
+![](https://blog.kakaocdn.net/dna/ckIwfa/btq3gbFwPAQ/AAAAAAAAAAAAAAAAAAAAAChRnvoHWdl2Mo-rfITpc2kP75cLsNHDvr2JlfovtgHY/img.png?credential=yqXZFxpELC7KVnFOS48ylbz2pIh7yKj8&expires=1772290799&allow_ip=&allow_referer=&signature=ey6anSOSmccapPlNy0b57SI9oo0%3D)
 
+### 3\. Boyer-Moore Voting Algorithm
 
 ```
 class Solution:
@@ -50,5 +55,7 @@ class Solution:
             count += 1 if num == target else -1
         return target
 ```
+
+![](https://blog.kakaocdn.net/dna/mv4Tr/btq3i97Fjhr/AAAAAAAAAAAAAAAAAAAAAJZkNPazipiFrnE2rvpVVA7qMg526TLrkdEsKpYsjzv0/img.png?credential=yqXZFxpELC7KVnFOS48ylbz2pIh7yKj8&expires=1772290799&allow_ip=&allow_referer=&signature=pTUgpc7TlJwyxbutTqC%2FaRXLzlY%3D)
 
 굉장히 유익한 문제였다.

@@ -10,17 +10,20 @@ date: 2021-08-06T09:32:51+09:00
 
 > 원문: https://doljae.tistory.com/199
 
-![cover](https://blog.kakaocdn.net/dna/bmKHU2/btrbpPHdiJu/AAAAAAAAAAAAAAAAAAAAAGfzf8-SSBWhimPMKwfTqpCnKLHXlMF_XIxyoEDx_0FJ/img.png?credential=yqXZFxpELC7KVnFOS48ylbz2pIh7yKj8&expires=1772290799&allow_ip=&allow_referer=&signature=7W4qParz2fqSKBKHt2npAyABPE4%3D)
+[Queries on Number of Points Inside a Circle - LeetCode
+
+Level up your coding skills and quickly land a job. This is the best place to expand your knowledge and get prepared for your next interview.
+
+leetcode.com](https://leetcode.com/problems/queries-on-number-of-points-inside-a-circle/)
+
+<!-- truncate -->
 
 원의 중심 좌표와 반지름의 길이가 주어지고, N개의 점이 입력으로 주어진다.
 
 해당 원 안에 포함되거나 걸치는 점의 개수를 각각의 원에 대해서 반환하는 문제다.
 
-<!-- truncate -->
-
 ```
 from typing import *
-
 
 class Solution:
     def countPoints(self, points: List[List[int]], queries: List[List[int]]) -> List[int]:
@@ -38,6 +41,14 @@ class Solution:
         return answer
 ```
 
+![](https://blog.kakaocdn.net/dna/bmKHU2/btrbpPHdiJu/AAAAAAAAAAAAAAAAAAAAAGfzf8-SSBWhimPMKwfTqpCnKLHXlMF_XIxyoEDx_0FJ/img.png?credential=yqXZFxpELC7KVnFOS48ylbz2pIh7yKj8&expires=1772290799&allow_ip=&allow_referer=&signature=7W4qParz2fqSKBKHt2npAyABPE4%3D)
+
 문제는 간단한데, 원의 중심과 주어진 점의 거리가 원의 반지름보다 같거나 작은 경우에 카운트를 올려주면 된다.
 
 하지만 이 문제는 굉장히 재밌는 문제인데 관련한 내용은 아래 포스트 참고.
+
+ [N\*N, N\*\*2, pow(N, 2), math.pow(N,2)
+
+이전에 재밌는 문제를 풀었다. 관련 내용은 아래 포스팅 참고. 1828. Queries on Number of Points Inside a Circle Queries on Number of Points Inside a Circle - LeetCode Level up your coding skills and qu..
+
+doljae.tistory.com](https://doljae.tistory.com/200)

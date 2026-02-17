@@ -10,16 +10,19 @@ date: 2021-08-01T00:00:41+09:00
 
 > 원문: https://doljae.tistory.com/194
 
-![cover](https://blog.kakaocdn.net/dna/bFxBAY/btraRknRvoV/AAAAAAAAAAAAAAAAAAAAALAUKpYa_LP3I9hhhBFW5I0KDDm04s9jZErIE-oP-Vzv/img.png?credential=yqXZFxpELC7KVnFOS48ylbz2pIh7yKj8&expires=1772290799&allow_ip=&allow_referer=&signature=730hXHJ6V9rEFVou8HWmHD41Czk%3D)
+[Binary Tree Pruning - LeetCode
+
+Level up your coding skills and quickly land a job. This is the best place to expand your knowledge and get prepared for your next interview.
+
+leetcode.com](https://leetcode.com/problems/binary-tree-pruning/)
+
+<!-- truncate -->
 
 노드의 값이 0, 1로만 이루어진 이진트리가 주어진다.
 
 주어진 이진트리 중 0으로만 이루어진 가지를 가지치기(pruning)하고 루트 노드를 반환하는 문제다.
 
-<!-- truncate -->
-
-1. Recursion
-
+### 1\. Recursion
 
 ```
 class Solution:
@@ -45,15 +48,17 @@ class Solution:
         return root if root.val == 1 or root.left or root.right else None
 ```
 
+![](https://blog.kakaocdn.net/dna/bFxBAY/btraRknRvoV/AAAAAAAAAAAAAAAAAAAAALAUKpYa_LP3I9hhhBFW5I0KDDm04s9jZErIE-oP-Vzv/img.png?credential=yqXZFxpELC7KVnFOS48ylbz2pIh7yKj8&expires=1772290799&allow_ip=&allow_referer=&signature=730hXHJ6V9rEFVou8HWmHD41Czk%3D)
+
 결국 0으로만 이루어진 가지는 0으로만 이루어진 서브 트리와 같다.
 
 왼쪽, 오른쪽 순서에 상관없이 우선 트리의 자식 노드까지 내려간 뒤에, 거슬러 올라가면서 가지치기를 진행한다.
 
 가지치기 방법은 다음과 같다.
 
-자식 노드의 값이 1이면 True를, 0이면 False를 반환한다.
-왼쪽 서브 트리가 모두 0으로만 이루어져 있으면 left와의 연결을 끊는다.(cur.left=None)
-오른쪽 서브 트리가 모두 0으로만 이루어져 있으면 right와의 연결을 끊는다.(cur.right=None)
-현재 노드의 값이 1이거나 왼쪽, 오른쪽 서브 트리 중 한쪽이라도 연결되어있다면 True를, 그렇지 않다면 False를 반환한다.
+1.  자식 노드의 값이 1이면 True를, 0이면 False를 반환한다.
+2.  왼쪽 서브 트리가 모두 0으로만 이루어져 있으면 left와의 연결을 끊는다.(cur.left=None)
+3.  오른쪽 서브 트리가 모두 0으로만 이루어져 있으면 right와의 연결을 끊는다.(cur.right=None)
+4.  현재 노드의 값이 1이거나 왼쪽, 오른쪽 서브 트리 중 한쪽이라도 연결되어있다면 True를, 그렇지 않다면 False를 반환한다.
 
 마지막에 루트노드도 가치지기 조건에 포함되기 때문에 만일 루트 노드의 왼쪽, 오른쪽 서브 트리의 연결이 하나도 없는 상태에서 루트 노드의 값도 0이라면 None을 반환하고, 그렇지 않은 경우만 root를 반환하면 된다.

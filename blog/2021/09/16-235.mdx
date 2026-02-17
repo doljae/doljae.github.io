@@ -10,16 +10,19 @@ date: 2021-09-16T09:59:24+09:00
 
 > 원문: https://doljae.tistory.com/235
 
-![cover](https://blog.kakaocdn.net/dna/ckjFWz/btrfdXVlBP9/AAAAAAAAAAAAAAAAAAAAABBeR-O4eu6zZda3KYlDdSNp4EUz6s_vJ_lkToesXK4K/img.png?credential=yqXZFxpELC7KVnFOS48ylbz2pIh7yKj8&expires=1772290799&allow_ip=&allow_referer=&signature=trgVVHlCr3Ap%2F3U3D4oQ8JBXUeI%3D)
+[Long Pressed Name - LeetCode
+
+Level up your coding skills and quickly land a job. This is the best place to expand your knowledge and get prepared for your next interview.
+
+leetcode.com](https://leetcode.com/problems/long-pressed-name/)
+
+<!-- truncate -->
 
 입력하고자 하는 문자열 name과 name을 입력하려고 했는데 일부 문자가 여러 번 눌린 문자 typed가 주어진다.
 
 typed에서 여러 번 눌린 문자를 제거했을 때 name으로 변환이 가능한지 판단하는 문제다.
 
-<!-- truncate -->
-
-예시
-
+#### 예시
 
 ```
 Input: name = "alex", typed = "aaleex"
@@ -38,8 +41,7 @@ Output: true
 Explanation: It's not necessary to long press any character.
 ```
 
-1. 구현
-
+### 1\. 구현
 
 ```
 class Solution:
@@ -74,9 +76,11 @@ class Solution:
         return True
 ```
 
+![](https://blog.kakaocdn.net/dna/ckjFWz/btrfdXVlBP9/AAAAAAAAAAAAAAAAAAAAABBeR-O4eu6zZda3KYlDdSNp4EUz6s_vJ_lkToesXK4K/img.png?credential=yqXZFxpELC7KVnFOS48ylbz2pIh7yKj8&expires=1772290799&allow_ip=&allow_referer=&signature=trgVVHlCr3Ap%2F3U3D4oQ8JBXUeI%3D)
+
 2개의 함수를 이용해 구현을 했다.
 
-make_trace는 문자열을 같은 문자열끼리 split 한 문자열을 저장한 list를 반환한다.
+make\_trace는 문자열을 같은 문자열끼리 split 한 문자열을 저장한 list를 반환한다.
 
 match는 str1이 str2와 같거나 부분 문자열인 경우 True를 반환한다.
 
@@ -106,11 +110,9 @@ match(d,dd) -> True
 return False
 ```
 
+결국 입력해야 하는 문자열을 여러 번 누른 경우에 생성되는 문자열이라면 같은 문자열끼리 끊었을 때 나오는 make\_trace의 결과 배열의 길이가 같아야 한다. 그리고 끊었을 때 나오는 문자열은 반드시 원래 문자열과 같거나 원래 문자열이 부분 문자열이 여야 한다.
 
-결국 입력해야 하는 문자열을 여러 번 누른 경우에 생성되는 문자열이라면 같은 문자열끼리 끊었을 때 나오는 make_trace의 결과 배열의 길이가 같아야 한다. 그리고 끊었을 때 나오는 문자열은 반드시 원래 문자열과 같거나 원래 문자열이 부분 문자열이 여야 한다.
-
-2. 최적화
-
+### 2\. 최적화
 
 ```
 class Solution:
@@ -125,6 +127,8 @@ class Solution:
 
         return i == len(name)
 ```
+
+![](https://blog.kakaocdn.net/dna/oBA3K/btre7uUN19J/AAAAAAAAAAAAAAAAAAAAAPc6shUwNNmht3nXb8Mhtb48mQ5EZPLWN0whIiB1E58c/img.png?credential=yqXZFxpELC7KVnFOS48ylbz2pIh7yKj8&expires=1772290799&allow_ip=&allow_referer=&signature=nFN1zZjbmYX2zd9DDPyY%2FITvwqo%3D)
 
 한 번의 선형 탐색으로 위에서 언급한 조건을 전부 체크할 수 있다.
 

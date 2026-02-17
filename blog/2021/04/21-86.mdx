@@ -10,10 +10,15 @@ date: 2021-04-21T12:36:26+09:00
 
 > 원문: https://doljae.tistory.com/86
 
-![cover](https://blog.kakaocdn.net/dna/bsyPvS/btq26nMwpee/AAAAAAAAAAAAAAAAAAAAAPuX-nzqbjQjAJN6bZXKp6bYrAs277ONq_afLfhcNavu/img.png?credential=yqXZFxpELC7KVnFOS48ylbz2pIh7yKj8&expires=1772290799&allow_ip=&allow_referer=&signature=7ZFKLbC2MuWhBRkQj12y5MUUCYE%3D)
+[Merge Two Binary Trees - LeetCode
 
-1. 나의 Trash Garbage 코드
+Level up your coding skills and quickly land a job. This is the best place to expand your knowledge and get prepared for your next interview.
 
+leetcode.com](https://leetcode.com/problems/merge-two-binary-trees/)
+
+<!-- truncate -->
+
+### 1\. 나의 Trash Garbage 코드
 
 ```
 class Solution:
@@ -24,8 +29,6 @@ class Solution:
                 self.search(p1.left, p2.left)
             else:
                 self.search(p1.left, TreeNode(0, None, None))
-
-<!-- truncate -->
 
         else:
             if p2 and p2.left:
@@ -50,8 +53,9 @@ class Solution:
         return root1
 ```
 
-2. 섹시한 코드
+![](https://blog.kakaocdn.net/dna/bsyPvS/btq26nMwpee/AAAAAAAAAAAAAAAAAAAAAPuX-nzqbjQjAJN6bZXKp6bYrAs277ONq_afLfhcNavu/img.png?credential=yqXZFxpELC7KVnFOS48ylbz2pIh7yKj8&expires=1772290799&allow_ip=&allow_referer=&signature=7ZFKLbC2MuWhBRkQj12y5MUUCYE%3D)
 
+### 2\. 섹시한 코드
 
 ```
 class Solution:
@@ -64,12 +68,13 @@ class Solution:
         return new_root
 ```
 
+![](https://blog.kakaocdn.net/dna/duurTZ/btq22F1RxGH/AAAAAAAAAAAAAAAAAAAAAFSfnXJ9j0OMJj7f9oOm3h5n2exrNJrfaB8dJQxeR7HP/img.png?credential=yqXZFxpELC7KVnFOS48ylbz2pIh7yKj8&expires=1772290799&allow_ip=&allow_referer=&signature=UbD40zrAjerjZ8wjhbFlWk28GIo%3D)
+
 내 코드는 엄밀히 말하면 새 트리를 만들지 않고, 기존 트리 중 하나에 값을 업데이트한다. 두 번째 코드는 새 트리를 만드는 코드다.
 
 문제에선 두 트리를 합쳐서 새로운 트리를 만들라고 했으니 2번이 의도도, 코드도 더 적합하다고 볼 수 있다.
 
-3. 더 직관적이라고 생각이 드는 코드
-
+### 3\. 더 직관적이라고 생각이 드는 코드
 
 ```
 class Solution:
@@ -83,6 +88,8 @@ class Solution:
                 return t1 or t2
 ```
 
-사실 2번 코드와 골자는 같다. 그런데 훨씬 더 이해하기 쉽고 **return t1 or t2 **구문을 통해서 t1과 t2중 하나만 있다면 그 노드를, 둘 다 없다면 None을 반환해서 재귀 조건을 설정했다.
+![](https://blog.kakaocdn.net/dna/pYQ3R/btq26nsa6oD/AAAAAAAAAAAAAAAAAAAAAA8hnZSorszB3yUxqJ-IzpoJ5hN6ida1A_6u53BvB0ms/img.png?credential=yqXZFxpELC7KVnFOS48ylbz2pIh7yKj8&expires=1772290799&allow_ip=&allow_referer=&signature=MkMSbEnyXXHCEA8Hxc2v15gvl5E%3D)
+
+사실 2번 코드와 골자는 같다. 그런데 훨씬 더 이해하기 쉽고 **return t1 or t2** 구문을 통해서 t1과 t2중 하나만 있다면 그 노드를, 둘 다 없다면 None을 반환해서 재귀 조건을 설정했다.
 
 변명하자면 나는 새로운 트리를 만들어서 하는 것보다 기존 트리를 이용해서 하는 게 메모리를 사용하지 않아서 더 효율적이라고 생각했고, 그래서 기존 트리에 값을 반영하는 로직으로 코드를 작성했지만...

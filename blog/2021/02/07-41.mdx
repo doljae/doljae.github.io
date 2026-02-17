@@ -10,47 +10,54 @@ date: 2021-02-07T16:57:43+09:00
 
 > 원문: https://doljae.tistory.com/41
 
-JDK와 JRE의 차이
+### JDK와 JRE의 차이
+
 JRE는 Java Runtime Environment의 약자
 
 Java Byte Code에 대한 Interpreter, OS에 적합한 JRE를 설치하는 것으로 플랫폼 독립적으로 Java 코드를 실행할 수 있음.
 
-JDK는 Java Development Kit의 약자
-
 <!-- truncate -->
+
+JDK는 Java Development Kit의 약자
 
 Java 코드를 Byte Code로 컴파일하는 Java Compiler + JRE를 의미한다.
 
-J2SE, J2EE, J2ME
+### J2SE, J2EE, J2ME
+
 추후 서술
 
-Byte Code Injection
+### Byte Code Injection
+
 Java 코드가 컴파일될 때 코드를 분석해서 추가적으로 필요한 코드를 자동으로 추가해 Byte Code를 만드는 기술
 
 예를 들어 어노테이션을 적용한 class에 대해서 해당하는 기능을 할 수 있는 코드를 작성한다던가, 생성자가 없는 클래스에 기본 생성자를 작성한다던가, extends XX 가 없는 클래스에 대해서 extends Object라고 붙여준다던가...
 
 모든 클래스는 extends Object라고 자동으로 붙어있다고 생각해야 한다. 클래스를 만들면 명시적으로 작성하지 않아도 Byte Code Injection을 통해 자동으로 붙는다.
 
-추상 클래스
+### 추상 클래스
+
 추상 메서드(body가 없는 메서드)를 하나 이상 포함하고 있는 클래스
 
 추상 클래스는 객체로 생성할 수 없고 상속만 가능하다. 객체로 생성하면 body가 없는 메서드가 있게 되는 말이 안 되는 상황이기 때문.
 
 하지만 추상 클래스를 상속받은 클래스는 생성이 가능하다. 추상화 클래스로 형(type)을 결정하고, 그 추상화 클래스를 상속받아 구체화한 일반 클래스는 추상 메서드의 body가 있기 때문.
 
-추상 클래스 vs 인터페이스
+### 추상 클래스 vs 인터페이스
+
 추상 클래스는 body가 있는 메서드(concrete method)도 존재할 수 있다.
 
 인터페이스는 그것이 불가능하다. (Java 8부터 default, private 등의 예약어를 써서 사용이 가능하 졌다)
 
-상속의 장점
-1. 비슷한 유형의 코드 재사용
+### 상속의 장점
 
-2. 검증된 코드를 사용해 오류를 최소화할 수 있음
+1\. 비슷한 유형의 코드 재사용
 
-3. 관련된 여러 클래스들의 공통점을 통일시킬 수 있음
+2\. 검증된 코드를 사용해 오류를 최소화할 수 있음
 
-Override 접근 제한자, 예외 처리 규칙
+3\. 관련된 여러 클래스들의 공통점을 통일시킬 수 있음
+
+### Override 접근 제한자, 예외 처리 규칙
+
 접근 제한자
 
 부모의 범위 &lt;= 자식의 범위
@@ -65,7 +72,8 @@ Override 접근 제한자, 예외 처리 규칙
 
 즉 부모가 IOException을 던지는데 자식이 Exception을 던질 순 없다.
 
-다형성(Polymorphism)
+### 다형성(Polymorphism)
+
 One interface, Multiple Implementation
 
 인터페이스는 하나만 존재하고, 그 인터페이스를 상속받아 만든 구현체는 여러 가지가 존재할 수 있다.
@@ -80,7 +88,6 @@ Spring을 비롯한 Java의 많은 프레임워크, API가 다형성을 강제�
 SqlSession session = new SqlSessionTemplate();
 sysout(session.getObject());
 ```
-
 
 JDBC의 interface 중 하나인 SqlSession을 ThreadSafe 한 구현체인 SqlSessionTemplate으로 만들었다.
 

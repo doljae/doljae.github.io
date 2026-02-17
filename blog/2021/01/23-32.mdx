@@ -10,35 +10,30 @@ date: 2021-01-23T13:47:51+09:00
 
 > 원문: https://doljae.tistory.com/32
 
-![cover](http://bimage.interpark.com/goods_image/2/0/8/1/213202081h.jpg)
+## Stack Machine
 
-Stack Machine
 작동 및 연산에 스택을 사용하는 장치 혹은 기법 -&gt; 후위 표기법(postorder)
 
-1과 2를 더한 것에 3을 곱하다 -&gt; 1 2 + 3 *
+1과 2를 더한 것에 3을 곱하다 -&gt; 1 2 + 3 \*
 
 <!-- truncate -->
 
-2와 3을 곱한 후 1을 더한다 -&gt; 2 3 * 1 +
+2와 3을 곱한 후 1을 더한다 -&gt; 2 3 \* 1 +
 
 Java, Python의 VM 형태도 스택 머신의 형태를 띤다.
 
 Python의 dis 라이브러리를 이용하면 VM이 실행할 명령 열을 출력할 수 있다.
 
-LISP
+### LISP
+
 괄호로 시작해서 명령어가 맨 앞에 나온다. 그다음 공란으로 간격을 만들고 무엇을 더할 것인지를 기술한다.
 
--&gt; 전위 표기법(preorder)
+\-&gt; 전위 표기법(preorder)
 
 1과 2를 더한다 -&gt; (+ 1 2)
 
-1과 2를 더한 후 3을 곱한다 -&gt; (* (+ 1 2) 3 )
+1과 2를 더한 후 3을 곱한다 -&gt; (\* (+ 1 2) 3 )
 
 Python의 ast 라이브러리를 이용하면 특정 코드가 어떤 구문 트릴로 구성되어 있는지 알 수 있다.
 
-코딩을 지탱하는 기술
-국내도서
-저자 : 니시오 히로카즈 / 김완섭역
-출판 : 비제이퍼블릭 2013.10.16
-
-상세보기
+&lt;table class="tt-plugin-interpark" style="background: #fff; border: 1px solid #e0e0e0; width: 408px;" border="0" width="100%" cellspacing="0" data-darkreader-inline-bgimage="" data-darkreader-inline-bgcolor="" data-darkreader-inline-border-top="" data-darkreader-inline-border-right="" data-darkreader-inline-border-bottom="" data-darkreader-inline-border-left=""&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td style="vertical-align: top; padding: 10px 0 10px 10px;" width="70"&gt;&lt;a href="http://book.interpark.com/blog/integration/product/itemDetail.rdo?prdNo=213202081&amp;refererType=8303&amp;bookblockname=bpmain_in&amp;booklinkname=wg_search_EFEB8364BC43711681CC6C69032386A3753E74A4F9E4F62B3FA06C4836C10BAB&amp;key=EFEB8364BC43711681CC6C69032386A3753E74A4F9E4F62B3FA06C4836C10BAB" target="_blank" rel="noopener"&gt;&lt;img style="border: 0 none;" src="http://bimage.interpark.com/goods_image/2/0/8/1/213202081h.jpg" width="66" height="90" data-darkreader-inline-border-top="" data-darkreader-inline-border-right="" data-darkreader-inline-border-bottom="" data-darkreader-inline-border-left=""&gt;&lt;/a&gt;&lt;/td&gt;&lt;td style="vertical-align: top; padding: 10px 10px 10px 15px;"&gt;&lt;dl style="margin: 0; padding: 2px 0 0 0; list-style: none; font: 11px dotum, sans-serif; letter-spacing: -1px; color: #777;" data-darkreader-inline-color=""&gt;&lt;dt style="padding: 0; margin: 0;"&gt;&lt;a style="font-size: 12px; color: #444 !important; font-weight: bold; text-decoration: none !important;" href="http://book.interpark.com/blog/integration/product/itemDetail.rdo?prdNo=213202081&amp;refererType=8303&amp;bookblockname=bpmain_in&amp;booklinkname=wg_search_EFEB8364BC43711681CC6C69032386A3753E74A4F9E4F62B3FA06C4836C10BAB&amp;key=EFEB8364BC43711681CC6C69032386A3753E74A4F9E4F62B3FA06C4836C10BAB" target="_blank" rel="noopener" data-darkreader-inline-color=""&gt;코딩을 지탱하는 기술&lt;/a&gt;&lt;/dt&gt;&lt;dd style="padding: 7px 0 0 0; margin: 0; color: #a0a0a0;" data-darkreader-inline-color=""&gt;국내도서&lt;/dd&gt;&lt;dd style="padding: 17px 0 0 0; margin: 0;"&gt;저자 : 니시오 히로카즈 / 김완섭역&lt;/dd&gt;&lt;dd style="padding: 4px 0 0 0; margin: 0;"&gt;출판 : 비제이퍼블릭 &lt;span style="letter-spacing: normal;"&gt;2013.10.16&lt;/span&gt;&lt;/dd&gt;&lt;/dl&gt;&lt;a style="float: right; width: 44px; height: 11px; background: url('//t1.daumcdn.net/tistory_admin/static/images/icon_ipark_detail.gif') no-repeat; overflow: hidden; display: block; text-indent: -1000em;" href="http://book.interpark.com/blog/integration/product/itemDetail.rdo?prdNo=213202081&amp;refererType=8303&amp;bookblockname=bpmain_in&amp;booklinkname=wg_search_EFEB8364BC43711681CC6C69032386A3753E74A4F9E4F62B3FA06C4836C10BAB&amp;key=EFEB8364BC43711681CC6C69032386A3753E74A4F9E4F62B3FA06C4836C10BAB" target="_blank" rel="noopener" data-darkreader-inline-bgcolor=""&gt;상세보기&lt;/a&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;

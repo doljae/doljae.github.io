@@ -10,10 +10,15 @@ date: 2021-05-04T14:36:11+09:00
 
 > 원문: https://doljae.tistory.com/109
 
-![cover](https://blog.kakaocdn.net/dna/dzLaY7/btq36Q1BUKh/AAAAAAAAAAAAAAAAAAAAADKuBiNcD_mRaqK2L9WmvywV_P_VWc2MS8__7_cBh8uV/img.png?credential=yqXZFxpELC7KVnFOS48ylbz2pIh7yKj8&expires=1772290799&allow_ip=&allow_referer=&signature=WSu4FSDVgcN0MGPz4oJaQLoy4GY%3D)
+[Palindrome Linked List - LeetCode
 
-1. 단순한 풀이
+Level up your coding skills and quickly land a job. This is the best place to expand your knowledge and get prepared for your next interview.
 
+leetcode.com](https://leetcode.com/problems/palindrome-linked-list/)
+
+<!-- truncate -->
+
+### 1\. 단순한 풀이
 
 ```
 class Solution:
@@ -26,12 +31,11 @@ class Solution:
         return trace == trace[::-1]
 ```
 
-<!-- truncate -->
+![](https://blog.kakaocdn.net/dna/dzLaY7/btq36Q1BUKh/AAAAAAAAAAAAAAAAAAAAADKuBiNcD_mRaqK2L9WmvywV_P_VWc2MS8__7_cBh8uV/img.png?credential=yqXZFxpELC7KVnFOS48ylbz2pIh7yKj8&expires=1772290799&allow_ip=&allow_referer=&signature=WSu4FSDVgcN0MGPz4oJaQLoy4GY%3D)
 
 경로를 저장하고 경로와 뒤집은 경로가 같은지를 반환한다.
 
-2. Pointer 2개를 이용한 풀이
-
+### 2\. Pointer 2개를 이용한 풀이
 
 ```
 class Solution:
@@ -48,6 +52,8 @@ class Solution:
         return not slow
 ```
 
+![](https://blog.kakaocdn.net/dna/eclCjS/btq4buJKA7X/AAAAAAAAAAAAAAAAAAAAAAeY7B7vId69VLb_A256DZn2hn6Mx6ZgKCG97zgMEJ02/img.png?credential=yqXZFxpELC7KVnFOS48ylbz2pIh7yKj8&expires=1772290799&allow_ip=&allow_referer=&signature=WxqY2wNf9tqswGzDsAlIN58pFLg%3D)
+
 굉장의 창의적인 풀이고, 예전에 풀었는데도 이 방법을 정확히 구현하지 못했다.
 
 주어진 연결 리스트의 절반을 뒤집고 나머지 절반과 값을 비교하는 방법이다.
@@ -57,7 +63,6 @@ class Solution:
 ```
 a,b,c = b,c,a
 ```
-
 
 Python에 있는 이런 문법이 있다.
 
@@ -70,13 +75,11 @@ a, b = b, c
 c = a
 ```
 
-
 이걸 이렇게 쪼개면 c에는 a의 원래 값이 아니라 b의 값이 들어간다. 두 코드를 자세히 보면 이해할 수 있다.
 
 이런 식으로 현재 순간의 값을 임시 배열 없이 옮길 수 있기 때문에 유용하게 사용할 수 있고, 반대로 이런 특징을 모르고 남발했다간 에러를 잡지 못할 수도 있으니깐 주의해야 한다.
 
-2. Deque를 이용한 풀이
-
+### 2\. Deque를 이용한 풀이
 
 ```
 from collections import deque
@@ -94,6 +97,8 @@ class Solution:
                 return False
         return True
 ```
+
+![](https://blog.kakaocdn.net/dna/bFPGOi/btq4btKUZRY/AAAAAAAAAAAAAAAAAAAAAKLGuUQeRvqW3qNOqLH6vnamacVDVV5IYInmvlN_Hemo/img.png?credential=yqXZFxpELC7KVnFOS48ylbz2pIh7yKj8&expires=1772290799&allow_ip=&allow_referer=&signature=44k70vMsXzC9osqTnsXG6zrgyyg%3D)
 
 
 

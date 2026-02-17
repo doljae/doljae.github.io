@@ -10,8 +10,15 @@ date: 2021-04-22T14:31:45+09:00
 
 > 원문: https://doljae.tistory.com/87
 
-1. 집합 사용
+[Single Number - LeetCode
 
+Level up your coding skills and quickly land a job. This is the best place to expand your knowledge and get prepared for your next interview.
+
+leetcode.com](https://leetcode.com/problems/single-number/)
+
+<!-- truncate -->
+
+### 1\. 집합 사용
 
 ```
 class Solution:
@@ -25,10 +32,7 @@ class Solution:
         return set1[0]
 ```
 
-2. 조건의 특성 사용, 2*(a+b+c) - (2a+2b+c) = c
-
-<!-- truncate -->
-
+### 2\. 조건의 특성 사용, 2\*(a+b+c) - (2a+2b+c) = c
 
 ```
 class Solution:
@@ -37,9 +41,7 @@ class Solution:
         return sum(nums2) * 2 - sum(nums)
 ```
 
-
-3. 비트 마스킹, XOR
-
+### 3\. 비트 마스킹, XOR
 
 ```
 class Solution:

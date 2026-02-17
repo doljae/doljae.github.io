@@ -10,13 +10,17 @@ date: 2021-07-01T16:46:44+09:00
 
 > 원문: https://doljae.tistory.com/175
 
-![cover](https://blog.kakaocdn.net/dna/H9zoN/btq8yd6bpPA/AAAAAAAAAAAAAAAAAAAAAPQqQlp4feJmaIU_cFRvOaO7Bq98qvlvFJ-E5dNCvTKw/img.png?credential=yqXZFxpELC7KVnFOS48ylbz2pIh7yKj8&expires=1772290799&allow_ip=&allow_referer=&signature=rz6j4GkyUyjpRqp%2BEv%2BDrOlyKrA%3D)
+[Longest Consecutive Sequence - LeetCode
+
+Level up your coding skills and quickly land a job. This is the best place to expand your knowledge and get prepared for your next interview.
+
+leetcode.com](https://leetcode.com/problems/longest-consecutive-sequence/)
+
+<!-- truncate -->
 
 정수가 포함된 List가 주어진다.
 
 이 List의 정수들이 연속되게 증가, 혹은 감소하는 조합의 최대 길이를 반환하는 문제다. 시간 복잡도 제한은 O(n)이다.
-
-<!-- truncate -->
 
 예시는 다음과 같다.
 
@@ -29,13 +33,10 @@ Input: nums = [0,3,7,2,5,8,4,6,0,1]
 Output: 9
 ```
 
-
-1. 인덱스를 사용해서 체크하는 방법
-
+### 1\. 인덱스를 사용해서 체크하는 방법
 
 ```
 from typing import *
-
 
 class Solution:
     def longestConsecutive(self, nums: List[int]) -> int:
@@ -58,6 +59,8 @@ class Solution:
         return result
 ```
 
+![](https://blog.kakaocdn.net/dna/H9zoN/btq8yd6bpPA/AAAAAAAAAAAAAAAAAAAAAPQqQlp4feJmaIU_cFRvOaO7Bq98qvlvFJ-E5dNCvTKw/img.png?credential=yqXZFxpELC7KVnFOS48ylbz2pIh7yKj8&expires=1772290799&allow_ip=&allow_referer=&signature=rz6j4GkyUyjpRqp%2BEv%2BDrOlyKrA%3D)
+
 큰 정수 배열을 준비하고 주어진 nums를 선형 탐색하면서 정수가 있는지 빈도를 체크한다.
 
 그리고 체크한 정수 배열을 선형 탐색하면서 연속적으로 체크된 가장 큰 길이를 반환하는 로직이다.
@@ -70,12 +73,10 @@ class Solution:
 
 설령 저 엄청 큰 배열을 선언할 수 있다 하더라도 저 배열을 선형 탐색하면 TLE가 발생한다.
 
-2. Greedy 한 선형 탐색(?)
-
+### 2\. Greedy 한 선형 탐색(?)
 
 ```
 from typing import *
-
 
 class Solution:
     def longestConsecutive(self, nums: List[int]) -> int:
@@ -103,12 +104,14 @@ class Solution:
         return answer
 ```
 
+![](https://blog.kakaocdn.net/dna/bo3cGH/btq8z7qTm9I/AAAAAAAAAAAAAAAAAAAAAMcJ_GTfog0fmblG9M3-0l1SyQ8U2kEMFuELqX77j-ZF/img.png?credential=yqXZFxpELC7KVnFOS48ylbz2pIh7yKj8&expires=1772290799&allow_ip=&allow_referer=&signature=vY12q3eHsAyh7ltQYmAuVuEg7MM%3D)
+
 아무튼 상수 시간 복잡도로 해결을 해야 하니 Greedy 하게 접근해봤다.
 
 우선 nums를 탐색하면서 num을 집합에 넣는다. 이러면 num이 있는지 유무는 O(1) 시간으로 알 수 있다.
 
 이후에 다시 nums를 순회하면서 해당 num의 +1, -1 방향으로 연속된 값이 있었는지 체크하고 있다면 방문처리를 해주면서 현재까지 연속된 길이를 저장하고, 최종 결괏값을 업데이트하는 것을 반복한다.
 
-방문처리를 해주기 때문에 중복된 길이를 찾지 않는다. 예를 들어서 [1,2,3,4]가 있다면 1에서 2,3,4까지 진행하면서 2,3,4를 모두 방문 처리하고 반복하지 않기 때문에 2에서 시작한 2,3,4, 3에서 시작한 3,4, 4에서 시작한 4의 경우를 찾지 않고 넘어간다.
+방문처리를 해주기 때문에 중복된 길이를 찾지 않는다. 예를 들어서 \[1,2,3,4\]가 있다면 1에서 2,3,4까지 진행하면서 2,3,4를 모두 방문 처리하고 반복하지 않기 때문에 2에서 시작한 2,3,4, 3에서 시작한 3,4, 4에서 시작한 4의 경우를 찾지 않고 넘어간다.
 
 오랜만에 고민하다가 나름대로 이쁘게 푼 것 같아서 기분이 좋았다.

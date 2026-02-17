@@ -10,18 +10,21 @@ date: 2021-08-23T13:12:14+09:00
 
 > 원문: https://doljae.tistory.com/217
 
-![cover](https://blog.kakaocdn.net/dna/bfhVUV/btrc1vGzwAa/AAAAAAAAAAAAAAAAAAAAAGD_Ey4i-H6qPuj0kopF6cYvneZCM2TW58ovetGFxob4/img.png?credential=yqXZFxpELC7KVnFOS48ylbz2pIh7yKj8&expires=1772290799&allow_ip=&allow_referer=&signature=fVbhpxvvpx7LvIzR7n2aE8zScyg%3D)
+[Balance a Binary Search Tree - LeetCode
+
+Level up your coding skills and quickly land a job. This is the best place to expand your knowledge and get prepared for your next interview.
+
+leetcode.com](https://leetcode.com/problems/balance-a-binary-search-tree/)
+
+<!-- truncate -->
 
 이진 탐색 트리가 주어진다.
 
 주어진 이진 탐색 트리를 균형 이진 탐색 트리로 만들어 반환하는 문제다.
 
-<!-- truncate -->
-
 균형 이진 탐색 트리는 모든 노드의 left, right subtree의 depth 차이가 1 이하인 이진 탐색 트리다.
 
-1. 중위 순회를 이용한 트리 생성
-
+### 1\. 중위 순회를 이용한 트리 생성
 
 ```
 class Solution:
@@ -41,7 +44,7 @@ class Solution:
         def make_bst(candidate):
             mid = len(candidate) // 2
             cur_root = TreeNode(candidate[mid])
-            
+
             if candidate[:mid]:
                 cur_root.left = make_bst(candidate[:mid])
             if candidate[mid + 1:]:
@@ -52,6 +55,8 @@ class Solution:
         return make_bst(seq)
 ```
 
+![](https://blog.kakaocdn.net/dna/bfhVUV/btrc1vGzwAa/AAAAAAAAAAAAAAAAAAAAAGD_Ey4i-H6qPuj0kopF6cYvneZCM2TW58ovetGFxob4/img.png?credential=yqXZFxpELC7KVnFOS48ylbz2pIh7yKj8&expires=1772290799&allow_ip=&allow_referer=&signature=fVbhpxvvpx7LvIzR7n2aE8zScyg%3D)
+
 이진 탐색 트리가 주어지기 때문에 중위 순위를 하면 오름차순으로 노드를 조회할 수 있다.
 
 균형 이진 탐색 트리이기 때문에 왼쪽 서브 트리, 오른쪽 서브 트리의 노드 개수를 최대 1개 차이만 나게 만들어주면 원하는 결과를 얻을 수 있다. 노드 후보 list를 들고 재귀에 진입해서 list의 중간 index에 있는 값을 root로 하고 index 왼쪽 노드로는 왼쪽 서브 트리를, 오른쪽 노드로는 오른쪽 서브 트리를 만드는 것을 반복하면 된다.
@@ -59,3 +64,9 @@ class Solution:
 엄밀히 따지면 이건 기존 트리를 균형을 맞춰서 반환한 것이 아니라 균형을 맞는 새 트리를 만든 셈이다.
 
 만일 공간 복잡도 제한이 걸려서 기존 트리를 가지고 균형을 맞춰야 한다면 자료구조 시간에 배웠던 AVL 트리 만들기 공식 같은 것을 사용해야 한다.
+
+ [균형 잡힌 이진 탐색 트리: AVL 트리
+
+이진 탐색 트리는 저장 순서에 따라 탐색의 성능에 큰 차이를 보인다. 이러한 단점을 해결한 트리를 "균형 잡힌 이진 탐색 트리"라고 하며, 종류는 다음과 같다. - AVL 트리 - 2-3 트리 - 2-3-4 트리 - R
+
+rudruddl.tistory.com](https://rudruddl.tistory.com/137)

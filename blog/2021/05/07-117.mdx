@@ -10,10 +10,15 @@ date: 2021-05-07T11:21:42+09:00
 
 > 원문: https://doljae.tistory.com/117
 
-![cover](https://blog.kakaocdn.net/dna/6JSy6/btq4js7absu/AAAAAAAAAAAAAAAAAAAAANFb2Pkl6d0hr0x2kn7QC-fBjVi2sNO_KOanBWxWW9tr/img.png?credential=yqXZFxpELC7KVnFOS48ylbz2pIh7yKj8&expires=1772290799&allow_ip=&allow_referer=&signature=NCjF55VtupYCYQe%2B6R8LKDEsn1s%3D)
+[Palindromic Substrings - LeetCode
 
-1. Brute Force (실패)
+Level up your coding skills and quickly land a job. This is the best place to expand your knowledge and get prepared for your next interview.
 
+leetcode.com](https://leetcode.com/problems/palindromic-substrings/)
+
+<!-- truncate -->
+
+### 1\. Brute Force (실패)
 
 ```
 class Solution:
@@ -27,8 +32,6 @@ class Solution:
                 end -= 1
             return True
 
-<!-- truncate -->
-
         answer = len(s)
         for length in range(2, len(s) + 1):
             for i in range(len(s) - length + 1):
@@ -37,12 +40,13 @@ class Solution:
         return answer
 ```
 
+![](https://blog.kakaocdn.net/dna/6JSy6/btq4js7absu/AAAAAAAAAAAAAAAAAAAAANFb2Pkl6d0hr0x2kn7QC-fBjVi2sNO_KOanBWxWW9tr/img.png?credential=yqXZFxpELC7KVnFOS48ylbz2pIh7yKj8&expires=1772290799&allow_ip=&allow_referer=&signature=NCjF55VtupYCYQe%2B6R8LKDEsn1s%3D)
+
 모든 부분 문자열이 회문인지 체크하는 방법.
 
 당연하게도 TLE가 났다.
 
-2. Dynamic Programming
-
+### 2\. Dynamic Programming
 
 ```
 class Solution:
@@ -70,6 +74,8 @@ class Solution:
         return answer
 ```
 
+![](https://blog.kakaocdn.net/dna/bot6SI/btq4iNcCvpX/AAAAAAAAAAAAAAAAAAAAAGidKafAHQYGnLhoN6LyBnoC7CfO0xvuf5J78ipVA-0g/img.png?credential=yqXZFxpELC7KVnFOS48ylbz2pIh7yKj8&expires=1772290799&allow_ip=&allow_referer=&signature=1UFmCpIDD%2FtesPyHBF2LWGssBCQ%3D)
+
 DP로 해결할 수 있었다.
 
 코드 주요 점화식은 다음과 같다.
@@ -81,14 +87,12 @@ else:
 	dp[length][i] = 0
 ```
 
-
 s가 입력받은 문자열이고 length가 현재 문자열의 길이다.
 
-현재 문자열의 길이를 5라고 가정하고 점화식을 설명하면 다음과 같다.
+&gt; 현재 문자열의 길이를 5라고 가정하고 점화식을 설명하면 다음과 같다.
+&gt; string \[i : i + 5\] 은 string \[i\]와 string \[i+4\]가 같은 문자고, string \[i+1 : i+4\]가 회문이면 회문이다.
+&gt;
+&gt; i                        i+4
+&gt; a    x     b     x    a
 
-string [i : i + 5] 은 string [i]와 string [i+4]가 같은 문자고, string [i+1 : i+4]가 회문이면 회문이다.
-
-i                        i+4
-
-a    x     b     x    a
 그러면 이전에 구한 회문을 사용해서 빠르게 유무를 판단할 수 있다.

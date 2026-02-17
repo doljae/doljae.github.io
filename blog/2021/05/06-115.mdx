@@ -10,12 +10,18 @@ date: 2021-05-06T15:44:27+09:00
 
 > 원문: https://doljae.tistory.com/115
 
-1. Monotone Stack
+[Daily Temperatures - LeetCode
 
+Level up your coding skills and quickly land a job. This is the best place to expand your knowledge and get prepared for your next interview.
+
+leetcode.com](https://leetcode.com/problems/daily-temperatures/)
+
+<!-- truncate -->
+
+### 1\. Monotone Stack
 
 ```
 from typing import *
-
 
 class Solution:
     def dailyTemperatures(self, T: List[int]) -> List[int]:
@@ -39,15 +45,10 @@ class Solution:
         return answer[::-1]
 ```
 
-<!-- truncate -->
-
-
-2. 리팩토링
-
+### 2\. 리팩토링
 
 ```
 from typing import *
-
 
 class Solution:
     def dailyTemperatures(self, T: List[int]) -> List[int]:
@@ -68,19 +69,19 @@ class Solution:
 
 Stack의 성질을 이용해 풀 수 있다.
 
-주어진 배열은 왼쪽과 같다. -&gt; [온도 1, 온도 2, 온도 3.... ]
+주어진 배열은 왼쪽과 같다. -&gt; \[온도 1, 온도 2, 온도 3.... \] 
 
-이 배열을 다음과 같이 변경한다. -&gt; [(0, 온도 1), (1, 온도 2), (2, 온도 3)...]
+이 배열을 다음과 같이 변경한다. -&gt; \[(0, 온도 1), (1, 온도 2), (2, 온도 3)...\]
 
 그냥 주어진 배열에 인덱스 값만 추가해서 기존 위치를 기록한다.
 
 그리고 만든 배열을 뒤집어서 마지막 날부터 처리를 한다.
 
-1. 스택을 이용해 온도 값을 오름차순으로 정렬하고 현재 온도보다 stack의 tail의 온도가 클 때까지 pop을 한다.
+1\. 스택을 이용해 온도 값을 오름차순으로 정렬하고 현재 온도보다 stack의 tail의 온도가 클 때까지 pop을 한다.
 
-2. 스택에 값이 없다는 것은 현재 시점 이후에 현재 온도보다 높은 온도가 없다는 뜻이니깐 0을 삽입한다.
+2\. 스택에 값이 없다는 것은 현재 시점 이후에 현재 온도보다 높은 온도가 없다는 뜻이니깐 0을 삽입한다.
 
-3. 스택에 값이 있다는 것은 현재 시점 이후에 현재 온도보다 높은 온도가 있다는 뜻이니깐 (현재 스택의 tail 값의 인덱스 - 현재 온도의 인덱스) 값을 결과 배열에 저장한다. 이 값이 현재 시점에서 최초로 현재보다 온도가 높아지는(= 맑아지는) 날이 된다.
+3\. 스택에 값이 있다는 것은 현재 시점 이후에 현재 온도보다 높은 온도가 있다는 뜻이니깐 (현재 스택의 tail 값의 인덱스 - 현재 온도의 인덱스) 값을 결과 배열에 저장한다. 이 값이 현재 시점에서 최초로 현재보다 온도가 높아지는(= 맑아지는) 날이 된다.
 
 그리고 현재 온도를 stack에 저장한다.
 

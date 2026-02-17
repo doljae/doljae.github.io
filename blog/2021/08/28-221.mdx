@@ -10,24 +10,25 @@ date: 2021-08-28T19:14:33+09:00
 
 > 원문: https://doljae.tistory.com/221
 
-![cover](https://blog.kakaocdn.net/dna/b1jkwV/btrdsvTSg9R/AAAAAAAAAAAAAAAAAAAAAJo-IDt2RahZt8ubpDo6FWRHtIEVcBwu2cU0OFUfNyH7/img.png?credential=yqXZFxpELC7KVnFOS48ylbz2pIh7yKj8&expires=1772290799&allow_ip=&allow_referer=&signature=xapsicX7lGsiH%2B2JUX2gpedbeyQ%3D)
+[PageableExecutionUtils (Spring Data Core 2.5.4 API)
+
+docs.spring.io](https://docs.spring.io/spring-data/commons/docs/current/api/org/springframework/data/support/PageableExecutionUtils.html)
 
 PageableExecutionUtils는 Spring Data 모듈에 있는 추상 클래스다.
 
-이 클래스에는 getPage()라는 메서드만이 있고, 웹 서비스에서 빈번히 제공해야 하는 Paging 기능을 제공한다.
-
 <!-- truncate -->
+
+이 클래스에는 getPage()라는 메서드만이 있고, 웹 서비스에서 빈번히 제공해야 하는 Paging 기능을 제공한다.
 
 ```
 public static <T> Page<T> getPage(List<T> content, Pageable pageable, LongSupplier totalSupplier)
 ```
 
-
 메서드를 보면 3개의 인자를 받는다.
 
-content는 실제 page에 담길 데이터를 뜻한다.
-pageable은 paging 관련된 정보를 닮고 있는 Pageable 객체를 의미한다.
-totalSupplier는 내가 호출하는 데이터의 총개수를 반환하는 LongSupplier라는 Long 값을 반환하는 함수형 인터페이스다.
+1.  content는 실제 page에 담길 데이터를 뜻한다.
+2.  pageable은 paging 관련된 정보를 닮고 있는 Pageable 객체를 의미한다.
+3.  totalSupplier는 내가 호출하는 데이터의 총개수를 반환하는 LongSupplier라는 Long 값을 반환하는 함수형 인터페이스다.
 
 ```
 public Page<MemberTeamDto> searchPageComplexWithCountOptimization(MemberSearchCondition condition,
@@ -35,7 +36,6 @@ public Page<MemberTeamDto> searchPageComplexWithCountOptimization(MemberSearchCo
      return PageableExecutionUtils.getPage(contents, pageable, countQuery::fetchCount);
 }
 ```
-
 
 대충 사용하면 이런 형태이다.
 
@@ -49,18 +49,56 @@ countQuery.fetchCount() 함수 자체를 넘기고 이 함수의 반환 값은 L
 
 또 해당 페이지의 데이터와 무관하게 전체 데이터가 몇 개인지도 알 수 있는데 이 또한 내부적으로 쿼리를 호출해한다. 그러니깐 paging기능을 사용하면 일반적으로 데이터를 조회하는데 1번, 데이터의 총개수를 세는데 1번 이렇게 쿼리가 나간다. 위의 예시를 사용하면 51번 ~ 100번까지 데이터를 호출하는 select 쿼리 1번, 모든 데이터 개수를 호출하는 select 쿼리 1번, 총 2번의 쿼리가 나간다.
 
+![](https://blog.kakaocdn.net/dna/b1jkwV/btrdsvTSg9R/AAAAAAAAAAAAAAAAAAAAAJo-IDt2RahZt8ubpDo6FWRHtIEVcBwu2cU0OFUfNyH7/img.png?credential=yqXZFxpELC7KVnFOS48ylbz2pIh7yKj8&expires=1772290799&allow_ip=&allow_referer=&signature=xapsicX7lGsiH%2B2JUX2gpedbeyQ%3D)
+
+한 페이지 사이즈를 10으로 설정할 때 1번 페이지(0번 부터 시작)에 해당하는 member 데이터를 반환하는 쿼리
+
 아무튼 Spring과 조합해서 구현하면 이런 식의 결과를 얻을 수 있다.
 
 member 데이터가 총 100개 있는 상태에서 한 페이지의 사이즈가 10이고 1번 페이지를 가져오는 것을 호출하면 위와 같은 결과를 얻을 수 있다. 아래쪽에 totalElements: 100이라고 보이는데 이 부분이 count query를 호출해서 얻는 정보라고 생각하면 된다.
+
+![](https://blog.kakaocdn.net/dna/qaVNW/btrdrmJRjjS/AAAAAAAAAAAAAAAAAAAAANnOq1LK9S_guuoHjCDZypccCk7olniL5UgZdYHfr73b/img.png?credential=yqXZFxpELC7KVnFOS48ylbz2pIh7yKj8&expires=1772290799&allow_ip=&allow_referer=&signature=0IWZgBcghtTLLXMKfCwIUynWfH0%3D)
+
+실제로 쿼리가 2번 나갔다. 데이터 읽어오는데 1번, 전체 갯수 세는데 2번
 
 여기서 전체 개수 세는 쿼리는 필요한 경우에만 나가게 최적화를 해주는데, 예를 들어 내가 퍼올리는 데이터 개수가 전체 데이터 개수보다 클 경우에는 퍼올린 데이터 개수가 전체 데이터 개수이기 때문에 굳이 count query를 날릴 필요가 없다. 이런 경우에 불필요한 count query를 날리지 않는다.
 
 그럼 전체 데이터가 100개인데 페이지 1개 사이즈가 100이라면 모든 데이터를 퍼올린 거니깐 count query가 나가지 말아야 하는데...
 
+![](https://blog.kakaocdn.net/dna/ZDmhA/btrdo9rqbiW/AAAAAAAAAAAAAAAAAAAAAHupWj34ZaJVopkOoL9_y-r9h1qHlG6ogLQpNoGfv3p9/img.png?credential=yqXZFxpELC7KVnFOS48ylbz2pIh7yKj8&expires=1772290799&allow_ip=&allow_referer=&signature=l6IV66AXj%2BBGs7GF%2BY5OvKDmLkM%3D)
+
+이렇게 조건을 걸어서 날린다고 해보자. 전체 데이터가 100개인데 한 페이지 사이즈도 100이니깐 모든 데이터를 퍼올려서 count query가 나갈 필요가 없어야하는데...
+
+![](https://blog.kakaocdn.net/dna/C2HZS/btrdon4xqLb/AAAAAAAAAAAAAAAAAAAAACoQF5i1q9t5v60V1E7wld16xV8xoCNhnel-dg5jB-5v/img.png?credential=yqXZFxpELC7KVnFOS48ylbz2pIh7yKj8&expires=1772290799&allow_ip=&allow_referer=&signature=Q5J%2BSDy4ffZTAEEvAXR3DnjZTh8%3D)
+
+실제론 2번이 나간다.
+
 정확히는 보더에 걸리는, 그러니깐 전체 데이터 개수와 페이지 사이즈가 같은 경우에는 count query가 꼭 나간다.
 
-이유
+![](https://blog.kakaocdn.net/dna/bualIh/btrdtLoR4Px/AAAAAAAAAAAAAAAAAAAAAKO6tXMae-1dkCp_KIsSCFNt_nm49pTxnFP0zs1R_WbN/img.png?credential=yqXZFxpELC7KVnFOS48ylbz2pIh7yKj8&expires=1772290799&allow_ip=&allow_referer=&signature=r5Dh1a%2BfBTOsHtzarGM%2BpNAIRhc%3D)
+
+이렇게 페이지 사이즈를 101로 맞춰주면?
+
+![](https://blog.kakaocdn.net/dna/ojNi1/btrdruOpYef/AAAAAAAAAAAAAAAAAAAAAESff6BdV27meWLhoK8hyP5MyjFLefZKK3U6OXp4S1cD/img.png?credential=yqXZFxpELC7KVnFOS48ylbz2pIh7yKj8&expires=1772290799&allow_ip=&allow_referer=&signature=E5zh4ztJX%2BgGwPjWdUHCdgcL4Uc%3D)
+
+조회 쿼리 1개만 나간다.
+
+### 이유
+
+![](https://blog.kakaocdn.net/dna/dteLJK/btrdprFm9qa/AAAAAAAAAAAAAAAAAAAAAGhqyw4bZBmeUtTdKaDDyvrQ9fDsg0wlDiEToH68D_rw/img.png?credential=yqXZFxpELC7KVnFOS48ylbz2pIh7yKj8&expires=1772290799&allow_ip=&allow_referer=&signature=jwpC7c87u04g7zeCdksYuUQCAdg%3D)
 
 getPage() 구현 코드를 보면 다음과 같다.
+
+![](https://blog.kakaocdn.net/dna/eoVqPi/btrduUlyKo7/AAAAAAAAAAAAAAAAAAAAAM4UsPlu6ge0Humo8ZjaYSqWAPsw3p_pv_AD-HPO_gQ4/img.png?credential=yqXZFxpELC7KVnFOS48ylbz2pIh7yKj8&expires=1772290799&allow_ip=&allow_referer=&signature=9L7tKPME%2B4ULAHADliQr%2BEmFfgw%3D)
+
+count query를 호출하지 않는 리턴문
+
+![](https://blog.kakaocdn.net/dna/eEZ1JP/btrduT72nn8/AAAAAAAAAAAAAAAAAAAAAKeq5HLPGXRV59Ay2BCNdD-B5FZPAkn0hK9Askvyht71/img.png?credential=yqXZFxpELC7KVnFOS48ylbz2pIh7yKj8&expires=1772290799&allow_ip=&allow_referer=&signature=MzuyTqT01Zc0tB8wx5gt%2FjPQndI%3D)
+
+count query를 호출하는 리턴문
+
+![](https://blog.kakaocdn.net/dna/c0iR6Y/btrdpr6rDeU/AAAAAAAAAAAAAAAAAAAAAOf4BBeXRQp-pzmUtgfEq44HSo61Ap1kbvMsVPpylRGR/img.png?credential=yqXZFxpELC7KVnFOS48ylbz2pIh7yKj8&expires=1772290799&allow_ip=&allow_referer=&signature=xIPVrfA5p8UJUV35fFdwwhzOzAw%3D)
+
+count query를 호출하지 않는 리턴문의 조건
 
 그냥 내부 구현에 &gt;= 이 아니라 &gt;로 되어있어서 페이지 사이즈와 데이터 길이가 같을 때도 count query가 나가는 것이었다.

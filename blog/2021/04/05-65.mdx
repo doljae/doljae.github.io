@@ -10,24 +10,36 @@ date: 2021-04-05T10:30:14+09:00
 
 > 원문: https://doljae.tistory.com/65
 
-![cover](https://blog.kakaocdn.net/dna/BLcNc/btq1KA8gSk2/AAAAAAAAAAAAAAAAAAAAAGdKXmsUgYQOPfhhxPb7awBJgndWRPSex7ao6xwuL3Qx/img.png?credential=yqXZFxpELC7KVnFOS48ylbz2pIh7yKj8&expires=1772290799&allow_ip=&allow_referer=&signature=rXajp0LFMZzGhp9UgrraH%2Fs2CHw%3D)
+[What does "/dev/null" mean at the end of shell commands
 
-/dev/null
+What is the difference between the following commands? ssh myhostname "command1; command2;...commandn;" 2&gt;/dev/null ssh myhostname "command1; command2;...commandn;" what does 2&gt; mean? what...
+
+stackoverflow.com](https://stackoverflow.com/questions/13408619/what-does-dev-null-mean-at-the-end-of-shell-commands)
+
+<!-- truncate -->
+
+### /dev/null
+
 리눅스에서 위 파일은 항상 비어있다고 한다. 그러니깐 예약어 같은 느낌이라고 생각하면 될 것 같다.
 
 이 곳으로 전송된 결과는 모두 버려진다는 특징을 가지고 있다.
 
-<!-- truncate -->
+### 2 &gt; &1
 
-2 &gt; &1
+ [리눅스 표준 입출력 리다이렉션
+
+쉘에서 키보드로 명령을 입력받는 것을 표준 입력(Standard Inupt)이라 하며, 키보드로 입력 받은 명령의 실행결과를 모니터로 출력하는 것을 표준 출력(Standard Outpu)이라고 합니다. 입출력 리다이렉
+
+webdir.tistory.com](https://webdir.tistory.com/256)
 
 요컨대 0, 1, 2는 파일 디스크립터로 불리는 숫자이고 각각 표준 입력, 표준 출력, 표준 에러를 의미하는 예약어다.
 
-&gt;는 표준 출력을 의미하는 리다이렉션 기호이다.
+\&gt;는 표준 출력을 의미하는 리다이렉션 기호이다.
 
 1은 표준 출력을, 2는 표준 에러를 의미한다.
 
-정리
+### 정리
+
 어떤 명령어 &gt; /dev/null 2&gt;&1 은
 
 어떤 명령어를 수행하고 표준 출력(1)으로 나오는 결과를 /dev/null이라는 곳으로 보내고,
@@ -37,5 +49,15 @@ date: 2021-04-05T10:30:14+09:00
 표준 출력은 /dev/null에 결과를 버리게 했는데, 표준 에러도 표준 출력으로 보내라고 했으니깐 표준 에러도 결국 /dev/null로 결과를 보내게 되는 의미가 된다.
 
 이 명령어의 효과는 터미널에 아무것도 뜨지 않게 해주는 효과가 있다. 즉 쓸데없는 에러나 출력 결과를 생략하게 만든다.
+
+![](https://blog.kakaocdn.net/dna/BLcNc/btq1KA8gSk2/AAAAAAAAAAAAAAAAAAAAAGdKXmsUgYQOPfhhxPb7awBJgndWRPSex7ao6xwuL3Qx/img.png?credential=yqXZFxpELC7KVnFOS48ylbz2pIh7yKj8&expires=1772290799&allow_ip=&allow_referer=&signature=rXajp0LFMZzGhp9UgrraH%2Fs2CHw%3D)
+
+요로콤 놀 수 있다
+
+ [In the shell, what does " 2&gt;&1 " mean?
+
+In a Unix shell, if I want to combine stderr and stdout into the stdout stream for further manipulation, I can append the following on the end of my command: 2&gt;&1 So, if I want to use head...
+
+stackoverflow.com](https://stackoverflow.com/questions/818255/in-the-shell-what-does-21-mean)
 
 댓글 중에 원리를 설명해준 댓글이 있다. 나중에 한번 보면 유익할 것 같다.

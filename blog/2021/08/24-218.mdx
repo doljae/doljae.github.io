@@ -10,26 +10,28 @@ date: 2021-08-24T09:44:49+09:00
 
 > 원문: https://doljae.tistory.com/218
 
-![cover](https://blog.kakaocdn.net/dna/bYiIi9/btrcVi3nk2L/AAAAAAAAAAAAAAAAAAAAABl0B7DCCXNq5gFE-2T-fN0RtXbcr_RV1wogUuI0x73l/img.png?credential=yqXZFxpELC7KVnFOS48ylbz2pIh7yKj8&expires=1772290799&allow_ip=&allow_referer=&signature=0hf9Ypj5s3PlwDl0su49WB9rskk%3D)
+[Maximum Number of Coins You Can Get - LeetCode
+
+Level up your coding skills and quickly land a job. This is the best place to expand your knowledge and get prepared for your next interview.
+
+leetcode.com](https://leetcode.com/problems/maximum-number-of-coins-you-can-get/)
+
+<!-- truncate -->
 
 3의 배 수개의 코인이 들어있는 list가 주어진다.
 
 임의의 코인 3개씩을 집어서 자신은 2번째로 큰 코인만을 가져간다고 할 때, 획득할 수 있는 코인의 최대 합을 반환하는 문제다.
 
-<!-- truncate -->
-
-1. Greedy
-
+### 1\. Greedy
 
 ```
 from typing import *
 from collections import deque
 
-
 class Solution:
     def maxCoins(self, piles: List[int]) -> int:
         piles_q = deque(sorted(piles, reverse=True))
-        
+
         answer = 0
         while piles_q:
             alice, me, bob = piles_q.popleft(), piles_q.popleft(), piles_q.pop()
@@ -38,11 +40,13 @@ class Solution:
         return answer
 ```
 
+![](https://blog.kakaocdn.net/dna/bYiIi9/btrcVi3nk2L/AAAAAAAAAAAAAAAAAAAAABl0B7DCCXNq5gFE-2T-fN0RtXbcr_RV1wogUuI0x73l/img.png?credential=yqXZFxpELC7KVnFOS48ylbz2pIh7yKj8&expires=1772290799&allow_ip=&allow_referer=&signature=0hf9Ypj5s3PlwDl0su49WB9rskk%3D)
+
 해설
 
-임의의 코인 3개를 고를 때 나는 항상 두 번째로 큰 코인만을 가져갈 수 있다.
-그렇기 때문에 내가 가져갈 수 있는 최선은 항상 남은 코인들 중 두 번째로 큰 코인이다.
-그렇기 때문에 항상 남은 코인에서 가장 큰 코인, 두 번째로 큰 코인을 우선 고른다.
-남은 하나의 코인은 남은 코인에서 가장 작은 코인을 고른다. 그렇게 해야 다음번에 내가 고를 코인 후보에서 가장 작은 코인이 제거된다.
+1.  임의의 코인 3개를 고를 때 나는 항상 두 번째로 큰 코인만을 가져갈 수 있다.
+2.  그렇기 때문에 내가 가져갈 수 있는 최선은 항상 남은 코인들 중 두 번째로 큰 코인이다.
+3.  그렇기 때문에 항상 남은 코인에서 가장 큰 코인, 두 번째로 큰 코인을 우선 고른다.
+4.  남은 하나의 코인은 남은 코인에서 가장 작은 코인을 고른다. 그렇게 해야 다음번에 내가 고를 코인 후보에서 가장 작은 코인이 제거된다.
 
 내림차순 정렬 후 Queue를 이용해 alice와 me가 가져갈 코인은 왼쪽에서, bob이 가져갈 코인은 오른쪽에서 빼내는 것을 반복하는 것으로 해결할 수 있다.

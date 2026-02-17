@@ -10,28 +10,13 @@ date: 2021-01-23T18:20:05+09:00
 
 > 원문: https://doljae.tistory.com/37
 
-![cover](http://bimage.interpark.com/goods_image/4/2/0/8/208294208h.jpg)
+&lt;table style="border-collapse: collapse; width: 100%; height: 80px;" border="1"&gt;&lt;tbody&gt;&lt;tr style="height: 20px;"&gt;&lt;td style="width: 25%; height: 20px;"&gt;추상화레벨&lt;/td&gt;&lt;td style="width: 25%; height: 20px;"&gt;이름&lt;/td&gt;&lt;td style="width: 25%; height: 20px;" colspan="2"&gt;예시&lt;/td&gt;&lt;/tr&gt;&lt;tr style="height: 20px;"&gt;&lt;td style="width: 25%; height: 20px;"&gt;1&lt;/td&gt;&lt;td style="width: 25%; height: 20px;"&gt;아키텍처 스타일&lt;/td&gt;&lt;td style="width: 25%; height: 20px;" colspan="2"&gt;REST&lt;/td&gt;&lt;/tr&gt;&lt;tr style="height: 20px;"&gt;&lt;td style="width: 25%; height: 20px;"&gt;2&lt;/td&gt;&lt;td style="width: 25%; height: 20px;"&gt;아키텍처&lt;/td&gt;&lt;td style="width: 25%; height: 20px;" colspan="2"&gt;브라우저, 서버, 프록시, HTTP, URI, HTML&lt;/td&gt;&lt;/tr&gt;&lt;tr style="height: 20px;"&gt;&lt;td style="width: 25%; height: 20px;"&gt;3&lt;/td&gt;&lt;td style="width: 25%; height: 20px;"&gt;구현&lt;/td&gt;&lt;td style="width: 25%; height: 20px;" colspan="2"&gt;Apache, Firefox, Chrome&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;
 
-추상화레벨
-이름
-예시
+#### URI
 
-1
-아키텍처 스타일
-REST
+리소스를 통일적으로 식별하는 ID
 
 <!-- truncate -->
-
-2
-아키텍처
-브라우저, 서버, 프록시, HTTP, URI, HTML
-
-3
-구현
-Apache, Firefox, Chrome
-
-URI
-리소스를 통일적으로 식별하는 ID
 
 인터넷상에서 유일한 호스트 명의 구조와 호스트 내에서 유일한 계층 경로를 결합해 리소스 간 절대 중복되지 않는 것을 보장한다.
 
@@ -49,28 +34,14 @@ URI는 구조를 가지고 있기 때문에 프로그램에서 간단하게 표�
 
 URI가 지니고 있는 리소스를 간단히 가리킬 수 있는 성질
 
-REST 아키텍처 스타일의 구성
-REST = ULCDODC$SS = 클라이언트/서버 + 스테이트리스 서버 + 캐시 + 유니폼 인터페이스 + 계층화 시스템 + 코드온디맨드
+## REST 아키텍처 스타일의 구성
 
-클라이언트/서버
-유저 인터페이스와 처리를 분리한다
+#### REST = ULCDODC$SS = 클라이언트/서버 + 스테이트리스 서버 + 캐시 + 유니폼 인터페이스 + 계층화 시스템 + 코드온디맨드 
 
-스테이트리스 서버
-서버 측에서 애플리케이션의 상태를 가지지 않는다
+&lt;table style="border-collapse: collapse; width: 100%;" border="1"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td style="width: 50%;"&gt;클라이언트/서버&lt;/td&gt;&lt;td style="width: 50%;"&gt;유저 인터페이스와 처리를 분리한다&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td style="width: 50%;"&gt;스테이트리스 서버&lt;/td&gt;&lt;td style="width: 50%;"&gt;서버 측에서 애플리케이션의 상태를 가지지 않는다&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td style="width: 50%;"&gt;캐시&lt;/td&gt;&lt;td style="width: 50%;"&gt;클라이언트와 서버의 통신횟수와 양을 감소시킨다&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td style="width: 50%;"&gt;유니폼 인터페이스&lt;/td&gt;&lt;td style="width: 50%;"&gt;인터페이스를 고정한다(8개의 메소드로 프로토콜 고정)&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td style="width: 50%;"&gt;계층화 시스템&lt;/td&gt;&lt;td style="width: 50%;"&gt;시스템을 계층별로 분리한다(프록시, 로드밸런서, 레거시에 웹 애플리케이션 추가 등이 가능해짐)&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td style="width: 50%;"&gt;코드 온 디맨드&lt;/td&gt;&lt;td style="width: 50%;"&gt;프로그램을 클라이언트에 다운로드하여 실행한다&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;
 
-캐시
-클라이언트와 서버의 통신횟수와 양을 감소시킨다
+#### 상대 경로 vs 절대 경로
 
-유니폼 인터페이스
-인터페이스를 고정한다(8개의 메소드로 프로토콜 고정)
-
-계층화 시스템
-시스템을 계층별로 분리한다(프록시, 로드밸런서, 레거시에 웹 애플리케이션 추가 등이 가능해짐)
-
-코드 온 디맨드
-프로그램을 클라이언트에 다운로드하여 실행한다
-
-상대 경로 vs 절대 경로
 절대경로 = Base URI + 상대 경로
 
 리소스의 URI를 상대, 혹은 절대 경로로 할 때 장단점
@@ -81,14 +52,16 @@ REST = ULCDODC$SS = 클라이언트/서버 + 스테이트리스 서버 + 캐시 
 
 URI 전부를 클라이언트 측에서 가지고 있어야 한다(알고 있어야 한다)
 
-URI 인코딩
+### URI 인코딩
+
 기본은 UTF-8을 따른다.
 
 %로 시작하며 UTF-8 인코딩을 한 URI를 주고받는다.
 
 URI에 아스키코드 이외의 문자를 넣을 경우 가능한 UTF-8 인코딩을 하는 것이 바람직하다.
 
-URI, URL, URN
+### URI, URL, URN
+
 URI는 URL과 URN을 총칭하는 이름이다.
 
 URL은 도메인을 갱신하지 않거나 서버가 장애로 인해 변경되면 액세스 할 수 없게 되는 문제점이 있다.
@@ -99,9 +72,4 @@ URN은 도메인명에 의존하지 않는다.
 
 하지만 URN은 프로토콜명이 없어 URI로서 리소스를 취득할 수 없고, URI 자체를 가능한 한 영속적으로 액세스 할 수 있도록 만들어놓는 움직임이 있고 그것을 권장해서 URN이 상대적으로 필요가 줄어들었다.
 
-웹을 지탱하는 기술
-국내도서
-저자 : 야마모토 요헤이(Yamamoto Yohei) / 김성훈역
-출판 : 멘토르출판사 2011.05.30
-
-상세보기
+&lt;table class="tt-plugin-interpark" style="background: #fff; border: 1px solid #e0e0e0; width: 408px;" border="0" width="100%" cellspacing="0" data-darkreader-inline-bgimage="" data-darkreader-inline-bgcolor="" data-darkreader-inline-border-top="" data-darkreader-inline-border-right="" data-darkreader-inline-border-bottom="" data-darkreader-inline-border-left=""&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td style="vertical-align: top; padding: 10px 0 10px 10px;" width="70"&gt;&lt;a href="http://book.interpark.com/blog/integration/product/itemDetail.rdo?prdNo=208294208&amp;refererType=8303&amp;bookblockname=bpmain_in&amp;booklinkname=wg_search_EFEB8364BC43711681CC6C69032386A3753E74A4F9E4F62B3FA06C4836C10BAB&amp;key=EFEB8364BC43711681CC6C69032386A3753E74A4F9E4F62B3FA06C4836C10BAB" target="_blank" rel="noopener"&gt;&lt;img style="border: 0 none;" src="http://bimage.interpark.com/goods_image/4/2/0/8/208294208h.jpg" width="66" height="90" data-darkreader-inline-border-top="" data-darkreader-inline-border-right="" data-darkreader-inline-border-bottom="" data-darkreader-inline-border-left=""&gt;&lt;/a&gt;&lt;/td&gt;&lt;td style="vertical-align: top; padding: 10px 10px 10px 15px;"&gt;&lt;dl style="margin: 0; padding: 2px 0 0 0; list-style: none; font: 11px dotum, sans-serif; letter-spacing: -1px; color: #777;" data-darkreader-inline-color=""&gt;&lt;dt style="padding: 0; margin: 0;"&gt;&lt;a style="font-size: 12px; color: #444 !important; font-weight: bold; text-decoration: none !important;" href="http://book.interpark.com/blog/integration/product/itemDetail.rdo?prdNo=208294208&amp;refererType=8303&amp;bookblockname=bpmain_in&amp;booklinkname=wg_search_EFEB8364BC43711681CC6C69032386A3753E74A4F9E4F62B3FA06C4836C10BAB&amp;key=EFEB8364BC43711681CC6C69032386A3753E74A4F9E4F62B3FA06C4836C10BAB" target="_blank" rel="noopener" data-darkreader-inline-color=""&gt;웹을 지탱하는 기술&lt;/a&gt;&lt;/dt&gt;&lt;dd style="padding: 7px 0 0 0; margin: 0; color: #a0a0a0;" data-darkreader-inline-color=""&gt;국내도서&lt;/dd&gt;&lt;dd style="padding: 17px 0 0 0; margin: 0;"&gt;저자 : 야마모토 요헤이(Yamamoto Yohei) / 김성훈역&lt;/dd&gt;&lt;dd style="padding: 4px 0 0 0; margin: 0;"&gt;출판 : 멘토르출판사 &lt;span style="letter-spacing: normal;"&gt;2011.05.30&lt;/span&gt;&lt;/dd&gt;&lt;/dl&gt;&lt;a style="float: right; width: 44px; height: 11px; background: url('//t1.daumcdn.net/tistory_admin/static/images/icon_ipark_detail.gif') no-repeat; overflow: hidden; display: block; text-indent: -1000em;" href="http://book.interpark.com/blog/integration/product/itemDetail.rdo?prdNo=208294208&amp;refererType=8303&amp;bookblockname=bpmain_in&amp;booklinkname=wg_search_EFEB8364BC43711681CC6C69032386A3753E74A4F9E4F62B3FA06C4836C10BAB&amp;key=EFEB8364BC43711681CC6C69032386A3753E74A4F9E4F62B3FA06C4836C10BAB" target="_blank" rel="noopener" data-darkreader-inline-bgcolor=""&gt;상세보기&lt;/a&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;

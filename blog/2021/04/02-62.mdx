@@ -10,16 +10,18 @@ date: 2021-04-02T16:18:47+09:00
 
 > 원문: https://doljae.tistory.com/62
 
-![cover](https://blog.kakaocdn.net/dna/dcKzYC/btq1C2DMubb/AAAAAAAAAAAAAAAAAAAAADaOjG3Am2mpx8VHnRpI4rqKcaPLIbE5EnzmNq9CzuWp/img.png?credential=yqXZFxpELC7KVnFOS48ylbz2pIh7yKj8&expires=1772290799&allow_ip=&allow_referer=&signature=I6uvIzPJ8vsodaynJA28gitB6ds%3D)
+[3Sum - LeetCode
 
-1. Two Pointer를 사용한 풀이(내 풀이, start, index, end)
+Level up your coding skills and quickly land a job. This is the best place to expand your knowledge and get prepared for your next interview.
 
-
-```
-from typing import *
+leetcode.com](https://leetcode.com/problems/3sum/)
 
 <!-- truncate -->
 
+### 1\. Two Pointer를 사용한 풀이(내 풀이, start, index, end)
+
+```
+from typing import *
 
 class Solution:
     def threeSum(self, nums: List[int]) -> List[List[int]]:
@@ -41,12 +43,12 @@ class Solution:
         return list(map(lambda x:list(x),set(answer)))
 ```
 
-2. Two Pointer를 사용한 풀이(최적화, index, start, end, 중복 결과 continue)
+![](https://blog.kakaocdn.net/dna/dcKzYC/btq1C2DMubb/AAAAAAAAAAAAAAAAAAAAADaOjG3Am2mpx8VHnRpI4rqKcaPLIbE5EnzmNq9CzuWp/img.png?credential=yqXZFxpELC7KVnFOS48ylbz2pIh7yKj8&expires=1772290799&allow_ip=&allow_referer=&signature=I6uvIzPJ8vsodaynJA28gitB6ds%3D)
 
+### 2\. Two Pointer를 사용한 풀이(최적화, index, start, end, 중복 결과 continue)
 
 ```
 from typing import *
-
 
 class Solution:
     def threeSum(self, nums: List[int]) -> List[List[int]]:
@@ -72,3 +74,5 @@ class Solution:
                     start += 1
         return list(map(lambda x:list(x),set(answer)))
 ```
+
+![](https://blog.kakaocdn.net/dna/cGh1TN/btq1GdESmEm/AAAAAAAAAAAAAAAAAAAAACtnernBpWGHALIbUNiJ6Lc0wZmlLtMsB-VA_Y5byR5S/img.png?credential=yqXZFxpELC7KVnFOS48ylbz2pIh7yKj8&expires=1772290799&allow_ip=&allow_referer=&signature=aeX1b3lx7bGn3EE4YOnvw380AfI%3D)

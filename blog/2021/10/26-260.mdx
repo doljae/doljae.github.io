@@ -10,18 +10,21 @@ date: 2021-10-26T00:04:15+09:00
 
 > 원문: https://doljae.tistory.com/260
 
-![cover](https://blog.kakaocdn.net/dna/bK4Su4/btriRUaccKk/AAAAAAAAAAAAAAAAAAAAAKAfw-cXmL_TqBDcTJQFoW-IGiy4V0n87nCd1cv-0hV4/img.png?credential=yqXZFxpELC7KVnFOS48ylbz2pIh7yKj8&expires=1772290799&allow_ip=&allow_referer=&signature=Ilssd%2Fr0vap7QOc6sWHXQ0%2BgJKE%3D)
+[Merge Intervals - LeetCode
+
+Level up your coding skills and quickly land a job. This is the best place to expand your knowledge and get prepared for your next interview.
+
+leetcode.com](https://leetcode.com/problems/merge-intervals/)
+
+<!-- truncate -->
 
 양의 정수 2개로 이루어진 배열이 담긴 배열이 주어진다.
 
 각 양의 정수는 시작과 끝을 의미하고 이 배열 하나를 interval로 한다.
 
-<!-- truncate -->
-
 만일 interval 간의 끝과 시작이 같거나 겹친다면 하나의 interval로 만들 수 있을 때 interval 들을 합친 결과를 반환하는 문제다.
 
-예시
-
+### 예시
 
 ```
 Input: intervals = [[1,3],[2,6],[8,10],[15,18]]
@@ -33,13 +36,11 @@ Output: [[1,5]]
 Explanation: Intervals [1,4] and [4,5] are considered overlapping.
 ```
 
-1. 구현, Greedy(?)
-
+### 1\. 구현, Greedy(?)
 
 ```
 from typing import *
 from collections import deque
-
 
 class Solution:
     def merge(self, intervals: List[List[int]]) -> List[List[int]]:
@@ -53,12 +54,13 @@ class Solution:
             while q and end >= q[0][0]:
                 end = max(end, q.popleft()[1])
             answer.append([start, end])
-        
+
         return answer
 ```
 
-2. 좀 더 정해에 가까운 구현
+![](https://blog.kakaocdn.net/dna/bK4Su4/btriRUaccKk/AAAAAAAAAAAAAAAAAAAAAKAfw-cXmL_TqBDcTJQFoW-IGiy4V0n87nCd1cv-0hV4/img.png?credential=yqXZFxpELC7KVnFOS48ylbz2pIh7yKj8&expires=1772290799&allow_ip=&allow_referer=&signature=Ilssd%2Fr0vap7QOc6sWHXQ0%2BgJKE%3D)
 
+### 2\. 좀 더 정해에 가까운 구현
 
 ```
 class Solution:
@@ -83,7 +85,20 @@ class Solution:
         return answer
 ```
 
+![](https://blog.kakaocdn.net/dna/bvOqNR/btriThW2gah/AAAAAAAAAAAAAAAAAAAAACMo3v38GQKkNWWoKuH43acx16JOOWgugFJs8ICq3O2U/img.png?credential=yqXZFxpELC7KVnFOS48ylbz2pIh7yKj8&expires=1772290799&allow_ip=&allow_referer=&signature=nEwjJEnk3orWwUMlwQ5nQnNIfkI%3D)
+
 설명은 아래 링크를 참고.
 
-3. 트리로 구현
+ [Beat 98% Java. Sort start & end respectively. - LeetCode Discuss
+
+Level up your coding skills and quickly land a job. This is the best place to expand your knowledge and get prepared for your next interview.
+
+leetcode.com](https://leetcode.com/problems/merge-intervals/discuss/21223/Beat-98-Java.-Sort-start-and-end-respectively./115420)
+
+![](https://blog.kakaocdn.net/dna/nOj82/btriRZvO6ju/AAAAAAAAAAAAAAAAAAAAAOjzTpGGLJtQrn_yGCQcT4vXqOhnFNKHuchrtbYZBFp3/img.png?credential=yqXZFxpELC7KVnFOS48ylbz2pIh7yKj8&expires=1772290799&allow_ip=&allow_referer=&signature=AbvUymbzGKiFL7aIGupisSNOtig%3D)
+
+창의력 대장...
+
+### 3\. 트리로 구현
+
 도 가능하나 가장 비효율적인 방법.

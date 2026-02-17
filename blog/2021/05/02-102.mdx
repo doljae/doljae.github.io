@@ -10,17 +10,20 @@ date: 2021-05-02T00:37:29+09:00
 
 > 원문: https://doljae.tistory.com/102
 
-![cover](https://blog.kakaocdn.net/dna/cRWQEk/btq3WmyJShK/AAAAAAAAAAAAAAAAAAAAAM8KpFQDCWZUJcuzSf1vbuWZk7PRoqjMvX2da5Yn_vBp/img.png?credential=yqXZFxpELC7KVnFOS48ylbz2pIh7yKj8&expires=1772290799&allow_ip=&allow_referer=&signature=G1YA4hG%2F0Avcr7nt%2FeA6NFdmSZ4%3D)
+[Symmetric Tree - LeetCode
 
-1. in-order 접근(실패)
+Level up your coding skills and quickly land a job. This is the best place to expand your knowledge and get prepared for your next interview.
 
+leetcode.com](https://leetcode.com/problems/symmetric-tree/)
+
+<!-- truncate -->
+
+### 1\. in-order 접근(실패)
 
 ```
 class Solution:
     def isSymmetric(self, root: TreeNode) -> bool:
         trace = []
-
-<!-- truncate -->
 
         def dfs(cur):
             if not cur:
@@ -39,11 +42,9 @@ class Solution:
         return False
 ```
 
-
 아무런 근거 없이 테스트 케이스를 그래프로 보다가 왼쪽, 오른쪽 subtree를 각각 in-order로 탐색하고 탐색 경로를 절반으로 나누어서 뒤집은 결과가 같으면 대칭이어서 그렇게 해봤지만 실패...
 
-2. DFS using Stack
-
+### 2\. DFS using Stack
 
 ```
 class Solution:
@@ -65,8 +66,9 @@ class Solution:
         return True
 ```
 
-2. DFS using Recursion
+![](https://blog.kakaocdn.net/dna/cRWQEk/btq3WmyJShK/AAAAAAAAAAAAAAAAAAAAAM8KpFQDCWZUJcuzSf1vbuWZk7PRoqjMvX2da5Yn_vBp/img.png?credential=yqXZFxpELC7KVnFOS48ylbz2pIh7yKj8&expires=1772290799&allow_ip=&allow_referer=&signature=G1YA4hG%2F0Avcr7nt%2FeA6NFdmSZ4%3D)
 
+### 2\. DFS using Recursion
 
 ```
 class Solution:
@@ -88,8 +90,9 @@ class Solution:
         return False
 ```
 
-3. BFS using Queue
+![](https://blog.kakaocdn.net/dna/bb87Bu/btq3VN4cTsM/AAAAAAAAAAAAAAAAAAAAACjGi_WrMCXlfZ02aQm0Okc03srmmcbE7GZWcNruwwZi/img.png?credential=yqXZFxpELC7KVnFOS48ylbz2pIh7yKj8&expires=1772290799&allow_ip=&allow_referer=&signature=d3Aj2k4qR6U%2F4vVDOBaGYcQGzto%3D)
 
+### 3\. BFS using Queue
 
 ```
 class Solution:
@@ -110,5 +113,7 @@ class Solution:
                 return False
         return True
 ```
+
+![](https://blog.kakaocdn.net/dna/dtSTrP/btq3WndkxfH/AAAAAAAAAAAAAAAAAAAAACtmBTQTnrKRRKgbcS8AEfZxceLv4vkvLqOwCU11GFAx/img.png?credential=yqXZFxpELC7KVnFOS48ylbz2pIh7yKj8&expires=1772290799&allow_ip=&allow_referer=&signature=dBWvt%2BlLbGcy6D6oSP08%2Fk8A240%3D)
 
 leetcode는 어차피 정해라고 부를 수 있는 답이 굉장히 깔끔하다는 것을 알고 있어서 그런지 자꾸 코드에 손이 안 간다. 예쁘게 풀려다가 아예 손도 못 대고 시간만 지나가는 느낌이 없지 않아 있어서 좀 답답하다.

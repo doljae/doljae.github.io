@@ -2,65 +2,74 @@
 
 import fs from 'node:fs/promises';
 import path from 'node:path';
+import TurndownService from 'turndown';
+import {gfm} from 'turndown-plugin-gfm';
 
 function yamlString(value) {
   return JSON.stringify(String(value));
 }
 
-function htmlToMarkdown(descriptionHtml) {
-  const firstImage = descriptionHtml.match(/<img[^>]*src="([^"]+)"/i)?.[1] ?? '';
+function createTurndownService() {
+  const service = new TurndownService({
+    headingStyle: 'atx',
+    codeBlockStyle: 'fenced',
+    bulletListMarker: '-',
+    emDelimiter: '*',
+  });
 
-  let body = descriptionHtml;
-  const codeBlocks = [];
+  service.use(gfm);
 
-  body = body.replace(/<pre[^>]*><code[^>]*>([\s\S]*?)<\/code><\/pre>/gi, (_, code) => {
-    const normalized = code
-      .replaceAll('&lt;', '<')
-      .replaceAll('&gt;', '>')
-      .replaceAll('&quot;', '"')
-      .replaceAll('&#39;', "'")
-      .replaceAll('&amp;', '&')
-      .replaceAll('&nbsp;', ' ')
-      .replace(/\r\n/g, '\n')
-      .trimEnd();
-    const token = `@@CODEBLOCK_${codeBlocks.length}@@`;
-    codeBlocks.push(`\n\n\`\`\`\n${normalized}\n\`\`\`\n\n`);
+  service.addRule('removeScriptsAndStyles', {
+    filter: (node) => node.nodeName === 'SCRIPT' || node.nodeName === 'STYLE',
+    replacement: () => '',
+  });
+
+  service.addRule('iframeToLink', {
+    filter: 'iframe',
+    replacement: (_content, node) => {
+      const src = node.getAttribute?.('src') || '';
+      if (!src) {
+        return '';
+      }
+
+      return `\n\n[Embedded content](${src})\n\n`;
+    },
+  });
+
+  return service;
+}
+
+function escapeMdxSensitiveChars(markdown) {
+  const tokens = [];
+  let text = markdown;
+
+  text = text.replace(/```[\s\S]*?```/g, (match) => {
+    const token = `@@FENCED_${tokens.length}@@`;
+    tokens.push(match);
     return token;
   });
 
-  body = body.replace(/<code[^>]*>([\s\S]*?)<\/code>/gi, (_, code) => {
-    const normalized = code
-      .replaceAll('&lt;', '<')
-      .replaceAll('&gt;', '>')
-      .replaceAll('&quot;', '"')
-      .replaceAll('&#39;', "'")
-      .replaceAll('&amp;', '&')
-      .replaceAll('&nbsp;', ' ')
-      .trim();
-    return `\`${normalized}\``;
+  text = text.replace(/`[^`\n]+`/g, (match) => {
+    const token = `@@INLINE_${tokens.length}@@`;
+    tokens.push(match);
+    return token;
   });
 
-  body = body.replace(/<script[\s\S]*?<\/script>/gi, '');
-  body = body.replace(/<style[\s\S]*?<\/style>/gi, '');
-  body = body.replace(/<figure[\s\S]*?<\/figure>/gi, '');
-  body = body.replace(/<br\s*\/?>/gi, '\n\n');
-  body = body.replace(/<\/p>\s*<p[^>]*>/gi, '\n\n');
-  body = body.replace(/<p[^>]*>/gi, '');
-  body = body.replace(/<\/p>/gi, '\n\n');
-  body = body.replace(/<b>/gi, '**');
-  body = body.replace(/<\/b>/gi, '**');
-  body = body.replace(/<[^>]+>/g, '');
-  body = body
-    .replaceAll('&lt;', '<')
-    .replaceAll('&gt;', '>')
-    .replaceAll('&quot;', '"')
-    .replaceAll('&#39;', "'")
-    .replaceAll('&amp;', '&')
-    .replaceAll('&nbsp;', ' ')
+  text = text
     .replaceAll('<', '&lt;')
     .replaceAll('>', '&gt;')
     .replaceAll('{', '&#123;')
     .replaceAll('}', '&#125;');
+
+  text = text.replace(/@@(?:FENCED|INLINE)_(\d+)@@/g, (_, idx) => tokens[Number(idx)] ?? '');
+
+  return text;
+}
+
+function htmlToMarkdown(descriptionHtml) {
+  const turndown = createTurndownService();
+  let body = turndown.turndown(descriptionHtml);
+  body = escapeMdxSensitiveChars(body);
 
   body = body
     .replace(/[ \t]+\n/g, '\n')
@@ -84,12 +93,6 @@ function htmlToMarkdown(descriptionHtml) {
 
   if (cutIndex >= 0) {
     body = body.slice(0, cutIndex).trim();
-  }
-
-  body = body.replace(/@@CODEBLOCK_(\d+)@@/g, (_, idx) => codeBlocks[Number(idx)] ?? '');
-
-  if (firstImage) {
-    return `![cover](${firstImage})\n\n${body}`;
   }
 
   return body;

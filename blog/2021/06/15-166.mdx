@@ -10,18 +10,20 @@ date: 2021-06-15T23:04:06+09:00
 
 > 원문: https://doljae.tistory.com/166
 
-![cover](https://blog.kakaocdn.net/dna/JtL86/btq7nz2VKyA/AAAAAAAAAAAAAAAAAAAAAKwvy_l-rpFLKZWbSUk96KssMElXyFWvKlPCyTSKURK-/img.png?credential=yqXZFxpELC7KVnFOS48ylbz2pIh7yKj8&expires=1772290799&allow_ip=&allow_referer=&signature=4WCm535rhgEip%2BYr74Tk%2BS3qAiI%3D)
+[Construct Binary Tree from Preorder and Inorder Traversal - LeetCode
 
-이진트리의 PreOrder 순회 결과와 InOrder 순회 결과를 입력하면 이진트리를 복원해서 반환하는 문제다.
+Level up your coding skills and quickly land a job. This is the best place to expand your knowledge and get prepared for your next interview.
 
-1. 4개의 index 값을 이용한 DFS
+leetcode.com](https://leetcode.com/problems/construct-binary-tree-from-preorder-and-inorder-traversal/)
 
 <!-- truncate -->
 
+이진트리의 PreOrder 순회 결과와 InOrder 순회 결과를 입력하면 이진트리를 복원해서 반환하는 문제다.
+
+### 1\. 4개의 index 값을 이용한 DFS
 
 ```
 from typing import *
-
 
 class Solution:
     def buildTree(self, preorder: List[int], inorder: List[int]) -> TreeNode:
@@ -40,6 +42,8 @@ class Solution:
         return dfs(0, len(preorder) - 1, 0, len(inorder) - 1)
 ```
 
+![](https://blog.kakaocdn.net/dna/JtL86/btq7nz2VKyA/AAAAAAAAAAAAAAAAAAAAAKwvy_l-rpFLKZWbSUk96KssMElXyFWvKlPCyTSKURK-/img.png?credential=yqXZFxpELC7KVnFOS48ylbz2pIh7yKj8&expires=1772290799&allow_ip=&allow_referer=&signature=4WCm535rhgEip%2BYr74Tk%2BS3qAiI%3D)
+
 PreOrder list의 첫 원소는 반드시 head이다.
 
 PreOrder list의 두 번째 원소는 반드시 left subtree의 head이다.
@@ -52,12 +56,10 @@ right subtree의 원소 개수는 index+1 ~ InOrder list의 끝까지의 개수�
 
 (설명을 정말 이해할 수 없게 했지만...)
 
-2. 개선
-
+### 2\. 개선
 
 ```
 from typing import *
-
 
 class Solution:
     def buildTree(self, preorder: List[int], inorder: List[int]) -> TreeNode:
@@ -75,6 +77,8 @@ class Solution:
 
         return dfs(0, len(preorder) - 1, 0, len(inorder) - 1)
 ```
+
+![](https://blog.kakaocdn.net/dna/bKfGft/btq7nQJ7CNV/AAAAAAAAAAAAAAAAAAAAAKLvXDqVWMlacrsauFc6Mcb-mtEUqPJvCHfY42PVDSLp/img.png?credential=yqXZFxpELC7KVnFOS48ylbz2pIh7yKj8&expires=1772290799&allow_ip=&allow_referer=&signature=pmp09%2BdV%2Foi7azTCiZ2znl%2F0KvY%3D)
 
 이 문제는 이진트리에서 항상 unique 한 값을 가진다는 조건이 있는데, 그 조건이 없더라도 해결할 수 있는 코드를 작성해봤다.
 

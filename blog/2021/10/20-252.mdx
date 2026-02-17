@@ -10,30 +10,33 @@ date: 2021-10-20T15:05:43+09:00
 
 > 원문: https://doljae.tistory.com/252
 
-![cover](https://blog.kakaocdn.net/dna/bME6Ff/btrigJBJReY/AAAAAAAAAAAAAAAAAAAAAF1myJq6ZYWg1u24uPxf_BdJejsZCMCT7jfdotdYSwlE/img.jpg?credential=yqXZFxpELC7KVnFOS48ylbz2pIh7yKj8&expires=1772290799&allow_ip=&allow_referer=&signature=S8y6xyb%2Bw9MAQ%2BLu61k2ANn%2BLNk%3D)
+[Word Search - LeetCode
+
+Level up your coding skills and quickly land a job. This is the best place to expand your knowledge and get prepared for your next interview.
+
+leetcode.com](https://leetcode.com/problems/word-search/)
+
+<!-- truncate -->
 
 영어 대문자로 구성된 2차원 배열이 주어진다.
 
 임의의 위치에서 시작해 네 방향으로 이동하면서 주어진 문자열을 만들 수 있는지를 판단하는 문제다.
 
-<!-- truncate -->
+### 예시
 
-예시
+![](https://blog.kakaocdn.net/dna/bME6Ff/btrigJBJReY/AAAAAAAAAAAAAAAAAAAAAF1myJq6ZYWg1u24uPxf_BdJejsZCMCT7jfdotdYSwlE/img.jpg?credential=yqXZFxpELC7KVnFOS48ylbz2pIh7yKj8&expires=1772290799&allow_ip=&allow_referer=&signature=S8y6xyb%2Bw9MAQ%2BLu61k2ANn%2BLNk%3D)
 
 ```
 Input: board = [["A","B","C","E"],["S","F","C","S"],["A","D","E","E"]], word = "ABCCED"
 Output: true
 ```
 
-
 여기서 방문한 격자를 중복해서 선택할 순 없다. 그러므로 위 예시에선 "ASA"는 true 지만 "ASAA"는 false를 반환해야 한다.
 
-1. DFS
-
+### 1\. DFS
 
 ```
 from typing import *
-
 
 class Solution:
     def exist(self, board: List[List[str]], word: str) -> bool:
@@ -70,8 +73,10 @@ class Solution:
         return False
 ```
 
+![](https://blog.kakaocdn.net/dna/moO3h/btrihbSgVDV/AAAAAAAAAAAAAAAAAAAAAKG3R64HLFWtbGONjDcjaMAQh9nrILmq35J5YQggI4X0/img.png?credential=yqXZFxpELC7KVnFOS48ylbz2pIh7yKj8&expires=1772290799&allow_ip=&allow_referer=&signature=p5x0EgSOfAGgSfjQYyV6%2BUHl%2BBQ%3D)
+
 2차원 배열에 대한 DFS를 구현하면 해결할 수 있다.
 
-최 하단의 2중 반복문이 main인데, board [i][j]가 word의 첫 문자와 같다면 탐색을 시작할 수 있는 지점이기 때문에 이 지점부터 DFS를 시도한다. DFS 함수에선 좌표와 word의 index값을 넣어서 현재 좌표의 4방을 보고 만일 word [index+1] 값과 같다면 해당 방향으로 DFS를 타 도록 구현했다.
+최 하단의 2중 반복문이 main인데, board \[i\]\[j\]가 word의 첫 문자와 같다면 탐색을 시작할 수 있는 지점이기 때문에 이 지점부터 DFS를 시도한다. DFS 함수에선 좌표와 word의 index값을 넣어서 현재 좌표의 4방을 보고 만일 word \[index+1\] 값과 같다면 해당 방향으로 DFS를 타 도록 구현했다.
 
 DFS이기 때문에 방문 처리를 원복 해주어야 다음 재귀에서도 탐색할 수 있기 때문에 재귀 함수 마지막엔 방문 처리를 해제해주었다. 이런 식의 재귀 함수 구조는 함수가 끝나면 visited 배열도 원복 되어 따로 초기화를 해주지 않아도 된다는 장점이 있다.

@@ -10,21 +10,28 @@ date: 2021-08-21T11:14:14+09:00
 
 > 원문: https://doljae.tistory.com/215
 
-![cover](https://blog.kakaocdn.net/dna/bd3xli/btrcMGiGE2o/AAAAAAAAAAAAAAAAAAAAABJJemtrlOzIaLh957tVlXnTtHEVU6ZQpBBsseW1z3KP/img.png?credential=yqXZFxpELC7KVnFOS48ylbz2pIh7yKj8&expires=1772290799&allow_ip=&allow_referer=&signature=twyVrzDuIdaLJIgR%2B79M5UzSkTk%3D)
+[All Elements in Two Binary Search Trees - LeetCode
+
+Level up your coding skills and quickly land a job. This is the best place to expand your knowledge and get prepared for your next interview.
+
+leetcode.com](https://leetcode.com/problems/all-elements-in-two-binary-search-trees/)
+
+<!-- truncate -->
 
 2개의 이진 탐색 트리가 주어진다.
 
 두 트리의 value값을 오름차순 정렬한 list를 반환하는 문제다.
 
-<!-- truncate -->
+![](https://blog.kakaocdn.net/dna/bd3xli/btrcMGiGE2o/AAAAAAAAAAAAAAAAAAAAABJJemtrlOzIaLh957tVlXnTtHEVU6ZQpBBsseW1z3KP/img.png?credential=yqXZFxpELC7KVnFOS48ylbz2pIh7yKj8&expires=1772290799&allow_ip=&allow_referer=&signature=twyVrzDuIdaLJIgR%2B79M5UzSkTk%3D)
+
+예시
 
 ```
 Input: root1 = [2,1,4], root2 = [1,0,3]
 Output: [0,1,1,2,3,4]
 ```
 
-1. 중위 순회(in-order traversal)
-
+### 1\. 중위 순회(in-order traversal)
 
 ```
 class Solution:
@@ -63,6 +70,8 @@ class Solution:
 
         return answer
 ```
+
+![](https://blog.kakaocdn.net/dna/ds5bVI/btrcNJr5Ou5/AAAAAAAAAAAAAAAAAAAAAEs8oXuTq7kHqFRSW_sRFQQCLrllpy8IFOJtwxYzWjj1/img.png?credential=yqXZFxpELC7KVnFOS48ylbz2pIh7yKj8&expires=1772290799&allow_ip=&allow_referer=&signature=HX27wMtSJoRGTU%2BCUmvaQk3Pda8%3D)
 
 이진 탐색 트리이기 때문에 중위 순회를 하면 각 트리 별로 오름차순 정렬된 값을 얻을 수 있다.
 

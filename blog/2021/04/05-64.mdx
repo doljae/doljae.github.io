@@ -10,44 +10,58 @@ date: 2021-04-05T00:14:13+09:00
 
 > 원문: https://doljae.tistory.com/64
 
-![cover](https://blog.kakaocdn.net/dna/bZsprW/btq1JVdOyyq/AAAAAAAAAAAAAAAAAAAAAHsQUE4kcwB_Rq09xjTq_H4eCUsFR4kLrkDglgy1vWjg/img.png?credential=yqXZFxpELC7KVnFOS48ylbz2pIh7yKj8&expires=1772290799&allow_ip=&allow_referer=&signature=tKojo4oeMOyjmlIndEDdmGGo1XM%3D)
-
 최근 사내에서 자동화 스크립트를 작성할 때 사용했던 Selenium과 BeautifulSoup 관련 기록을 남겨둔다.
 
-**1. Selenium은 PC 성능 영향을 많이 받는다.**
+#### **1\. Selenium은 PC 성능 영향을 많이 받는다.**
+
 PC에서 실제 브라우저를 사람 대신 작동하는 방식으로 진행되기 때문에 상황에 따라 적절한 대기 방법을 사용해서 코드를 멈춰줄 필요가 있다. 사용자 환경 기준으로 맞춰줘야 한다.
 
 <!-- truncate -->
 
-**2. 상황에 맞는 적절한 대기를 사용해야 한다.**
+#### **2\. 상황에 맞는 적절한 대기를 사용해야 한다.**
+
+ [셀레니움 wait 개념 이해하기 (implicitly wait VS explicitly wait) - 뻥뚫리는 파이썬 코드 모음
+
+이 문서는 셀레니움 wait 에 관한 implicitly wait 와 explicitly wait 에 대해서 다루고 있습니다. 셀레니움 사용법 전반에 대해서 알아보시려면 셀레니움 크롤러 기본 사용법을 확인하시기 바랍니다. 목
+
+pythondocs.net](https://pythondocs.net/selenium/%EC%85%80%EB%A0%88%EB%8B%88%EC%9B%80-wait-%EA%B0%9C%EB%85%90-%EC%9D%B4%ED%95%B4%ED%95%98%EA%B8%B0-implicitly-wait-vs-explicitly-wait/)
 
 가장 괜찮게 설명하고 있는 글이라고 생각해서 링크를 올려둔다.
 
-**3. time.sleep()도 상황에 맞게 적절히 사용해주면 좋다.**
+#### **3\. time.sleep()도 상황에 맞게 적절히 사용해주면 좋다.**
+
 select 박스 같은 ajax로 데이터를 가져오는 요소를 조작하는 경우가 있다. 이처럼 동적으로 데이터가 변하거나 입력값에 대해서 새로운 Dom을 만드는 요소의 경우는 Explicitly Wait을 사용하기 상당히 껄끄러운 경우가 있다.
 
 예를 들면...
 
 이메일의 받는 사람 이메일을 입력하고 나면 뭔가 이쁘게 CSS가 쌓이는 그런 서비스들이 많다.
 
-내가 이메일을 20개 입력했다고 가정해보면, 20개의 이메일 문자열이 입력이 다 될 때까지 기다려야 한다. 그런데 Explicitly Wait으로 처리하려고 하면 **참조의 input 안에 마지막 저 파란색 요소의 텍스트 값이 내가 20번째 입력한 이메일 주소과 같을 때까지 **대기시켜야 한다.
+![](https://blog.kakaocdn.net/dna/bZsprW/btq1JVdOyyq/AAAAAAAAAAAAAAAAAAAAAHsQUE4kcwB_Rq09xjTq_H4eCUsFR4kLrkDglgy1vWjg/img.png?credential=yqXZFxpELC7KVnFOS48ylbz2pIh7yKj8&expires=1772290799&allow_ip=&allow_referer=&signature=tKojo4oeMOyjmlIndEDdmGGo1XM%3D)
+
+이런식으로...
+
+내가 이메일을 20개 입력했다고 가정해보면, 20개의 이메일 문자열이 입력이 다 될 때까지 기다려야 한다. 그런데 Explicitly Wait으로 처리하려고 하면 **참조의 input 안에 마지막 저 파란색 요소의 텍스트 값이 내가 20번째 입력한 이메일 주소과 같을 때까지** 대기시켜야 한다.
 
 그런데 저런 요소들은 보통 태그 하나로 끝나지 않고 태그가 여러 개가 중첩되어있다. 요컨대 너무 힘들다는 말이다. 이럴 때 time.sleep()을 적절히 사용해주면 상당히 괜찮다.
 
-**4. find_element_by_xpath()가 제일 정확도가 높았다.**
+#### **4\. find\_element\_by\_xpath()가 제일 정확도가 높았다.**
+
 이건 경험상의 의견.
 
-**5. execute_script() 사용하기**
+#### **5\. execute\_script() 사용하기**
+
 단순히 데이터만 긁어오는 게 아니라 뭔가 입력하고 조작해야 하는 경우가 있다. 이번에 작업할 때 단순히 문자열을 입력하는 게 아니라 CSS가 적용된 표를 특정 위치에 넣어야 했다.
 
-execute_script()는 괄호 안의 Javascript 코드 문자열을 수행한다. 이를 이용해 Javascript Dom 조작 함수들을 적절히 활용해 기능을 구현할 수 있었다.
+execute\_script()는 괄호 안의 Javascript 코드 문자열을 수행한다. 이를 이용해 Javascript Dom 조작 함수들을 적절히 활용해 기능을 구현할 수 있었다.
 
-**6. Pandas, htmlmin**
+#### **6\. Pandas, htmlmin**
+
 Pandas는 빅데이터, 데이터 분석에 사용되는 라이브러리다. 표 스타일의 자료구조 Dataframe을 제공한다. 심자이 Dataframe을 HTML 테이블로도 변환하는 기능이 있다.
 
-execute_script()는 굉장히 민감한 것 같다. Pandas로 변환된 HTML 테이블을 삽입하려고 했으나 에러가 발생했고, htmlmin 라이브러리를 통해 문자열의 쓸데없는 개행, 공백을 전부 없애고 넣어서 오류를 해결했다.
+execute\_script()는 굉장히 민감한 것 같다. Pandas로 변환된 HTML 테이블을 삽입하려고 했으나 에러가 발생했고, htmlmin 라이브러리를 통해 문자열의 쓸데없는 개행, 공백을 전부 없애고 넣어서 오류를 해결했다.
 
-**7. 데이터 추출이 아닌 브라우저 조작은 생각보다 어렵다.**
+#### **7\. 데이터 추출이 아닌 브라우저 조작은 생각보다 어렵다.**
+
 사실 대안이 없지만...
 
 정적 사이트에서 데이터를 추출하고 파싱 하는 것은 어렵지 않았지만, 이번 스크립트의 경우 특정 조건에 맞는 여러 메일의 본문 내용을 읽어 추합 후 새로운 본문을 생성하는 작업이었다.

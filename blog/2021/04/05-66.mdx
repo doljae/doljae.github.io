@@ -10,16 +10,18 @@ date: 2021-04-05T13:30:30+09:00
 
 > 원문: https://doljae.tistory.com/66
 
-![cover](https://blog.kakaocdn.net/dna/bfV4We/btq1KBTXgFr/AAAAAAAAAAAAAAAAAAAAAL2NxE2seaht-HBysWCAWv-MRR6QqwSCvV4TVVznOUDH/img.png?credential=yqXZFxpELC7KVnFOS48ylbz2pIh7yKj8&expires=1772290799&allow_ip=&allow_referer=&signature=lWXp%2BWac%2BhSRceeK5Xlx2LviY1Y%3D)
+[Generate Parentheses - LeetCode
 
-1. Brute Force (특정 길이의 괄호 문자열을 전부 만들고 적합한지 판단)
+Level up your coding skills and quickly land a job. This is the best place to expand your knowledge and get prepared for your next interview.
 
-
-```
-from typing import *
+leetcode.com](https://leetcode.com/problems/generate-parentheses/)
 
 <!-- truncate -->
 
+### 1\. Brute Force (특정 길이의 괄호 문자열을 전부 만들고 적합한지 판단)
+
+```
+from typing import *
 
 class Solution:
     answer = []
@@ -52,12 +54,12 @@ class Solution:
         return False
 ```
 
-2. 창의적인 Backtracking
+![](https://blog.kakaocdn.net/dna/bfV4We/btq1KBTXgFr/AAAAAAAAAAAAAAAAAAAAAL2NxE2seaht-HBysWCAWv-MRR6QqwSCvV4TVVznOUDH/img.png?credential=yqXZFxpELC7KVnFOS48ylbz2pIh7yKj8&expires=1772290799&allow_ip=&allow_referer=&signature=lWXp%2BWac%2BhSRceeK5Xlx2LviY1Y%3D)
 
+### 2\. 창의적인 Backtracking
 
 ```
 from typing import *
-
 
 class Solution:
     def generateParenthesis(self, n: int) -> List[str]:
@@ -80,3 +82,5 @@ class Solution:
         dfs([], 0, 0)
         return answer
 ```
+
+![](https://blog.kakaocdn.net/dna/vuFyi/btq1K4IhWQE/AAAAAAAAAAAAAAAAAAAAAI4jXMQPVuTTnfwyJy9wtNKWGzy0YlDVq0kFB5LGf-8w/img.png?credential=yqXZFxpELC7KVnFOS48ylbz2pIh7yKj8&expires=1772290799&allow_ip=&allow_referer=&signature=0JAxIEIEJQTVSGELB9kI8AFtNBA%3D)

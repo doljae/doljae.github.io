@@ -10,10 +10,15 @@ date: 2021-05-15T20:22:14+09:00
 
 > 원문: https://doljae.tistory.com/135
 
-![cover](https://blog.kakaocdn.net/dna/bz4PJU/btq4XDmXfbY/AAAAAAAAAAAAAAAAAAAAAPl_OevWBbCv-S2x1BEWkqss7g8Hyul07ZK_QU6donNF/img.png?credential=yqXZFxpELC7KVnFOS48ylbz2pIh7yKj8&expires=1772290799&allow_ip=&allow_referer=&signature=Pr9%2F0tJi6AQv%2BFS3bhgguzmbeQM%3D)
+[Letter Combinations of a Phone Number - LeetCode
 
-1. DFS
+Level up your coding skills and quickly land a job. This is the best place to expand your knowledge and get prepared for your next interview.
 
+leetcode.com](https://leetcode.com/problems/letter-combinations-of-a-phone-number/)
+
+<!-- truncate -->
+
+### 1\. DFS
 
 ```
 class Solution(object):
@@ -30,8 +35,6 @@ class Solution(object):
             return []
         answer = []
 
-<!-- truncate -->
-
         def dfs(cur, target, result):
             if cur == len(target):
                 answer.append(result)
@@ -42,5 +45,7 @@ class Solution(object):
         dfs(0, digits, "")
         return answer
 ```
+
+![](https://blog.kakaocdn.net/dna/bz4PJU/btq4XDmXfbY/AAAAAAAAAAAAAAAAAAAAAPl_OevWBbCv-S2x1BEWkqss7g8Hyul07ZK_QU6donNF/img.png?credential=yqXZFxpELC7KVnFOS48ylbz2pIh7yKj8&expires=1772290799&allow_ip=&allow_referer=&signature=Pr9%2F0tJi6AQv%2BFS3bhgguzmbeQM%3D)
 
 주말은 가볍게.

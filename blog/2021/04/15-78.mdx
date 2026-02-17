@@ -10,6 +10,14 @@ date: 2021-04-15T15:04:00+09:00
 
 > 원문: https://doljae.tistory.com/78
 
+[13549번: 숨바꼭질 3
+
+수빈이는 동생과 숨바꼭질을 하고 있다. 수빈이는 현재 점 N(0 ≤ N ≤ 100,000)에 있고, 동생은 점 K(0 ≤ K ≤ 100,000)에 있다. 수빈이는 걷거나 순간이동을 할 수 있다. 만약, 수빈이의 위치가 X일
+
+www.acmicpc.net](https://www.acmicpc.net/problem/13549)
+
+<!-- truncate -->
+
 ```
 import sys
 from collections import deque
@@ -36,12 +44,15 @@ while q:
         visited.add(cur_pos - 1)
         q.append((cur_pos - 1, cur_val + 1))
 
-<!-- truncate -->
-
 print(result)
 ```
 
-
-이 문제의 정해는 **0-1 BFS**를 사용한 풀이다.
+이 문제의 정해는 **0-1 BFS**를 사용한 풀이다.
 
 자세한 것은 링크를 참고.
+
+ [\[그래프\] 0-1 BFS 알고리즘
+
+어제 알고리즘에 대해 검색을 하다가 코드포스 블로그에서 흥미로운 최단경로 최적화법을 찾아서, 그 방법을 소개하고자 합니다.
+
+justicehui.github.io](https://justicehui.github.io/medium-algorithm/2018/08/30/01BFS/)

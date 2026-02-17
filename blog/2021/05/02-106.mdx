@@ -10,8 +10,15 @@ date: 2021-05-02T23:05:13+09:00
 
 > 원문: https://doljae.tistory.com/106
 
-1. prefix sum을 이용한 풀이
+[Maximum Subarray - LeetCode
 
+Level up your coding skills and quickly land a job. This is the best place to expand your knowledge and get prepared for your next interview.
+
+leetcode.com](https://leetcode.com/problems/maximum-subarray/)
+
+<!-- truncate -->
+
+### 1\. prefix sum을 이용한 풀이
 
 ```
 class Solution:
@@ -31,13 +38,9 @@ class Solution:
         return result
 ```
 
-<!-- truncate -->
-
-
 처음에 prefix에 0 패딩을 하나 넣고 시작해서 prefix sum 배열이 이상하게 나와서 조금 삽질했지만, prefix sum을 생각해냈다는 사실만으로 기분이 좋았다.
 
-2....
-
+### 2....
 
 ```
     def maxSubArray2(self, nums: List[int]) -> int:
@@ -50,8 +53,7 @@ class Solution:
             print(cur_sum, result)
 ```
 
-
-cur_sum은 기존까지의 연속된 값의 합이거나, 현재의 값이다.
+cur\_sum은 기존까지의 연속된 값의 합이거나, 현재의 값이다.
 
 연속된 수의 합이 최대가 되는 경우를 찾아야하기 때문에 경우는 2가지다.
 

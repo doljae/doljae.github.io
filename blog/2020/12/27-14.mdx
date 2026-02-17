@@ -10,102 +10,107 @@ date: 2020-12-27T14:29:59+09:00
 
 > 원문: https://doljae.tistory.com/14
 
-![cover](http://bimage.interpark.com/goods_image/2/6/6/1/211422661h.jpg)
+### NoSQL
 
-NoSQL
 SQL 쿼리는 다음과 같은 단계를 거친다
 
-1. 쿼리의 수신
+1\. 쿼리의 수신
 
 <!-- truncate -->
 
-2. 구문 해석
+2\. 구문 해석
 
-3. 테이블의 오픈
+3\. 테이블의 오픈
 
-4. 테이블의 잠금
+4\. 테이블의 잠금
 
-5. 실행 계획의 작성
+5\. 실행 계획의 작성
 
-6. 레코드로의 액세스
+6\. 레코드로의 액세스
 
-7. 테이블의 잠금 해제
+7\. 테이블의 잠금 해제
 
-8. 테이블의 클로즈
+8\. 테이블의 클로즈
 
-9. 결과 회신
+9\. 결과 회신
 
 기본 키 검색이라는 용도로 사용할 때 실제로 애플리케이션에서 의미가 있는 작업은 1,6,9번 밖에 없다. 그 이외의 작업은 모두 불필요한 작업이다.
 
 이 불필요한 작업 때문에 데이터베이스의 성능을 발목 잡는다. NoSQL은 이런 관점에서 MySQL 보다 약 3배 이상의 빠른 쿼리 처리량을 보여준다.
 
-탄생 배경
+#### 탄생 배경
+
 기본키 이용한 단순 검색 같은 경우처럼...
 
 SQL문과 같은 복잡한 언어를 사용하지 않고 프로그래밍 언어의 라이브러리 함수를 사용하여 직접 데이터를 액세스 하는 편이 훨씬 고속으로 되는 것은 아닌가?
 
 MySQL
 
-SELECT * FROM USER WHERE ID=50
+SELECT \* FROM USER WHERE ID=50
 
 NoSQL
 
-GET KEY_50 4
+GET KEY\_50 4
 
 50번 KEY 값에서 4바이트 만큼에 해당하는 값을 가져와라.
 
 이렇게 하면 이 쿼리를 요청하기 위해서 사용되는 수신 바이트 또한 "50"만 보내면 되기 때문에 간단하고, 반환되는 값도 SQL에 비해서 column 이름 : value 식으로 오지 않기 때문에 네트워크 송수신 전송량이 크게 감소하고 구문 분석을 위한 비용도 크게 감소해 CPU 사용량을 크게 낮출 수 있다.
 
-장점
-1. 특정 경우에서 SQL 보다 싸고 빠르게 작업이 가능하다.
+#### 장점
 
-2. SQL에서 테이블의 잠금, 잠금해체가 필요 없이 항상 테이블이 열려있다. 즉 SQL 문의 수행보다 테이블 열기 및 닫기 비용이 더 많이 드는 때가 있는데 메모리 내부에서 초당 10만 회 잇아의 쿼리가 실행되면 이런 비용을 무시할 수 없다. NoSQL은 이것이 강점이다.
+1\. 특정 경우에서 SQL 보다 싸고 빠르게 작업이 가능하다.
 
-단점
-1. 트랜잭션을 지원하지 않아서 트랜잭션으로 인해 얻을 수 있었던 ROLLBACK, 크래쉬 발생 시 데이터 복원, 커밋한 데이터까지의 무사함 보장 등이 불가능하다 --&gt; 다시 말하면 이런 걸 보장하지 않아도 되는 데이터에 사용하면 된다.
+2\. SQL에서 테이블의 잠금, 잠금해체가 필요 없이 항상 테이블이 열려있다. 즉 SQL 문의 수행보다 테이블 열기 및 닫기 비용이 더 많이 드는 때가 있는데 메모리 내부에서 초당 10만 회 잇아의 쿼리가 실행되면 이런 비용을 무시할 수 없다. NoSQL은 이것이 강점이다.
 
-2. 스키마가 없다.
+#### 단점
+
+1\. 트랜잭션을 지원하지 않아서 트랜잭션으로 인해 얻을 수 있었던 ROLLBACK, 크래쉬 발생 시 데이터 복원, 커밋한 데이터까지의 무사함 보장 등이 불가능하다 --&gt; 다시 말하면 이런 걸 보장하지 않아도 되는 데이터에 사용하면 된다.
+
+2\. 스키마가 없다.
 
 즉 가져온 데이터를 파싱하고 의미 있는 데이터를 얻기 위해서 애플리케이션 단에서 작업을 해줘야 한다. RDBMS의 경우 반환된 데이터의 의미를 알기 매우 쉽다. 하지만 NoSQL의 경우는 "정리 정돈이 전혀 되지 않는 방"을 나는 물건의 위치를 알지만 다른 사람은 알 수 없는 그런 경우에 해당하게 된다.
 
-3. 기본키 이외의 인덱스를 사용할 수 없다. KEY-VALUE 구조를 가지기 때문이다.
+3\. 기본키 이외의 인덱스를 사용할 수 없다. KEY-VALUE 구조를 가지기 때문이다.
 
-사용하는 곳
-1. 캐시
+#### 사용하는 곳
+
+1\. 캐시
 
 RDBMS의 캐시로 사용한다. 대표적인 것이 memcached. 캐시 DB를 먼저 체크 후 캐시 미스인 경우에만 HDD에 접근하는 쿼리를 수행해 I/O를 줄일 수 있다.
 
-2. 세션 데이터
+2\. 세션 데이터
 
 SNS에서 마지막 접속 시간, 친구가 언제쯤 온라인 상태가 되었는지 등의 데이터는 굳이 정확할 필요가 없다.
 
 용도에 따라 기능, 무정지성을 희생하고 성능 쪽을 추구하는 것이 좋은 경우에 사용한다.
 
-3. 분산 데이터베이스
+3\. 분산 데이터베이스
 
 분리되어있어도 특별히 문제가 없는 데이터들에 적함함, Write Scaling(서버를 추가하면 자동으로 데이터를 분산 배치해서 처리할 수 있게 해주는 기능)
 
-MySQL Cluster
+#### MySQL Cluster
+
 탄생 배경
 
-상황에 맞게 RDBMS와 NoSQL을 사용할 수 있으면 어떨까?
+상황에 맞게 RDBMS와 NoSQL을 사용할 수 있으면 어떨까? 
 
-1. NDBAPI라는 C++ API를 사용해 백엔드 스토리지에 직접 접근을 할 수 있는 기능을 제공함
+1\. NDBAPI라는 C++ API를 사용해 백엔드 스토리지에 직접 접근을 할 수 있는 기능을 제공함
 
-2. myCached/HandlerSocket
+2\. myCached/HandlerSocket
 
-3. 다중 마스터 구성 --&gt; 갱신 충돌을 어떻게 감지할 것인가
+3\. 다중 마스터 구성 --&gt; 갱신 충돌을 어떻게 감지할 것인가
 
-4. Shading
+4\. Shading
 
-기타
-1. 테이블의 종류
+#### 기타
+
+1\. 테이블의 종류
 
 마스터계 테이블
 
 트랜잭션계 테이블
 
-2. 관계
+2\. 관계
 
 1대다
 
@@ -113,15 +118,10 @@ MySQL Cluster
 
 계층형
 
-3. DML 별
+3\. DML 별
 
 INSERT, UPDATE, DELETE 등 주로 사용되는 작업에 따라서 적합한 DB모델링이 필요하다
 
 출처 및 참고문헌
 
-데이터베이스를 지탱하는 기술
-국내도서
-저자 : 마쯔노부 요시노리 / 정인식역
-출판 : 제이펍 2012.11.18
-
-상세보기
+&lt;table class="tt-plugin-interpark" style="background: #fff; border: 1px solid #e0e0e0; width: 408px;" border="0" width="100%" cellspacing="0" data-darkreader-inline-bgimage="" data-darkreader-inline-bgcolor="" data-darkreader-inline-border-top="" data-darkreader-inline-border-right="" data-darkreader-inline-border-bottom="" data-darkreader-inline-border-left=""&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td style="vertical-align: top; padding: 10px 0 10px 10px;" width="70"&gt;&lt;a href="http://book.interpark.com/blog/integration/product/itemDetail.rdo?prdNo=211422661&amp;refererType=8303&amp;bookblockname=bpmain_in&amp;booklinkname=wg_search_EFEB8364BC43711681CC6C69032386A3753E74A4F9E4F62B3FA06C4836C10BAB&amp;key=EFEB8364BC43711681CC6C69032386A3753E74A4F9E4F62B3FA06C4836C10BAB" target="_blank" rel="noopener"&gt;&lt;img style="border: 0 none;" src="http://bimage.interpark.com/goods_image/2/6/6/1/211422661h.jpg" width="66" height="90" data-darkreader-inline-border-top="" data-darkreader-inline-border-right="" data-darkreader-inline-border-bottom="" data-darkreader-inline-border-left=""&gt;&lt;/a&gt;&lt;/td&gt;&lt;td style="vertical-align: top; padding: 10px 10px 10px 15px;"&gt;&lt;dl style="margin: 0; padding: 2px 0 0 0; list-style: none; font: 11px dotum, sans-serif; letter-spacing: -1px; color: #777;" data-darkreader-inline-color=""&gt;&lt;dt style="padding: 0; margin: 0;"&gt;&lt;a style="font-size: 12px; color: #444 !important; font-weight: bold; text-decoration: none !important;" href="http://book.interpark.com/blog/integration/product/itemDetail.rdo?prdNo=211422661&amp;refererType=8303&amp;bookblockname=bpmain_in&amp;booklinkname=wg_search_EFEB8364BC43711681CC6C69032386A3753E74A4F9E4F62B3FA06C4836C10BAB&amp;key=EFEB8364BC43711681CC6C69032386A3753E74A4F9E4F62B3FA06C4836C10BAB" target="_blank" rel="noopener" data-darkreader-inline-color=""&gt;데이터베이스를 지탱하는 기술&lt;/a&gt;&lt;/dt&gt;&lt;dd style="padding: 7px 0 0 0; margin: 0; color: #a0a0a0;" data-darkreader-inline-color=""&gt;국내도서&lt;/dd&gt;&lt;dd style="padding: 17px 0 0 0; margin: 0;"&gt;저자 : 마쯔노부 요시노리 / 정인식역&lt;/dd&gt;&lt;dd style="padding: 4px 0 0 0; margin: 0;"&gt;출판 : 제이펍 &lt;span style="letter-spacing: normal;"&gt;2012.11.18&lt;/span&gt;&lt;/dd&gt;&lt;/dl&gt;&lt;a style="float: right; width: 44px; height: 11px; background: url('//t1.daumcdn.net/tistory_admin/static/images/icon_ipark_detail.gif') no-repeat; overflow: hidden; display: block; text-indent: -1000em;" href="http://book.interpark.com/blog/integration/product/itemDetail.rdo?prdNo=211422661&amp;refererType=8303&amp;bookblockname=bpmain_in&amp;booklinkname=wg_search_EFEB8364BC43711681CC6C69032386A3753E74A4F9E4F62B3FA06C4836C10BAB&amp;key=EFEB8364BC43711681CC6C69032386A3753E74A4F9E4F62B3FA06C4836C10BAB" target="_blank" rel="noopener" data-darkreader-inline-bgcolor=""&gt;상세보기&lt;/a&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;

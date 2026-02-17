@@ -10,25 +10,27 @@ date: 2021-07-25T10:59:16+09:00
 
 > 원문: https://doljae.tistory.com/189
 
-![cover](https://blog.kakaocdn.net/dna/veUZ9/btrat2tw6R7/AAAAAAAAAAAAAAAAAAAAAH0Y99ZRxBdw5fBLLB3kmjh7aZG2qCA9sLSp3SXxCfPs/img.png?credential=yqXZFxpELC7KVnFOS48ylbz2pIh7yKj8&expires=1772290799&allow_ip=&allow_referer=&signature=jI2BWjCjrLGIEVjbvn6wH7tanHo%3D)
+[Range Sum Query - Mutable - LeetCode
+
+Level up your coding skills and quickly land a job. This is the best place to expand your knowledge and get prepared for your next interview.
+
+leetcode.com](https://leetcode.com/problems/range-sum-query-mutable/)
+
+<!-- truncate -->
 
 정수로 이루어진 list가 주어질 때 주석으로 된 코드가 작동하도록 메서드를 구현하는 문제다.
 
 ```
 class NumArray:
 
-<!-- truncate -->
-
     def __init__(self, nums: List[int]):
         # 자유롭게 사용
 
     def update(self, index: int, val: int) -> None:
     	# nums[index]의 값을 val로 바꾸시오
-        
+
     def sumRange(self, left: int, right: int) -> int:
     	# nums[left ~ right+1]의 구간합을 반환하시오
-        
-
 
 # Your NumArray object will be instantiated and called as such:
 # obj = NumArray(nums)
@@ -36,28 +38,28 @@ class NumArray:
 # param_2 = obj.sumRange(left,right)
 ```
 
-
-1. Brute Force -TLE
-
+### 1\. Brute Force -TLE
 
 ```
 class NumArray:
 
     def __init__(self, nums: List[int]):
         self.nums=nums
-        
 
     def update(self, index: int, val: int) -> None:
         self.nums[index]=val
-        
 
     def sumRange(self, left: int, right: int) -> int:
         return sum(self.nums[left:right+1])
 ```
 
+![](https://blog.kakaocdn.net/dna/veUZ9/btrat2tw6R7/AAAAAAAAAAAAAAAAAAAAAH0Y99ZRxBdw5fBLLB3kmjh7aZG2qCA9sLSp3SXxCfPs/img.png?credential=yqXZFxpELC7KVnFOS48ylbz2pIh7yKj8&expires=1772290799&allow_ip=&allow_referer=&signature=jI2BWjCjrLGIEVjbvn6wH7tanHo%3D)
+
 요구하는 바를 그대로 구현하면 위와 같은 코드가 나오고 결과는 시간 초과.
 
 제약조건을 보면 다음과 같다.
+
+![](https://blog.kakaocdn.net/dna/b0oJGQ/btrasTXEbZU/AAAAAAAAAAAAAAAAAAAAADVjDrBq1gNIa8oZs1CNdGXkkDM5e1DNbO1kow6tcDOX/img.png?credential=yqXZFxpELC7KVnFOS48ylbz2pIh7yKj8&expires=1772290799&allow_ip=&allow_referer=&signature=LROVLrBF9ekcdvYI4b7tZmDFYN8%3D)
 
 nums의 길이가 30000이 최대다.
 
@@ -65,16 +67,14 @@ nums의 길이가 30000이 최대다.
 
 하지만 sumRange는 항상 O(N)이다. 특정 위치부터 위치까지의 값의 합을 구하려면 선형 탐색을 해야 하기 때문이다.
 
-여기서 N은 3*pow(10,4)이고 sumRange가 최대 N번 호출될 수 있다고 했으니깐 3*3*pow(2, pow(10,4))...
+여기서 N은 3\*pow(10,4)이고 sumRange가 최대 N번 호출될 수 있다고 했으니깐 3\*3\*pow(2, pow(10,4))...
 
 시간 초과가 날 수밖에 없다.
 
-2. BIT(Binary Indexed Tree, Fenwick Tree)
-
+### 2\. BIT(Binary Indexed Tree, Fenwick Tree)
 
 ```
 from typing import *
-
 
 class NumArray:
 
@@ -107,6 +107,8 @@ class NumArray:
             right -= right & -right
         return right_sum - left_sum
 ```
+
+![](https://blog.kakaocdn.net/dna/biNIS1/btrao7CBrPV/AAAAAAAAAAAAAAAAAAAAAFQLtJI6aaBuvaE4hJ_TIi-rxqEtt1ZW3pHnvOctonty/img.png?credential=yqXZFxpELC7KVnFOS48ylbz2pIh7yKj8&expires=1772290799&allow_ip=&allow_referer=&signature=h4ubboKSOZaMV2T2u0LJprkxzNQ%3D)
 
 이 문제는 구간 질의를 해결하는 특수한 자료구조를 사용해야 한다. 구간 트리(Segment Tree)류로 불리는 자료구조를 사용하면 이 문제의 시간 복잡도를 개선할 수 있다.
 

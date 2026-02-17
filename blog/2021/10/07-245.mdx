@@ -10,24 +10,23 @@ date: 2021-10-07T22:39:02+09:00
 
 > 원문: https://doljae.tistory.com/245
 
-![cover](https://blog.kakaocdn.net/dna/zVl9s/btrg7IJRAGe/AAAAAAAAAAAAAAAAAAAAAGMFiE5D_5MGm2UXg6BxGJM390y8LpfCDmW3SZRLlEbu/img.png?credential=yqXZFxpELC7KVnFOS48ylbz2pIh7yKj8&expires=1772290799&allow_ip=&allow_referer=&signature=LqAUYK%2BFzEue5PTrlUL4gHsP%2Bx0%3D)
+### 서론
 
-서론
 Spring Batch를 사용해본 경험이 없었다. 최근에 간단한 배치 잡(Batch Job)을 개발하게 되었다. 간단한 배치 잡 코드를 작성 후 테스트 코드를 통해 검증을 하려고 해 보았는데, 설정해주는 과정에서 배우고 삽질한 내용을 공유한다.
 
 spring-batch-test 의존성은 최신 버전으로 진행했다.
 
 <!-- truncate -->
 
-의존성 추가
-https://mvnrepository.com/artifact/org.springframework.batch/spring-batch-test
+### 의존성 추가
+
+[https://mvnrepository.com/artifact/org.springframework.batch/spring-batch-test](https://mvnrepository.com/artifact/org.springframework.batch/spring-batch-test)
 
 Spring Boot로 시작했다면 starter-test 의존성은 있을 거고, spring-batch-test 의존성을 따로 추가해준다.
 
 이 의존성 추가로 @SpringBatchTest 어노테이션 및 배치 잡 테스트에 사용되는 Util 클래스를 사용할 수 있다.
 
-HelloWorldBatchJob.java
-
+### HelloWorldBatchJob.java
 
 ```
 @Slf4j
@@ -63,15 +62,13 @@ public class HelloWorldBatchJob {
 }
 ```
 
-
 인터넷에서 쉽게 찾아볼 수 있는 아주 간단한 스프링 배치 잡 코드다.
 
 스프링 배치에 대해선 거의 모르는 상태이기 때문에 깊은 설명을 할 순 없지만 JobBuilderFactory, StepBuilderFactory를 통해 Job과 Step을 만들고, Step을 Job에 세팅하게 된다.
 
 이렇게 만든 Job과 Step은 Bean으로 등록되어 관리된다. 이 배치 잡의 이름은 @ConditionalOnProperty에서 설정해주었다.
 
-HelloWorldBatchJobTest.java
-
+## HelloWorldBatchJobTest.java
 
 ```
 @SpringBootTest
@@ -95,67 +92,84 @@ class HelloWorldBatchJobTest {
 }
 ```
 
-
 이것이 삽질을 통해 만든 배치 잡 테스트의 기본 템플릿이다. 참고로 Junit5를 쓴 테스트 코드다.
 
 어노테이션 설명을 간략히 하면 다음과 같다.
 
-@SpringBootTest
+-   @SpringBootTest
+    -   스프링 부트 앱을 기동 해서 스캔되는 모든 Bean을 ApplicationContext에 준비해 필요한 부분에 주입한다.
+-   @SpringBatchTest
+    -   JobLauncherTestUtils, JobRepositoryTestUtils 등의 배치 테스트에 유용한 클래스를 사용할 수 있도록 한다.
+-   @ActiveProfile
+    -   profile 설정이 여러 개인 경우 어떤 profile로 부트 앱을 띄울지를 설정한다. profile이 하나라면 필요 없다.
+-   @RequiredArgsConstructor
+    -   이것이 삽질의 원인 1
+-   @TestConstructor
+    -   이것이 삽질의 원인 3
+-   @TestPropertySource
+    -   배치 애플리케이션은 어떤 배치 잡을 돌릴지 배치 잡 이름을 파라미터로 같이 실행해줘야 한다.
+    -   아까 만든 JOB\_NAME을 넣어주어 이 테스트에서 돌릴 배치 잡을 특정 지어준다.
 
-스프링 부트 앱을 기동 해서 스캔되는 모든 Bean을 ApplicationContext에 준비해 필요한 부분에 주입한다.
+### 삽질 원인 1, @RequiredArgsConstructor
 
-@SpringBatchTest
-
-JobLauncherTestUtils, JobRepositoryTestUtils 등의 배치 테스트에 유용한 클래스를 사용할 수 있도록 한다.
-
-@ActiveProfile
-
-profile 설정이 여러 개인 경우 어떤 profile로 부트 앱을 띄울지를 설정한다. profile이 하나라면 필요 없다.
-
-@RequiredArgsConstructor
-
-이것이 삽질의 원인 1
-
-@TestConstructor
-
-이것이 삽질의 원인 3
-
-@TestPropertySource
-
-배치 애플리케이션은 어떤 배치 잡을 돌릴지 배치 잡 이름을 파라미터로 같이 실행해줘야 한다.
-아까 만든 JOB_NAME을 넣어주어 이 테스트에서 돌릴 배치 잡을 특정 지어준다.
-
-삽질 원인 1, @RequiredArgsConstructor
 비교적 최신 버전의 Spring Boot는 @Autowired 대신 @RequiredArgsConstructor를 사용하고 기존의 주입받는 Bean을 final로 선언해도 문제없이 사용할 수 있다. 이것을 생성자 주입이라고 한다.
 
 하지만 테스트에선 이렇게 생성자 주입이 불가능하다. 그래서 @Autowired를 사용하곤 한다.
 
 그런데 @Autowired를 JobLauncherTestUtils, JobRepositoryTestUtils에 해주어도 Intellij에서 적합한 Bean이 없다고 잡아내질 못했다. 그런데 실행하면 잘 돌아간다.
 
-사실 그냥 하면 되는데 빨간 줄이 보기 싫어서 생성자 주입을 받아버리면 되지 않을까 해서 해봤고, 빨간 줄은 없어졌지만 실행이 되지 않았다.
+사실 그냥 하면 되는데 빨간 줄이 보기 싫어서 생성자 주입을 받아버리면 되지 않을까 해서 해봤고, 빨간 줄은 없어졌지만 실행이 되지 않았다. 
+
+![](https://blog.kakaocdn.net/dna/zVl9s/btrg7IJRAGe/AAAAAAAAAAAAAAAAAAAAAGMFiE5D_5MGm2UXg6BxGJM390y8LpfCDmW3SZRLlEbu/img.png?credential=yqXZFxpELC7KVnFOS48ylbz2pIh7yKj8&expires=1772290799&allow_ip=&allow_referer=&signature=LqAUYK%2BFzEue5PTrlUL4gHsP%2Bx0%3D)
+
+에러 메시지
 
 에러 메시지를 구글링 해보니 ParameterResolver라는 것이 JobLauncherTestUtils, JobRepositoryTestUtils에 주입할 적합한 객체를 찾지 못해서 발생하는 게 원인인 것 같았다. 그런데 @SpringBootTest로 모든 Bean을 올렸고 따로 설정하지 않은 Bean은 AutoConfiguration에 의해 자동으로 등록되지 않나라는 생각을 했다.
 
 우선 이 원인에 대해선 아래 블로그에서 굉장히 잘 설명해주셔서 링크로 대체한다.
 
+ [JUnit 5 + Kotlin 테스트 클래스에서 생성자 주입 이슈
+
+서론
+
+minkukjo.github.io](https://minkukjo.github.io/framework/2020/06/28/JUnit-23/)
+
 결론적으로 Junit5가 사용하는 ApplicationContext는 SpringBoot의 그것과 다른 모양이다.
 
-삽질 원인 2, ParameterResolver
+### 삽질 원인 2, ParameterResolver
+
 ParameterResolver에 대한 설명은 아래 링크에서 잘 설명되어 있다.
 
+ [junit5 ParameterResolver - 머루의개발블로그
+
+오늘은 junit5의 기본적인 사용법만 살펴보자. 예전에 릴리즈 되기 전에 여기에 대충 사용법만 포스팅한적이 있었다. 아주 junit5 의 기본적인 내용만 살펴봤으니 좀 더 많은 내용은 문서를 통해서
+
+wonwoo.ml](http://wonwoo.ml/index.php/post/1878)
+
 Junit4에 @RunWith 대신 Junit5는 @ExtendWith(XXX.class)를 사용한다. 여기서 XXX에 해당하는 게 ParameterResolver의 구현체다. ParameterResolver는 특정 클래스에 대한 반환 값을 제공한다.
+
+![](https://blog.kakaocdn.net/dna/XMbg4/btrg8c4K2Wg/AAAAAAAAAAAAAAAAAAAAAHnrP-d9wf9xPxrkDtD7lvlgZuC3SuWEE40-14l-cdtt/img.png?credential=yqXZFxpELC7KVnFOS48ylbz2pIh7yKj8&expires=1772290799&allow_ip=&allow_referer=&signature=bHN5QgU7dUVlCzhYCMjvLa%2Fptcc%3D)
+
+SpringExtension.class
 
 아무튼 Parameter를 보고 해당 Resolver가 처리할 수 있는 클래스인 경우 파라미터에 적합한 구현체를 넣어주는 것 같다.(지금의 난 그렇게 이해하고 있다.)
 
 이런 생각이 들었다.
 
-JobLauncherTestUtils, JobRepositoryTestUtils 모두 @Autowired로 주입은 되는 걸 보니 Bean이 생성되는 건 맞다.
+&gt; JobLauncherTestUtils, JobRepositoryTestUtils 모두 @Autowired로 주입은 되는 걸 보니 Bean이 생성되는 건 맞다.
+&gt; 그러니깐 이 ParameterResolver를 하나 만들어서 만들어진 JobLauncherTestUtils, JobRepositoryTestUtils의 Bean을 반환하도록 하면 되지 않을까? 
 
-그러니깐 이 ParameterResolver를 하나 만들어서 만들어진 JobLauncherTestUtils, JobRepositoryTestUtils의 Bean을 반환하도록 하면 되지 않을까?
 우선 결과적으로 이건 실패했다. ParameterResolver의 구현체에 Bean을 주입하려면 ParameterResolver 안에서 Bean으로 반환하고 싶은 구현체를 주입받아야 하는데 주입받으려면 @Component 같은걸 붙여줘야 한다. 붙였을 때 충돌이 나는 것 같아서 이 방법은 우선 내려놨다.
 
-삽질 원인 3, @TestConstructor
+### 삽질 원인 3, @TestConstructor
+
 Junit5의 버전별 신규 feature에 대해 정리한 링크다.
+
+ [Spring Boot + JUnit에서 의존성 주입하기
+
+JUnt 4Field Injection 밖에 되지 않음.Spring Boot 2.2.0부터 JUnit 5가 기본으로 탑재되기 시작했고,Spring Boot 2.4.0부터는 아예 JUnit 4 의존성이 제거됐기 때문에 JUnit 4의 사용은 하지 말아야한다. 12345678@RunWith
+
+perfectacle.github.io](https://perfectacle.github.io/2020/12/25/dependency-injection-in-junit/)
 
 SpringBoot 2.2.X 버전부턴 Spring Test 5.2.X 버전을 사용하고 있고, 그렇기 때문에 새로운 기능 중 하나인 @TestConstructor를 사용할 수 있다.
 
@@ -165,9 +179,16 @@ autowireMode = AutowireMode.ALL 옵션을 사용해서 주입이 가능한 모�
 
 아래는 TestConstructor 및 비교적 신규 기능들에 대해서 참고할만한 링크다.
 
-결론
+ [\[JUnit\] JUnit5 사용법과 TDD (2) - REST API 테스트
+
+JUnit5 사용법과 TDD (2) JUnit 5의 dependency 추가 방법과 실행 순서, 기본 annotation에 대한 정리 -&gt; TDD 정리 1 Spring 관련 주요 Test Annotation JUnit5와 spring-boot-test의 모든 annotation은 아니며 자..
+
+sunghs.tistory.com](https://sunghs.tistory.com/138)
+
+### 결론
+
 이렇게 삽질을 한 결과 굉장히 힘들었지만(몸도 마음도...) 다양한 개념도 접했고, 아무튼 현재 상태에선 해결이 되어서 다행이지만...
 
-그냥 **Junit5 Constructor Injection **혹은 **Junit5 생성자 주입으로만** 검색해보았어도 10분 만에 해결했을 문제였다는 걸 생각해보면 슬프다. 하루 종일 Custom ParameterResolver 이런 키워드로만 검색하고 있었는데 왜 저렇게 찾아볼 생각을 하지 않았을까 ㅠㅠ
+그냥 **Junit5 Constructor Injection** 혹은 **Junit5 생성자 주입으로만** 검색해보았어도 10분 만에 해결했을 문제였다는 걸 생각해보면 슬프다. 하루 종일 Custom ParameterResolver 이런 키워드로만 검색하고 있었는데 왜 저렇게 찾아볼 생각을 하지 않았을까 ㅠㅠ
 
 충격적인 건 아직 배치 잡 코드는 1도 작성하지 못했다는 점;

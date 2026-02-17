@@ -10,21 +10,22 @@ date: 2020-12-30T12:52:09+09:00
 
 > 원문: https://doljae.tistory.com/18
 
-![cover](http://bimage.interpark.com/goods_image/3/1/8/5/284503185h.jpg)
+### 인덱스 수직적 탐색
 
-인덱스 수직적 탐색
 정렬된 인덱스 레코드 중 조건을 만족하는 **첫 번째 레코드를 찾는 과정**
 
 즉 인덱스 스캔 시작 지점을 찾는 과정
 
 <!-- truncate -->
 
-인덱스 수평적 탐색
+### 인덱스 수평적 탐색
+
 수직적 탐색으로 찾은 스캔 시작점에서 찾고자 하는 데이터가 더 안 나타날 때까지 수평적으로 스캔하는 과정
 
 즉 실제로 데이터를 찾는 과정
 
-WHERE 절의 조건 순서에 따라서 성능이 결정된다?
+#### WHERE 절의 조건 순서에 따라서 성능이 결정된다?
+
 잘못된 정보임.
 
 비교 연산 횟수를 줄일 수 있다는 설명은 맞음.
@@ -33,16 +34,17 @@ WHERE 절의 조건 순서에 따라서 성능이 결정된다?
 
 (자세한 건 인덱스 성별 여자 이름 유관순으로 검색해볼 것, 대부분이 잘못된 자료인 경우라고 함)
 
-인덱스를 RANGE SCAN 할 수 없는 이유
-1. 인덱스 칼럼을 가공하면 인덱스를 정상적으로 사용할 수 없다.
+### 인덱스를 RANGE SCAN 할 수 없는 이유
 
-2. 그 이유는 **인덱스 스캔 시작점을 찾을 수 없기 때문이다.**
+1\. 인덱스 칼럼을 가공하면 인덱스를 정상적으로 사용할 수 없다.
 
-3. 인덱스는 수직적 탐색을 위해 첫 번째 레코드를 찾아야 한다. 그런데 RANGE 라면 그것이 가능할까? 시작점은 어디고, 어디서 멈추어야 할까? 결국 FULL SCAN을 해야 한다.
+2\. 그 이유는 **인덱스 스캔 시작점을 찾을 수 없기 때문이다.**
 
-4. 인덱스를 정상적으로 사용한다는 것은 리프 블록에서 스캔 시작점을 찾아서 거기서부터 스캔하다 중간에 멈추는 것이 가능해야 한다.
+3\. 인덱스는 수직적 탐색을 위해 첫 번째 레코드를 찾아야 한다. 그런데 RANGE 라면 그것이 가능할까? 시작점은 어디고, 어디서 멈추어야 할까? 결국 FULL SCAN을 해야 한다.
 
-5. 즉 이런 쿼리는 INDEX RANGE SCAN이 불가능함. 단 OR이나 IN 조건절은 옵티마이저의 쿼리 변환 기능을 통해 RANGE SCAN으로 처리되기도 함
+4\. 인덱스를 정상적으로 사용한다는 것은 리프 블록에서 스캔 시작점을 찾아서 거기서부터 스캔하다 중간에 멈추는 것이 가능해야 한다.
+
+5\. 즉 이런 쿼리는 INDEX RANGE SCAN이 불가능함. 단 OR이나 IN 조건절은 옵티마이저의 쿼리 변환 기능을 통해 RANGE SCAN으로 처리되기도 함
 
 ```
 WHERE SUBSTR(....) = "05"
@@ -52,24 +54,30 @@ WHERE COL1 = :TEL_NO OR COL2= :CUST_NUM)
 WHERE TEL IN (:TEL_NO1, :TEL_NO2)
 ```
 
-인덱스 스캔의 종류
-1. Index Range Scan
-2. Index Full Scan
+## 인덱스 스캔의 종류
+
+#### 1\. Index Range Scan
+
+#### 2\. Index Full Scan
+
 Range Scan이 불가능하고, Table Full Scan보다 저렴할 때 옵티마이저가 선택하는 방법. 자주 하게 되면 인덱스를 따로 만들어주는 것이 효율적임
 
-3. Index Unique Scan
+#### 3\. Index Unique Scan
+
 인덱스 수직적 탐색만으로 탐색을 끝낼 수 있는 경우, 조건이 UNIQUE 해야 함
 
-4. Index Skip Scan
+#### 4\. Index Skip Scan
+
 조건의 선두 칼럼의 Distinct value 개수가 적고 후행 칼럼의 Distinct value 개수가 많을 때 유용한 방법
 
 (Disticnt Value : 값의 종류의 개수를 말함, 예를 들어 성별을 남/여로 설정한 DB라면 성별의 Distinct Value는 2 임)
 
-조건 1 & 조건 2
+조건 1 & 조건 2 
 
 에서 조건 1 이 만족하지 않으면 범위를 점프하는 스캔법
 
-5. Index Fast Full Scan
+#### 5\. Index Fast Full Scan
+
 논리적인 인덱스 트리 구조를 무시하고 인덱스 전체를 Multiblock I/O 방식으로 스캔하는 방법
 
 물리적 디스크에 저장된 순서대로 인덱스 리프 블록을 읽는 방식
@@ -84,35 +92,10 @@ Range Scan이 불가능하고, Table Full Scan보다 저렴할 때 옵티마이�
 
 쿼리에 사용하는 모든 칼럼이 모두 인덱스에 포함돼 있을 때만 사용 가능
 
-Index Full Scan
-Index Fast Full Scan
+&lt;table style="border-collapse: collapse; width: 100%;" border="1"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td style="width: 50%;"&gt;Index Full Scan&lt;/td&gt;&lt;td style="width: 50%;"&gt;Index Fast Full Scan&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td style="width: 50%;"&gt;1. 인덱스 구조를 따라 스캔&lt;br&gt;2. 결과 집합 순서 보장&lt;br&gt;3. Single Block I/O&lt;br&gt;4. 파티션 되어있지 않다면 병렬 스캔 불가&lt;br&gt;5. 인덱스에 포함되지 않은 컬럼 조회 시에도 사용 가능&lt;/td&gt;&lt;td style="width: 50%;"&gt;1. 세그먼트 전체를 스캔&lt;br&gt;2. 결과 집합 순서 보장 안 됨&lt;br&gt;3. Multiblock I/O&lt;br&gt;4. 병렬 스캔 가능&lt;br&gt;5. 인덱스에 포함된 컬럼으로만 조회할 때 사용 가능&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;
 
-1. 인덱스 구조를 따라 스캔
-
-2. 결과 집합 순서 보장
-
-3. Single Block I/O
-
-4. 파티션 되어있지 않다면 병렬 스캔 불가
-
-5. 인덱스에 포함되지 않은 컬럼 조회 시에도 사용 가능
-1. 세그먼트 전체를 스캔
-
-2. 결과 집합 순서 보장 안 됨
-
-3. Multiblock I/O
-
-4. 병렬 스캔 가능
-
-5. 인덱스에 포함된 컬럼으로만 조회할 때 사용 가능
-
-5. Index Range Scan Descending
+#### 5\. Index Range Scan Descending
 
 출처 및 참고문헌
 
-친절한 SQL 튜닝
-국내도서
-저자 : 조시형
-출판 : 디비안(주) (DBian) 2018.06.01
-
-상세보기
+&lt;table class="tt-plugin-interpark" style="background: #fff; border: 1px solid #e0e0e0; width: 408px;" border="0" width="100%" cellspacing="0" data-darkreader-inline-bgimage="" data-darkreader-inline-bgcolor="" data-darkreader-inline-border-top="" data-darkreader-inline-border-right="" data-darkreader-inline-border-bottom="" data-darkreader-inline-border-left=""&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td style="vertical-align: top; padding: 10px 0 10px 10px;" width="70"&gt;&lt;a href="http://book.interpark.com/blog/integration/product/itemDetail.rdo?prdNo=284503185&amp;refererType=8303&amp;bookblockname=bpmain_in&amp;booklinkname=wg_search_EFEB8364BC43711681CC6C69032386A3753E74A4F9E4F62B3FA06C4836C10BAB&amp;key=EFEB8364BC43711681CC6C69032386A3753E74A4F9E4F62B3FA06C4836C10BAB" target="_blank" rel="noopener"&gt;&lt;img style="border: 0 none;" src="http://bimage.interpark.com/goods_image/3/1/8/5/284503185h.jpg" width="66" height="90" data-darkreader-inline-border-top="" data-darkreader-inline-border-right="" data-darkreader-inline-border-bottom="" data-darkreader-inline-border-left=""&gt;&lt;/a&gt;&lt;/td&gt;&lt;td style="vertical-align: top; padding: 10px 10px 10px 15px;"&gt;&lt;dl style="margin: 0; padding: 2px 0 0 0; list-style: none; font: 11px dotum, sans-serif; letter-spacing: -1px; color: #777;" data-darkreader-inline-color=""&gt;&lt;dt style="padding: 0; margin: 0;"&gt;&lt;a style="font-size: 12px; color: #444 !important; font-weight: bold; text-decoration: none !important;" href="http://book.interpark.com/blog/integration/product/itemDetail.rdo?prdNo=284503185&amp;refererType=8303&amp;bookblockname=bpmain_in&amp;booklinkname=wg_search_EFEB8364BC43711681CC6C69032386A3753E74A4F9E4F62B3FA06C4836C10BAB&amp;key=EFEB8364BC43711681CC6C69032386A3753E74A4F9E4F62B3FA06C4836C10BAB" target="_blank" rel="noopener" data-darkreader-inline-color=""&gt;친절한 SQL 튜닝&lt;/a&gt;&lt;/dt&gt;&lt;dd style="padding: 7px 0 0 0; margin: 0; color: #a0a0a0;" data-darkreader-inline-color=""&gt;국내도서&lt;/dd&gt;&lt;dd style="padding: 17px 0 0 0; margin: 0;"&gt;저자 : 조시형&lt;/dd&gt;&lt;dd style="padding: 4px 0 0 0; margin: 0;"&gt;출판 : 디비안(주) (DBian) &lt;span style="letter-spacing: normal;"&gt;2018.06.01&lt;/span&gt;&lt;/dd&gt;&lt;/dl&gt;&lt;a style="float: right; width: 44px; height: 11px; background: url('//t1.daumcdn.net/tistory_admin/static/images/icon_ipark_detail.gif') no-repeat; overflow: hidden; display: block; text-indent: -1000em;" href="http://book.interpark.com/blog/integration/product/itemDetail.rdo?prdNo=284503185&amp;refererType=8303&amp;bookblockname=bpmain_in&amp;booklinkname=wg_search_EFEB8364BC43711681CC6C69032386A3753E74A4F9E4F62B3FA06C4836C10BAB&amp;key=EFEB8364BC43711681CC6C69032386A3753E74A4F9E4F62B3FA06C4836C10BAB" target="_blank" rel="noopener" data-darkreader-inline-bgcolor=""&gt;상세보기&lt;/a&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;

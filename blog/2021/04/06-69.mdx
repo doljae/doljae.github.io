@@ -10,16 +10,18 @@ date: 2021-04-06T13:48:46+09:00
 
 > 원문: https://doljae.tistory.com/69
 
-![cover](https://blog.kakaocdn.net/dna/83cvn/btq1U8KHLnW/AAAAAAAAAAAAAAAAAAAAANAGs6qVckt1Ce4x1pP_OBEoNDBMqWrcPabu6MfoO-S8/img.png?credential=yqXZFxpELC7KVnFOS48ylbz2pIh7yKj8&expires=1772290799&allow_ip=&allow_referer=&signature=B8m4VqVBSuCnn6pb6fT6MSkFbUo%3D)
+[Product of Array Except Self - LeetCode
 
-1. 숫자 기준 왼쪽, 오른쪽 곱배열을 구한 뒤 곱배열을 곱해서 반환
+Level up your coding skills and quickly land a job. This is the best place to expand your knowledge and get prepared for your next interview.
 
-
-```
-from typing import *
+leetcode.com](https://leetcode.com/problems/product-of-array-except-self/)
 
 <!-- truncate -->
 
+### 1\. 숫자 기준 왼쪽, 오른쪽 곱배열을 구한 뒤 곱배열을 곱해서 반환
+
+```
+from typing import *
 
 class Solution:
     def productExceptSelf(self, nums: List[int]) -> List[int]:
@@ -35,12 +37,12 @@ class Solution:
         return answer
 ```
 
-2. 동일한 원리, 최적화
+![](https://blog.kakaocdn.net/dna/83cvn/btq1U8KHLnW/AAAAAAAAAAAAAAAAAAAAANAGs6qVckt1Ce4x1pP_OBEoNDBMqWrcPabu6MfoO-S8/img.png?credential=yqXZFxpELC7KVnFOS48ylbz2pIh7yKj8&expires=1772290799&allow_ip=&allow_referer=&signature=B8m4VqVBSuCnn6pb6fT6MSkFbUo%3D)
 
+### 2\. 동일한 원리, 최적화
 
 ```
 from typing import *
-
 
 class Solution:
     def productExceptSelf(self, nums: List[int]) -> List[int]:
@@ -53,3 +55,5 @@ class Solution:
             temp *= nums[i]
         return answer
 ```
+
+![](https://blog.kakaocdn.net/dna/GOR0C/btq1XkJTmGo/AAAAAAAAAAAAAAAAAAAAAHCKfQFYyYnRBXLpnvdieqmFHDuXvuU2A41msPNYzESk/img.png?credential=yqXZFxpELC7KVnFOS48ylbz2pIh7yKj8&expires=1772290799&allow_ip=&allow_referer=&signature=%2FM1s40LMIGip9qfuOwC4wrL8XBQ%3D)

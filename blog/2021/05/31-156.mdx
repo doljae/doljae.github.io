@@ -10,10 +10,15 @@ date: 2021-05-31T22:28:07+09:00
 
 > 원문: https://doljae.tistory.com/156
 
-![cover](https://blog.kakaocdn.net/dna/z2DjP/btq6cSXuDmd/AAAAAAAAAAAAAAAAAAAAAJBEtBKheftC3BzQoxb_YCa1FvtKr6mgohGbBkYl6lf6/img.png?credential=yqXZFxpELC7KVnFOS48ylbz2pIh7yKj8&expires=1772290799&allow_ip=&allow_referer=&signature=D8dvZkE0EdHYrsVfKmOI6%2FNOwP4%3D)
+[Roman to Integer - LeetCode
 
-1. 내 Trash Garbage Code
+Level up your coding skills and quickly land a job. This is the best place to expand your knowledge and get prepared for your next interview.
 
+leetcode.com](https://leetcode.com/problems/roman-to-integer/)
+
+<!-- truncate -->
+
+### 1\. 내 Trash Garbage Code
 
 ```
 class Solution:
@@ -40,17 +45,16 @@ class Solution:
                 answer += dict1[s[index]]
             index += 1
 
-<!-- truncate -->
-
         return answer
 ```
+
+![](https://blog.kakaocdn.net/dna/z2DjP/btq6cSXuDmd/AAAAAAAAAAAAAAAAAAAAAJBEtBKheftC3BzQoxb_YCa1FvtKr6mgohGbBkYl6lf6/img.png?credential=yqXZFxpELC7KVnFOS48ylbz2pIh7yKj8&expires=1772290799&allow_ip=&allow_referer=&signature=D8dvZkE0EdHYrsVfKmOI6%2FNOwP4%3D)
 
 그냥 문제 내용 그대로 구현했다.
 
 딱 봐도 별로다.
 
-2. 로마자 특징을 이용한 풀이
-
+### 2\. 로마자 특징을 이용한 풀이
 
 ```
 class Solution:
@@ -71,9 +75,11 @@ class Solution:
         return answer + dict1[s[-1]]
 ```
 
+![](https://blog.kakaocdn.net/dna/c78tId/btq6gcHyKLx/AAAAAAAAAAAAAAAAAAAAAKCL4tl4Xm1GTT8VXzvElreUuxNh-zrVbsiskD-u83y2/img.png?credential=yqXZFxpELC7KVnFOS48ylbz2pIh7yKj8&expires=1772290799&allow_ip=&allow_referer=&signature=guj9gR9wxnkib6vpcOipLP6L%2BGE%3D)
+
 로마자는 이런 특징이 있다.
 
-IV -&gt; 5 - 1  = 4
+IV -&gt; 5 - 1  = 4
 
 XL -&gt; 50 - 10 = 40
 

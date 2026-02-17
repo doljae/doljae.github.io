@@ -10,22 +10,30 @@ date: 2021-10-11T13:40:56+09:00
 
 > 원문: https://doljae.tistory.com/249
 
-![cover](https://blog.kakaocdn.net/dna/CngrV/btrhqgeecXf/AAAAAAAAAAAAAAAAAAAAAMqU6cLtxvHRpIbaCiQ6sduRKV79sFKCJxL3T-ToaHIY/img.png?credential=yqXZFxpELC7KVnFOS48ylbz2pIh7yKj8&expires=1772290799&allow_ip=&allow_referer=&signature=Q2ux0bRVrAevr8Km%2B3xkd0faIKs%3D)
+[Search a 2D Matrix - LeetCode
 
-row, col이 커질수록 큰 값이 들어있는 2차원 배열에서 특정 값이 있는지 탐색하는 문제다.
+Level up your coding skills and quickly land a job. This is the best place to expand your knowledge and get prepared for your next interview.
 
-1. 이진 탐색
+leetcode.com](https://leetcode.com/problems/search-a-2d-matrix/)
 
 <!-- truncate -->
 
+row, col이 커질수록 큰 값이 들어있는 2차원 배열에서 특정 값이 있는지 탐색하는 문제다.
+
+### 1\. 이진 탐색
+
+ [240\. Search a 2D Matrix II
+
+Search a 2D Matrix II - LeetCode Level up your coding skills and quickly land a job. This is the best place to expand your knowledge and get prepared for your next interview. leetcode.com 1. Brute F..
+
+doljae.tistory.com](https://doljae.tistory.com/143)
+
 동일한 문제지만 2차원 배열 크기가 훨씬 큰 문제에서 사용한 방법을 그대로 사용할 수 있다.
 
-2. 이진 탐색 2
-
+### 2\. 이진 탐색 2
 
 ```
 from typing import *
-
 
 class Solution:
     def searchMatrix(self, matrix: List[List[int]], target: int) -> bool:
@@ -43,13 +51,15 @@ class Solution:
                 start = mid + 1
             else:
                 end = mid - 1
-        
+
         return False
 ```
 
-1번 풀이와 별다를 건 없어 보이지만,  row, col 값을 얻을 수 있는 값을 이용해 이진 탐색을 한다.
+![](https://blog.kakaocdn.net/dna/CngrV/btrhqgeecXf/AAAAAAAAAAAAAAAAAAAAAMqU6cLtxvHRpIbaCiQ6sduRKV79sFKCJxL3T-ToaHIY/img.png?credential=yqXZFxpELC7KVnFOS48ylbz2pIh7yKj8&expires=1772290799&allow_ip=&allow_referer=&signature=Q2ux0bRVrAevr8Km%2B3xkd0faIKs%3D)
 
-예를 들어 4 * 5 사이즈의 2차원 배열이라면 start, end를 각각 0, (20 - 1)로 두고 이진 탐색을 하는 셈.
+1번 풀이와 별다를 건 없어 보이지만,  row, col 값을 얻을 수 있는 값을 이용해 이진 탐색을 한다.
+
+예를 들어 4 \* 5 사이즈의 2차원 배열이라면 start, end를 각각 0, (20 - 1)로 두고 이진 탐색을 하는 셈.
 
 mid 값을 width로 나누면 row의 값을 얻을 수 있고, mid 값을 width로 모듈로 연산하면 col의 값을 얻을 수 있다.
 

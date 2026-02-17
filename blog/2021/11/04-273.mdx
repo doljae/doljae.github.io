@@ -10,14 +10,28 @@ date: 2021-11-04T13:57:01+09:00
 
 > 원문: https://doljae.tistory.com/273
 
-![cover](https://blog.kakaocdn.net/dna/bZcg20/btrjVNUNRB8/AAAAAAAAAAAAAAAAAAAAALMt50Ey7mDDTgPMycf268Yq84rFiGDMc5G25oT31uNx/img.png?credential=yqXZFxpELC7KVnFOS48ylbz2pIh7yKj8&expires=1772290799&allow_ip=&allow_referer=&signature=SRQksG7QbWpmrSpZShW3BIHnNTc%3D)
+[What is using Port 5000 on macOS Monterey?
 
-요약하면 새로 추가된 기능 중 하나인 **airplay to mac**을 위한 listener가 디폴트로 켜져 있고, 그 포트가 로컬 5000번 포트를 점유하고 있다는 내용이다.
+I’ve been fiddling a bit with Wails recently and I gave the unreleased v2 alpha a try. Out of the box, it binds to Port 5000 and I was surprised to receive a 403 Forbidden. Definitely not what I expected. We can use the lsof utility to figure out what’
 
-Airplay 수신 모드를 끄면 점유하고 있단 포트를 내려놓긴 한다.
+utf9k.net](https://utf9k.net/questions/macos-port-5000-monterey/)
 
 <!-- truncate -->
 
+![](https://blog.kakaocdn.net/dna/bZcg20/btrjVNUNRB8/AAAAAAAAAAAAAAAAAAAAALMt50Ey7mDDTgPMycf268Yq84rFiGDMc5G25oT31uNx/img.png?credential=yqXZFxpELC7KVnFOS48ylbz2pIh7yKj8&expires=1772290799&allow_ip=&allow_referer=&signature=SRQksG7QbWpmrSpZShW3BIHnNTc%3D)
+
+시스템 환경설정 -&gt; 공유
+
+요약하면 새로 추가된 기능 중 하나인 **airplay to mac**을 위한 listener가 디폴트로 켜져 있고, 그 포트가 로컬 5000번 포트를 점유하고 있다는 내용이다.
+
+![](https://blog.kakaocdn.net/dna/bcxDGV/btrjPQeCIQz/AAAAAAAAAAAAAAAAAAAAAIXzkbMST-V_YJOYplEsiNJEbm5i2lEGPXJ2AVDIXfSs/img.png?credential=yqXZFxpELC7KVnFOS48ylbz2pIh7yKj8&expires=1772290799&allow_ip=&allow_referer=&signature=30eefHCwyJ0h2XfCy2TuXbMWdrc%3D)
+
+sudo lsof -i :5000
+
+Airplay 수신 모드를 끄면 점유하고 있단 포트를 내려놓긴 한다.
+
 물론 강제로 kill 하면 될 것 같지만(해보진 않음), 점유하고 있는 프로세스 명령어가 좀 무서워서 이걸 강제로 죽여도 되나 싶을 수 있겠다 싶다. 개발할 때 5000번 포트를 사용하고 있는 서비스가 있다면 기능을 끄고 사용하거나 포트번호를 바꿔줘야 될 것 같다.
+
+![](https://blog.kakaocdn.net/dna/cI7Bfa/btrjPt4Sogu/AAAAAAAAAAAAAAAAAAAAAC1ur9E8qvIVT_zsEbZ78O0tzj01A0CkztIzhpvZLg9r/img.png?credential=yqXZFxpELC7KVnFOS48ylbz2pIh7yKj8&expires=1772290799&allow_ip=&allow_referer=&signature=N8kADa9r4S%2BHaq6Ad5MAtIsooRA%3D)
 
 참고로 docker registry의 default 포트 번호가 5000번이라고 한다.

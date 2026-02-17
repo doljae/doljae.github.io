@@ -10,23 +10,27 @@ date: 2021-06-27T17:18:25+09:00
 
 > 원문: https://doljae.tistory.com/172
 
-![cover](https://blog.kakaocdn.net/dna/c0SYKD/btq8dSOKsyC/AAAAAAAAAAAAAAAAAAAAAEkpStLs0QBssBJ36hjpKtI3S9O1NhCcfWHv_yp9R_pf/img.png?credential=yqXZFxpELC7KVnFOS48ylbz2pIh7yKj8&expires=1772290799&allow_ip=&allow_referer=&signature=b55Fpr26wsd3NbSVV4aenqWV%2BAI%3D)
+[Unique Binary Search Trees - LeetCode
+
+Level up your coding skills and quickly land a job. This is the best place to expand your knowledge and get prepared for your next interview.
+
+leetcode.com](https://leetcode.com/problems/unique-binary-search-trees/)
+
+<!-- truncate -->
 
 노드의 개수가 주어진다.
 
 주어진 노드를 모두 사용해서 만들 수 있는 이진트리의 형태의 가짓수를 반환하는 문제다.
 
-<!-- truncate -->
+### 1\. DFS
 
-1. DFS
 처음에 DFS로 해결할 수 있는지를 생각해보았다.
 
 결과적으론 불가능하다고 판단했다.
 
 루트 노드를 기준으로 DFS는 left subtree, right subtree를 한 재귀에서 위 문제에서 확인해야 하는 상태를 볼 수 없다.
 
-2. DP
-
+### 2\. DP
 
 ```
 class Solution:
@@ -43,13 +47,21 @@ class Solution:
         return dp[-1]
 ```
 
+![](https://blog.kakaocdn.net/dna/c0SYKD/btq8dSOKsyC/AAAAAAAAAAAAAAAAAAAAAEkpStLs0QBssBJ36hjpKtI3S9O1NhCcfWHv_yp9R_pf/img.png?credential=yqXZFxpELC7KVnFOS48ylbz2pIh7yKj8&expires=1772290799&allow_ip=&allow_referer=&signature=b55Fpr26wsd3NbSVV4aenqWV%2BAI%3D)
+
 Tree DP랑 비슷한 느낌이라고 생각해서 루트를 기준으로 left subtree의 가짓수, right subtree의 가짓수를 곱하면서 DP가 진행될 것 같은데라는 생각까지만 하고 점화식을 찾진 못해서 Discussion을 참고했다.
 
 왜 이런 점화식이 성립하는지는 Discussion 탭의 Most Voted 최상위에 있는 풀이의 답변을 참고하면 좋다.
 
-3. Catalan Number(카탈랑 수)
+### 3\. Catalan Number(카탈랑 수)
 
 사실 이 수는 **카탈랑 수**라는 독특한 수라고 한다.
+
+ [카탈랑 수 - 위키백과, 우리 모두의 백과사전
+
+비슷한 이름의 카탈랑 상수에 관해서는 해당 문서를 참조하십시오. 조합론에서, 카탈랑 수(Catalan數, 영어: Catalan number)는 이진 트리의 수 따위를 셀 때 등장하는 수열이다. 카탈랑 수 C : N → N &#123;\\di
+
+ko.wikipedia.org](https://ko.wikipedia.org/wiki/%EC%B9%B4%ED%83%88%EB%9E%91_%EC%88%98)
 
 이것을 알고 있으면 다양한 조합 문제를 한 줄로 해결할 수 있다.
 
@@ -78,6 +90,8 @@ class Solution:
             return dp[n]
 ```
 
+![](https://blog.kakaocdn.net/dna/beHXye/btq8duN6xbg/AAAAAAAAAAAAAAAAAAAAAMiPNbLRMefcBZUTW0cX-whPHx7pRRBy2Nvy05oq6Q5t/img.png?credential=yqXZFxpELC7KVnFOS48ylbz2pIh7yKj8&expires=1772290799&allow_ip=&allow_referer=&signature=1H4ETHmoTRmPeT9WRuSPVSpT8YI%3D)
+
 위키백과에 나와있는 카탈랑 수를 구하는 방법 그대로 반복문을 통해 구현했다.
 
 List 이름을 DP라고 했지만 DP를 사용한 문제는 아니고, 그래서 시간이 위 코드보다 더 걸렸다.
@@ -88,6 +102,8 @@ class Solution:
         print(factorial)
         return factorial(2*n)//factorial(n)//factorial(n)//(n+1)
 ```
+
+![](https://blog.kakaocdn.net/dna/bzofP7/btq8gmVC9Z5/AAAAAAAAAAAAAAAAAAAAANqfIKWMzn8t8kD922wUz2z7sT6XizZn2CNenhSkUEWP/img.png?credential=yqXZFxpELC7KVnFOS48ylbz2pIh7yKj8&expires=1772290799&allow_ip=&allow_referer=&signature=zk6aCrY3gRQTpfZNIPAFSLwU8CM%3D)
 
 카탈랑 수 점화식을 수학적으로 계산했을 때 한 줄로 해결할 수 있다.
 

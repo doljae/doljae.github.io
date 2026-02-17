@@ -24,7 +24,6 @@ def lower_bound(input_list, target_value):
 
     return lo
 
-
 def upper_bound(input_list, target_value):
     if not input_list:
         return 0
@@ -41,7 +40,6 @@ def upper_bound(input_list, target_value):
     return lo
 ```
 
-
-bisect_left, bisect_right를 그대로 구현한 코드.
+bisect\_left, bisect\_right를 그대로 구현한 코드.
 
 직접 구현해야 할 때 헷갈리면 마지막에 lo를 반환하게만 고정하고, hi 이동은 mid로 고정, lo 이동은 mid+1로 고정하는 걸 의식하자.

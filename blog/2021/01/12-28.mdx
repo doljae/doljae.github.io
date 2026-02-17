@@ -10,82 +10,80 @@ date: 2021-01-12T16:34:59+09:00
 
 > 원문: https://doljae.tistory.com/28
 
-![cover](http://bimage.interpark.com/goods_image/9/5/5/2/207819552h.jpg)
+### 소규모 서비스와 대규모 서비스의 차이
 
-소규모 서비스와 대규모 서비스의 차이
-1. 확장성 확보, 부하분산 필요
+1\. 확장성 확보, 부하분산 필요
 
 스케일 업이 아닌 스케일 아웃으로 진행된 느 확장의 경우 요구되는 서버, DB 간 동기화 이슈 해결
 
 <!-- truncate -->
 
-2. 다중성 확보
+2\. 다중성 확보
 
 특정 서버가 고장 나거나 성능이 저하되더라도 서비스를 계속할 수 있는 구성으로 할 필요가 있다.
 
 대규모 서비스일수록 잠깐의 기능 정지로 인해 많은 손실을 가져오기 때문이다.
 
-3. 효율적 운용 필요
+3\. 효율적 운용 필요
 
 서버가 100대를 넘어갈 때 현재 서버들의 상태를 파악할 수 있어야 하고, 상태에 따라서 적절한 조치를 빠르게 취할 수 있어야 한다. 최소한의 인력으로 대규모 시스템을 건강한 상태로 유지하는 것이 필요하다.
 
-4. 개발자 수, 개발 방법의 변화
+4\. 개발자 수, 개발 방법의 변화
 
 표준화를 위한 교육 및 팀 매니지먼트가 필요하다.
 
-5. 대규모 데이터의 처리
+5\. 대규모 데이터의 처리
 
 가장 중요한 부분.
 
 병목현상을 야기하는 어떤 기술과 알고리즘을 적용해 디스크 I/O를 줄일 수 있을 것인가를 고려해야 한다.
 
-대규모 데이터 처리의 어려운 점
-1. 메모리 내에서 계산할 수 없다.
+### 대규모 데이터 처리의 어려운 점
+
+1\. 메모리 내에서 계산할 수 없다.
 
 대규모 데이터는 너무 방대해서 그것을 모두 메모리에 올릴 수 없다. 다시 말해서 메모리 내에서 계산할 수 없고, 디스크 I/O 가 반드시 병행된다.
 
-2. 메모리 내에서 계산할 수 없게 되면 디스크에 있는 데이터를 검색하고, 이로 인해 발생하는 I/O를 어떻게 대처할 것인지가 중요한 포인트다.
+2\. 메모리 내에서 계산할 수 없게 되면 디스크에 있는 데이터를 검색하고, 이로 인해 발생하는 I/O를 어떻게 대처할 것인지가 중요한 포인트다.
 
-3. 메모리와 디스크의 속도 차이는 pow(10,5) ~ pow(10,6) 정도다.
+3\. 메모리와 디스크의 속도 차이는 pow(10,5) ~ pow(10,6) 정도다.
 
-4. 또 데이터가 커지면 커질수록 메모리에서 처리 못하고 디스크상에서 처리할 수밖에 없는 요건이 늘어난다.
+4\. 또 데이터가 커지면 커질수록 메모리에서 처리 못하고 디스크상에서 처리할 수밖에 없는 요건이 늘어난다.
 
-디스크는 왜 늦을까?
-1. 메모리는 전기적인 부품임으로 탐색 속도에 그다지 영향을 받지 않는다.
+### 디스크는 왜 늦을까?
 
-2. 하지만 디스크는 탐색하기 위해 헤드, 원반 등 하드웨어들이 이동하면서 데이터를 읽는다. 즉 메모리와는 달리 회전 등의 물리적인 동작을 수반하고 이런 차이 때문에 속도에 영향을 준다.
+1\. 메모리는 전기적인 부품임으로 탐색 속도에 그다지 영향을 받지 않는다.
 
-3. 아무리 효율적으로 디스크를 탐색한다 하더라도 빛의 속도에 근접시킬 순 없다. 메모리는 1회 탐색 시 마이크로 초가 걸리는 반면, 디스크는 수 밀리 초가 걸린다.
+2\. 하지만 디스크는 탐색하기 위해 헤드, 원반 등 하드웨어들이 이동하면서 데이터를 읽는다. 즉 메모리와는 달리 회전 등의 물리적인 동작을 수반하고 이런 차이 때문에 속도에 영향을 준다.
 
-4. OS 레벨에서 이를 어느 정도 커버하기 위해 데이터를 1바이트가 아니라 4KB 정도 한꺼번에 읽도록 해 1회의 디스크 회전으로 읽는 데이터수를 많게 한다. 하지만 이 또한 밀리 초가 걸리기 때문에 속도 차이를 피할 수 없다
+3\. 아무리 효율적으로 디스크를 탐색한다 하더라도 빛의 속도에 근접시킬 순 없다. 메모리는 1회 탐색 시 마이크로 초가 걸리는 반면, 디스크는 수 밀리 초가 걸린다.
 
-5. 또 전송속도도 메모리에 비해 100배 이상 느리다. 메모리는 7.5GB/초, 디스크는 58MB/초 정도 걸린다.
+4\. OS 레벨에서 이를 어느 정도 커버하기 위해 데이터를 1바이트가 아니라 4KB 정도 한꺼번에 읽도록 해 1회의 디스크 회전으로 읽는 데이터수를 많게 한다. 하지만 이 또한 밀리 초가 걸리기 때문에 속도 차이를 피할 수 없다
 
-부하 조정
-1. CPU 부하의 조정은 상대적으로 간단하다.
+5\. 또 전송속도도 메모리에 비해 100배 이상 느리다. 메모리는 7.5GB/초, 디스크는 58MB/초 정도 걸린다.
+
+### 부하 조정
+
+1\. CPU 부하의 조정은 상대적으로 간단하다.
 
 같은 구성의 서버를 늘리고 로드밸런서로 분산
 
 웹, AP 서버, 크롤러 등을 이용
 
-2. I/O 부하의 규모 조정은 어렵다.
+2\. I/O 부하의 규모 조정은 어렵다.
 
 DB, 대규모 데이터 등
 
-대규모 데이터를 다루기 위한 급소
-1. 어떻게 하면 메모리에서 처리를 마칠 수 있을까?
+### 대규모 데이터를 다루기 위한 급소
+
+1\. 어떻게 하면 메모리에서 처리를 마칠 수 있을까?
 
 즉 디스크 seek 횟수를 최소화하고 국소성을 활용한 분산 처리를 실현해야 한다.
 
-2. 데이터량 증가에 강한 알고리즘 및 데이터 구조를 사용하기
+2\. 데이터량 증가에 강한 알고리즘 및 데이터 구조를 사용하기
 
 선형 탐색을 이분 탐색으로
 
-3. 데이터 압축, 정보검색 기술 사용
+3\. 데이터 압축, 정보검색 기술 사용
 
-대규모 서비스를 지탱하는 기술
-국내도서
-저자 : 이토 나오야,다나카 신지 / 진명조역
-출판 : 제이펍 2011.02.28
-
-상세보기
+&lt;table class="tt-plugin-interpark" style="background: #fff; border: 1px solid #e0e0e0; width: 408px;" border="0" width="100%" cellspacing="0" data-darkreader-inline-bgimage="" data-darkreader-inline-bgcolor="" data-darkreader-inline-border-top="" data-darkreader-inline-border-right="" data-darkreader-inline-border-bottom="" data-darkreader-inline-border-left=""&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td style="vertical-align: top; padding: 10px 0 10px 10px;" width="70"&gt;&lt;a href="http://book.interpark.com/blog/integration/product/itemDetail.rdo?prdNo=207819552&amp;refererType=8303&amp;bookblockname=bpmain_in&amp;booklinkname=wg_search_EFEB8364BC43711681CC6C69032386A3753E74A4F9E4F62B3FA06C4836C10BAB&amp;key=EFEB8364BC43711681CC6C69032386A3753E74A4F9E4F62B3FA06C4836C10BAB" target="_blank" rel="noopener"&gt;&lt;img style="border: 0 none;" src="http://bimage.interpark.com/goods_image/9/5/5/2/207819552h.jpg" width="66" height="90" data-darkreader-inline-border-top="" data-darkreader-inline-border-right="" data-darkreader-inline-border-bottom="" data-darkreader-inline-border-left=""&gt;&lt;/a&gt;&lt;/td&gt;&lt;td style="vertical-align: top; padding: 10px 10px 10px 15px;"&gt;&lt;dl style="margin: 0; padding: 2px 0 0 0; list-style: none; font: 11px dotum, sans-serif; letter-spacing: -1px; color: #777;" data-darkreader-inline-color=""&gt;&lt;dt style="padding: 0; margin: 0;"&gt;&lt;a style="font-size: 12px; color: #444 !important; font-weight: bold; text-decoration: none !important;" href="http://book.interpark.com/blog/integration/product/itemDetail.rdo?prdNo=207819552&amp;refererType=8303&amp;bookblockname=bpmain_in&amp;booklinkname=wg_search_EFEB8364BC43711681CC6C69032386A3753E74A4F9E4F62B3FA06C4836C10BAB&amp;key=EFEB8364BC43711681CC6C69032386A3753E74A4F9E4F62B3FA06C4836C10BAB" target="_blank" rel="noopener" data-darkreader-inline-color=""&gt;대규모 서비스를 지탱하는 기술&lt;/a&gt;&lt;/dt&gt;&lt;dd style="padding: 7px 0 0 0; margin: 0; color: #a0a0a0;" data-darkreader-inline-color=""&gt;국내도서&lt;/dd&gt;&lt;dd style="padding: 17px 0 0 0; margin: 0;"&gt;저자 : 이토 나오야,다나카 신지 / 진명조역&lt;/dd&gt;&lt;dd style="padding: 4px 0 0 0; margin: 0;"&gt;출판 : 제이펍 &lt;span style="letter-spacing: normal;"&gt;2011.02.28&lt;/span&gt;&lt;/dd&gt;&lt;/dl&gt;&lt;a style="float: right; width: 44px; height: 11px; background: url('//t1.daumcdn.net/tistory_admin/static/images/icon_ipark_detail.gif') no-repeat; overflow: hidden; display: block; text-indent: -1000em;" href="http://book.interpark.com/blog/integration/product/itemDetail.rdo?prdNo=207819552&amp;refererType=8303&amp;bookblockname=bpmain_in&amp;booklinkname=wg_search_EFEB8364BC43711681CC6C69032386A3753E74A4F9E4F62B3FA06C4836C10BAB&amp;key=EFEB8364BC43711681CC6C69032386A3753E74A4F9E4F62B3FA06C4836C10BAB" target="_blank" rel="noopener" data-darkreader-inline-bgcolor=""&gt;상세보기&lt;/a&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;

@@ -10,8 +10,7 @@ date: 2020-12-20T09:23:32+09:00
 
 > 원문: https://doljae.tistory.com/6
 
-변수 관련
-
+#### 변수 관련
 
 ```
 # 한 줄에 변수를 2개 이상 선언할 수 있다
@@ -32,8 +31,7 @@ a, b = b, a
 # a=10, b=5
 ```
 
-list 조작 1
-
+#### list 조작 1
 
 ```
 # map
@@ -49,20 +47,17 @@ new_board = list(filter(lambda x: x > 2, board))
 # 복잡한 조건을 넣어야 할 경우 따로 함수를 선언해 사용
 board = [1, 2, 3, 4, 5]
 
-
 def mapping_function(input_value):
     if input_value % 2 == 0:
         return "짝"
     else:
         return "홀"
 
-
 new_board = list(map(lambda x: mapping_function(x), board))
 # new_board = ["홀","짝","홀","짝","홀"]
 ```
 
-list 조작 2
-
+#### list 조작 2
 
 ```
 # extend

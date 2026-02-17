@@ -10,77 +10,99 @@ date: 2023-08-20T15:14:46+09:00
 
 > 원문: https://doljae.tistory.com/321
 
-![cover](https://blog.kakaocdn.net/dna/ovLWe/btsrDEDMnWy/AAAAAAAAAAAAAAAAAAAAAFmsVd0NylcsdhHUoTz41DxuPeBcuhW_i6rWT57Uzev3/img.png?credential=yqXZFxpELC7KVnFOS48ylbz2pIh7yKj8&expires=1772290799&allow_ip=&allow_referer=&signature=wb9zS7EQYff4MeCCCOJQxVub53Q%3D)
+## 요약
 
-요약
-좋은 기회가 닿아 **코프링 프로젝트 투입 일주일 전: 주니어 개발자의 코틀린 도입 이야기**라는 주제로 인프콘 2023에 발표자로 참여했습니다. 발표 신청부터 발표까지의 지난 4개월간의 이야기를 정리해보려고 합니다.
+좋은 기회가 닿아 [***코프링 프로젝트 투입 일주일 전: 주니어 개발자의 코틀린 도입 이야기***](https://www.inflearn.com/conf/infcon-2023/session-detail?id=765)라는 주제로 인프콘 2023에 발표자로 참여했습니다. 발표 신청부터 발표까지의 지난 4개월간의 이야기를 정리해보려고 합니다.
 
-발표자 신청
+![](https://blog.kakaocdn.net/dna/ovLWe/btsrDEDMnWy/AAAAAAAAAAAAAAAAAAAAAFmsVd0NylcsdhHUoTz41DxuPeBcuhW_i6rWT57Uzev3/img.png?credential=yqXZFxpELC7KVnFOS48ylbz2pIh7yKj8&expires=1772290799&allow_ip=&allow_referer=&signature=wb9zS7EQYff4MeCCCOJQxVub53Q%3D)
 
 <!-- truncate -->
 
-인프랩 측에서 4월 경에 인프콘 2023 발표자 공개모집을 시작했습니다.
+발표 소개 페이지
 
-이전에도 기회가 된다면 IT 콘퍼런스 연사로 참여해 보고 싶다는 생각은 있었습니다. 다만 구체적이라기보단 막연함 쪽에 가까웠기 때문에 뭔가 특별히 준비하고 있진 않았습니다. 당시 회사에선 작년 여름에 시작한 코프링 API 서버 개발 일을 하고 있었습니다. 신규 프로젝트였고 핵심이 되는 API 서버를 밑바닥에서부터 개발하는 경험을 하게 되었습니다. 이때 서비스 로직을 담고 있는 운영 서버에 처음으로 코프링(코틀린 + 스프링)을 도입했고, 초기 설정부터 개발을 진행하면서 여러 가지 코프링 관련 개발 경험을 할 수 있었습니다.
+## 발표자 신청
+
+![](https://blog.kakaocdn.net/dna/bQ4snT/btsrTPjfe8g/AAAAAAAAAAAAAAAAAAAAABIlXErr7n7auowD6ajoZaG72yoCrOiAEc2uHfNDALb1/img.png?credential=yqXZFxpELC7KVnFOS48ylbz2pIh7yKj8&expires=1772290799&allow_ip=&allow_referer=&signature=BF1CvxvrSQfILHSAkiYI4NIOKmU%3D)
+
+인프랩 측에서 4월 경에 [인프콘 2023 발표자 공개모집](https://www.linkedin.com/posts/inflab_infcon-2023-%EB%B0%9C%ED%91%9C%EC%9E%90-%EA%B3%B5%EA%B0%9C%EB%AA%A8%EC%A7%91-activity-7051125870471647232-BfRk?utm_source=share&utm_medium=member_desktop)을 시작했습니다.
+
+이전에도 기회가 된다면 IT 콘퍼런스 연사로 참여해 보고 싶다는 생각은 있었습니다. 다만 구체적이라기보단 막연함 쪽에 가까웠기 때문에 뭔가 특별히 준비하고 있진 않았습니다. 당시 회사에선 작년 여름에 시작한 코프링 API 서버 개발 일을 하고 있었습니다. 신규 프로젝트였고 핵심이 되는 API 서버를 밑바닥에서부터 개발하는 경험을 하게 되었습니다. 이때 서비스 로직을 담고 있는 운영 서버에 처음으로 코프링(코틀린 + 스프링)을 도입했고, 초기 설정부터 개발을 진행하면서 여러 가지 코프링 관련 개발 경험을 할 수 있었습니다.
 
 **발표자 모집 소식을 듣고 꽤 괜찮은 주제가 될 것 같은 데라는 생각을 했습니다.** 자바, 스프링은 국내 개발 시장에서 가장 큰 파이를 차지하고 있기도 하고 요즘 기업 규모를 막론하고 JVM과 스프링을 주요 기술 스택으로 가지고 있는 많은 조직에서 코틀린을 도입하고 있습니다. 그래서 코틀린, 스프링 관련 발표라는 것만으로도 어느 정도 수요가 있을 것으로 기대했습니다.
 
-다만 저도 코프링에 대해서 아직 배워가는 중이고 자신 있게 말할 수 있는 정도의 지식을 갖추지 못했기 때문에 원리, 내부 구현 등 깊이 있는 내용에 대해서 다루는 것은 어렵지 않겠냐는 판단 아래 코프링 도입기라는 비교적 가볍게 풀어갈 수 있는 주제로 방향성을 잡았습니다.
+다만 저도 코프링에 대해서 아직 배워가는 중이고 자신 있게 말할 수 있는 정도의 지식을 갖추지 못했기 때문에 원리, 내부 구현 등 깊이 있는 내용에 대해서 다루는 것은 어렵지 않겠냐는 판단 아래 코프링 도입기라는 비교적 가볍게 풀어갈 수 있는 주제로 방향성을 잡았습니다.
 
-여기에 주니어 개발자의 입장에서 (나름대로) 팀과 프로젝트에 새로운 기술 도입을 견인하면서 겪었던 여러 가지 이야기를 풀어가는 정도라면 어느 정도 납득할 만한 퀄리티의 정보 제공 성격의 발표를 준비할 수 있지 않겠냐는 생각이 들었습니다.
+여기에 주니어 개발자의 입장에서 (나름대로) 팀과 프로젝트에 새로운 기술 도입을 견인하면서 겪었던 여러 가지 이야기를 풀어가는 정도라면 어느 정도 납득할 만한 퀄리티의 정보 제공 성격의 발표를 준비할 수 있지 않겠냐는 생각이 들었습니다.
 
-그렇게 발표 제목과 내용이 정리되어 발표 신청을 했고 감사하게도 발표자로 선정되었습니다.
+![](https://blog.kakaocdn.net/dna/tay2M/btsrH4IDrNi/AAAAAAAAAAAAAAAAAAAAAG-rfxfMJxzM1pitI2rptsXpSDM-WY37bwlooLj8o6im/img.png?credential=yqXZFxpELC7KVnFOS48ylbz2pIh7yKj8&expires=1772290799&allow_ip=&allow_referer=&signature=Dz8YmL2jaSF25zzlyIA5I0bw7AE%3D)
 
-발표 준비 1
-발표자 선정 후에는 발표자 & 발표에 대한 간략한 소개와 1차 발표 자료를 제출하게 됩니다.
+그렇게 발표 제목과 내용이 정리되어 발표 신청을 했고 감사하게도 발표자로 선정되었습니다.
 
-발표자 소개를 몇 번이나 쓰고 지우고를 반복했는지 모르겠습니다. 발표 소개 메인에 들어갈 내용이기도 하고 대외적으로 저는 이런 사람이라고 설명하는 아주 중요한 부분이라고 생각했습니다. 그래서 작년 인프콘 발표자분들의 자기소개 글도 보고 이런저런 참고 자료도 찾아보았지만 진도가 잘 나가지 않아서 제출 마감일 전날까지도 고민을 많이 했습니다. 그렇게 고민하다가 그냥 속 편하게 나에 대해서 좀 적어보자, 해서 두서없이 적어봤는데 이렇게 하니 가장 자연스럽게 문장이 나와서 마감에 늦지 않게 제출했습니다.
+## 발표 준비 1
 
-발표 자료 준비도 쉽지 않았습니다. 제가 다루려는 내용을 적절하게 분리해서 슬라이드를 구성하니 약 70장 정도 분량이 나왔습니다. 이때 제가 다루려는 이야기가 매우 많은 분량인 것을 알게 되었고 이렇게 많은 슬라이드를 만든 경험도 이번 발표가 처음이었습니다. 다만 1차 발표 자료 제출 후 피드백을 받은 뒤 최종 발표 자료를 제출하는 일정이 있었기 때문에 우선 내용을 먼저 채우고 단어 선택 및 스타일 관련 부분은 제출 후 다듬자는 생각으로 준비했습니다.
+발표자 선정 후에는 발표자 & 발표에 대한 간략한 소개와 1차 발표 자료를 제출하게 됩니다.
 
-1차 발표 자료 제출 이후에 인프랩 사옥에서 발표자 사전 모임을 했습니다. 발표 전에 발표자분들과 다과를 먹으면서 이야기해 볼 수 있는 좋은 시간이었습니다.
+발표자 소개를 몇 번이나 쓰고 지우고를 반복했는지 모르겠습니다. 발표 소개 메인에 들어갈 내용이기도 하고 대외적으로 저는 이런 사람이라고 설명하는 아주 중요한 부분이라고 생각했습니다. 그래서 작년 인프콘 발표자분들의 자기소개 글도 보고 이런저런 참고 자료도 찾아보았지만 진도가 잘 나가지 않아서 제출 마감일 전날까지도 고민을 많이 했습니다. 그렇게 고민하다가 그냥 속 편하게 나에 대해서 좀 적어보자, 해서 두서없이 적어봤는데 이렇게 하니 가장 자연스럽게 문장이 나와서 마감에 늦지 않게 제출했습니다.
 
-발표자 사전 모임 관련 포스트는 이곳에서 확인하실 수 있습니다.
+발표 자료 준비도 쉽지 않았습니다. 제가 다루려는 내용을 적절하게 분리해서 슬라이드를 구성하니 약 70장 정도 분량이 나왔습니다. 이때 제가 다루려는 이야기가 매우 많은 분량인 것을 알게 되었고 이렇게 많은 슬라이드를 만든 경험도 이번 발표가 처음이었습니다. 다만 1차 발표 자료 제출 후 피드백을 받은 뒤 최종 발표 자료를 제출하는 일정이 있었기 때문에 우선 내용을 먼저 채우고 단어 선택 및 스타일 관련 부분은 제출 후 다듬자는 생각으로 준비했습니다.
 
-발표 준비 2
-1차 발표 자료 제출 후 인프콘 운영팀 쪽에서 발표 자료 관련 피드백을 받게 됩니다. 그리고 발표자분들과 자율 참석 성격의 온라인 리허설을 통해서도 많은 피드백을 받았습니다.
+![](https://blog.kakaocdn.net/dna/dmYCOR/btsrBMWdJyt/AAAAAAAAAAAAAAAAAAAAAGud413pANutVkNUDtOVkh48CSKu7so7kzSHHC8OUovy/img.png?credential=yqXZFxpELC7KVnFOS48ylbz2pIh7yKj8&expires=1772290799&allow_ip=&allow_referer=&signature=pYSGNnIoPD%2BnG7tPvv4SEQ4weLE%3D)
 
-**개인적으로 온라인 리허설 경험이 정말 좋았습니다.** 온라인 환경이긴 하지만 내가 만든 자료를 가지고 다른 분들 앞에서 발표를 해보면 부족한 부분을 알 수 있었습니다. 그리고 다른 발표자분께서 저는 보이지 않았던 아쉬운 부분에 대해 짚어 주시고 건설적인 피드백을 아낌없이 주셨습니다. 이를 바탕으로 발표와 발표 자료에 대한 방향성을 검토하고 이에 맞게 수정했습니다. 온라인 리허설에서 피드백을 주신 발표자분들께 이 자리를 빌려서 정말 감사하다는 말씀드립니다.
+1차 발표 자료 제출 이후에 인프랩 사옥에서 발표자 사전 모임을 했습니다. 발표 전에 발표자분들과 다과를 먹으면서 이야기해 볼 수 있는 좋은 시간이었습니다.
+
+발표자 사전 모임 관련 포스트는 [이곳에서](https://www.inflearn.com/pages/infcon-20203-story-speaker-pre-meeting) 확인하실 수 있습니다.
+
+## 발표 준비 2
+
+1차 발표 자료 제출 후 인프콘 운영팀 쪽에서 발표 자료 관련 피드백을 받게 됩니다. 그리고 발표자분들과 자율 참석 성격의 온라인 리허설을 통해서도 많은 피드백을 받았습니다.
+
+**개인적으로 온라인 리허설 경험이 정말 좋았습니다.** 온라인 환경이긴 하지만 내가 만든 자료를 가지고 다른 분들 앞에서 발표를 해보면 부족한 부분을 알 수 있었습니다. 그리고 다른 발표자분께서 저는 보이지 않았던 아쉬운 부분에 대해 짚어 주시고 건설적인 피드백을 아낌없이 주셨습니다. 이를 바탕으로 발표와 발표 자료에 대한 방향성을 검토하고 이에 맞게 수정했습니다. 온라인 리허설에서 피드백을 주신 발표자분들께 이 자리를 빌려서 정말 감사하다는 말씀드립니다.
+
+![](https://blog.kakaocdn.net/dna/nOLq6/btsrB2EsFnw/AAAAAAAAAAAAAAAAAAAAAIhVNhWz-MP9_0XNFrtV1SPz6iE9AdKL769Q9gtAZMbG/img.png?credential=yqXZFxpELC7KVnFOS48ylbz2pIh7yKj8&expires=1772290799&allow_ip=&allow_referer=&signature=XW1R5x0PJS191Mhkh0iNw0KB6dg%3D)
+
+인터넷에서만 보던 걸 하게 되었습니다...
 
 발표 자료도 코드와 비슷해서 오늘은 괜찮았다가도 내일 보면 아쉬운 부분이 보이는, 정답과 끝이 없는 그런 느낌이 들어 수정 작업을 수없이 반복했고 우여곡절 끝에 최종 발표 자료를 제출했습니다.
 
-발표 전날 리허설
+## 발표 전날 리허설
+
+![](https://blog.kakaocdn.net/dna/6mhG9/btsrBPL8FOp/AAAAAAAAAAAAAAAAAAAAABb59XSkTQEda0NMbQ-byWyKp9mCWwZKG4GgNQVz-YCb/img.png?credential=yqXZFxpELC7KVnFOS48ylbz2pIh7yKj8&expires=1772290799&allow_ip=&allow_referer=&signature=tFsMIZGOPjps%2BaWuzVUYCRk9c7g%3D)![](https://blog.kakaocdn.net/dna/cb2CgK/btsrIeXV9X1/AAAAAAAAAAAAAAAAAAAAAD-emp4Cld_ibdcRMS4aOGWNRuX4-UcYQP-8nyOMTpsM/img.png?credential=yqXZFxpELC7KVnFOS48ylbz2pIh7yKj8&expires=1772290799&allow_ip=&allow_referer=&signature=D3VpBDm0r0NhrCad1fYGbYAuU3w%3D)
+
+행사 전날 리허설
 
 발표 당일 전날에 오프라인 리허설에 참여했습니다. 제가 발표할 공간에서 발표 자료, 장비, 음향 설정을 한 뒤 리허설하는 시간을 가졌습니다.
 
-리허설 후 오길 잘했다는 생각이 들었는데요, 주어진 발표 시간이 제가 생각했던 것보다 조금 부족하다는 것을 알게 되었습니다. 만일 리허설을 하지 않았더라면 현장에서 시간이 부족해 갑자기 말이 빨라진다던가 뒷부분 내용을 전달해 드리지 못하거나 했었을 것 같습니다. 상대적으로 중요한 슬라이드에 시간을 좀 더 투자하고 덜 중요한 슬라이드는 빠르게 넘기기로 하고 얼추 딱 시간이 알맞게 맞는 것을 확인하고 잠에 들었습니다.
+리허설 후 오길 잘했다는 생각이 들었는데요, 주어진 발표 시간이 제가 생각했던 것보다 조금 부족하다는 것을 알게 되었습니다. 만일 리허설을 하지 않았더라면 현장에서 시간이 부족해 갑자기 말이 빨라진다던가 뒷부분 내용을 전달해 드리지 못하거나 했었을 것 같습니다. 상대적으로 중요한 슬라이드에 시간을 좀 더 투자하고 덜 중요한 슬라이드는 빠르게 넘기기로 하고 얼추 딱 시간이 알맞게 맞는 것을 확인하고 잠에 들었습니다.
 
-발표 당일
+## 발표 당일
 
-저는 오프닝 다음에 바로 이어지는 타임 슬롯이었기 때문에 오프닝 키노트 시작 후 얼마 안 있어 발표자 대기실에서 발표장으로 이동했습니다. 오프닝이 끝나고 시간이 되었고 발표 전 영상이 재생되는 동안 단상에 올라가 발표했습니다.
+![](https://blog.kakaocdn.net/dna/tgRK9/btsrIdEHZQB/AAAAAAAAAAAAAAAAAAAAAH3PqOX8efi4lYZ7ChRkhRmQiZRhEnZMXjXoCm4t238v/img.png?credential=yqXZFxpELC7KVnFOS48ylbz2pIh7yKj8&expires=1772290799&allow_ip=&allow_referer=&signature=DCiUI3o85jUW9mofbIAHoV4vyvg%3D)![](https://blog.kakaocdn.net/dna/bNhwct/btsrDIZwM2F/AAAAAAAAAAAAAAAAAAAAABl8AGoRueya9VuNpbDGYp6kiBmt6NDQfmnTK7lp9TDm/img.png?credential=yqXZFxpELC7KVnFOS48ylbz2pIh7yKj8&expires=1772290799&allow_ip=&allow_referer=&signature=E6rBh7fXciUTKD3BgCeDmMlF1J0%3D)![](https://blog.kakaocdn.net/dna/sOqNm/btsrDdln69Y/AAAAAAAAAAAAAAAAAAAAABsSXYI27pjAoiAfawZXwDbaZdcv-EYK6c_tQEQPyfCv/img.png?credential=yqXZFxpELC7KVnFOS48ylbz2pIh7yKj8&expires=1772290799&allow_ip=&allow_referer=&signature=H5IgP8tQWHWSVqqnf1tUkEY3yHg%3D)
 
-40분이 어떻게 지나갔는지도 모를 정도로 빠르게 지나갔는데요, 마지막 슬라이드가 끝날 때 약 2분 정도의 여유가 있었는데요 시간 관계상 빠르게 넘긴 슬라이드가 조금 아쉬우면서도 적당하게 잘 마무리했다는 안도감이 함께 들었습니다.
+저는 오프닝 다음에 바로 이어지는 타임 슬롯이었기 때문에 오프닝 키노트 시작 후 얼마 안 있어 발표자 대기실에서 발표장으로 이동했습니다. 오프닝이 끝나고 시간이 되었고 발표 전 영상이 재생되는 동안 단상에 올라가 발표했습니다.
 
-그렇게 발표가 끝나고 이어지는 질의응답 시간까지 마무리되면서 발표자가 아닌 참가자로 부스와 다른 세션에 참석하는 등 즐거운 시간을 보냈습니다.
+40분이 어떻게 지나갔는지도 모를 정도로 빠르게 지나갔는데요, 마지막 슬라이드가 끝날 때 약 2분 정도의 여유가 있었는데요 시간 관계상 빠르게 넘긴 슬라이드가 조금 아쉬우면서도 적당하게 잘 마무리했다는 안도감이 함께 들었습니다.
 
-느낀 점
-**발표 준비는 틈틈이**
+그렇게 발표가 끝나고 이어지는 질의응답 시간까지 마무리되면서 발표자가 아닌 참가자로 부스와 다른 세션에 참석하는 등 즐거운 시간을 보냈습니다. 
 
-개인적으로 인프콘 운영팀에서 발표자분들에게 발표 자료 준비를 위해서 충분한 시간을 주셨다고 생각합니다. 그런데도 위에서 언급 드린 것처럼 여러 가지 이유로 발표 자료를 계속 수정하게 됩니다. 그래서 급하게 발표 자료를 만들고 제출하게 되면 제출하고 떠오르는 아쉬운 부분이 많이 보이게 됩니다. 또 발표 리허설을 함으로써 발표 자료에서 아쉬운 점이나 보강할 점이 보이기도 합니다.
+## 느낀 점
 
-다행히 이런 부분들을 운영팀 쪽에서도 알고 계시고 배려를 해주셔서 큰 문제는 없었습니다. 다만 완성도 있는 발표 자료를 기한 내에 제출하려면 생각보다 많은 시간이 필요하니 틈틈이 자료 준비를 하시고, **특히 최종 자료 제출 전에 발표 리허설도 해보시면서 발표 자료를 보강하실 시간적 여유를 확보하시길 권장해 드립니다.**
+**발표 준비는 틈틈이**
+개인적으로 인프콘 운영팀에서 발표자분들에게 발표 자료 준비를 위해서 충분한 시간을 주셨다고 생각합니다. 그런데도 위에서 언급 드린 것처럼 여러 가지 이유로 발표 자료를 계속 수정하게 됩니다. 그래서 급하게 발표 자료를 만들고 제출하게 되면 제출하고 떠오르는 아쉬운 부분이 많이 보이게 됩니다. 또 발표 리허설을 함으로써 발표 자료에서 아쉬운 점이나 보강할 점이 보이기도 합니다.
 
-**리허설 참여**
+다행히 이런 부분들을 운영팀 쪽에서도 알고 계시고 배려를 해주셔서 큰 문제는 없었습니다. 다만 완성도 있는 발표 자료를 기한 내에 제출하려면 생각보다 많은 시간이 필요하니 틈틈이 자료 준비를 하시고, **특히 최종 자료 제출 전에 발표 리허설도 해보시면서 발표 자료를 보강하실 시간적 여유를 확보하시길 권장해 드립니다.**
 
-온, 오프라인 막론하고 가능하다면, 특히 저처럼 이런 발표 자리가 처음이거나 발표 경험이 많이 없으신 분들이라면 리허설을 꼭 참여하시길 추천해 드립니다. **저는 온, 오프라인 리허설을 참가하지 않았더라면 이 정도 수준의 발표 자료를 만들어 발표할 수 없었을 것이라고 확신합니다.**
+**리허설 참여**
+온, 오프라인 막론하고 가능하다면, 특히 저처럼 이런 발표 자리가 처음이거나 발표 경험이 많이 없으신 분들이라면 리허설을 꼭 참여하시길 추천해 드립니다. **저는 온, 오프라인 리허설을 참가하지 않았더라면 이 정도 수준의 발표 자료를 만들어 발표할 수 없었을 것이라고 확신합니다.**
 
-내가 하고 싶은 이야기를 하는 것도 중요하지만 결국 발표라는 것은 다른 분들이 들어주시고 함께 공감하는 것이 의의라고 생각합니다. 여러 가지 방법을 이용해 제삼자의 의견을 받아보시는 것을 권장해 드립니다. 그리고 발표 당일에 어떤 시야에서 어떻게 발표하는지 보고 발표자 숙지사항 등도 체크하시는 등 오프라인 리허설에 참여하시는 것도 발표 당일에 큰 힘이 됩니다.
+내가 하고 싶은 이야기를 하는 것도 중요하지만 결국 발표라는 것은 다른 분들이 들어주시고 함께 공감하는 것이 의의라고 생각합니다. 여러 가지 방법을 이용해 제삼자의 의견을 받아보시는 것을 권장해 드립니다. 그리고 발표 당일에 어떤 시야에서 어떻게 발표하는지 보고 발표자 숙지사항 등도 체크하시는 등 오프라인 리허설에 참여하시는 것도 발표 당일에 큰 힘이 됩니다. 
 
-정리
+## 정리
 
-이렇게 발표 신청부터 시작한 약 4개월의 이야기가 마무리되었습니다. 발표 자료와 코프링 샘플 프로젝트 링크를 걸어두었습니다. 발표 영상은 이후에 인프런 유튜브 및 강의에 올라올 예정이라고 합니다. 코프링에 대해서 관심 있으신 분들께선 한번 봐주셔도 좋을 것 같습니다.
+![](https://blog.kakaocdn.net/dna/p5F77/btsrNoFWjbQ/AAAAAAAAAAAAAAAAAAAAALPAIneGyGngqpg6Tp6Qf3kh18BpE51hGS0h9Hx_YMAl/img.png?credential=yqXZFxpELC7KVnFOS48ylbz2pIh7yKj8&expires=1772290799&allow_ip=&allow_referer=&signature=Wogog%2BfKbK6tj7U41lRnIlhHZ7I%3D)![](https://blog.kakaocdn.net/dna/UbG2s/btsrNz8wDbD/AAAAAAAAAAAAAAAAAAAAAI6ffB1C0zehggHV1AcYva5xH0CrfEA9I8EbKZhgfuyL/img.png?credential=yqXZFxpELC7KVnFOS48ylbz2pIh7yKj8&expires=1772290799&allow_ip=&allow_referer=&signature=HxvZiAUZbVzhgZchj2jDs3n2vss%3D)![](https://blog.kakaocdn.net/dna/bQsUIU/btsrB7FNFYh/AAAAAAAAAAAAAAAAAAAAAA57tJgs_VT12ZA4IOMFrxyBbg7fy_gJjcxUc-d1AW-D/img.png?credential=yqXZFxpELC7KVnFOS48ylbz2pIh7yKj8&expires=1772290799&allow_ip=&allow_referer=&signature=vq1l1KuV08qP7Q730Asz9NNB%2BhI%3D)
 
-(인프런 강의에 발표자료와 함께 영상이 올라갔습니다!)
+이렇게 발표 신청부터 시작한 약 4개월의 이야기가 마무리되었습니다. [발표 자료](https://www.slideshare.net/SeokjaeLee11/2023v6pdf-260129735)와 [코프링 샘플 프로젝트](https://github.com/doljae/kopring-starter) 링크를 걸어두었습니다. 발표 영상은 이후에 [인프런 유튜브](https://www.youtube.com/channel/UC0Y0T9JpgIBbyGDjvy9PbOg) 및 강의에 올라올 예정이라고 합니다. 코프링에 대해서 관심 있으신 분들께선 한번 봐주셔도 좋을 것 같습니다.
+
+([인프런 강의](https://www.inflearn.com/course/%EC%9D%B8%ED%94%84%EC%BD%982023-%EB%8B%A4%EC%8B%9C%EB%B3%B4%EA%B8%B0)에 발표자료와 함께 영상이 올라갔습니다!)
 
 이번 발표는 작년 여름부터 시작한 신규 프로젝트에 대한 저 나름의 회고이기도 했습니다. 발표 준비를 하면서 작성했던 코드, 찾아봤던 자료, 그리고 만들었던 사내 Wiki 페이지 등을 보면서 아련한 느낌도 들었고, 나름대로 1년 동안 열심히 보냈다는 생각도 들었습니다.
 

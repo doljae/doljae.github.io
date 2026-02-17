@@ -10,18 +10,20 @@ date: 2021-04-28T15:04:55+09:00
 
 > 원문: https://doljae.tistory.com/96
 
-![cover](https://blog.kakaocdn.net/dna/cbB2tS/btq3IPVeSBU/AAAAAAAAAAAAAAAAAAAAAKnfcVKXtfgm65KWeNU9C6NdpF0sZDLGPfc1h9UOjgGF/img.png?credential=yqXZFxpELC7KVnFOS48ylbz2pIh7yKj8&expires=1772290799&allow_ip=&allow_referer=&signature=%2Fel7gg4VkaMloFBxDc%2F9of1NSco%3D)
+[Diameter of Binary Tree - LeetCode
 
-1. 실패한 코드
+Level up your coding skills and quickly land a job. This is the best place to expand your knowledge and get prepared for your next interview.
 
+leetcode.com](https://leetcode.com/problems/diameter-of-binary-tree/)
+
+<!-- truncate -->
+
+### 1\. 실패한 코드
 
 ```
 # Definition for a binary tree node.
 from typing import *
 from collections import deque
-
-<!-- truncate -->
-
 
 # Definition for a binary tree node.
 class TreeNode:
@@ -29,7 +31,6 @@ class TreeNode:
         self.val = val
         self.left = left
         self.right = right
-
 
 class Solution:
     start = None
@@ -52,13 +53,11 @@ class Solution:
                 return max(left, right) + 1
 ```
 
-
 실패 테스트 케이스
 
 ```
 [4,-7,-3,null,null,-9,-3,9,-7,-4,null,6,null,-6,-6,null,null,0,6,5,null,9,null,null,-1,-4,null,null,null,-2]
 ```
-
 
 원인
 
@@ -66,8 +65,9 @@ Tree DP 마냥 올라가면 안 된다. 최댓값을 반환하는 문제기 때�
 
 반례는 아래와 같다. (오픈 톡방 cgiosy님 반례)
 
-2. 해법
+![](https://blog.kakaocdn.net/dna/cbB2tS/btq3IPVeSBU/AAAAAAAAAAAAAAAAAAAAAKnfcVKXtfgm65KWeNU9C6NdpF0sZDLGPfc1h9UOjgGF/img.png?credential=yqXZFxpELC7KVnFOS48ylbz2pIh7yKj8&expires=1772290799&allow_ip=&allow_referer=&signature=%2Fel7gg4VkaMloFBxDc%2F9of1NSco%3D)
 
+### 2\. 해법
 
 ```
 class Solution:
@@ -86,5 +86,7 @@ class Solution:
         dfs(root)
         return self.result
 ```
+
+![](https://blog.kakaocdn.net/dna/cdaOnu/btq3EJItdVa/AAAAAAAAAAAAAAAAAAAAAA9k7zaWh7OiTELIS9vUgHhzyk_PypzlfaIK5pkN8GJb/img.png?credential=yqXZFxpELC7KVnFOS48ylbz2pIh7yKj8&expires=1772290799&allow_ip=&allow_referer=&signature=BtFHniDFFS9nWBonMQ7ddKrb%2F4c%3D)
 
 괜히 내부 함수 없이 주어진 함수 그대로 재귀로 넘기려고 했다가 문제 요구 사항을 제대로 짚지 못했다.

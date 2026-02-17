@@ -10,16 +10,18 @@ date: 2021-04-05T14:09:52+09:00
 
 > 원문: https://doljae.tistory.com/67
 
-![cover](https://blog.kakaocdn.net/dna/EdoLa/btq1OMAlot0/AAAAAAAAAAAAAAAAAAAAAGwUCZYLZu_Dzc4NIPG7rTFFoMMmHkvF_ASP4zXAoxwJ/img.png?credential=yqXZFxpELC7KVnFOS48ylbz2pIh7yKj8&expires=1772290799&allow_ip=&allow_referer=&signature=UaXeFdL%2FoZWJeO6lZiJWGpWPg5E%3D)
+[Binary Tree Inorder Traversal - LeetCode
 
-1. DFS를 이용한 Inorder 구현
+Level up your coding skills and quickly land a job. This is the best place to expand your knowledge and get prepared for your next interview.
 
-
-```
-from typing import *
+leetcode.com](https://leetcode.com/problems/binary-tree-inorder-traversal/)
 
 <!-- truncate -->
 
+### 1\. DFS를 이용한 Inorder 구현
+
+```
+from typing import *
 
 class Solution:
     def inorderTraversal(self, root: TreeNode) -> List[int]:
@@ -36,8 +38,9 @@ class Solution:
         return answer
 ```
 
-2. Stack을 이용한 Inorder 구현
+![](https://blog.kakaocdn.net/dna/EdoLa/btq1OMAlot0/AAAAAAAAAAAAAAAAAAAAAGwUCZYLZu_Dzc4NIPG7rTFFoMMmHkvF_ASP4zXAoxwJ/img.png?credential=yqXZFxpELC7KVnFOS48ylbz2pIh7yKj8&expires=1772290799&allow_ip=&allow_referer=&signature=UaXeFdL%2FoZWJeO6lZiJWGpWPg5E%3D)
 
+### 2\. Stack을 이용한 Inorder 구현
 
 ```
 class Solution:
@@ -54,3 +57,5 @@ class Solution:
             cur = cur.right
         return answer
 ```
+
+![](https://blog.kakaocdn.net/dna/bqp1w5/btq1TL1Jf5Y/AAAAAAAAAAAAAAAAAAAAACNz1gj1EeeWfp0gSYyOboqfCwRG2JKRlaPnV58-Xfzi/img.png?credential=yqXZFxpELC7KVnFOS48ylbz2pIh7yKj8&expires=1772290799&allow_ip=&allow_referer=&signature=fedaEYmZzISEzAzuk%2BuBPoBG748%3D)

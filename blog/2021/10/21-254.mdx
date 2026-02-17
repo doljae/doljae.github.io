@@ -10,18 +10,21 @@ date: 2021-10-21T12:56:45+09:00
 
 > 원문: https://doljae.tistory.com/254
 
-![cover](https://blog.kakaocdn.net/dna/kMCWS/btrioF5qyO2/AAAAAAAAAAAAAAAAAAAAAH6yebb_d-Z5gd1xz8SQBT0TWVg158KZfhXVpmCwE8FX/img.png?credential=yqXZFxpELC7KVnFOS48ylbz2pIh7yKj8&expires=1772290799&allow_ip=&allow_referer=&signature=wcHujDOLWy35f3aKoXdO9cPTrIE%3D)
+[House Robber II - LeetCode
+
+Level up your coding skills and quickly land a job. This is the best place to expand your knowledge and get prepared for your next interview.
+
+leetcode.com](https://leetcode.com/problems/house-robber-ii/)
+
+<!-- truncate -->
 
 양의 정수가 들어있는 1차원 배열이 주어진다.
 
 도둑은 배열을 방문하면서 방문한 곳에 해당하는 정수만큼 돈을 훔칠 수 있다. 단 연속된 배열을 방문할 순 없고, 최소 한 칸 이상 건너서 훔칠 수 있다. 도둑이 훔칠 수 있는 최댓값을 반환하는 문제다.
 
-<!-- truncate -->
-
 단 주의할 점이 있다면 1차원 배열이 주어지지만 이 배열이 원형으로 되어있어 0번 인덱스와 N-1 인덱스는 인접하고 있다는 조건이 추가되었다. 그렇기 때문에 0번 인덱스와 N-1번 인덱스가 가리키는 값을 동시에 훔칠 수는 없다.
 
-예시
-
+### 예시
 
 ```
 Input: nums = [2,3,2]
@@ -38,13 +41,10 @@ Input: nums = [1,2,3]
 Output: 3
 ```
 
-
-1. DP (실패)
-
+### 1\. DP (실패)
 
 ```
 from typing import *
-
 
 class Solution:
     def rob(self, nums: List[int]) -> int:
@@ -89,12 +89,13 @@ class Solution:
         return max(dp[-1])
 ```
 
+![](https://blog.kakaocdn.net/dna/kMCWS/btrioF5qyO2/AAAAAAAAAAAAAAAAAAAAAH6yebb_d-Z5gd1xz8SQBT0TWVg158KZfhXVpmCwE8FX/img.png?credential=yqXZFxpELC7KVnFOS48ylbz2pIh7yKj8&expires=1772290799&allow_ip=&allow_referer=&signature=wcHujDOLWy35f3aKoXdO9cPTrIE%3D)
+
 dp 문제인 건 보면 알 것 같고, 점화식도 적당히 생각이 났지만 0번, N-1번 인덱스가 인접해있다는 조건을 어떻게 해결해야 할지 감이 오질 않았다. 우선 check라는 배열을 이용해 점화식을 진행하면서 현재 최댓값이 0번째 인덱스가 가리키는 값을 포함하고 있는지를 기록했고, 점화식으로 값을 업데이트할 때마다 이것을 반영해주었다.
 
-마지막 방에서 dp [i][1]의 값을 업데이트할 때 check 배열 조건을 확인해 만일 True라면 nums [0]을 제외하고 nums [-1]을 더하는 식으로 작성해보았다. 하지만 예외 케이스를 통과하지 못했고, 무엇보다 이렇게 푸는 문제가 아닐 거란 생각에 위 방법은 접었다.
+마지막 방에서 dp \[i\]\[1\]의 값을 업데이트할 때 check 배열 조건을 확인해 만일 True라면 nums \[0\]을 제외하고 nums \[-1\]을 더하는 식으로 작성해보았다. 하지만 예외 케이스를 통과하지 못했고, 무엇보다 이렇게 푸는 문제가 아닐 거란 생각에 위 방법은 접었다.
 
-2. DP (성공)
-
+### 2\. DP (성공)
 
 ```
 class Solution:
@@ -115,18 +116,18 @@ class Solution:
         return max(first[len(nums) - 1], second[len(nums)])
 ```
 
+![](https://blog.kakaocdn.net/dna/uKxjZ/btrioo4b56X/AAAAAAAAAAAAAAAAAAAAAGzLmQ1NQyETKi_K3hzQxAwQ4vAQlbcrfYfyXlAc651o/img.png?credential=yqXZFxpELC7KVnFOS48ylbz2pIh7yKj8&expires=1772290799&allow_ip=&allow_referer=&signature=soyeFzdpU2xi63Zix%2FAzzw%2FqQkU%3D)
+
 first, second 배열은 첫 번째 방부터 시작했을 때 dp, 두 번째 방부터 시작했을 때 dp 배열이다.
 
 dp 배열 사이즈를 len(nums)+1로 해서 반복문에서 예외를 편리하게 넘겼다. 점화식은 동일하다.
 
 이렇게 첫 번째, 두 번째 방을 방문했을 때의 dp 배열을 따로 두고, 마지막엔 첫 번째 dp배열의 마지막 방을 방문하기 전의 최댓값과 두 번째 dp배열의 마지막 방까지 방문했을 때의 최댓값을 비교해 반환해주면 복잡한 분기문이 필요 없이 요구하는 문제 조건을 만족시킬 수 있다.
 
-3. DP (수정)
-
+### 3\. DP (수정)
 
 ```
 from typing import *
-
 
 class Solution:
     def rob(self, nums: List[int]) -> int:
@@ -144,9 +145,11 @@ class Solution:
         return max(help(nums, 1, len(nums)), help(nums, 0, len(nums) - 1))
 ```
 
+![](https://blog.kakaocdn.net/dna/lhS11/btrio2Nn9rG/AAAAAAAAAAAAAAAAAAAAABnkyryS5PJTlVClWetlFko-wq9a-Th_6fVXLjNIG80p/img.png?credential=yqXZFxpELC7KVnFOS48ylbz2pIh7yKj8&expires=1772290799&allow_ip=&allow_referer=&signature=hxP%2FeBp2wpIPeda%2F2mmQ1gopTY8%3D)
+
 위 과정을 좀 더 우아하게 작성할 수 있다.
 
-그러니깐 결국 dp 배열을 구하는 로직은 같은데 첫 번째 방이 포함되는 dp 배열은 nums [:len(nums)-1]를 대상으로 하고, 두 번째 방이 포함되는 dp 배열은 nums [1:len(nums)]를 대상으로 한다.
+그러니깐 결국 dp 배열을 구하는 로직은 같은데 첫 번째 방이 포함되는 dp 배열은 nums \[:len(nums)-1\]를 대상으로 하고, 두 번째 방이 포함되는 dp 배열은 nums \[1:len(nums)\]를 대상으로 한다.
 
 그러니깐 시작과 끝의 인덱스 값만 보내고, rob1, rob2로 index-1, index-2 시점의 최댓값을 저장하면서 업데이트하면 추가 공간도 선언할 필요 없이 문제를 해결할 수 있다.
 

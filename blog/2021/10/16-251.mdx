@@ -10,34 +10,36 @@ date: 2021-10-16T20:24:38+09:00
 
 > 원문: https://doljae.tistory.com/251
 
-![cover](https://blog.kakaocdn.net/dna/coY4DW/btrhV96YVkh/AAAAAAAAAAAAAAAAAAAAAP_oYSe4bfad-fVrmP7KA87ShGXsK0ymeB8AzWB23Ofg/img.png?credential=yqXZFxpELC7KVnFOS48ylbz2pIh7yKj8&expires=1772290799&allow_ip=&allow_referer=&signature=XeLoHG%2FmsThdk1PquA7kuc8IirE%3D)
+[Subtree of Another Tree - LeetCode
+
+Level up your coding skills and quickly land a job. This is the best place to expand your knowledge and get prepared for your next interview.
+
+leetcode.com](https://leetcode.com/problems/subtree-of-another-tree/)
+
+<!-- truncate -->
 
 트리 a, b가 주어진다.
 
 트리 b가 트리 a에 포함되는지를 판단해 반환하는 문제다. 즉 트리 b가 트리 a와 같거나 혹은 트리 a의 서브 트리인지를 반환하면 된다.
 
-<!-- truncate -->
+### 접근법
 
-접근법
 중위, 후위, 전위 순회로 트리 2개를 탐색하고, 탐색 순서를 문자열로 변환해 트리 a의 탐색 순서 문자열에 트리 b의 탐색 순서 문자열이 존재하는지 판단하는 것으로 접근했다.
 
-그런데 이것으론 예외를 탐색할 수가 없었다. 예를 들어 a가 [1,2,3]이고 b가 [1,2]라면 a를 순회한 문자열은 "123", b를 순회한 문자열은 "12"이고 True를 반환하지만 답은 False가 된다.
+그런데 이것으론 예외를 탐색할 수가 없었다. 예를 들어 a가 \[1,2,3\]이고 b가 \[1,2\]라면 a를 순회한 문자열은 "123", b를 순회한 문자열은 "12"이고 True를 반환하지만 답은 False가 된다.
 
-1. DFS 구현
-
+### 1\. DFS 구현
 
 ```
 # Definition for a binary tree node.
 
 from typing import *
 
-
 class TreeNode:
     def __init__(self, val=0, left=None, right=None):
         self.val = val
         self.left = left
         self.right = right
-
 
 class Solution:
     def isSubtree(self, root: Optional[TreeNode], subRoot: Optional[TreeNode]) -> bool:
@@ -67,5 +69,7 @@ class Solution:
 
         return dfs(root, subRoot)
 ```
+
+![](https://blog.kakaocdn.net/dna/coY4DW/btrhV96YVkh/AAAAAAAAAAAAAAAAAAAAAP_oYSe4bfad-fVrmP7KA87ShGXsK0ymeB8AzWB23Ofg/img.png?credential=yqXZFxpELC7KVnFOS48ylbz2pIh7yKj8&expires=1772290799&allow_ip=&allow_referer=&signature=XeLoHG%2FmsThdk1PquA7kuc8IirE%3D)
 
 재귀로 깔끔하게 구현할 수 있는 문제였다.

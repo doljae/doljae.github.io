@@ -10,17 +10,19 @@ date: 2021-05-08T22:07:05+09:00
 
 > 원문: https://doljae.tistory.com/120
 
-![cover](https://blog.kakaocdn.net/dna/cc5WXc/btq4s27q8lD/AAAAAAAAAAAAAAAAAAAAAC6q1x3_TW2jVLd7161a1rSafdErygjdN7R7ha1UpPi9/img.png?credential=yqXZFxpELC7KVnFOS48ylbz2pIh7yKj8&expires=1772290799&allow_ip=&allow_referer=&signature=O7WDs4auRjLyuE1JsF8VQG1yheg%3D)
+[Top K Frequent Elements - LeetCode
 
-1. Using Counter
+Level up your coding skills and quickly land a job. This is the best place to expand your knowledge and get prepared for your next interview.
 
+leetcode.com](https://leetcode.com/problems/top-k-frequent-elements/)
+
+<!-- truncate -->
+
+### 1\. Using Counter
 
 ```
 from typing import *
 from collections import Counter
-
-<!-- truncate -->
-
 
 class Solution:
     def topKFrequent(self, nums: List[int], k: int) -> List[int]:
@@ -30,15 +32,15 @@ class Solution:
         return list(map(lambda x: x[0], counter_dict.most_common(k)))[:k]
 ```
 
+![](https://blog.kakaocdn.net/dna/cc5WXc/btq4s27q8lD/AAAAAAAAAAAAAAAAAAAAAC6q1x3_TW2jVLd7161a1rSafdErygjdN7R7ha1UpPi9/img.png?credential=yqXZFxpELC7KVnFOS48ylbz2pIh7yKj8&expires=1772290799&allow_ip=&allow_referer=&signature=O7WDs4auRjLyuE1JsF8VQG1yheg%3D)
+
 Python의 HashMap인 Dictionary 자료구조를 응용한 Counter 자료구조를 이용해 풀어보았다.
 
-2. Bucket Sort
-
+### 2\. Bucket Sort
 
 ```
 from typing import *
 from collections import defaultdict
-
 
 class Solution:
     def topKFrequent(self, nums: List[int], k: int) -> List[int]:
@@ -64,6 +66,8 @@ class Solution:
                     break
         return result
 ```
+
+![](https://blog.kakaocdn.net/dna/bh3r0D/btq4s2TULqr/AAAAAAAAAAAAAAAAAAAAAAFpSTLyTPm2Y_MdfA36KR4E8NPrMFWw2Bgp8xzgsZU7/img.png?credential=yqXZFxpELC7KVnFOS48ylbz2pIh7yKj8&expires=1772290799&allow_ip=&allow_referer=&signature=KXDYIiDcALtr2sNzqNYCsOmSNik%3D)
 
 Counter를 사용했을 때 보다 속도도 느리고 메모리 사용량도 높다.
 

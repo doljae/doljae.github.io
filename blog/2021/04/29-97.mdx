@@ -10,24 +10,36 @@ date: 2021-04-29T11:03:36+09:00
 
 > 원문: https://doljae.tistory.com/97
 
-![cover](https://blog.kakaocdn.net/dna/dr43fo/btq3FnMOXHw/AAAAAAAAAAAAAAAAAAAAAKNrIoDHmyFCw6qsN9pg4aHTSKjWp4Oj4smfAeRMovFV/img.png?credential=yqXZFxpELC7KVnFOS48ylbz2pIh7yKj8&expires=1772290799&allow_ip=&allow_referer=&signature=S%2FSe5l9mfJshxdrsQxz19G2aVYY%3D)
-
 애플이 최근에 출시한 M1 프로세서를 사용한 MAC은 VMware, VirtualBox 등 무료 가상 머신을 사용할 수 없다. 현재까진 Parallels에서만 사용이 가능한 것으로 알고 있다.
 
 MAC OS는 기본적으로 터미널이 있고, 리눅스 기반 명령어를 사용할 수 있도록 환경이 어느 정도 갖추어져 있지만, 그 조상이 Linux가 아니라 라 Unix(Linux의 조상)이어서 그런진 몰라도 리눅스 환경에서 사용했던 명령어 일부가 지원하지 않거나 다른 명령어가 그 역할을 한다.
 
-<!-- truncate -->
-
 포인트는 공부 및 프로젝트 배포 실습을 위해선 Linux환경이 필요하다. 그래서 결국 대안으로 AWS EC2를 이용해 Linux 환경을 사용하기로 했다.
+
+<!-- truncate -->
 
 사실 AWS도 공부를 제대로 하고 사용해야 하는 기술 스택이지만 아직 배움이 부족해 자세한 포스팅을 할 수 없어서 계정 생성부터 실행까지 잘 설명해주신 블로그 링크를 걸어둔다.
 
-1. EC2 계정 생성부터 실행까지...
+### 1\. EC2 계정 생성부터 실행까지...
 
-2. 기타 설정
+ [AWS 튜토리얼(1) - Ec2 생성하기
+
+EC2 인스턴스 생성 AMI(amazon Machine Image) 선택 인스턴스 유형 선택 인스턴스 세부 정보 구성 스토리지 추가 태그 추가 보안 그룹 구성 인스턴스 시작 검토 인스턴스 생성완료 지난주쯤에 스프링부
+
+youngjinmo.github.io](https://youngjinmo.github.io/2020/03/aws-tutorial-create-ec2/)
+
+### 2\. 기타 설정
+
+ [\[AWS\] 8.AWS EC2 root 계정 활성화 시키기
+
+\[AWS\] 8.AWS EC2 root 계정 활성화 시키기 안녕하세요. 갓대희 입니다. 이번 포스팅은 \[ AWS EC2 (리눅스) root 계정 사용하기 \] 입니다. : ) 이전 포스팅을 통해 EC2 리눅스를 설치 해보았다. 다만 root.
+
+goddaehee.tistory.com](https://goddaehee.tistory.com/193)
 
 훌륭한 지식 공유자분들 덕분에 쉽게 설정할 수 있었다. 이후에는 가상 머신의 Ubuntu 사용하는 것처럼 사용할 수 있다.
 
 간단하게 nginx를 설치하고 테스트해보았는데 아주 잘 된다!
+
+![](https://blog.kakaocdn.net/dna/dr43fo/btq3FnMOXHw/AAAAAAAAAAAAAAAAAAAAAKNrIoDHmyFCw6qsN9pg4aHTSKjWp4Oj4smfAeRMovFV/img.png?credential=yqXZFxpELC7KVnFOS48ylbz2pIh7yKj8&expires=1772290799&allow_ip=&allow_referer=&signature=S%2FSe5l9mfJshxdrsQxz19G2aVYY%3D)
 
 이번 기회에 좀 더 Linux랑 AWS와 친해지도록 공부해봐야겠다.

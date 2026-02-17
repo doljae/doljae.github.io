@@ -10,17 +10,19 @@ date: 2021-04-05T16:00:34+09:00
 
 > 원문: https://doljae.tistory.com/68
 
-![cover](https://blog.kakaocdn.net/dna/cHRlNI/btq1V291MIU/AAAAAAAAAAAAAAAAAAAAAN0lNz7HVds682-5PTocUtxhEXrBQq13hIhnvgLwCXb3/img.png?credential=yqXZFxpELC7KVnFOS48ylbz2pIh7yKj8&expires=1772290799&allow_ip=&allow_referer=&signature=VZI3Y0dTRvSIPgtEBEmJCBCMWm0%3D)
+[Permutations - LeetCode
 
-1. 전형적인 DFS
+Level up your coding skills and quickly land a job. This is the best place to expand your knowledge and get prepared for your next interview.
 
+leetcode.com](https://leetcode.com/problems/permutations/)
+
+<!-- truncate -->
+
+### 1\. 전형적인 DFS
 
 ```
 from typing import *
 from copy import deepcopy
-
-<!-- truncate -->
-
 
 class Solution:
     def permute(self, nums: List[int]) -> List[List[int]]:
@@ -44,8 +46,9 @@ class Solution:
         return answer
 ```
 
-2. 아직도 이해하지 못한 DFS
+![](https://blog.kakaocdn.net/dna/cHRlNI/btq1V291MIU/AAAAAAAAAAAAAAAAAAAAAN0lNz7HVds682-5PTocUtxhEXrBQq13hIhnvgLwCXb3/img.png?credential=yqXZFxpELC7KVnFOS48ylbz2pIh7yKj8&expires=1772290799&allow_ip=&allow_referer=&signature=VZI3Y0dTRvSIPgtEBEmJCBCMWm0%3D)
 
+### 2\. 아직도 이해하지 못한 DFS
 
 ```
 class Solution:
@@ -66,3 +69,5 @@ class Solution:
         backtrack(0, len(nums))
         return ans
 ```
+
+![](https://blog.kakaocdn.net/dna/bqWVMB/btq1NveRBt3/AAAAAAAAAAAAAAAAAAAAAFnd2hO_IfnCjjn_OG4_TXI1U_2_E9uQZQF57fovITwM/img.png?credential=yqXZFxpELC7KVnFOS48ylbz2pIh7yKj8&expires=1772290799&allow_ip=&allow_referer=&signature=YUZYYmb%2FqZ2SRJ9XQuWvZA8DO9k%3D)

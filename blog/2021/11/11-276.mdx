@@ -10,27 +10,39 @@ date: 2021-11-11T12:03:53+09:00
 
 > 원문: https://doljae.tistory.com/276
 
-![cover](https://blog.kakaocdn.net/dna/bRyToO/btrkw4BW9cY/AAAAAAAAAAAAAAAAAAAAALmp4TGJ7TF8u8afD85NNeJvVjSR0Gog51IXhutl103w/img.jpg?credential=yqXZFxpELC7KVnFOS48ylbz2pIh7yKj8&expires=1772290799&allow_ip=&allow_referer=&signature=5Ep%2FYWfo9dyBbFu5W%2BYTa%2ByqQuE%3D)
+[Sum of Left Leaves - LeetCode
+
+Level up your coding skills and quickly land a job. This is the best place to expand your knowledge and get prepared for your next interview.
+
+leetcode.com](https://leetcode.com/problems/sum-of-left-leaves/)
+
+<!-- truncate -->
 
 이진트리의 root가 주어진다.
 
 주어진 트리의 왼쪽 자식 노드의 값의 합을 반환하는 문제다.
 
-<!-- truncate -->
+### 예시
 
-예시
+![](https://blog.kakaocdn.net/dna/bRyToO/btrkw4BW9cY/AAAAAAAAAAAAAAAAAAAAALmp4TGJ7TF8u8afD85NNeJvVjSR0Gog51IXhutl103w/img.jpg?credential=yqXZFxpELC7KVnFOS48ylbz2pIh7yKj8&expires=1772290799&allow_ip=&allow_referer=&signature=5Ep%2FYWfo9dyBbFu5W%2BYTa%2ByqQuE%3D)
 
+```
 Input: root = [3,9,20,null,null,15,7]
 Output: 24
 Explanation: There are two left leaves in the binary tree, with values 9 and 15 respectively.
+```
+
 추가로 왼쪽 **자식 노드의** 값의 합을 반환하는 문제이기 때문에 root만 주어진다면 0을 반환해야 한다.
 
-접근법
+### 접근법
+
 우선 재귀를 사용해서 해결할 수 있는 것 까진 문제만 읽고 감이 왔다. 어떻게 디자인을 할지 생각해보니...
 
-결국 구하려는 값은 root의 왼쪽 subtree에 존재하는 왼쪽 자식 노드들의 값의 합 + 오른쪽 subtree에 존재하는 왼쪽 자식 노드들의 값의 합이라는 생각이 들었다. 그럼 우선 왼쪽, 오른쪽 subtree를 DFS로 탐색한 뒤 결괏값을 반환하는 구조로 디자인을 한 뒤에 조건을 맞추면 되지 않을까?라고 생각했다.
+결국 구하려는 값은 root의 왼쪽 subtree에 존재하는 왼쪽 자식 노드들의 값의 합 + 오른쪽 subtree에 존재하는 왼쪽 자식 노드들의 값의 합이라는 생각이 들었다. 그럼 우선 왼쪽, 오른쪽 subtree를 DFS로 탐색한 뒤 결괏값을 반환하는 구조로 디자인을 한 뒤에 조건을 맞추면 되지 않을까?라고 생각했다.
 
-1. DFS
+### 1\. DFS
+
+```
 from typing import *
 
 class TreeNode:
@@ -40,7 +52,7 @@ class TreeNode:
         self.right = right
 
 class Solution:
-    def sumOfLeftLeaves(self, root: Optional[TreeNode]) -&gt; int:
+    def sumOfLeftLeaves(self, root: Optional[TreeNode]) -> int:
 
         def dfs(cur, flag):
 
@@ -58,5 +70,8 @@ class Solution:
             return answer
 
         return dfs(root, -1)
+```
+
+![](https://blog.kakaocdn.net/dna/QowCo/btrkqrrMFoM/AAAAAAAAAAAAAAAAAAAAAECvu1U8JfV9vgw8Ha7UXt75Tay_I0sWSmB1gPKF_jYR/img.png?credential=yqXZFxpELC7KVnFOS48ylbz2pIh7yKj8&expires=1772290799&allow_ip=&allow_referer=&signature=KxfjiKsuzJAfciAOSiR2bgersas%3D)
 
 구현 방법은 DFS의 나름 전형적인 디자인이지만 현재 자식 노드가 부모 노드의 왼쪽 자식인지를 판단하기 위해서는 어느 방향에서 왔는지에 대한 값을 가지고 판단해줘야 한다. flag라는 값을 이용해 이를 해결했고, 초기 시작할 때는 -1로 시작하기 때문에 만약에 자식이 없는 root만 주어지는 경우도 조건문 없이 바로 적용이 가능하다.

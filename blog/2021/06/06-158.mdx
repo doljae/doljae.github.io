@@ -10,16 +10,18 @@ date: 2021-06-06T22:35:22+09:00
 
 > 원문: https://doljae.tistory.com/158
 
-![cover](https://blog.kakaocdn.net/dna/btOrOA/btq6GpGaIdE/AAAAAAAAAAAAAAAAAAAAAPklsN26oyJWicHao7VRhor4VN0xl7llSZa07WpJBU7e/img.png?credential=yqXZFxpELC7KVnFOS48ylbz2pIh7yKj8&expires=1772290799&allow_ip=&allow_referer=&signature=zDLh%2FdG6gjJuMQkwypitDwcHe0Y%3D)
+[Remove Duplicates from Sorted Array - LeetCode
 
-1. 선형 탐색 로직
+Level up your coding skills and quickly land a job. This is the best place to expand your knowledge and get prepared for your next interview.
 
-
-```
-from typing import *
+leetcode.com](https://leetcode.com/problems/remove-duplicates-from-sorted-array/)
 
 <!-- truncate -->
 
+### 1\. 선형 탐색 로직
+
+```
+from typing import *
 
 class Solution:
     def removeDuplicates(self, nums: List[int]) -> int:
@@ -42,6 +44,8 @@ class Solution:
         return len(nums)
 ```
 
+![](https://blog.kakaocdn.net/dna/btOrOA/btq6GpGaIdE/AAAAAAAAAAAAAAAAAAAAAPklsN26oyJWicHao7VRhor4VN0xl7llSZa07WpJBU7e/img.png?credential=yqXZFxpELC7KVnFOS48ylbz2pIh7yKj8&expires=1772290799&allow_ip=&allow_referer=&signature=zDLh%2FdG6gjJuMQkwypitDwcHe0Y%3D)
+
 정수로 구성된 오름차순으로 정렬된 리스트가 주어진다.
 
 이 리스트를 추가 공간 없이, 즉 주어진 리스트 내부의 조작만을 이용해 중복된 정수를 제거하는 로직을 작성하는 문제다.
@@ -50,15 +54,15 @@ class Solution:
 
 이 문제를 해결하는 데 2개의 변수를 사용했다.
 
-saved_val은 가장 마지막에 출현한 값을, target_index는 새로운 값이 들어가야 하는 인덱스를 저장하는 변수다.
+saved\_val은 가장 마지막에 출현한 값을, target\_index는 새로운 값이 들어가야 하는 인덱스를 저장하는 변수다.
 
 이제 주어진 nums 리스트를 0번 인덱스부터 선형 탐색하는데 로직은 다음과 같다.
 
-1. 만일 현재 인덱스가 가리키는 값(nums[i])가 가장 마지막에 출현한 값(saved_val)과 같다면 이 값은 중복 값이기 때문에 그냥 지나간다.
+1\. 만일 현재 인덱스가 가리키는 값(nums\[i\])가 가장 마지막에 출현한 값(saved\_val)과 같다면 이 값은 중복 값이기 때문에 그냥 지나간다.
 
-2. nums[i]와 saved_val이 같지 않다면 중복이 아닌 새로운 값이기 때문에 그 숫자가 문제에서 요구하는 위치에 있어야 할 곳(nums [target_index])의 값으로 바꿔주고, target_index의 값을 1 올려준다.
+2\. nums\[i\]와 saved\_val이 같지 않다면 중복이 아닌 새로운 값이기 때문에 그 숫자가 문제에서 요구하는 위치에 있어야 할 곳(nums \[target\_index\])의 값으로 바꿔주고, target\_index의 값을 1 올려준다.
 
-3. 위 작업이 끝난 후 불필요한 부분(len(nums) - target_index) 만큼 길이는 pop 연산으로 버려준다.
+3\. 위 작업이 끝난 후 불필요한 부분(len(nums) - target\_index) 만큼 길이는 pop 연산으로 버려준다.
 
 시뮬레이션하면 다음과 같다.
 

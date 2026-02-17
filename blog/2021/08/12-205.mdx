@@ -10,31 +10,35 @@ date: 2021-08-12T12:41:40+09:00
 
 > 원문: https://doljae.tistory.com/205
 
-![cover](https://blog.kakaocdn.net/dna/mujc3/btrbR4dEKKP/AAAAAAAAAAAAAAAAAAAAANJ5eOHxO1cOqKsExEkQ9Hoebrtu3OtPEXbWidWH_3KX/img.png?credential=yqXZFxpELC7KVnFOS48ylbz2pIh7yKj8&expires=1772290799&allow_ip=&allow_referer=&signature=6EHBDgI1bqCMpvSUBxseL8MlalM%3D)
+[Serialize and Deserialize Binary Tree - LeetCode
+
+Level up your coding skills and quickly land a job. This is the best place to expand your knowledge and get prepared for your next interview.
+
+leetcode.com](https://leetcode.com/problems/serialize-and-deserialize-binary-tree/)
+
+<!-- truncate -->
 
 이진트리가 주어진다.
 
 이진트리를 직렬화(serialize)해 문자열로 반환하고, 반환된 문자열을 역직렬화(deserialize)해서 이진트리를 복원하는 메서드를 작성하는 문제다.
 
-<!-- truncate -->
-
 직렬화 및 역직렬화 방법에 제한은 없다.
 
-1. 초기 접근법
+### 1\. 초기 접근법
+
 처음에 나는 이 문제를 전위(pre-order), 중위(in-order) 순회 정보를 가지고 트리를 복구하는 문제와 결이 같다고 생각했다. 수십 분의 삽질 끝에 접근법이 잘못된 것을 알게 되었고 그 이유는 다음과 같다.
 
-주어지는 트리는 이진 탐색 트리가 아닌 이진트리다.
-주어지는 트리의 value값은 unique하지 않다. 그래서 초기 형태로 복원하려면 추가적인 정보를 넣어서 직렬 화해 줘야 한다.
-직감적으로 이렇게 푸는 문제가 아닌 것 같다는 생각이 들었다(...)
+1.  주어지는 트리는 이진 탐색 트리가 아닌 이진트리다.
+2.  주어지는 트리의 value값은 unique하지 않다. 그래서 초기 형태로 복원하려면 추가적인 정보를 넣어서 직렬 화해 줘야 한다.
+3.  직감적으로 이렇게 푸는 문제가 아닌 것 같다는 생각이 들었다(...)
 
-전위 순회를 한 결과가 [1, 1, 1, 1, 1]이라고 한다면...
+전위 순회를 한 결과가 \[1, 1, 1, 1, 1\]이라고 한다면...
 
 value값만 직렬화 해선 이진트리의 모양이 어떻게 생겼는지 알 수 없다. 그러니깐 root가 어떤 인덱스인지 알 수 없다.
 
 설령 첫 root의 index가 몇 번이다라는 정보를 저장한다고 하더라도 그 index 기준으로 좌, 우의 subtree에서의 root는 또 무엇이며, 이 root의 어떤 depth의 root인지에 대한 정보까지 있어야 완벽하게 복원할 수 있다.
 
-2. BFS
-
+### 2\. BFS
 
 ```
 class Codec:
@@ -88,13 +92,19 @@ class Codec:
         return root
 ```
 
+![](https://blog.kakaocdn.net/dna/mujc3/btrbR4dEKKP/AAAAAAAAAAAAAAAAAAAAANJ5eOHxO1cOqKsExEkQ9Hoebrtu3OtPEXbWidWH_3KX/img.png?credential=yqXZFxpELC7KVnFOS48ylbz2pIh7yKj8&expires=1772290799&allow_ip=&allow_referer=&signature=6EHBDgI1bqCMpvSUBxseL8MlalM%3D)
+
+![](https://blog.kakaocdn.net/dna/dFUQxC/btrbOJ2m7dI/AAAAAAAAAAAAAAAAAAAAABLVz10A88gUhyMdA8MrMoZTJJW_YfHox3jlS4wJgCP1/img.jpg?credential=yqXZFxpELC7KVnFOS48ylbz2pIh7yKj8&expires=1772290799&allow_ip=&allow_referer=&signature=O9YjmiJP8LwjcOUQmz1tnvhNS5c%3D)
+
+예시 트리
+
 왼쪽 트리를 기준으로 생각해보면 다음과 같다.
 
 우선 트리를 BFS탐색을 한다. 탐색할 때 노드가 있는 경우는 노드의 값을 문자열로 저장하고, 자식 노드가 없는 경우에는 "#"를 저장한다.
 
 BFS 탐색을 마치면 저장되는 결과는 다음과 같다.
 
-[1, 2, 3, #, #,4, 5, #, #, #, #]
+\[1, 2, 3, #, #,4, 5, #, #, #, #\]
 
 이걸 구분자를 적당히 넣어서 문자열로 만들어 반환하면 직렬 화가 끝난다.
 
@@ -102,22 +112,18 @@ BFS 탐색을 마치면 저장되는 결과는 다음과 같다.
 
 시뮬레이션은 다음과 같다.
 
-root 노드는 직렬화 결과의 맨 첫 번째 기 때문에 미리 node로 만들어서 q2에 넣어둔다. q1은 root노드를 만들었기 때문에 popleft()를 한 번 해준다.
-q2에 노드가 있을 때까지 반복하는데...
+1.  root 노드는 직렬화 결과의 맨 첫 번째 기 때문에 미리 node로 만들어서 q2에 넣어둔다. q1은 root노드를 만들었기 때문에 popleft()를 한 번 해준다.
+2.  q2에 노드가 있을 때까지 반복하는데...
+    1.  q2에서 노드를 꺼낸다.
+    2.  q1에서 값 2개를 꺼낸다. 각각 왼쪽, 오른쪽에 해당하는 값이다.
+    3.  만일 꺼낸 값이 우리가 null 체크를 한 문자인 "#"이 아니라면, 즉 꺼낸 값이 문자로 된 정수라면 노드를 만들어서 현재 노드의 왼쪽, 오른쪽에 연결해준다.
+    4.  연결되었다면 3번에서 만든 노드를 q2에 넣어준다.
+3.  root를 반환한다.
 
-q2에서 노드를 꺼낸다.
-q1에서 값 2개를 꺼낸다. 각각 왼쪽, 오른쪽에 해당하는 값이다.
-만일 꺼낸 값이 우리가 null 체크를 한 문자인 "#"이 아니라면, 즉 꺼낸 값이 문자로 된 정수라면 노드를 만들어서 현재 노드의 왼쪽, 오른쪽에 연결해준다.
-연결되었다면 3번에서 만든 노드를 q2에 넣어준다.
-
-root를 반환한다.
-
-2. DFS
-
+### 2\. DFS
 
 ```
 from collections import deque
-
 
 class Codec:
 
@@ -168,6 +174,8 @@ class Codec:
         dfs(q, root)
         return root
 ```
+
+![](https://blog.kakaocdn.net/dna/cNT973/btrbXiBKn0d/AAAAAAAAAAAAAAAAAAAAAH4WZj7cNXBdUsNCKmM5SBHjbh2GbBDYuqtQYxyA33n7/img.png?credential=yqXZFxpELC7KVnFOS48ylbz2pIh7yKj8&expires=1772290799&allow_ip=&allow_referer=&signature=jXcW%2BFS3c%2BcbRUKz%2BTXYfvtBxAk%3D)
 
 BFS와 결은 비슷하다. 설명은 생략.
 

@@ -10,10 +10,9 @@ date: 2021-01-12T17:20:01+09:00
 
 > 원문: https://doljae.tistory.com/29
 
-![cover](http://bimage.interpark.com/goods_image/9/5/5/2/207819552h.jpg)
+### I/O 부하를 줄이는 방법
 
-I/O 부하를 줄이는 방법
-1. 캐시를 전제로 한 I/O 줄이는 방법
+1\. 캐시를 전제로 한 I/O 줄이는 방법
 
 데이터 규모 &lt; 물리 메모리
 
@@ -23,22 +22,24 @@ I/O 부하를 줄이는 방법
 
 하지만 메모리;는 매우 비싼 자원이고 현실적으로 불가능하다.
 
-2. 전부 캐싱할 수 없는 구조가 되면
+2\. 전부 캐싱할 수 없는 구조가 되면
 
 복수 서버로 확장시키기
 
--&gt; CPU 부하분산은 단순히 스케일 업 하는 것으로 해결이 가능하다.
+\-&gt; CPU 부하분산은 단순히 스케일 업 하는 것으로 해결이 가능하다.
 
--&gt; I/O 분산에는 국소성을 고려한다.
+\-&gt; I/O 분산에는 국소성을 고려한다.
 
-3. 단순히 대수만 늘려서는 확장성을 확보할 수 없다.
+3\. 단순히 대수만 늘려서는 확장성을 확보할 수 없다.
 
 애초에 캐시 용량이 부족해서 늘렸는데 그 부족한 부분도 그대로 동일하게 늘려가게 된다. 결국 액세스 한 순간에 느려지는 것은 변함이 없다. 캐싱할 수 없는 비율은 변함없이 그대로 간다.
 
-국소성을 고려한 분산
+### 국소성을 고려한 분산
+
 액세스 패턴을 고려한 분산, 캐싱할 수 없는 부분이 사라진다. (메모리는 디스크보다 10^6배 빠르기 때문)
 
-1. 파티셔닝
+#### 1\. 파티셔닝
+
 한 대였던 DB 서버를 여러 대의 서버로 분할하는 방법
 
 예. 테이블 단위 분할
@@ -53,14 +54,10 @@ I/O 부하를 줄이는 방법
 
 캐싱하기 쉬운 요청, 캐싱하기 어려운 요청을 처리하는 섬을 나누게 되면, 전자는 국소성으로 인해 안정되고 높은 캐시 적중률을 낼 수 있다.
 
-2. 페이지 캐시를 고려한 운용의 기본 규칙
-1. OS 기동 후에 서버를 곧바로 투입하지 않는다.
+#### 2\. 페이지 캐시를 고려한 운용의 기본 규칙
 
-2. 성능 평가는 캐시가 최적화되었을 때 한다.
+1\. OS 기동 후에 서버를 곧바로 투입하지 않는다.
 
-대규모 서비스를 지탱하는 기술
-국내도서
-저자 : 이토 나오야,다나카 신지 / 진명조역
-출판 : 제이펍 2011.02.28
+2\. 성능 평가는 캐시가 최적화되었을 때 한다.
 
-상세보기
+&lt;table class="tt-plugin-interpark" style="background: #fff; border: 1px solid #e0e0e0; width: 408px;" border="0" width="100%" cellspacing="0" data-darkreader-inline-bgimage="" data-darkreader-inline-bgcolor="" data-darkreader-inline-border-top="" data-darkreader-inline-border-right="" data-darkreader-inline-border-bottom="" data-darkreader-inline-border-left=""&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td style="vertical-align: top; padding: 10px 0 10px 10px;" width="70"&gt;&lt;a href="http://book.interpark.com/blog/integration/product/itemDetail.rdo?prdNo=207819552&amp;refererType=8303&amp;bookblockname=bpmain_in&amp;booklinkname=wg_search_EFEB8364BC43711681CC6C69032386A3753E74A4F9E4F62B3FA06C4836C10BAB&amp;key=EFEB8364BC43711681CC6C69032386A3753E74A4F9E4F62B3FA06C4836C10BAB" target="_blank" rel="noopener"&gt;&lt;img style="border: 0 none;" src="http://bimage.interpark.com/goods_image/9/5/5/2/207819552h.jpg" width="66" height="90" data-darkreader-inline-border-top="" data-darkreader-inline-border-right="" data-darkreader-inline-border-bottom="" data-darkreader-inline-border-left=""&gt;&lt;/a&gt;&lt;/td&gt;&lt;td style="vertical-align: top; padding: 10px 10px 10px 15px;"&gt;&lt;dl style="margin: 0; padding: 2px 0 0 0; list-style: none; font: 11px dotum, sans-serif; letter-spacing: -1px; color: #777;" data-darkreader-inline-color=""&gt;&lt;dt style="padding: 0; margin: 0;"&gt;&lt;a style="font-size: 12px; color: #444 !important; font-weight: bold; text-decoration: none !important;" href="http://book.interpark.com/blog/integration/product/itemDetail.rdo?prdNo=207819552&amp;refererType=8303&amp;bookblockname=bpmain_in&amp;booklinkname=wg_search_EFEB8364BC43711681CC6C69032386A3753E74A4F9E4F62B3FA06C4836C10BAB&amp;key=EFEB8364BC43711681CC6C69032386A3753E74A4F9E4F62B3FA06C4836C10BAB" target="_blank" rel="noopener" data-darkreader-inline-color=""&gt;대규모 서비스를 지탱하는 기술&lt;/a&gt;&lt;/dt&gt;&lt;dd style="padding: 7px 0 0 0; margin: 0; color: #a0a0a0;" data-darkreader-inline-color=""&gt;국내도서&lt;/dd&gt;&lt;dd style="padding: 17px 0 0 0; margin: 0;"&gt;저자 : 이토 나오야,다나카 신지 / 진명조역&lt;/dd&gt;&lt;dd style="padding: 4px 0 0 0; margin: 0;"&gt;출판 : 제이펍 &lt;span style="letter-spacing: normal;"&gt;2011.02.28&lt;/span&gt;&lt;/dd&gt;&lt;/dl&gt;&lt;a style="float: right; width: 44px; height: 11px; background: url('//t1.daumcdn.net/tistory_admin/static/images/icon_ipark_detail.gif') no-repeat; overflow: hidden; display: block; text-indent: -1000em;" href="http://book.interpark.com/blog/integration/product/itemDetail.rdo?prdNo=207819552&amp;refererType=8303&amp;bookblockname=bpmain_in&amp;booklinkname=wg_search_EFEB8364BC43711681CC6C69032386A3753E74A4F9E4F62B3FA06C4836C10BAB&amp;key=EFEB8364BC43711681CC6C69032386A3753E74A4F9E4F62B3FA06C4836C10BAB" target="_blank" rel="noopener" data-darkreader-inline-bgcolor=""&gt;상세보기&lt;/a&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;

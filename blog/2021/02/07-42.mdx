@@ -10,28 +10,32 @@ date: 2021-02-07T17:23:15+09:00
 
 > 원문: https://doljae.tistory.com/42
 
-JDBC(Java Database Connectivity)
+### JDBC(Java Database Connectivity)
+
 Java에서 제공하는 DB 접속 관련 API. Interface의 묶음으로 DB 벤더가 본인들의 제품 스펙에 맞게 구현체를 만들어 제공한다.
 
 J2SE의 경우 JDBC의 인터페이스는 DB 벤더가 구현한다.
 
-J2EE의 경우 JDBC의 인터페이스는 WAS 벤더가 구현한다.
-
 <!-- truncate -->
 
-WAS(Web Application Server)
+J2EE의 경우 JDBC의 인터페이스는 WAS 벤더가 구현한다.
+
+### WAS(Web Application Server)
+
 Web Server + Web Container
 
 weblogic, webshpere, jeus 등이 있다.
 
 자세한 내용은 추후 기술
 
-WS(Web Server)
+### WS(Web Server)
+
 Apache, nginx 등이 있다.
 
 자세한 내용은 추후 기술
 
-static, non-static
+### static, non-static
+
 static
 
 특정 변수의 값이 생성되는 객체 모두 같다.
@@ -42,11 +46,23 @@ non-static
 
 class 구현체는 heap 영역에 저장되지만, static 변수는 class 영역에 저장된다.
 
+ [JVM 메모리 구조 - Class Area(클래스영역), Java Stack(자바 스택 영역), Heap(힙 영역), Native Method Stacks(네
+
+  JVM 메모리 구조 구성요소 동의어 저장 요소 Class Area ·         static 영역 ·         메소드영역(method area) ·         데이터 영역 ·         static 변수(class..
+
+codedragon.tistory.com](https://codedragon.tistory.com/5297)
+
 static initializer
 
 static 변수를 초기화할 때 사용한다. 방법이 있다는 것지 일반적으로 잘 써본 경험은 없음
 
-Collection에 적용된 Generics
+### Collection에 적용된 Generics
+
+ [자바 제네릭 이해하기 Part 1
+
+개요 제네릭이란? 제네릭을 사용하는 이유 제네릭을 사용할 수 없는 경우 제네릭 메서드란? 제네릭 타입 제한하기 (Bounded Type Parameter)
+
+yaboong.github.io](https://yaboong.github.io/java/2019/01/19/java-generics-1/)
 
 Java 5 이전
 
@@ -60,13 +76,11 @@ for(int i=0;i<list.size();i++{
 }
 ```
 
-
 Java 5 이후
 
 ```
 List<String> list=new ArrayList<String>();
 ```
-
 
 Java 7 이후
 
@@ -74,7 +88,8 @@ Java 7 이후
 List<String> list=new ArrayList<>();
 ```
 
-instanceof, getClass()
+### instanceof, getClass()
+
 instanceof는 상속받은 클래스나 인터페이스도 체크한다.
 
 B extends A인 경우
@@ -83,7 +98,13 @@ B instanceof A는 true를 반환한다.
 
 정확한 클래스를 체크하고 싶다면 getClass()를 사용해야 한다
 
-Default Method
+### Default Method
+
+ [자바 입문 - 인터페이스의 default method
+
+자바 입문 가장 널리 쓰이는 프로그래밍 언어 Java로 프로그래밍의 기초를 다져보세요. 강의를 다 들었는데, 지금 내가 코딩 테스트 준비를 하고 있다면? 15년차 Java 전문 리더가 직접 이끄는 온라
+
+programmers.co.kr](https://programmers.co.kr/learn/courses/5/lessons/241)
 
 원래 interface의 method에는 body가 없었다.
 
@@ -95,5 +116,6 @@ Default Method
 
 default method는 body가 있는 method로 기존에 만들어진 구현체들도 자유롭게 사용할 수 있는 메서드다.
 
-Functional Interface
+### Functional Interface
+
 추상 메서드 하나 이외에 아무것도 없는 인터페이스

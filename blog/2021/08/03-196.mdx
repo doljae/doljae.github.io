@@ -10,14 +10,17 @@ date: 2021-08-03T09:36:05+09:00
 
 > 원문: https://doljae.tistory.com/196
 
-![cover](https://blog.kakaocdn.net/dna/cWesdf/btraZLlQhN5/AAAAAAAAAAAAAAAAAAAAAENmVjwQjMek7hd339BVKxJtB0TmuXq5g91wHIZh9BxT/img.png?credential=yqXZFxpELC7KVnFOS48ylbz2pIh7yKj8&expires=1772290799&allow_ip=&allow_referer=&signature=WcCj2x1BmuT%2FSfLmHO5N2ro0X%2Fs%3D)
+[Range Sum of BST - LeetCode
 
-이진 탐색 트리의 low, high 값을 주면 low 이상 high 이하의 모든 노드의 값을 더해서 반환하는 문제다.
+Level up your coding skills and quickly land a job. This is the best place to expand your knowledge and get prepared for your next interview.
 
-1. DFS, 완전 탐색
+leetcode.com](https://leetcode.com/problems/range-sum-of-bst/)
 
 <!-- truncate -->
 
+이진 탐색 트리의 low, high 값을 주면 low 이상 high 이하의 모든 노드의 값을 더해서 반환하는 문제다.
+
+### 1\. DFS, 완전 탐색
 
 ```
 class Solution:
@@ -41,12 +44,13 @@ class Solution:
         return self.answer
 ```
 
+![](https://blog.kakaocdn.net/dna/cWesdf/btraZLlQhN5/AAAAAAAAAAAAAAAAAAAAAENmVjwQjMek7hd339BVKxJtB0TmuXq5g91wHIZh9BxT/img.png?credential=yqXZFxpELC7KVnFOS48ylbz2pIh7yKj8&expires=1772290799&allow_ip=&allow_referer=&signature=WcCj2x1BmuT%2FSfLmHO5N2ro0X%2Fs%3D)
+
 이진 탐색 트리를 전부 탐색하면서 조건에 해당하는 값을 더한 뒤 반환한다.
 
 이진 탐색 트리의 특징을 사용하지 않았다.
 
-2. DFS, 이진 탐색 트리의 특징을 사용한 탐색
-
+### 2\. DFS, 이진 탐색 트리의 특징을 사용한 탐색
 
 ```
 class Solution:
@@ -69,6 +73,8 @@ class Solution:
         return dfs(root)
 ```
 
+![](https://blog.kakaocdn.net/dna/bJojaT/btraVEUFvXO/AAAAAAAAAAAAAAAAAAAAAMcqnurFK-Ypnv_Ir3vAFbOZduH7mtSwS2CqmDRZN8Rb/img.png?credential=yqXZFxpELC7KVnFOS48ylbz2pIh7yKj8&expires=1772290799&allow_ip=&allow_referer=&signature=cBEPc9kHTpsvYWLg4CKkwqUbc0o%3D)
+
 1번 방법과 비슷하지만 조건에 해당하는 범위만을 탐색하고 있다.
 
 low는 이진 탐색 트리의 왼쪽 서브 트리에 해당하는 방향인데, 현재 노드의 값이 low보다 작다는 것은 적어도 현재 노드의 왼쪽 서브 트리는 탐색하지 않아도 된다는 뜻이다.
@@ -77,8 +83,7 @@ high는 이진 탐색 트리의 오른쪽 서브 트리에 해당하는 방향�
 
 필요한 부분만을 탐색했기 때문에 소요시간도 줄었다.
 
-3. Stack
-
+### 3\. Stack
 
 ```
 class Solution:
@@ -96,5 +101,7 @@ class Solution:
                     answer += cur.val
         return answer
 ```
+
+![](https://blog.kakaocdn.net/dna/c5ZZZy/btraXVPNtGQ/AAAAAAAAAAAAAAAAAAAAAC2j1kADzV2AXicogIbW1WvXv-IgSfWjLVPqIa1_yEsW/img.png?credential=yqXZFxpELC7KVnFOS48ylbz2pIh7yKj8&expires=1772290799&allow_ip=&allow_referer=&signature=nDm%2BvELbE4QJdhSsJy4%2FCMnAOAA%3D)
 
 2번 풀이와 동일한 방법을 stack으로 구현했다.

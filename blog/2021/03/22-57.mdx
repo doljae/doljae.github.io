@@ -10,14 +10,20 @@ date: 2021-03-22T15:48:04+09:00
 
 > 원문: https://doljae.tistory.com/57
 
-programmers.co.kr/learn/courses/30/lessons/12933
+[programmers.co.kr/learn/courses/30/lessons/12933](https://programmers.co.kr/learn/courses/30/lessons/12933)
+
+ [코딩테스트 연습 - 정수 내림차순으로 배치하기
+
+함수 solution은 정수 n을 매개변수로 입력받습니다. n의 각 자릿수를 큰것부터 작은 순으로 정렬한 새로운 정수를 리턴해주세요. 예를들어 n이 118372면 873211을 리턴하면 됩니다. 제한 조건 n은 1이
+
+<!-- truncate -->
+
+programmers.co.kr](https://programmers.co.kr/learn/courses/30/lessons/12933)
 
 내가 짠 Java 코드
 
 ```
 import java.util.Arrays;
-
-<!-- truncate -->
 
 class Solution {
     public long solution(long n) {
@@ -28,12 +34,10 @@ class Solution {
         for(String a:arr)
             builder.append(a);
 
-
         return Long.parseLong(builder.reverse().toString());
     }
 }
 ```
-
 
 내가 짠 Python 코드
 
@@ -41,7 +45,6 @@ class Solution {
 def solution(n):
     return int("".join(sorted(list(str(n)),reverse=True)))
 ```
-
 
 다른 분께서 짠 Java 코드
 

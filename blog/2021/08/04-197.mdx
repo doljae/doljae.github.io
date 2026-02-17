@@ -10,16 +10,19 @@ date: 2021-08-04T16:57:48+09:00
 
 > 원문: https://doljae.tistory.com/197
 
-![cover](https://blog.kakaocdn.net/dna/sqK1b/btra34fdYrz/AAAAAAAAAAAAAAAAAAAAAAkIJboJgvl79rXXN-oltKcIk5TaBDSXT1OP7IsiDJ82/img.png?credential=yqXZFxpELC7KVnFOS48ylbz2pIh7yKj8&expires=1772290799&allow_ip=&allow_referer=&signature=hoj7AnTfW%2BjoFTvxU2ynEto0FRU%3D)
+[Check if the Sentence Is Pangram - LeetCode
+
+Level up your coding skills and quickly land a job. This is the best place to expand your knowledge and get prepared for your next interview.
+
+leetcode.com](https://leetcode.com/problems/check-if-the-sentence-is-pangram/)
+
+<!-- truncate -->
 
 소문자로 이루어진 영문 문자열이 주어진다.
 
 주어진 문자열이 알파벳 26개가 모두 1번 이상 출현한다면 True를, 그렇지 않다면 False를 반환하는 문제다.
 
-<!-- truncate -->
-
-1. Set, discard()
-
+### 1\. Set, discard()
 
 ```
 class Solution:
@@ -31,6 +34,10 @@ class Solution:
 
         return True if len(alphabet_set) == 0 else False
 ```
+
+![](https://blog.kakaocdn.net/dna/sqK1b/btra34fdYrz/AAAAAAAAAAAAAAAAAAAAAAkIJboJgvl79rXXN-oltKcIk5TaBDSXT1OP7IsiDJ82/img.png?credential=yqXZFxpELC7KVnFOS48ylbz2pIh7yKj8&expires=1772290799&allow_ip=&allow_referer=&signature=hoj7AnTfW%2BjoFTvxU2ynEto0FRU%3D)
+
+![](https://blog.kakaocdn.net/dna/nCZtB/btra6H45z9V/AAAAAAAAAAAAAAAAAAAAAA19A31_Eqz2FST7vSVO5rcIDOsoAY4t1coj974wTPi1/img.png?credential=yqXZFxpELC7KVnFOS48ylbz2pIh7yKj8&expires=1772290799&allow_ip=&allow_referer=&signature=6agL0QmJwUVhn6xA%2BLEccu3frRo%3D)
 
 간단하지만 다양한 방법으로 해결할 수 있다.
 

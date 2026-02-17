@@ -10,18 +10,20 @@ date: 2021-05-29T20:18:09+09:00
 
 > 원문: https://doljae.tistory.com/153
 
-![cover](https://blog.kakaocdn.net/dna/BFh9O/btq518tgqqu/AAAAAAAAAAAAAAAAAAAAAGaYUuMwbcyM3-BUQOmVX4wV89dzgu77awkywLmq0ElI/img.jpg?credential=yqXZFxpELC7KVnFOS48ylbz2pIh7yKj8&expires=1772290799&allow_ip=&allow_referer=&signature=Rrn2SxwkSOKX%2BNrTRcukD4bhrS0%3D)
+![](https://blog.kakaocdn.net/dna/BFh9O/btq518tgqqu/AAAAAAAAAAAAAAAAAAAAAGaYUuMwbcyM3-BUQOmVX4wV89dzgu77awkywLmq0ElI/img.jpg?credential=yqXZFxpELC7KVnFOS48ylbz2pIh7yKj8&expires=1772290799&allow_ip=&allow_referer=&signature=Rrn2SxwkSOKX%2BNrTRcukD4bhrS0%3D)
 
-InnoDB 버퍼 풀
+### InnoDB 버퍼 풀
+
 디스크의 데이터 파일이나 인덱스 정보를 메모리에 캐시 해 두는 공간
-
-쓰기 작업을 지연시켜 일괄 작업으로 처리할 수 있게 해주는 버퍼 역할
 
 <!-- truncate -->
 
+쓰기 작업을 지연시켜 일괄 작업으로 처리할 수 있게 해주는 버퍼 역할
+
 변경된 데이터를 모아서 처리하게 되면 랜덤 디스크 I/O 횟수를 줄일 수 있다.
 
-Undo 로그
+### Undo 로그
+
 쿼리로 인해 데이터를 조작해 변경했을 때 변경되기 전 데이터를 보관하는 곳
 
 즉 쿼리 a로 데이터 b를 변경한다면 변경 전 데이터를 Undo 로그에 보관한다.
@@ -30,14 +32,16 @@ Undo 로그
 
 추가적으로 트랜잭션의 격리 수준을 유지하면서 높은 동시성을 제공하는 데 사용하기도 한다.
 
-Insert 버퍼
+### Insert 버퍼
+
 쿼리로 인해 데이터가 조작이 되거나 추가되면 당연히 인덱스 또한 업데이트되어야 한다.
 
 인덱스는 접근할 때 순차적 접근이 아닌 랜덤 디스크 I/O를 발생시키고 이 또한 병목의 원인이 된다.
 
 그래서 InnoDB는 변경해야 할 인덱스 페이지가 버퍼 풀에 있으면 바로 업데이트를 수행하고, 디스크로부터 읽어와서 업데이트해야 하는 경우는 즉시 실행하지 않고 Insert 버퍼라는 임시 공간에 저장해 두고 사용자에게 결과를 반환하는 방식으로 성능을 향상한다.
 
-Redo 로그
+### Redo 로그
+
 일반적으로 DBMS의 로그와 동일하게 생각하면 된다.
 
 ACID를 보장하기 위해 모든 쿼리에 대해서 바로바로 물리 디스크에 변경된 내용을 반영하기엔 디스크에 부하가 굉장히 크다.

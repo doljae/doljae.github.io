@@ -10,7 +10,13 @@ date: 2021-06-13T00:21:44+09:00
 
 > 원문: https://doljae.tistory.com/162
 
-![cover](https://blog.kakaocdn.net/dna/ljp45/btq69XvvzNS/AAAAAAAAAAAAAAAAAAAAALkbcLrEHniqCIVgwLmK0HSEL29dQSueJfRzU7Wj_sd8/img.png?credential=yqXZFxpELC7KVnFOS48ylbz2pIh7yKj8&expires=1772290799&allow_ip=&allow_referer=&signature=EHu7%2FOUNRTs%2FbbQaonRmo2Z3H7I%3D)
+[Flatten Nested List Iterator - LeetCode
+
+Level up your coding skills and quickly land a job. This is the best place to expand your knowledge and get prepared for your next interview.
+
+leetcode.com](https://leetcode.com/problems/flatten-nested-list-iterator/)
+
+<!-- truncate -->
 
 ```
 # """
@@ -37,21 +43,15 @@ date: 2021-06-13T00:21:44+09:00
 
 class NestedIterator:
     def __init__(self, nestedList: [NestedInteger]):
-        
-    
-    def next(self) -> int:
-        
-    
-    def hasNext(self) -> bool:
-         
 
-<!-- truncate -->
+    def next(self) -> int:
+
+    def hasNext(self) -> bool:
 
 # Your NestedIterator object will be instantiated and called as such:
 # i, v = NestedIterator(nestedList), []
 # while i.hasNext(): v.append(i.next())
 ```
-
 
 문제를 정리하면 다음과 같다.
 
@@ -61,7 +61,6 @@ NestedInteger 객체로 구성된 list가 입력값으로 들어온다. NestedIn
 [[1,1],2,[1,1]]
 ```
 
-
 위 입력값은 아래 3개의 NestedList 객체로 구성된 길이 3의 list이다. 출력하면 다음과 같다.
 
 ```
@@ -70,14 +69,13 @@ NestedInteger{_integer: 2, _list: []}
 NestedInteger{_integer: None, _list: [NestedInteger{_integer: 1, _list: []}, NestedInteger{_integer: 1, _list: []}]}
 ```
 
-
-NestedInteger의 _integer가 True라면 정수라는 뜻이고, False라는 뜻은 NestedList로 구성된 List라는 뜻이다.
+NestedInteger의 \_integer가 True라면 정수라는 뜻이고, False라는 뜻은 NestedList로 구성된 List라는 뜻이다.
 
 비교해보면서 읽으면 이해가 갈 것이다.
 
 아무튼 이런 식으로 다차원의 정수 배열이 입력값으로 들어오면 평탄화해서 1차원 배열로 바꾸는 것이 문제의 요구사항이다.
 
-위의 예제 같은 경우 [1, 1, 2, 1, 1]을 반환해야 정답이다.
+위의 예제 같은 경우 \[1, 1, 2, 1, 1\]을 반환해야 정답이다.
 
 실제로 NestedInteger 클래스를 건드릴 필요는 없고 주어진 3개의 메서드를 활용해서 NestedIterator 클래스를 완성하면 된다. hasNext(), next() 함수에 대한 정의 또한 문제에 있지만 이 또한 요구사항대로 구현하지 않아도 된다. 물론 추가 메서드를 구현해도 된다.
 
@@ -90,15 +88,12 @@ while iterator.hasNext()
 return res
 ```
 
-
 이번 문제는 제대로 내가 풀지 못했기 때문에 괜찮다고 생각한 풀이를 다양하게 discussion page에서 찾아서 이해 후 작성했다.
 
-1. DFS
-
+### 1\. DFS
 
 ```
 from collections import deque
-
 
 class NestedIterator:
     def __init__(self, nestedList: [NestedInteger]):
@@ -119,10 +114,11 @@ class NestedIterator:
         return self.deque
 ```
 
+![](https://blog.kakaocdn.net/dna/ljp45/btq69XvvzNS/AAAAAAAAAAAAAAAAAAAAALkbcLrEHniqCIVgwLmK0HSEL29dQSueJfRzU7Wj_sd8/img.png?credential=yqXZFxpELC7KVnFOS48ylbz2pIh7yKj8&expires=1772290799&allow_ip=&allow_referer=&signature=EHu7%2FOUNRTs%2FbbQaonRmo2Z3H7I%3D)
+
 중첩된 배열은 DFS를 이용해서 탐색할 수 있다. 중첩된 배열을 DFS로 탐색해서 미리 결과를 만들어놓은 뒤 deque를 이용해 앞에서부터 하나씩 꺼내는 방법이다.
 
-2. Stack
-
+### 2\. Stack
 
 ```
 class NestedIterator:
@@ -142,10 +138,11 @@ class NestedIterator:
         return False
 ```
 
+![](https://blog.kakaocdn.net/dna/cVMpNg/btq66kSv9eF/AAAAAAAAAAAAAAAAAAAAAMkCF-BD_l5EQjothWJCo6OYByHom1VEWjNSwvTyjbfz/img.png?credential=yqXZFxpELC7KVnFOS48ylbz2pIh7yKj8&expires=1772290799&allow_ip=&allow_referer=&signature=eHyG5uWB%2BvIIn4a71imXIRE3SVA%3D)
+
 스택을 사용한 풀이다. 포인트는 입력된 배열을 뒤집어서 가지고 시작한다는 점인데, 스택은 tail 부분만 꺼낼 수 있기 때문에 위와 같은 방법으로 시작한다. 스택의 tail이 정수면 그대로 꺼내서 반환하면 되고, 정수가 아니라면 list라는 뜻이기 때문에 꺼낸 뒤 getList() 함수를 뒤집어서 기존 stack에 extend 해준다. 포인트는 꺼낸 list도 뒤집어서 넣어줘야 한다는 점.
 
-3. Deque
-
+### 3\. Deque
 
 ```
 class NestedIterator:
@@ -170,10 +167,11 @@ class NestedIterator:
         return self.q
 ```
 
+![](https://blog.kakaocdn.net/dna/bDJC4I/btq66VEYHOo/AAAAAAAAAAAAAAAAAAAAAJVtg594-Uh7XrQMmGchrwNcW9KUf_nV357pwkGjbJ-O/img.png?credential=yqXZFxpELC7KVnFOS48ylbz2pIh7yKj8&expires=1772290799&allow_ip=&allow_referer=&signature=XN4ZZG3AZ6gI6ud2F08Bh6ogrEw%3D)
+
 deque를 사용한 풀이다. 1번이랑 다른 점은 1번은 단순히 앞에서 꺼낼 때 효율적으로 꺼내기 위해서 사용한 것인데, 이 풀이 같은 경우는 좀 다르다. 근본적으로 보면 stack풀이와 매우 유사하지만 deque는 앞, 뒤에서 전부 꺼낼 수 있기 때문에 선언할 때 뒤집어서 선언하지 않아도 된다. 그래서 앞에서부터 값을 꺼내서 볼 수 있고 꺼낸 값이 정수면 그대로 반환하고, 그렇지 않다면 꺼낸 값에 getList()를 통해 얻은 list를 뒤집어서 appendleft() 연산을 통해 넣어주면 순서 그대로 유지하면서 연산을 할 수 있다.
 
-4. Iterator 구현
-
+### 4\. Iterator 구현
 
 ```
 class NestedIterator(object):
@@ -186,7 +184,7 @@ class NestedIterator(object):
         nestedList, i = self.stack[-1]
         self.stack[-1][1] += 1
         return nestedList[i].getInteger()
-            
+
     def hasNext(self):
         s = self.stack
         while s:
@@ -202,12 +200,13 @@ class NestedIterator(object):
         return False
 ```
 
+![](https://blog.kakaocdn.net/dna/muTRj/btq64lrEYO3/AAAAAAAAAAAAAAAAAAAAAK4rYz_bb2vI_qmWqkv9baUI9cHVikfZ5UqRQ-ek2lpw/img.png?credential=yqXZFxpELC7KVnFOS48ylbz2pIh7yKj8&expires=1772290799&allow_ip=&allow_referer=&signature=4FEZWzAuh%2BZjrxl2nvaBJd1q4v8%3D)
+
 사실 이 문제는 iterator를 구현하는 문제다. 그러니깐 엄밀히 따지고 보면 1, 2, 3번 풀이는 iterator를 구현한 것이 아니니깐 요구 사항과 다른 풀이다. 이 코드는 직접 iterator의 원리를 그대로 구현한 코드다.
 
 설명하기 굉장히 어렵지만 예제 입력값을 가지고 한 번만 연습장에 시뮬레이션해보면 박수를 칠 정도의 풀이라고 생각한다.
 
-5. generator, yield 구현(Python 한정)
-
+### 5\. generator, yield 구현(Python 한정)
 
 ```
 def find_integer(input_list):
@@ -217,11 +216,9 @@ def find_integer(input_list):
         for item in input_list.getList():
             yield from find_integer(item)
 
-
 def to_iteration(input_list):
     for item in input_list:
         yield from find_integer(item)
-
 
 class NestedIterator:
     def __init__(self, nestedList: [NestedInteger]):
@@ -239,6 +236,8 @@ class NestedIterator:
         except:
             return False
 ```
+
+![](https://blog.kakaocdn.net/dna/2dbGO/btq64mjKAua/AAAAAAAAAAAAAAAAAAAAAPRfgEDBSAxADJcaDopL5cQMLDBruFuO_UvPkI9rQLqu/img.png?credential=yqXZFxpELC7KVnFOS48ylbz2pIh7yKj8&expires=1772290799&allow_ip=&allow_referer=&signature=KOlp4mfiwZuSWIiVKhmziE9hbhk%3D)
 
 python의 고급(?) 문법 중 하나인 generator와 yield를 사용한 풀이다.
 

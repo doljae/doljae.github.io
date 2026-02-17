@@ -10,14 +10,15 @@ date: 2021-02-07T17:54:51+09:00
 
 > 원문: https://doljae.tistory.com/44
 
-MyBatis
+### MyBatis
+
 Java 객체와 SQL문 사이의 자동 mapping을 지원하는 프레임워크
 
 SQL을 별도의 파일로 분리해서 객체와 SQL 간의 parameter mapping 작업을 자동으로 지원한다.
 
-장점
-
 <!-- truncate -->
+
+장점
 
 역할 및 업무 분리
 
@@ -33,13 +34,13 @@ JPA와 같은 새로운 DB 프로그래밍 패러다임을 익혀야 하는 부�
 
 JDBC코드 작성의 불편함도 줄어들어 도메인 객체, VO객체를 중심으로 개발이 가능하다
 
-DriverManager, DataSource
+### DriverManager, DataSource
+
 JDBC는 DriverManager를 사용한다.
 
 ```
 DriverManager.getConnection(url,user,password);
 ```
-
 
 MyBatis는 DataSource라는 interface의 구현체를 사용한다. 이 DataSource가 DriverManager의 상위 호환 대체 제이다.
 
@@ -47,20 +48,39 @@ DataSource는 DBCP라고 불리는 ConnectionPool인데, 미리 Connection을 �
 
 참고로 SpringBoot의 기본 DBCP는 HikariCP로 이것도 DataSource다.
 
-ConnectionPool에 대해서
+ [DataSource (Java Platform SE 7 )
 
-1. WAS가 실행되면 미리 일정량의 DB Connection 객체를 생성하고 Pool이라는 공간에 저장한다.
+A factory for connections to the physical data source that this DataSource object represents. An alternative to the DriverManager facility, a DataSource object is the preferred means of getting a connection. An object that implements the DataSource interfa
 
-2. HTTP 요청에 따라 필요할 때 Pool에서 Connection 객체를 가져다 쓰고 반환한다.
+docs.oracle.com](https://docs.oracle.com/javase/7/docs/api/javax/sql/DataSource.html)
 
-3. 이런 방식은 기존에 DriverManager를 통해 Connection을 매번 생성하는 것에 비해 DB Driver을 로드하고 물리적인 Connection을 위한 객체 생성에 사용되는 비용을 줄일 수 있다.
+### ConnectionPool에 대해서
 
-DataSource에 대해서
+ [DB Connection Pool에 대한 이야기
+
+DB Connection Pool은 왜 필요할까?
+
+www.holaxprogramming.com](https://www.holaxprogramming.com/2013/01/10/devops-how-to-manage-dbcp/)
+
+1\. WAS가 실행되면 미리 일정량의 DB Connection 객체를 생성하고 Pool이라는 공간에 저장한다.
+
+2\. HTTP 요청에 따라 필요할 때 Pool에서 Connection 객체를 가져다 쓰고 반환한다.
+
+3\. 이런 방식은 기존에 DriverManager를 통해 Connection을 매번 생성하는 것에 비해 DB Driver을 로드하고 물리적인 Connection을 위한 객체 생성에 사용되는 비용을 줄일 수 있다.
+
+### DataSource에 대해서
+
 DataSource는 JDCP(Java DBCP) interface다.
 
 끝에 CP가 붙는 ApacheCP, HikariCP는 DataSource의 구현체다. SpringBoot는 HikariCP를 채택해서 사용하고 있다.
 
-PreparedStatement, SqlSessionTemplate에 대해서
+### PreparedStatement, SqlSessionTemplate에 대해서
+
+ [#과 $의 차이를 알아보자!
+
+mybatis를 사용하다 mapper에 sql문을 작성할 때  '#'과 '$'들을 볼 수 있습니다. 그것이 어떤 의미인지 알아봅시다! ▷'#'이란? PreparedStatement를 의미합니다.     ex) (ID = admin)  ▶ mybatis mappe..
+
+rh-cp.tistory.com](https://rh-cp.tistory.com/71)
 
 SqlSession은 MyBatis를 사용해서 DB작업을 할 때 사용하는 interface
 

@@ -10,18 +10,21 @@ date: 2021-10-11T13:29:27+09:00
 
 > 원문: https://doljae.tistory.com/248
 
-![cover](https://blog.kakaocdn.net/dna/c6RWQZ/btrhets6N9F/AAAAAAAAAAAAAAAAAAAAAOUzuSWVPfJaOlESAOTUPIpaoynpmc7WnMGfzDVUeJEN/img.png?credential=yqXZFxpELC7KVnFOS48ylbz2pIh7yKj8&expires=1772290799&allow_ip=&allow_referer=&signature=nlo2%2BMMbhUJ9kFm9Gq%2FVGXw3Ebw%3D)
+[Search in Rotated Sorted Array - LeetCode
+
+Level up your coding skills and quickly land a job. This is the best place to expand your knowledge and get prepared for your next interview.
+
+leetcode.com](https://leetcode.com/problems/search-in-rotated-sorted-array/)
+
+<!-- truncate -->
 
 정렬된 임의의 정수로 구성된 list의 특정 index 기준으로 반으로 잘라 만들어진 두 개의 list a, b를 거꾸로 붙인 list가 주어진다.
 
 이 list에서 특정 값이 존재하는지를 판단해 존재한다면 그 인덱스를 반환하고 없다면 -1을 반환한다.
 
-<!-- truncate -->
-
 단 시간 복잡도는 log(N)으로 해결한다.
 
-예시
-
+### 예시
 
 ```
 Input: nums = [4,5,6,7,0,1,2], target = 0
@@ -34,12 +37,10 @@ Input: nums = [1], target = 0
 Output: -1
 ```
 
-1. binary search
-
+### 1\. binary search
 
 ```
 from typing import *
-
 
 class Solution:
     def search(self, nums: List[int], target: int) -> int:
@@ -66,20 +67,20 @@ class Solution:
         return (start + gap) % len(nums)
 ```
 
+![](https://blog.kakaocdn.net/dna/c6RWQZ/btrhets6N9F/AAAAAAAAAAAAAAAAAAAAAOUzuSWVPfJaOlESAOTUPIpaoynpmc7WnMGfzDVUeJEN/img.png?credential=yqXZFxpELC7KVnFOS48ylbz2pIh7yKj8&expires=1772290799&allow_ip=&allow_referer=&signature=nlo2%2BMMbhUJ9kFm9Gq%2FVGXw3Ebw%3D)
+
 주어진 nums 2개를 이어 붙인 새로운 list를 만들고, 해당 list를 탐색하면서 이전 값 보다 작아지는 위치를 찾아 gap으로 저장한다.
 
-그럼 new_nums [gap:]은 정렬된 배열이기 때문에 이진 탐색을 할 수 있게 되고, start의 nums의 길이 범위를 벗어나거나 가리키는 값이 target이 아닌 경우는 -1을, 그렇지 않다면 start에 gap을 더한 값의 모듈로 연산을 한 인덱스 값을 반환한다.
+그럼 new\_nums \[gap:\]은 정렬된 배열이기 때문에 이진 탐색을 할 수 있게 되고, start의 nums의 길이 범위를 벗어나거나 가리키는 값이 target이 아닌 경우는 -1을, 그렇지 않다면 start에 gap을 더한 값의 모듈로 연산을 한 인덱스 값을 반환한다.
 
 이건 지수 시간 복잡도가 아니다. 왜냐하면 이진 탐색 전에 선형 탐색을 들어가기 때문에...
 
-예를 들어 nums = [1,3,5] 면 new_nums = [1,3,5,1,3,5] 이기 때문에 O(N)을 반드시 소모한다.
+예를 들어 nums = \[1,3,5\] 면 new\_nums = \[1,3,5,1,3,5\] 이기 때문에 O(N)을 반드시 소모한다.
 
-2. 최적화
-
+### 2\. 최적화
 
 ```
 from typing import *
-
 
 class Solution:
     def search(self, nums: List[int], target: int) -> int:
@@ -110,13 +111,21 @@ class Solution:
         return -1
 ```
 
+![](https://blog.kakaocdn.net/dna/d8g8r4/btrhdlaRJ8q/AAAAAAAAAAAAAAAAAAAAADkCqJmWL13dLAWqr9SzQrSTg0NJEZ-NVjJL-n25AUpO/img.png?credential=yqXZFxpELC7KVnFOS48ylbz2pIh7yKj8&expires=1772290799&allow_ip=&allow_referer=&signature=7Cx8vjj840lAtP8dpy9X6E%2BSK4A%3D)
+
 두 번의 이진 탐색을 사용한다. 그렇게 되면 O(logN) + O(logN) 이기 때문에 O(logN)의 시간 복잡도를 가진다.
 
 첫 번째 이진 탐색은 최적 값을 찾는다. 선형 탐색이 아니라 mid가 end가 가리키는 값보다 크면 start를 (mid+1)로 전진시키고, 그 반대라면 end를 mid로 옮겨서 gap을 찾는다.
 
-gap을 찾았으니 다시 이진 탐색으로 target이 존재하는지 찾는다. 여기서 mid와 r_mid가 있는데 mid는 실제 이진 탐색을 하게 되는 중간 인덱스이고, r_mid는 mid+gap에 모듈로 연산을 한 값이다. 이런 식으로 정렬된 list를 쪼개서 뒤집어 붙인 경우에는 시작 인덱스의 위치인 gap만 찾으면 위와 같은 방법으로 이진 탐색을 할 수 있다.
+gap을 찾았으니 다시 이진 탐색으로 target이 존재하는지 찾는다. 여기서 mid와 r\_mid가 있는데 mid는 실제 이진 탐색을 하게 되는 중간 인덱스이고, r\_mid는 mid+gap에 모듈로 연산을 한 값이다. 이런 식으로 정렬된 list를 쪼개서 뒤집어 붙인 경우에는 시작 인덱스의 위치인 gap만 찾으면 위와 같은 방법으로 이진 탐색을 할 수 있다. 
 
-3. 이해 못 함
+### 3\. 이해 못 함
+
+ [The -INF and INF method but with a better explanation for dummies like me - LeetCode Discuss
+
+Level up your coding skills and quickly land a job. This is the best place to expand your knowledge and get prepared for your next interview.
+
+leetcode.com](https://leetcode.com/problems/search-in-rotated-sorted-array/discuss/154836/The-INF-and-INF-method-but-with-a-better-explanation-for-dummies-like-me)
 
 이 방법은 이해 못했다.
 

@@ -10,54 +10,59 @@ date: 2021-01-23T19:29:34+09:00
 
 > 원문: https://doljae.tistory.com/40
 
-![cover](http://bimage.interpark.com/goods_image/4/2/0/8/208294208h.jpg)
+### 리소스 지향 아키텍처
 
-리소스 지향 아키텍처
-1. 웹 서비스에서 제공할 데이터를 특정한다
+1\. 웹 서비스에서 제공할 데이터를 특정한다
 
-2. 데이터를 리소스로 나눈다
+2\. 데이터를 리소스로 나눈다
 
 <!-- truncate -->
 
-3. 리소스에 URI로 이름을 부여한다
+3\. 리소스에 URI로 이름을 부여한다
 
-4. 클라이언트에 제공할 리소스의 표현을 설계한다
+4\. 클라이언트에 제공할 리소스의 표현을 설계한다
 
-5. 링크와 폼을 이용해 리소스와 리소스를 연결한다
+5\. 링크와 폼을 이용해 리소스와 리소스를 연결한다
 
-6. 이벤트의 표준적인 코스를 검토한다
+6\. 이벤트의 표준적인 코스를 검토한다
 
-7. 에러에 대해 검토한다
+7\. 에러에 대해 검토한다
 
-RESTFul 웹 서비스 책에 의하면...
-리소스 지향 아키텍처는 다음과 같은 특징을 가지고 있다.
-1. 어드레스 가능성
+### RESTFul 웹 서비스 책에 의하면...
+
+#### 리소스 지향 아키텍처는 다음과 같은 특징을 가지고 있다.
+
+#### 1\. 어드레스 가능성
+
 URI만 있으면 리소스를 한결같이 가리킬 수 있다.
 
-2. 접속성
+#### 2\. 접속성
+
 리소스를 링크로 접속하여 하나의 애플리케이션을 이룬다는 성질은 하이퍼미디어로서의 웹의 근간이다. 링크를 따라갈 수 있어야 한다
 
-3. 유니폼 인터페이스
-4. 스테이트리스 성
+#### 3\. 유니폼 인터페이스
 
-트랜잭션 리소스
+#### 4\. 스테이트리스 성
+
+### 트랜잭션 리소스
+
 예를 들어 DELETE로 리소스 3개를 지우려고 한다.
 
 어떻게 정확히 이 3개를 완벽하게 지울 수 있을까? 중간에 통신에러가 나더라도 이전 상태를 보장하는 원자성을 띄게 할 수 있을까?
 
 HTTP의 인터페이스로 구현할 수 없는 이런 상황에서 새로운 리소스를 작성해 바디에 정보를 기술해 서버에서 처리하게 한다. 이런 역할을 하는 메서드를 **팩토리 메서드라고** 한다.
 
-1. 팩토리 리소스에 POST 요청을 보낸다.
+1\. 팩토리 리소스에 POST 요청을 보낸다.
 
-2. 응답 헤더의 Location에 팩토리 리소스 URI를 받는다
+2\. 응답 헤더의 Location에 팩토리 리소스 URI를 받는다
 
-3. 팩토리 리소스에  DELETE 할 리소스를 붙여서 보낸다
+3\. 팩토리 리소스에  DELETE 할 리소스를 붙여서 보낸다
 
-4. 정상적으로 처리가 되면 200, 그렇지 않으면 500 응답을 받는다.
+4\. 정상적으로 처리가 되면 200, 그렇지 않으면 500 응답을 받는다.
 
-5. 모든 처리가 끝나면 아래 헤더를 추가해 보낸다.
+5\. 모든 처리가 끝나면 아래 헤더를 추가해 보낸다.
 
-6. 200 받으면 정상 처리 완료
+6\. 200 받으면 정상 처리 완료 
 
 ```
 Content-Type: appliation/x-www-form-urlencoded
@@ -65,23 +70,13 @@ Content-Type: appliation/x-www-form-urlencoded
 commit=true
 ```
 
-
 물론 BODY에 보내서 작업해도 딱히 문제는 없다.
 
-베타 제어
+### 베타 제어
+
 복수의 클라이언트가 리소스를 편집할 때 발생함
 
-메서드
-Last-Modified
-ETag
-
-GET
-If-Modified-Since
-If-None-Match
-
-PUT/DELETE
-If-Unmodified-Since
-If-Match
+&lt;table style="border-collapse: collapse; width: 100%;" border="1"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td style="width: 33.3333%;"&gt;메서드&lt;/td&gt;&lt;td style="width: 33.3333%;"&gt;Last-Modified&lt;/td&gt;&lt;td style="width: 33.3333%;"&gt;ETag&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td style="width: 33.3333%;"&gt;GET&lt;/td&gt;&lt;td style="width: 33.3333%;"&gt;If-Modified-Since&lt;/td&gt;&lt;td style="width: 33.3333%;"&gt;If-None-Match&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td style="width: 33.3333%;"&gt;PUT/DELETE&lt;/td&gt;&lt;td style="width: 33.3333%;"&gt;If-Unmodified-Since&lt;/td&gt;&lt;td style="width: 33.3333%;"&gt;If-Match&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;
 
 ETag 값을 사용해 조건부 PUT을 실행한다.
 
@@ -97,22 +92,20 @@ ETag 값을 사용해 조건부 PUT을 실행한다.
 
 412 받았을 때 처리 방법
 
-1. 경합을 일으킨 사용자에게 확인한 후, 갱신 또는 삭제를 한다
+1\. 경합을 일으킨 사용자에게 확인한 후, 갱신 또는 삭제를 한다
 
-2. 경합을 일으킨 데이터를 경합 리소스로서 별도의 리소스로 보존한다(PUT인 경우만)
+2\. 경합을 일으킨 데이터를 경합 리소스로서 별도의 리소스로 보존한다(PUT인 경우만)
 
-3. 경합을 일으킨 사용자에게 변경점을 전하고, 병합을 촉구한다(PUT인 경우만)
+3\. 경합을 일으킨 사용자에게 변경점을 전하고, 병합을 촉구한다(PUT인 경우만)
 
-**결론**
-**1. 될 수 있는 한 심플하게 유지한다**
-**2. 막히면 리소스로 돌아가 생각한다**
+### **결론**
+
+### **1\. 될 수 있는 한 심플하게 유지한다**
+
+### **2\. 막히면 리소스로 돌아가 생각한다**
+
 **검색 기능을 구현하는 SEARCH 메서드를 HTTP에 추가하는 게 아니라 검색 결과 리소스를 GET 한다 같은 식으로 생각한다.**
 
-**3. 정말 필요하면 POST로 다 처리할 수 있다**
+### **3\. 정말 필요하면 POST로 다 처리할 수 있다**
 
-웹을 지탱하는 기술
-국내도서
-저자 : 야마모토 요헤이(Yamamoto Yohei) / 김성훈역
-출판 : 멘토르출판사 2011.05.30
-
-상세보기
+&lt;table class="tt-plugin-interpark" style="background: #fff; border: 1px solid #e0e0e0; width: 408px;" border="0" width="100%" cellspacing="0"&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td style="vertical-align: top; padding: 10px 0 10px 10px;" width="70"&gt;&lt;a href="http://book.interpark.com/blog/integration/product/itemDetail.rdo?prdNo=208294208&amp;refererType=8303&amp;bookblockname=bpmain_in&amp;booklinkname=wg_search_EFEB8364BC43711681CC6C69032386A3753E74A4F9E4F62B3FA06C4836C10BAB&amp;key=EFEB8364BC43711681CC6C69032386A3753E74A4F9E4F62B3FA06C4836C10BAB" target="_blank" rel="noopener"&gt;&lt;img style="border: 0 none;" src="http://bimage.interpark.com/goods_image/4/2/0/8/208294208h.jpg" width="66" height="90"&gt;&lt;/a&gt;&lt;/td&gt;&lt;td style="vertical-align: top; padding: 10px 10px 10px 15px;"&gt;&lt;dl style="margin: 0; padding: 2px 0 0 0; list-style: none; font: 11px dotum, sans-serif; letter-spacing: -1px; color: #777;"&gt;&lt;dt style="padding: 0; margin: 0;"&gt;&lt;a style="font-size: 12px; color: #444 !important; font-weight: bold; text-decoration: none !important;" href="http://book.interpark.com/blog/integration/product/itemDetail.rdo?prdNo=208294208&amp;refererType=8303&amp;bookblockname=bpmain_in&amp;booklinkname=wg_search_EFEB8364BC43711681CC6C69032386A3753E74A4F9E4F62B3FA06C4836C10BAB&amp;key=EFEB8364BC43711681CC6C69032386A3753E74A4F9E4F62B3FA06C4836C10BAB" target="_blank" rel="noopener"&gt;웹을 지탱하는 기술&lt;/a&gt;&lt;/dt&gt;&lt;dd style="padding: 7px 0 0 0; margin: 0; color: #a0a0a0;"&gt;국내도서&lt;/dd&gt;&lt;dd style="padding: 17px 0 0 0; margin: 0;"&gt;저자 : 야마모토 요헤이(Yamamoto Yohei) / 김성훈역&lt;/dd&gt;&lt;dd style="padding: 4px 0 0 0; margin: 0;"&gt;출판 : 멘토르출판사 &lt;span style="letter-spacing: normal;"&gt;2011.05.30&lt;/span&gt;&lt;/dd&gt;&lt;/dl&gt;&lt;a style="float: right; width: 44px; height: 11px; background: url('//t1.daumcdn.net/tistory_admin/static/images/icon_ipark_detail.gif') no-repeat; overflow: hidden; display: block; text-indent: -1000em;" href="http://book.interpark.com/blog/integration/product/itemDetail.rdo?prdNo=208294208&amp;refererType=8303&amp;bookblockname=bpmain_in&amp;booklinkname=wg_search_EFEB8364BC43711681CC6C69032386A3753E74A4F9E4F62B3FA06C4836C10BAB&amp;key=EFEB8364BC43711681CC6C69032386A3753E74A4F9E4F62B3FA06C4836C10BAB" target="_blank" rel="noopener"&gt;상세보기&lt;/a&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;

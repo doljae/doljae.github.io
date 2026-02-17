@@ -10,16 +10,19 @@ date: 2021-04-16T10:51:41+09:00
 
 > 원문: https://doljae.tistory.com/80
 
-![cover](https://blog.kakaocdn.net/dna/csWweX/btq2E9okp6J/AAAAAAAAAAAAAAAAAAAAAGMvSOcDgTsrwWwNU4qZMNZQaP0dtEKA5SRie0GeWIm_/img.png?credential=yqXZFxpELC7KVnFOS48ylbz2pIh7yKj8&expires=1772290799&allow_ip=&allow_referer=&signature=oiVLoXPESB8JIiBhWSxH0%2F9Tol0%3D)
+[Maximum Depth of Binary Tree - LeetCode
 
-1. DFS를 이용한 내 풀이
+Level up your coding skills and quickly land a job. This is the best place to expand your knowledge and get prepared for your next interview.
 
+leetcode.com](https://leetcode.com/problems/maximum-depth-of-binary-tree/)
+
+<!-- truncate -->
+
+### 1\. DFS를 이용한 내 풀이
 
 ```
 class Solution:
     answer = 0
-
-<!-- truncate -->
 
     def maxDepth(self, root: TreeNode) -> int:
 
@@ -35,8 +38,9 @@ class Solution:
         return self.answer+1
 ```
 
-2. 직관적이고 섹시한 풀이
+![](https://blog.kakaocdn.net/dna/csWweX/btq2E9okp6J/AAAAAAAAAAAAAAAAAAAAAGMvSOcDgTsrwWwNU4qZMNZQaP0dtEKA5SRie0GeWIm_/img.png?credential=yqXZFxpELC7KVnFOS48ylbz2pIh7yKj8&expires=1772290799&allow_ip=&allow_referer=&signature=oiVLoXPESB8JIiBhWSxH0%2F9Tol0%3D)
 
+### 2\. 직관적이고 섹시한 풀이
 
 ```
 class Solution:
@@ -46,3 +50,5 @@ class Solution:
             return 0
         return 1 + max(self.maxDepth(root.right), self.maxDepth(root.left))
 ```
+
+![](https://blog.kakaocdn.net/dna/biHWb8/btq2Kxuhc14/AAAAAAAAAAAAAAAAAAAAADDmwzRWdtvhfZ8RKM9RoLWFOCmldgTycmnWNqCvCJhp/img.png?credential=yqXZFxpELC7KVnFOS48ylbz2pIh7yKj8&expires=1772290799&allow_ip=&allow_referer=&signature=fCcs4VrqJ%2BcBvniMKA0Z5dqU88Y%3D)

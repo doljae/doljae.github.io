@@ -10,33 +10,33 @@ date: 2021-01-23T14:12:55+09:00
 
 > 원문: https://doljae.tistory.com/33
 
-![cover](http://bimage.interpark.com/goods_image/2/0/8/1/213202081h.jpg)
+## 함수
 
-함수
 몇 개의 행(코드라인)을 하나의 그룹으로 묶어 이름을 붙인 것
 
 장점
 
 <!-- truncate -->
 
-1. 프로그램이 정량적으로 짧아진다.
+1\. 프로그램이 정량적으로 짧아진다.
 
-2. 소스코드를 읽는 사람이 동일한 소스코드를 반복해서 읽지 않아도 된다.
+2\. 소스코드를 읽는 사람이 동일한 소스코드를 반복해서 읽지 않아도 된다.
 
-3. 프로그램을 쉽게 이해할 수 있다.
+3\. 프로그램을 쉽게 이해할 수 있다.
 
-4. 재사용을 통해 소모되는 비용(시간 및 메모리)을 감소시킬 수 있다.
+4\. 재사용을 통해 소모되는 비용(시간 및 메모리)을 감소시킬 수 있다.
 
-일반적인 흐름
-1. 코드가 진행된다
+### 일반적인 흐름
 
-2. 함수를 만난다.
+1\. 코드가 진행된다
 
-3. 함수가 저장된 메모리 공간으로 점프를 한다
+2\. 함수를 만난다.
 
-4. 점프한 뒤 메모리 공간의 코드를 수행한다
+3\. 함수가 저장된 메모리 공간으로 점프를 한다
 
-5. 수행한 뒤 함수를 호출했던 메모리 주소로 다시 돌아간다.
+4\. 점프한 뒤 메모리 공간의 코드를 수행한다
+
+5\. 수행한 뒤 함수를 호출했던 메모리 주소로 다시 돌아간다.
 
 돌아갈 목적지를 기록해두는 전용 메모리를 만들어
 
@@ -44,7 +44,8 @@ date: 2021-01-23T14:12:55+09:00
 
 거기에 스택을 이용해 마지막에 수행된 함수가 실행 후 돌아갈 메모리 주소를 저장하는 방법으로 특정 함수 호출 중에 다른 함수가 호출되었을 경우에도 함수가 각자 돌아갈 메모리 주소가 살아있게 된다.
 
-형(Type)
+### 형(Type)
+
 컴퓨터는 0과 1의 조합으로 이해하는 기계다.
 
 다시 말해서 컴퓨터는 비트열만으로 특정 비트 패턴을 인간이 원하는 형으로 이해할 수 없다.
@@ -68,7 +69,8 @@ int x; // x라는 이름이 가리키고 있는 메모리 영역은 정수로 �
 float y; // y라는 이름이 가리키고 있는 메모리 영역은 부동소숫점으로 해석해라
 ```
 
-동적 형 결정
+#### 동적 형 결정
+
 변수명, 값이 저장한 메모리 위치, 해당 메모리 내용 등 어떤 종류의 값인가를 언어 처리계가 한 세트로 가지고 있는 형태.
 
 즉 메타데이터를 값 그 자체와 함께 세트로 가지고 있는 것을 동적 형 결정이라고 한다.
@@ -83,15 +85,10 @@ PyObject 형의 구조 안에는 값의 종류 정보를 저장할 수 있는 �
 
 장점
 
-1. 유연한 처리가 가능하다. 실행 전까지 형을 정해두지 않아도 되고, 실행 시에 형이 바뀌는 것도 가능하다
+1\. 유연한 처리가 가능하다. 실행 전까지 형을 정해두지 않아도 되고, 실행 시에 형이 바뀌는 것도 가능하다
 
 단점
 
-1. 컴파일 시에 오류를 발견할 수 있는 정적 형 결정 언어와 비교해볼 때 실행 전에 버그를 발견하는 것이 불가능할 수 있다.
+1\. 컴파일 시에 오류를 발견할 수 있는 정적 형 결정 언어와 비교해볼 때 실행 전에 버그를 발견하는 것이 불가능할 수 있다.
 
-코딩을 지탱하는 기술
-국내도서
-저자 : 니시오 히로카즈 / 김완섭역
-출판 : 비제이퍼블릭 2013.10.16
-
-상세보기
+&lt;table class="tt-plugin-interpark" style="background: #fff; border: 1px solid #e0e0e0; width: 408px;" border="0" width="100%" cellspacing="0" data-darkreader-inline-bgimage="" data-darkreader-inline-bgcolor="" data-darkreader-inline-border-top="" data-darkreader-inline-border-right="" data-darkreader-inline-border-bottom="" data-darkreader-inline-border-left=""&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td style="vertical-align: top; padding: 10px 0 10px 10px;" width="70"&gt;&lt;a href="http://book.interpark.com/blog/integration/product/itemDetail.rdo?prdNo=213202081&amp;refererType=8303&amp;bookblockname=bpmain_in&amp;booklinkname=wg_search_EFEB8364BC43711681CC6C69032386A3753E74A4F9E4F62B3FA06C4836C10BAB&amp;key=EFEB8364BC43711681CC6C69032386A3753E74A4F9E4F62B3FA06C4836C10BAB" target="_blank" rel="noopener"&gt;&lt;img style="border: 0 none;" src="http://bimage.interpark.com/goods_image/2/0/8/1/213202081h.jpg" width="66" height="90" data-darkreader-inline-border-top="" data-darkreader-inline-border-right="" data-darkreader-inline-border-bottom="" data-darkreader-inline-border-left=""&gt;&lt;/a&gt;&lt;/td&gt;&lt;td style="vertical-align: top; padding: 10px 10px 10px 15px;"&gt;&lt;dl style="margin: 0; padding: 2px 0 0 0; list-style: none; font: 11px dotum, sans-serif; letter-spacing: -1px; color: #777;" data-darkreader-inline-color=""&gt;&lt;dt style="padding: 0; margin: 0;"&gt;&lt;a style="font-size: 12px; color: #444 !important; font-weight: bold; text-decoration: none !important;" href="http://book.interpark.com/blog/integration/product/itemDetail.rdo?prdNo=213202081&amp;refererType=8303&amp;bookblockname=bpmain_in&amp;booklinkname=wg_search_EFEB8364BC43711681CC6C69032386A3753E74A4F9E4F62B3FA06C4836C10BAB&amp;key=EFEB8364BC43711681CC6C69032386A3753E74A4F9E4F62B3FA06C4836C10BAB" target="_blank" rel="noopener" data-darkreader-inline-color=""&gt;코딩을 지탱하는 기술&lt;/a&gt;&lt;/dt&gt;&lt;dd style="padding: 7px 0 0 0; margin: 0; color: #a0a0a0;" data-darkreader-inline-color=""&gt;국내도서&lt;/dd&gt;&lt;dd style="padding: 17px 0 0 0; margin: 0;"&gt;저자 : 니시오 히로카즈 / 김완섭역&lt;/dd&gt;&lt;dd style="padding: 4px 0 0 0; margin: 0;"&gt;출판 : 비제이퍼블릭 &lt;span style="letter-spacing: normal;"&gt;2013.10.16&lt;/span&gt;&lt;/dd&gt;&lt;/dl&gt;&lt;a style="float: right; width: 44px; height: 11px; background: url('//t1.daumcdn.net/tistory_admin/static/images/icon_ipark_detail.gif') no-repeat; overflow: hidden; display: block; text-indent: -1000em;" href="http://book.interpark.com/blog/integration/product/itemDetail.rdo?prdNo=213202081&amp;refererType=8303&amp;bookblockname=bpmain_in&amp;booklinkname=wg_search_EFEB8364BC43711681CC6C69032386A3753E74A4F9E4F62B3FA06C4836C10BAB&amp;key=EFEB8364BC43711681CC6C69032386A3753E74A4F9E4F62B3FA06C4836C10BAB" target="_blank" rel="noopener" data-darkreader-inline-bgcolor=""&gt;상세보기&lt;/a&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;

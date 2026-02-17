@@ -12,129 +12,180 @@ date: 2023-07-22T18:45:30+09:00
 
 2021년에 비슷한 주제의 포스트를 작성했습니다.
 
-이번에 개인 장비를 새로 설정하는 과정을 단계 별로 정리했습니다.
+ [Mac 장비 지급 후 세팅 방법 정리
 
-시스템 계정 생성
-전체 이름은 변경 가능하지만 유저 디렉토리 이름은 이후에 변경하기 조금 부담스러울 수 있습니다.
+21.10.08. 업데이트 Xcode homebrew iterm 폰트 바꾸기 한글 깨짐 해결 투명도 조절 color scheme 수정 oh-my-zsh 설치 테마 변경 플러그인 설치 호스트 이름 가리기 문단 줄바꿈 자주 사용하는 명령어 alias 설정
 
 <!-- truncate -->
 
-네이밍 컨벤션 및 저의 경험 상 서버에서 많이 사용하고 있는 **firstname.lastname** 형식으로 설정합니다.
+doljae.tistory.com](https://doljae.tistory.com/195)
 
-macOS 환경 설정
-화면 모드
+이번에 개인 장비를 새로 설정하는 과정을 단계 별로 정리했습니다.
 
-스크롤 막대 보기: 항상
+## 시스템 계정 생성
 
-데스크탑 및 Dock
+전체 이름은 변경 가능하지만 유저 디렉토리 이름은 이후에 변경하기 조금 부담스러울 수 있습니다.
 
-Dock 크기 조절
-응용 프로그램 아이콘 속으로 윈도우 최소화: on
-자동으로 Dock 가리기와 보기: on
-Dock에서 최근 사용한 응용 프로그램 보기: off
-문서를 열 때 탭 사용: 항상
+[네이밍 컨벤션](https://jumpcloud.com/support/naming-conventions-for-users) 및 저의 경험 상 서버에서 많이 사용하고 있는 ***firstname.lastname*** 형식으로 설정합니다.
 
-배터리
+## macOS 환경 설정
 
-최적화된 배터리 충전: off
+### 화면 모드
 
-키보드
+-   스크롤 막대 보기: 항상
 
-키 반복 속도: 빠르게
-반복 지연 시간: 짧게
-🌐 키를 누를 때 실행할 동작 : 안 함
-텍스트 입력: 입력 소스: 편집: Caps Lock 키로 ABC 입력 소스 전환: off, 자동으로 대문자 시작: off
+### 데스크탑 및 Dock
 
-키보드 단축키
+-   Dock 크기 조절
+-   응용 프로그램 아이콘 속으로 윈도우 최소화: on
+-   자동으로 Dock 가리기와 보기: on
+-   Dock에서 최근 사용한 응용 프로그램 보기: off
+-   문서를 열 때 탭 사용: 항상
 
-입력 소스: 입력 메뉴에서 다음 소스 선택: off
-Caps Lock 키로 ABC 입력 소스 전환: off
-기능 키: F1, F2 등의 키를 표준 기능 키로 사용: on
+### 배터리
 
-트랙패드
+-   최적화된 배터리 충전: off
 
-클릭: 세게
-탭하여 클릭하기: on
+### 키보드
 
-터미널
+-   키 반복 속도: 빠르게
+-   반복 지연 시간: 짧게
+-   🌐 키를 누를 때 실행할 동작 : 안 함
+-   텍스트 입력: 입력 소스: 편집: Caps Lock 키로 ABC 입력 소스 전환: off, 자동으로 대문자 시작: off
+
+### 키보드 단축키
+
+-   입력 소스: 입력 메뉴에서 다음 소스 선택: off
+-   Caps Lock 키로 ABC 입력 소스 전환: off
+-   기능 키: F1, F2 등의 키를 표준 기능 키로 사용: on
+
+### 트랙패드
+
+-   클릭: 세게
+-   탭하여 클릭하기: on
+
+### 터미널
+
 독 애니메이션 모두 삭제
 
+```
 defaults write com.apple.dock autohide -bool true && defaults write com.apple.dock autohide-delay -float 0 && defaults write com.apple.dock autohide-time-modifier -float 0 && killall Dock
+```
+
 스크린샷 기본 저장 경로 수정
 
+```
 defaults write com.apple.screencapture location ~/screenshots && mkdir ~/screenshots
+```
+
 스크린샷 그림자 제거
 
+```
 defaults write com.apple.screencapture disable-shadow -bool true
+```
+
 런치패드 정렬
 
+```
 defaults write com.apple.dock ResetLaunchPad -bool true; killall Dock
-Finder
+```
 
-설정: 사이드바: home 디렉토리 추가
-고급: 모든 파일 확장자 보기: on
-보기: 탭 막대, 경로 막대, 상태 막대: on
-보기옵션: 크기 추가
+## Finder
 
-Homebrew
+-   설정: 사이드바: home 디렉토리 추가
+-   고급: 모든 파일 확장자 보기: on
+-   보기: 탭 막대, 경로 막대, 상태 막대: on
+-   보기옵션: 크기 추가
+
+## Homebrew
+
 homebrew 설치
 
+```
 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+```
+
+```
 From https://github.com/Homebrew/brew
- * [new tag]             4.0.29     -&gt; 4.0.29
+ * [new tag]             4.0.29     -> 4.0.29
 HEAD is now at aa74840dc Merge pull request #15729 from dduugg/inreplace-sig
 Warning: /opt/homebrew/bin is not in your PATH.
   Instructions on how to configure your shell for Homebrew
   can be found in the 'Next steps' section below.
-==&gt; Installation successful!
+==> Installation successful!
 
-==&gt; Homebrew has enabled anonymous aggregate formulae and cask analytics.
+==> Homebrew has enabled anonymous aggregate formulae and cask analytics.
 Read the analytics documentation (and how to opt-out) here:
   https://docs.brew.sh/Analytics
 No analytics data has been sent yet (nor will any be during this install run).
 
-==&gt; Homebrew is run entirely by unpaid volunteers. Please consider donating:
+==> Homebrew is run entirely by unpaid volunteers. Please consider donating:
   https://github.com/Homebrew/brew#donations
 
-==&gt; Next steps:
+==> Next steps:
 - Run these two commands in your terminal to add Homebrew to your PATH:
-    (echo; echo 'eval "$(/opt/homebrew/bin/brew shellenv)"') &gt;&gt; /Users/&#123;홈 디렉터리 이름&#125;/.zprofile
+    (echo; echo 'eval "$(/opt/homebrew/bin/brew shellenv)"') >> /Users/{홈 디렉터리 이름}/.zprofile
     eval "$(/opt/homebrew/bin/brew shellenv)"
 - Run brew help to get started
 - Further documentation:
     https://docs.brew.sh
-**Next steps** 아래의 커맨들을 ~/ 디렉토리에서 실행
+```
 
-(echo; echo 'eval "$(/opt/homebrew/bin/brew shellenv)"') &gt;&gt; /Users/&#123;home 디렉터리 이름&#125;/.zprofile
+***Next steps*** 아래의 커맨들을 ~/ 디렉토리에서 실행
+
+```
+(echo; echo 'eval "$(/opt/homebrew/bin/brew shellenv)"') >> /Users/{home 디렉터리 이름}/.zprofile
+```
+
+```
 eval "$(/opt/homebrew/bin/brew shellenv)"
-Terminal(iTerm2)
+```
+
+## Terminal(iTerm2)
+
+```
 brew install --cask iterm2
+```
+
 이후 터미널 대신 iterm2를 사용
 
-Preferernce
+Preferernce 
 
-Colors: Brogrammer
-Text: Cursor: Vertical bar
-Unicode normalization form: NFC
-Font: size: 15
-Window: Transarency: 15
+-   Colors: [Brogrammer](https://github.com/mbadolato/iTerm2-Color-Schemes/blob/master/schemes/Brogrammer.itermcolors)
+-   Text: Cursor: Vertical bar
+-   Unicode normalization form: NFC
+-   Font: size: 15
+-   Window: Transarency: 15
 
 omz 설치
 
+```
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+```
+
 omz 플러그인
 
-1. zsh-autosuggestions
+1\. zsh-autosuggestions
 
-git clone https://github.com/zsh-users/zsh-autosuggestions $&#123;ZSH_CUSTOM:-~/.oh-my-zsh/custom&#125;/plugins/zsh-autosuggestions
-2. zsh-syntax-highlighting
+```
+git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
+```
 
-git clone https://github.com/zsh-users/zsh-syntax-highlighting.git $&#123;ZSH_CUSTOM:-~/.oh-my-zsh/custom&#125;/plugins/zsh-syntax-highlighting
-3. autojump
+2\. zsh-syntax-highlighting
 
+```
+git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
+```
+
+3\. autojump
+
+```
 brew install autojump
+```
+
 .zshrc의 필요한 부분을 아래 설정으로 대치 or 추가
 
+```
 # kubeconfig, 필요한 경우 주석 해제
 # export KUBECONFIG=$HOME/.kube/CONFIG_ONE:$HOME/.kube/CONFIG_TWO
 
@@ -149,26 +200,26 @@ plugins=(git zsh-autosuggestions zsh-syntax-highlighting history dirhistory copy
 [ -f /opt/homebrew/etc/profile.d/autojump.sh ] && . /opt/homebrew/etc/profile.d/autojump.sh
 
 # prompt 정리
-prompt_context() &#123;
+prompt_context() {
   if [[ "$USER" != "$DEFAULT_USER" || -n "$SSH_CLIENT" ]]; then
-    prompt_segment black default "%(!.%&#123;%F&#123;yellow&#125;%&#125;.)😎"
+    prompt_segment black default "%(!.%{%F{yellow}%}.)😎"
   fi
-&#125;
+}
 
-prompt_newline() &#123;
+prompt_newline() {
   if [[ -n $CURRENT_BG ]]; then
-    echo -n "%&#123;%k%F&#123;$CURRENT_BG&#125;%&#125;$SEGMENT_SEPARATOR
-%&#123;%k%F&#123;blue&#125;%&#125;$SEGMENT_SEPARATOR"
+    echo -n "%{%k%F{$CURRENT_BG}%}$SEGMENT_SEPARATOR
+%{%k%F{blue}%}$SEGMENT_SEPARATOR"
   else
-    echo -n "%&#123;%k%&#125;"
+    echo -n "%{%k%}"
   fi
 
-  echo -n "%&#123;%f%&#125;"
+  echo -n "%{%f%}"
   CURRENT_BG=''
-&#125;
+}
 
 # Main prompt
-build_prompt() &#123;
+build_prompt() {
   RETVAL=$?
   prompt_status
   prompt_virtualenv
@@ -178,21 +229,31 @@ build_prompt() &#123;
   prompt_hg
   prompt_newline
   prompt_end
-&#125;
+}
 
 # alias
-alias fetchAll="find . -mindepth 1 -maxdepth 1 -type d -print -exec git -C &#123;&#125; fetch --all --recurse-submodules \;"
+alias fetchAll="find . -mindepth 1 -maxdepth 1 -type d -print -exec git -C {} fetch --all --recurse-submodules \;"
 
 alias brews="brew update && brew outdated && brew upgrade && brew upgrade --cask && omz update"
 
 alias k="kubectl"
+```
 
 (25.01.01) 테마는 powerlevel10k로 변경
 
-필요한 애플리케이션
-Homebrew
+ [GitHub - romkatv/powerlevel10k: A Zsh theme
+
+A Zsh theme. Contribute to romkatv/powerlevel10k development by creating an account on GitHub.
+
+github.com](https://github.com/romkatv/powerlevel10k)
+
+## 필요한 애플리케이션
+
+### Homebrew
+
+```
 ~ ❯ brew list                                                          21:43:30
-==&gt; Formulae
+==> Formulae
 asdf			hey			oniguruma
 autoconf		htop			openssl@3
 autojump		httpie			python@3.13
@@ -204,49 +265,63 @@ gmp			mpdecimal		yarn
 go			ncp-iam-authenticator
 helm			ncurses
 
-==&gt; Casks
+==> Casks
 aldente			iterm2			rectangle
 chatgpt			itsycal			scroll-reverser
 coconutbattery		jetbrains-toolbox	slack
 discord			karabiner-elements	stats
 google-chrome		maccy			visual-studio-code
 hiddenbar		obsidian
-AppStore
+```
 
-메신저
-Bear
-RunCat
-Pages, Numbers, Keynote, iMovie
+### AppStore
 
-기타
+-   메신저
+-   Bear
+-   RunCat
+-   Pages, Numbers, Keynote, iMovie
 
-Docker는 공식 홈페이지에서 dmg로 설치
+### 기타
 
-그 이외
-서체
+-   Docker는 [공식 홈페이지에서 dmg로 설치](https://www.docker.com/products/docker-desktop/)
 
-D2 Coding
-Pretendard
+## 그 이외
 
-karabiner 설정
+### 서체
 
-right command: f17
-f17을 macOS 입력 소스 변경 키로 설정
+-   [D2 Coding](https://github.com/naver/d2codingfont)
+-   [Pretendard](https://cactus.tistory.com/306)
 
-한글 백틱 활성화
+### karabiner 설정
+
+-   right command: f17
+-   f17을 macOS 입력 소스 변경 키로 설정
+
+### 한글 백틱 활성화
+
+```
 mkdir -p ~/Library/KeyBindings
+```
+
+```
 vi ~/Library/KeyBindings/DefaultKeyBinding.dict
-&#123;
+```
+
+```
+{
     "₩" = ("insertText:", "`");
-&#125;
-Java
+}
+```
+
+### Java
+
 아래 중 택 1
 
-jenv
-sdkman
-**asdf**
-IDE로 다운로드 후 관리
+-   jenv
+-   sdkman
+-   **asdf**
+-   IDE로 다운로드 후 관리
 
-키체인 접근
+### 키체인 접근
 
-로그인: Github personal access token 등록
+-   로그인: Github personal access token 등록

@@ -10,15 +10,18 @@ date: 2021-05-06T14:53:56+09:00
 
 > 원문: https://doljae.tistory.com/114
 
-![cover](https://blog.kakaocdn.net/dna/oS9nQ/btq4gayrY3n/AAAAAAAAAAAAAAAAAAAAALrNWExvZfOtVJjzMoymXwXa15zNndMT23k3lbx3Y8zQ/img.png?credential=yqXZFxpELC7KVnFOS48ylbz2pIh7yKj8&expires=1772290799&allow_ip=&allow_referer=&signature=gFXaim4524xw0r1Svqv0AWmTGeQ%3D)
+[Subsets - LeetCode
 
-1. 내장 함수 사용
+Level up your coding skills and quickly land a job. This is the best place to expand your knowledge and get prepared for your next interview.
 
+leetcode.com](https://leetcode.com/problems/subsets/)
+
+<!-- truncate -->
+
+### 1\. 내장 함수 사용
 
 ```
 from itertools import combinations
-
-<!-- truncate -->
 
 class Solution:
     def subsets(self, nums: List[int]) -> List[List[int]]:
@@ -29,8 +32,9 @@ class Solution:
         return answer
 ```
 
-2. 직접 구현
+![](https://blog.kakaocdn.net/dna/oS9nQ/btq4gayrY3n/AAAAAAAAAAAAAAAAAAAAALrNWExvZfOtVJjzMoymXwXa15zNndMT23k3lbx3Y8zQ/img.png?credential=yqXZFxpELC7KVnFOS48ylbz2pIh7yKj8&expires=1772290799&allow_ip=&allow_referer=&signature=gFXaim4524xw0r1Svqv0AWmTGeQ%3D)
 
+### 2\. 직접 구현
 
 ```
 class Solution:
@@ -49,5 +53,7 @@ class Solution:
         comb(0, 0, [])
         return answer
 ```
+
+![](https://blog.kakaocdn.net/dna/bsO5Xg/btq4jPGX7Cw/AAAAAAAAAAAAAAAAAAAAAMjHltUjnN1OAlULCWR657V7KD2TIh_8x3e6Jh2pU5_n/img.png?credential=yqXZFxpELC7KVnFOS48ylbz2pIh7yKj8&expires=1772290799&allow_ip=&allow_referer=&signature=%2FTvk%2B%2BG48oCBKi%2FrhUKHgrCkkKY%3D)
 
 오랜만에 직접 구현해봤는데 이쁘게 해보려고 하다가 삽질을 너무 많이 했다.

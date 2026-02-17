@@ -10,8 +10,15 @@ date: 2021-05-17T14:20:36+09:00
 
 > 원문: https://doljae.tistory.com/142
 
-JSON 받고, 반환하기
+[위키독스
 
+온라인 책을 제작 공유하는 플랫폼 서비스
+
+wikidocs.net](https://wikidocs.net/book/4479)
+
+<!-- truncate -->
+
+#### JSON 받고, 반환하기
 
 ```
 @app.route('/user', methods=['POST'])
@@ -20,10 +27,7 @@ def userLogin():
     return jsonify(user)  # 받아온 데이터를 다시 전송
 ```
 
-URI Path값 읽고 사용하기
-
-<!-- truncate -->
-
+#### URI Path값 읽고 사용하기
 
 ```
 # Spring의 @PathVariable 사용법
@@ -32,8 +36,7 @@ def environments(language):
     return jsonify({"language": language})
 ```
 
-URI를 HTTP Method로 분기하기
-
+#### URI를 HTTP Method로 분기하기
 
 ```
 @app.route('/user', methods=['GET', 'POST'])

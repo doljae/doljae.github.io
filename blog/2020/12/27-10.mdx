@@ -10,97 +10,98 @@ date: 2020-12-27T12:56:08+09:00
 
 > 원문: https://doljae.tistory.com/10
 
-![cover](http://bimage.interpark.com/goods_image/2/6/6/1/211422661h.jpg)
+### 데이터베이스는 어떤 때에 크래쉬 되는가?
 
-데이터베이스는 어떤 때에 크래쉬 되는가?
-1. 소프트웨어 장애
+1\. 소프트웨어 장애
 
-2. OS 장애
+2\. OS 장애
 
 <!-- truncate -->
 
-3. 하드웨어 장애
+3\. 하드웨어 장애
 
-디스크 이중화로 데이터 손실 방지하기
-1. 데이터는 보통 HDD에 저장된다.
+### 디스크 이중화로 데이터 손실 방지하기
 
-2. 그러나 HDD는 하드웨어 중에서 가장 고장률이 높은 부품이다.
+1\. 데이터는 보통 HDD에 저장된다.
 
-3. RAID 기술을 이용해 데이터 손실을 방지한다.
+2\. 그러나 HDD는 하드웨어 중에서 가장 고장률이 높은 부품이다.
 
-4. RAID 구성에 따라 한 개가 망가진 상태에서 방치하면 성능이 크게 저하할 수 있고, 두 번째 HDD가 손상되면 데이터 손실의 위험이 있다.
+3\. RAID 기술을 이용해 데이터 손실을 방지한다.
 
-5. 이런 것을 방지하기 위해 HDD가 손상된 경우에 서비스를 멈추지 않고 새로운 HDD로 교체하여 복구하는 "Hot Swap"이라는 기술도 병용된다.
+4\. RAID 구성에 따라 한 개가 망가진 상태에서 방치하면 성능이 크게 저하할 수 있고, 두 번째 HDD가 손상되면 데이터 손실의 위험이 있다.
 
-6. 하지만 근본적으로 RAID만으로는 서비스를 운영하는 것은 충분하지 않다. 장애 원인이 HDD 뿐만이 아니기 때문이다.
+5\. 이런 것을 방지하기 위해 HDD가 손상된 경우에 서비스를 멈추지 않고 새로운 HDD로 교체하여 복구하는 "Hot Swap"이라는 기술도 병용된다.
 
-7. RAID를 구성해도 복구 중에 서버는 작동하지 않는다.
+6\. 하지만 근본적으로 RAID만으로는 서비스를 운영하는 것은 충분하지 않다. 장애 원인이 HDD 뿐만이 아니기 때문이다.
 
-8. 따라서 서버는 두 대 이상이 필요하고, 두 대의 서버가 동일한 데이터를 가지고 있다면 크래쉬가 발생한 경우에도 남은 한 대를 사용하여 서비스를 지속할 수 있다.
+7\. RAID를 구성해도 복구 중에 서버는 작동하지 않는다.
 
-데이터 복제
-단 방향 / 비동기
-1. "Master"에서 갱신한 결과가 "Slave"에 비동기로 전파되는 유형의 복제, 가장 전통적이고 직관적인 방법
+8\. 따라서 서버는 두 대 이상이 필요하고, 두 대의 서버가 동일한 데이터를 가지고 있다면 크래쉬가 발생한 경우에도 남은 한 대를 사용하여 서비스를 지속할 수 있다.
 
-2. 마스터는 Binary Log로서 데이터베이스의 변화를 기록한다. 기록한 Binary Log를 슬레이브에 전파하고, 슬레이브는 Binary Log 기반으로 자신의 데이터를 갱신한다. (기록 --&gt; 갱신의 2단계)
+## 데이터 복제
 
-3. 문제점
+#### 단 방향 / 비동기
 
-1. 마스터에서 생성한 바이너리 로그가 슬레이브에서는 마지막까지 수신되지 않은 상황
+1\. "Master"에서 갱신한 결과가 "Slave"에 비동기로 전파되는 유형의 복제, 가장 전통적이고 직관적인 방법
 
-2. 슬레이브에서의 바이너리 로그의 실행이 마지막까지 종료되지 않은 상황
+2\. 마스터는 Binary Log로서 데이터베이스의 변화를 기록한다. 기록한 Binary Log를 슬레이브에 전파하고, 슬레이브는 Binary Log 기반으로 자신의 데이터를 갱신한다. (기록 --&gt; 갱신의 2단계)
+
+3\. 문제점
+
+1\. 마스터에서 생성한 바이너리 로그가 슬레이브에서는 마지막까지 수신되지 않은 상황
+
+2\. 슬레이브에서의 바이너리 로그의 실행이 마지막까지 종료되지 않은 상황
 
 위 두 상황에서 정상적으로 데이터 복제가 불가능하다.
 
-4. 해결법
+4\. 해결법
 
 1번의 경우 마스터가 죽었지만 마스터의 OS 환경이 살아있는 경우 SSH로 접속하여 바이너리 로그를 가져올 수도 있다.
 
-2번의 경우 마스터가 죽어서 슬레이브가 새로운 마스터가 되었는데, 슬레이브가 죽은 마스터의 바이너리 로그를 전부 갱신하지 않은 상태에서 새로운 데이터 조작 작업이 이루어지는 경우임.
+2번의 경우 마스터가 죽어서 슬레이브가 새로운 마스터가 되었는데, 슬레이브가 죽은 마스터의 바이너리 로그를 전부 갱신하지 않은 상태에서 새로운 데이터 조작 작업이 이루어지는 경우임. 
 
 즉 제대로 복구를 하려면 슬레이브가 바이너리 로그를 마지막까지 실행한 것을 확인하고 나서 업데이트 트래픽을 옮길 필요가 있고, 이것을 자동화해주는 툴이 있음.
 
-단방향 / 준동기화
-1. 마스터가 바이너리 로그를 기록하고 데이터를 업데이트 한 뒤, 슬레이브로 전송하여 확인 응답이 반환될 때까지 기다리는 방식.
+#### 단방향 / 준동기화
 
-2. 바이너리 로그가 슬레이브에 도착하는 것을 보장하고, 마스터 손실에 의한 데이터 손실의 위험을 억제할 수 있음.
+1\. 마스터가 바이너리 로그를 기록하고 데이터를 업데이트 한 뒤, 슬레이브로 전송하여 확인 응답이 반환될 때까지 기다리는 방식.
 
-3. 문제점
+2\. 바이너리 로그가 슬레이브에 도착하는 것을 보장하고, 마스터 손실에 의한 데이터 손실의 위험을 억제할 수 있음.
+
+3\. 문제점
 
 바이너리 로그 교환 시 동기적으로 진행되는 작업으로 인해 응답 시간이 나빠진다.
 
-단방향 / 동기
-1. MySQL에서는 구현되어있지 않음.
+#### 단방향 / 동기
 
-2. 슬레이브에 대해 업데이트 결과의 반영까지 마친 상태에서 처음으로 클라이언트에게 응답을 반환하는 방식
+1\. MySQL에서는 구현되어있지 않음.
 
-3. 즉 슬레이브에 모든 데이터가 업데이트되어 마스터와 일치될 때까지 작업을 하지 않음
+2\. 슬레이브에 대해 업데이트 결과의 반영까지 마친 상태에서 처음으로 클라이언트에게 응답을 반환하는 방식
 
-양방향 복제
-1. 현실적으로 쉽지 않은 기술임
+3\. 즉 슬레이브에 모든 데이터가 업데이트되어 마스터와 일치될 때까지 작업을 하지 않음
 
-2. MySQL에선 MySQL Cluster라는 제품으로 양방향 복제를 구현했음.
+#### 양방향 복제
 
-3. 데이터 노드라는 특수 서버에서 데이터를 가지고, 두 개 이상의 데이터 노드에서 동일한 데이터를 서로 보관함.
+1\. 현실적으로 쉽지 않은 기술임
 
-4. 한 데이터 노드에 적용된 업데이트는 다른 쪽 데이터 노드에 동기적으로 반영된다.
+2\. MySQL에선 MySQL Cluster라는 제품으로 양방향 복제를 구현했음.
 
-백업을 복원한 뒤에, 백업 이후에 업데이트된 결과는 어떻게 될까?
-1. 데이터베이스에는 시점 복구(Point In Time Recovery, PITR) 기능이 문제를 해결한다.
+3\. 데이터 노드라는 특수 서버에서 데이터를 가지고, 두 개 이상의 데이터 노드에서 동일한 데이터를 서로 보관함.
 
-2. 바이너리 로그를 통해 마지막 백업을 복구한 후에 그 이후의 업데이트 로그를 순차적으로 적용해 나가는 것으로 장애 이전 상태로 복구할 수 있다.
+4\. 한 데이터 노드에 적용된 업데이트는 다른 쪽 데이터 노드에 동기적으로 반영된다.
 
-3. "업데이트 로그의 어느 위치가 마지막 백업 시점인가"를 파악하기 위해서 "일시적으로 업데이트를 멈추고 백업을 하여 그 시점에서의 업데이트 로그의 위치를 특정하는" 방법이 있다.
+#### 백업을 복원한 뒤에, 백업 이후에 업데이트된 결과는 어떻게 될까?
 
-4. 백업 중에 업데이트를 할 수 없기 때문에 데이터 양이 크면  장시간 업데이트가 멈추게 된다.
+1\. 데이터베이스에는 시점 복구(Point In Time Recovery, PITR) 기능이 문제를 해결한다.
 
-5. 이를 해결하기 위해 트랜젝션 구조를 응용한 "온라인 백업" 기능을 통해 해결한다.
+2\. 바이너리 로그를 통해 마지막 백업을 복구한 후에 그 이후의 업데이트 로그를 순차적으로 적용해 나가는 것으로 장애 이전 상태로 복구할 수 있다.
+
+3\. "업데이트 로그의 어느 위치가 마지막 백업 시점인가"를 파악하기 위해서 "일시적으로 업데이트를 멈추고 백업을 하여 그 시점에서의 업데이트 로그의 위치를 특정하는" 방법이 있다.
+
+4\. 백업 중에 업데이트를 할 수 없기 때문에 데이터 양이 크면  장시간 업데이트가 멈추게 된다.
+
+5\. 이를 해결하기 위해 트랜젝션 구조를 응용한 "온라인 백업" 기능을 통해 해결한다.
 
 출처 및 참고문헌
 
-데이터베이스를 지탱하는 기술
-국내도서
-저자 : 마쯔노부 요시노리 / 정인식역
-출판 : 제이펍 2012.11.18
-
-상세보기
+&lt;table class="tt-plugin-interpark" style="background: #fff; border: 1px solid #e0e0e0; width: 408px;" border="0" width="100%" cellspacing="0" data-darkreader-inline-bgimage="" data-darkreader-inline-bgcolor="" data-darkreader-inline-border-top="" data-darkreader-inline-border-right="" data-darkreader-inline-border-bottom="" data-darkreader-inline-border-left=""&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td style="vertical-align: top; padding: 10px 0 10px 10px;" width="70"&gt;&lt;a href="http://book.interpark.com/blog/integration/product/itemDetail.rdo?prdNo=211422661&amp;refererType=8303&amp;bookblockname=bpmain_in&amp;booklinkname=wg_search_EFEB8364BC43711681CC6C69032386A3753E74A4F9E4F62B3FA06C4836C10BAB&amp;key=EFEB8364BC43711681CC6C69032386A3753E74A4F9E4F62B3FA06C4836C10BAB" target="_blank" rel="noopener"&gt;&lt;img style="border: 0 none;" src="http://bimage.interpark.com/goods_image/2/6/6/1/211422661h.jpg" width="66" height="90" data-darkreader-inline-border-top="" data-darkreader-inline-border-right="" data-darkreader-inline-border-bottom="" data-darkreader-inline-border-left=""&gt;&lt;/a&gt;&lt;/td&gt;&lt;td style="vertical-align: top; padding: 10px 10px 10px 15px;"&gt;&lt;dl style="margin: 0; padding: 2px 0 0 0; list-style: none; font: 11px dotum, sans-serif; letter-spacing: -1px; color: #777;" data-darkreader-inline-color=""&gt;&lt;dt style="padding: 0; margin: 0;"&gt;&lt;a style="font-size: 12px; color: #444 !important; font-weight: bold; text-decoration: none !important;" href="http://book.interpark.com/blog/integration/product/itemDetail.rdo?prdNo=211422661&amp;refererType=8303&amp;bookblockname=bpmain_in&amp;booklinkname=wg_search_EFEB8364BC43711681CC6C69032386A3753E74A4F9E4F62B3FA06C4836C10BAB&amp;key=EFEB8364BC43711681CC6C69032386A3753E74A4F9E4F62B3FA06C4836C10BAB" target="_blank" rel="noopener" data-darkreader-inline-color=""&gt;데이터베이스를 지탱하는 기술&lt;/a&gt;&lt;/dt&gt;&lt;dd style="padding: 7px 0 0 0; margin: 0; color: #a0a0a0;" data-darkreader-inline-color=""&gt;국내도서&lt;/dd&gt;&lt;dd style="padding: 17px 0 0 0; margin: 0;"&gt;저자 : 마쯔노부 요시노리 / 정인식역&lt;/dd&gt;&lt;dd style="padding: 4px 0 0 0; margin: 0;"&gt;출판 : 제이펍 &lt;span style="letter-spacing: normal;"&gt;2012.11.18&lt;/span&gt;&lt;/dd&gt;&lt;/dl&gt;&lt;a style="float: right; width: 44px; height: 11px; background: url('//t1.daumcdn.net/tistory_admin/static/images/icon_ipark_detail.gif') no-repeat; overflow: hidden; display: block; text-indent: -1000em;" href="http://book.interpark.com/blog/integration/product/itemDetail.rdo?prdNo=211422661&amp;refererType=8303&amp;bookblockname=bpmain_in&amp;booklinkname=wg_search_EFEB8364BC43711681CC6C69032386A3753E74A4F9E4F62B3FA06C4836C10BAB&amp;key=EFEB8364BC43711681CC6C69032386A3753E74A4F9E4F62B3FA06C4836C10BAB" target="_blank" rel="noopener" data-darkreader-inline-bgcolor=""&gt;상세보기&lt;/a&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;

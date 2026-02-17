@@ -10,15 +10,19 @@ date: 2021-05-09T12:20:58+09:00
 
 > 원문: https://doljae.tistory.com/121
 
-![cover](https://blog.kakaocdn.net/dna/di3jzZ/btq4oPISWwu/AAAAAAAAAAAAAAAAAAAAAFjznm7cVKiSuwAKYlyfwAEBRKmidvd46fwWINEN-akr/img.png?credential=yqXZFxpELC7KVnFOS48ylbz2pIh7yKj8&expires=1772290799&allow_ip=&allow_referer=&signature=es6lEPti%2FO2yCH1J0Uk%2FRg%2BeFZk%3D)
+[Rotate Image - LeetCode
 
-요약
-2차원 배열이 주어지면 추가 공간 할당 없이 시계 방향으로 회전시키는 문제
+Level up your coding skills and quickly land a job. This is the best place to expand your knowledge and get prepared for your next interview.
 
-1. Swap
+leetcode.com](https://leetcode.com/problems/rotate-image/)
 
 <!-- truncate -->
 
+### 요약
+
+2차원 배열이 주어지면 추가 공간 할당 없이 시계 방향으로 회전시키는 문제
+
+### 1\. Swap
 
 ```
 class Solution:
@@ -33,16 +37,16 @@ class Solution:
                 matrix[i][j] = temp
 ```
 
-사실 이 인덱스를 다 기억할 수가 없다. 4*4 배열 그려놓고 그냥 끼워 맞춰 가면서 인덱스를 잡았다.
+![](https://blog.kakaocdn.net/dna/di3jzZ/btq4oPISWwu/AAAAAAAAAAAAAAAAAAAAAFjznm7cVKiSuwAKYlyfwAEBRKmidvd46fwWINEN-akr/img.png?credential=yqXZFxpELC7KVnFOS48ylbz2pIh7yKj8&expires=1772290799&allow_ip=&allow_referer=&signature=es6lEPti%2FO2yCH1J0Uk%2FRg%2BeFZk%3D)
+
+사실 이 인덱스를 다 기억할 수가 없다. 4\*4 배열 그려놓고 그냥 끼워 맞춰 가면서 인덱스를 잡았다.
 
 그리고 모든 지점에 대해서 스왑 하면 두 번 돌리는 경우가 생기기 때문에 x좌표, y좌표 중 하나를 (length//2 + length%2) 만큼 반복해주고, 나머지 하나는 (length//2)만큼 반복해야 한다.
 
-2. 시계 방향 배열의 특징을 고려한 풀이
-
+### 2\. 시계 방향 배열의 특징을 고려한 풀이
 
 ```
 from typing import *
-
 
 class Solution:
     def rotate(self, matrix: List[List[int]]) -> None:
@@ -61,18 +65,19 @@ class Solution:
         reverse2(matrix)
 ```
 
+![](https://blog.kakaocdn.net/dna/BOB26/btq4t5iKgEf/AAAAAAAAAAAAAAAAAAAAAO9tvikgYqjx2zWnsIxXbXHG0qFaejJD4wkoqy_QXVnA/img.png?credential=yqXZFxpELC7KVnFOS48ylbz2pIh7yKj8&expires=1772290799&allow_ip=&allow_referer=&signature=htMtoubdb2vDM61TXSwy7xppLJc%3D)
+
 주어진 배열을 시계방향으로 돌리려면 다음과 같은 연산을 하면 된다.
 
-1. 주어진 배열을 (i, i) 축을 중심으로 대칭되게 Swap 한다.
+1\. 주어진 배열을 (i, i) 축을 중심으로 대칭되게 Swap 한다.
 
-2. 1번 결과 배열을 y=length//2 축 중심으로 대칭되게 Swap 한다.
+2\. 1번 결과 배열을 y=length//2 축 중심으로 대칭되게 Swap 한다.
 
 이렇게 하면 시계방향으로 돌린 결과와 동일한 결과를 얻을 수 있다.
 
 도대체 이런 생각을 어떻게 할까...
 
-3. Pythonic
-
+### 3\. Pythonic
 
 ```
 class Solution:
@@ -81,9 +86,11 @@ class Solution:
         matrix[::] = zip(*matrix[::-1])
 ```
 
+![](https://blog.kakaocdn.net/dna/mZnBL/btq4t4RFwb3/AAAAAAAAAAAAAAAAAAAAAEyyhXAm60l0l3NjXRIzRJFRjriXeBe-D_JSCzGWZrUx/img.png?credential=yqXZFxpELC7KVnFOS48ylbz2pIh7yKj8&expires=1772290799&allow_ip=&allow_referer=&signature=79aNsomLWuE00c6qPlPeu%2Fwsf8Y%3D)
+
 Python의 내장 함수 중 zip이 있다. 예전에 문제 풀이할 때 종종 사용했던 방법이다.
 
-어떻게 보면 트릭을 쓰는 건데 matrix가 아니라 matrix [::]으로 값을 받아서 matrix 내부의 값을 zip 연산한 결과로 치환하는 코드다.
+어떻게 보면 트릭을 쓰는 건데 matrix가 아니라 matrix \[::\]으로 값을 받아서 matrix 내부의 값을 zip 연산한 결과로 치환하는 코드다.
 
 이것을 in-place replacement라고 하는데 1차원 배열 이상의 다차원 배열은 배열 안에 주 솟값이 들어있다.
 

@@ -10,17 +10,19 @@ date: 2021-05-19T20:43:59+09:00
 
 > 원문: https://doljae.tistory.com/145
 
-![cover](https://blog.kakaocdn.net/dna/MI4z3/btq5f3SEfyH/AAAAAAAAAAAAAAAAAAAAAObtX-AHfTz9W-iI_812SsibaL4e9Lm9n-Z9USPGW0E0/img.png?credential=yqXZFxpELC7KVnFOS48ylbz2pIh7yKj8&expires=1772290799&allow_ip=&allow_referer=&signature=FTr4xj8i2IA1g1SxAL4qfFrEZl0%3D)
+[Longest Increasing Subsequence - LeetCode
 
-1. 스택과 이진 탐색을 이용한 풀이
+Level up your coding skills and quickly land a job. This is the best place to expand your knowledge and get prepared for your next interview.
 
+leetcode.com](https://leetcode.com/problems/longest-increasing-subsequence/)
+
+<!-- truncate -->
+
+### 1\. 스택과 이진 탐색을 이용한 풀이
 
 ```
 from typing import *
 from bisect import bisect_left
-
-<!-- truncate -->
-
 
 class Solution:
     def lengthOfLIS(self, nums: List[int]) -> int:
@@ -34,9 +36,11 @@ class Solution:
                     stack.append(num)
                 else:
                     stack[target_index] = num
-                    
+
         return len(stack)
 ```
+
+![](https://blog.kakaocdn.net/dna/MI4z3/btq5f3SEfyH/AAAAAAAAAAAAAAAAAAAAAObtX-AHfTz9W-iI_812SsibaL4e9Lm9n-Z9USPGW0E0/img.png?credential=yqXZFxpELC7KVnFOS48ylbz2pIh7yKj8&expires=1772290799&allow_ip=&allow_referer=&signature=FTr4xj8i2IA1g1SxAL4qfFrEZl0%3D)
 
 LIS문제는 굉장히 유명한 문제이고, 다양한 풀이법이 있다.
 
@@ -48,14 +52,22 @@ LIS문제는 굉장히 유명한 문제이고, 다양한 풀이법이 있다.
 
 이 문제의 접근법은 다음과 같다.
 
-1. 스택이 비어있다면 값을 삽입한다.
+1\. 스택이 비어있다면 값을 삽입한다.
 
-2. 현재 값이 삽입될 위치를 이진 탐색을 이용해 빠르게 탐색한다
+2\. 현재 값이 삽입될 위치를 이진 탐색을 이용해 빠르게 탐색한다
 
 3-1. 만일 그 위치가 스택의 길이와 같다면 현재 스택의 어떠한 값들보다 큰 값이기 때문에 그냥 삽입하면 된다.
 
 3-2. 만일 그 위치가 스택의 길이와 같지 않다면 그 위치의 스택의 값을 현재 값으로 치환한다.
 
+![](https://blog.kakaocdn.net/dna/bderqY/btq5fC11fUg/AAAAAAAAAAAAAAAAAAAAAAVB4gMJ227gYS-HXgP6itfOPjgZFzKqlk_Nxi6GF_lw/img.png?credential=yqXZFxpELC7KVnFOS48ylbz2pIh7yKj8&expires=1772290799&allow_ip=&allow_referer=&signature=J6165LzFLa%2Ba1DM33G4yDgt0WSQ%3D)
+
 실제로 굉장히 빠르다.
 
 LIS 문제에 대해 잘 정리해주신 링크가 있어서 첨부한다.
+
+ [LIS의 길이를 구하는 3가지 알고리즘
+
+LIS, 최장 증가 수열의 길이를 구하는 3가지 알고리즘을 살펴봅니다.
+
+shoark7.github.io](https://shoark7.github.io/programming/algorithm/3-LIS-algorithms)

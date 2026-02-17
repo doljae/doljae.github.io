@@ -10,10 +10,15 @@ date: 2021-04-26T12:56:02+09:00
 
 > 원문: https://doljae.tistory.com/91
 
-![cover](https://blog.kakaocdn.net/dna/4yXX6/btq3udoRMYP/AAAAAAAAAAAAAAAAAAAAABrN22MgcimKH7LhvAOX4Zg5J9OanfxmUsV_POmdtYeu/img.png?credential=yqXZFxpELC7KVnFOS48ylbz2pIh7yKj8&expires=1772290799&allow_ip=&allow_referer=&signature=Qrm9kw9FNDgTtGZfplz6R%2F46p6E%3D)
+[Merge Two Sorted Lists - LeetCode
 
-1. 내 Trash Garbage 코드
+Level up your coding skills and quickly land a job. This is the best place to expand your knowledge and get prepared for your next interview.
 
+leetcode.com](https://leetcode.com/problems/merge-two-sorted-lists/)
+
+<!-- truncate -->
+
+### 1\. 내 Trash Garbage 코드
 
 ```
 class Solution:
@@ -39,10 +44,9 @@ class Solution:
         return zero_node.next
 ```
 
-<!-- truncate -->
+![](https://blog.kakaocdn.net/dna/4yXX6/btq3udoRMYP/AAAAAAAAAAAAAAAAAAAAABrN22MgcimKH7LhvAOX4Zg5J9OanfxmUsV_POmdtYeu/img.png?credential=yqXZFxpELC7KVnFOS48ylbz2pIh7yKj8&expires=1772290799&allow_ip=&allow_referer=&signature=Qrm9kw9FNDgTtGZfplz6R%2F46p6E%3D)
 
-2. 개선된 코드
-
+### 2\. 개선된 코드
 
 ```
 class Solution:
@@ -61,10 +65,11 @@ class Solution:
         return zero_node.next
 ```
 
+![](https://blog.kakaocdn.net/dna/cnykOT/btq3niykxpL/AAAAAAAAAAAAAAAAAAAAAOJ7q6o9A9ty24XyuVNAPCBpkkOOWYlaWh-i0k9zRmVB/img.png?credential=yqXZFxpELC7KVnFOS48ylbz2pIh7yKj8&expires=1772290799&allow_ip=&allow_referer=&signature=DgY0qoZ2023D8DZlDIeDgJdOVHo%3D)
+
 특정 Linked-list를 먼저 다 사용했다면, 나머지를 그냥 붙여주기만 하면 되기 때문에 굳이 반복문을 돌릴 필요가 없다.
 
-3. Recursive Solution
-
+### 3\. Recursive Solution
 
 ```
 class Solution:
@@ -79,6 +84,8 @@ class Solution:
             l2.next = self.mergeTwoLists(l1, l2.next)
             return l2
 ```
+
+![](https://blog.kakaocdn.net/dna/umITq/btq3niryZem/AAAAAAAAAAAAAAAAAAAAABIUyhlbsRthycQ-v00UyPvvjjBr3Nu4evzUmd4eagYs/img.png?credential=yqXZFxpELC7KVnFOS48ylbz2pIh7yKj8&expires=1772290799&allow_ip=&allow_referer=&signature=TVwBwu1JI1I7xnLoq1bclrfiAsw%3D)
 
 재귀 코드는 정말 보면 볼수록 디자인을 하는 게 너무 신기한 것 같다.
 

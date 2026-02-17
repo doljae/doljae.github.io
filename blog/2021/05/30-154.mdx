@@ -10,16 +10,18 @@ date: 2021-05-30T22:22:52+09:00
 
 > 원문: https://doljae.tistory.com/154
 
-![cover](https://blog.kakaocdn.net/dna/yee41/btq57Hguf4X/AAAAAAAAAAAAAAAAAAAAAL71nlafNx0ozjMvcQ-fHfvzeMojsbEynnZO3a1IkHxy/img.png?credential=yqXZFxpELC7KVnFOS48ylbz2pIh7yKj8&expires=1772290799&allow_ip=&allow_referer=&signature=Yw2goN4xfdbRjxhVytkcN4huv%2FQ%3D)
+[Happy Number - LeetCode
 
-1. 집합을 이용한 풀이
+Level up your coding skills and quickly land a job. This is the best place to expand your knowledge and get prepared for your next interview.
 
-
-```
-from functools import reduce
+leetcode.com](https://leetcode.com/problems/happy-number/)
 
 <!-- truncate -->
 
+### 1\. 집합을 이용한 풀이
+
+```
+from functools import reduce
 
 class Solution:
     def isHappy(self, n: int) -> bool:
@@ -39,7 +41,10 @@ class Solution:
             set1.add(cur)
             cur = temp
         return True if cur == 1 else False
+
 ```
+
+![](https://blog.kakaocdn.net/dna/yee41/btq57Hguf4X/AAAAAAAAAAAAAAAAAAAAAL71nlafNx0ozjMvcQ-fHfvzeMojsbEynnZO3a1IkHxy/img.png?credential=yqXZFxpELC7KVnFOS48ylbz2pIh7yKj8&expires=1772290799&allow_ip=&allow_referer=&signature=Yw2goN4xfdbRjxhVytkcN4huv%2FQ%3D)
 
 자연수가 주어지면 그 자연수의 자릿수를 제곱해서 더한 값이 1이 될 때까지 반복하다가 1이 되면 True를, 1이 될 수 없다면 False를 반환하는 문제다.
 

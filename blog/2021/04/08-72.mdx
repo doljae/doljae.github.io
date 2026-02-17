@@ -10,17 +10,19 @@ date: 2021-04-08T14:57:47+09:00
 
 > 원문: https://doljae.tistory.com/72
 
-![cover](https://blog.kakaocdn.net/dna/bwcL3E/btq2aFNGcVg/AAAAAAAAAAAAAAAAAAAAAKxmDqTd-ds0OfOxSUVnBVhnchseThmnuikduYR-kIDo/img.png?credential=yqXZFxpELC7KVnFOS48ylbz2pIh7yKj8&expires=1772290799&allow_ip=&allow_referer=&signature=KMQok4XQ%2B21RvUTQSwheWk9uA%2FQ%3D)
+[Minimum Height Trees - LeetCode
 
-1. Brute Force DFS (시간 초과)
+Level up your coding skills and quickly land a job. This is the best place to expand your knowledge and get prepared for your next interview.
 
+leetcode.com](https://leetcode.com/problems/minimum-height-trees/)
+
+<!-- truncate -->
+
+### 1\. Brute Force DFS (시간 초과)
 
 ```
 from typing import *
 from collections import defaultdict
-
-<!-- truncate -->
-
 
 class Solution:
     def findMinHeightTrees(self, n: int, edges: List[List[int]]) -> List[int]:
@@ -52,13 +54,13 @@ class Solution:
         return answer
 ```
 
-2. Topological Sort (위상 정렬) 응용
+![](https://blog.kakaocdn.net/dna/bwcL3E/btq2aFNGcVg/AAAAAAAAAAAAAAAAAAAAAKxmDqTd-ds0OfOxSUVnBVhnchseThmnuikduYR-kIDo/img.png?credential=yqXZFxpELC7KVnFOS48ylbz2pIh7yKj8&expires=1772290799&allow_ip=&allow_referer=&signature=KMQok4XQ%2B21RvUTQSwheWk9uA%2FQ%3D)
 
+### 2\. Topological Sort (위상 정렬) 응용
 
 ```
 from typing import *
 from collections import defaultdict, deque
-
 
 class Solution:
     def findMinHeightTrees(self, n: int, edges: List[List[int]]) -> List[int]:
@@ -95,5 +97,8 @@ class Solution:
         return answer
 ```
 
-3. Tree DP
+![](https://blog.kakaocdn.net/dna/bAolnd/btq16tnaNzT/AAAAAAAAAAAAAAAAAAAAAAcj4vjuy2tYCTteBP_D_w9JRHhMg4JisLLYDEQhRwcT/img.png?credential=yqXZFxpELC7KVnFOS48ylbz2pIh7yKj8&expires=1772290799&allow_ip=&allow_referer=&signature=o%2FR323eUM3cezpQMXBIh107p%2Fd4%3D)
+
+### 3\. Tree DP 
+
 추후 기술

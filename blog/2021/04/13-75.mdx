@@ -10,17 +10,19 @@ date: 2021-04-13T11:25:07+09:00
 
 > 원문: https://doljae.tistory.com/75
 
-![cover](https://blog.kakaocdn.net/dna/GBefb/btq2s3OCc55/AAAAAAAAAAAAAAAAAAAAAM4ItEv3_t6g12sYsLBA07CTPPeJoUOTKnGf2bLW2zS_/img.png?credential=yqXZFxpELC7KVnFOS48ylbz2pIh7yKj8&expires=1772290799&allow_ip=&allow_referer=&signature=SJ%2FPTA933Yq8eplEl7kOk9RScZA%3D)
+[Partition Labels - LeetCode
 
-1. 문자의 첫 출현, 마지막 출현 정보 + Queue를 이용한 선형탐색
+Level up your coding skills and quickly land a job. This is the best place to expand your knowledge and get prepared for your next interview.
 
+leetcode.com](https://leetcode.com/problems/partition-labels/)
+
+<!-- truncate -->
+
+### 1\. 문자의 첫 출현, 마지막 출현 정보 + Queue를 이용한 선형탐색
 
 ```
 from typing import *
 from collections import deque, defaultdict
-
-<!-- truncate -->
-
 
 class Solution:
     def partitionLabels(self, s: str) -> List[int]:
@@ -51,3 +53,5 @@ class Solution:
             aanswer.append(answer[i] - answer[i - 1])
         return aanswer
 ```
+
+![](https://blog.kakaocdn.net/dna/GBefb/btq2s3OCc55/AAAAAAAAAAAAAAAAAAAAAM4ItEv3_t6g12sYsLBA07CTPPeJoUOTKnGf2bLW2zS_/img.png?credential=yqXZFxpELC7KVnFOS48ylbz2pIh7yKj8&expires=1772290799&allow_ip=&allow_referer=&signature=SJ%2FPTA933Yq8eplEl7kOk9RScZA%3D)

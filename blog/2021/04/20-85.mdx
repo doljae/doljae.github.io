@@ -10,12 +10,18 @@ date: 2021-04-20T16:42:27+09:00
 
 > 원문: https://doljae.tistory.com/85
 
-1. 완전 탐색
+[Longest Common Prefix - LeetCode
 
+Level up your coding skills and quickly land a job. This is the best place to expand your knowledge and get prepared for your next interview.
+
+leetcode.com](https://leetcode.com/problems/longest-common-prefix/)
+
+<!-- truncate -->
+
+### 1\. 완전 탐색
 
 ```
 from typing import *
-
 
 class Solution:
     def sol(self, strs, length):
@@ -29,8 +35,6 @@ class Solution:
                 return False
         else:
             return True
-
-<!-- truncate -->
 
     def longestCommonPrefix(self, strs: List[str]) -> str:
         # 빈 list가 오면 반환
@@ -47,6 +51,6 @@ class Solution:
         return strs[0][:answer_length - 1]
 ```
 
+### 2\. (내가 생각하는 정해) 이진 탐색
 
-2. (내가 생각하는 정해) 이진 탐색
 추후 기술

@@ -10,20 +10,33 @@ date: 2021-02-07T18:27:31+09:00
 
 > 원문: https://doljae.tistory.com/46
 
-GET, POST
+### GET, POST
 
-프레임워크, 라이브러리
-코드 플로우의 주도권을 누가 가지느냐의 차이
+ [\[HTTP\] HTTP Method 정리 / GET vs POST 차이점
 
-프레임워크는 개발자가 작성한 클래스를 설정해주면(xml에 적어주기, 어노테이션 달아주기 등) 개발자가 아니라 프레임워크가 클래스의 인스턴스를 생성한다.
+GET이나 POST는 매우 자주 쓰는 HTTP 메소드들이다. 아마 제일 많이 쓰지 않나 싶다. 근데 정확히 두 개가 어떻게 다른지, 어떤 특징을 가지고 있는지 잘 모르겠어서 정리해보려고 한다. 아래 글들은
 
 <!-- truncate -->
+
+im-developer.tistory.com](https://im-developer.tistory.com/166)
+
+### 프레임워크, 라이브러리
+
+코드 플로우의 주도권을 누가 가지느냐의 차이
+
+프레임워크는 개발자가 작성한 클래스를 설정해주면(xml에 적어주기, 어노테이션 달아주기 등) 개발자가 아니라 프레임워크가 클래스의 인스턴스를 생성한다.
 
 프레임워크는 비기능적 요구사항(성능, 보안, 확장성, 안정성 등)을 만족하는 구조와 구현된 기능을 안정적으로 실행하도록 제어해주는 잘 만들어진 구조의 라이브러리 덩어리
 
 프레임워크는 애플리케이션들의 최소한의 공통점을 찾아 하부 구조를 제공함으로써 개발자들로 하여금 시스템의 하부 구조(비즈니스 로직을 제외한 부분)를 구현하는데 최소한의 자원을 사용하게 만들어 줌
 
-EJB(Enterprise Java Bean)
+### EJB(Enterprise Java Bean)
+
+ [JavaBeans - Wikipedia
+
+In computing based on the Java Platform, JavaBeans are classes that encapsulate many objects into a single object (the bean). They are serializable, have a zero-argument constructor, and allow access to properties using getter and setter methods. The name
+
+en.wikipedia.org](https://en.wikipedia.org/wiki/JavaBeans)
 
 WAS 상에서 동작하고 트랜잭션 처리, 인증 기능을 제공하는 서버 측 컴포넌트 모델
 
@@ -31,63 +44,67 @@ WAS 상에서 동작하고 트랜잭션 처리, 인증 기능을 제공하는 �
 
 JAR + WAR = EAR이라는 파일로 만들어서 배포해야지 WAS에서 테스트할 수 있었음
 
-그러니깐 코드 수정이 일어나면 JAR 만들고 WAR 만들어서 EAR 만드는 걸 계속 반복해야 했고, 코드 작성보다 테스트하는데 시간이 더 많이 걸리는 상황이 되었다.
+그러니깐 코드 수정이 일어나면 JAR 만들고 WAR 만들어서 EAR 만드는 걸 계속 반복해야 했고, 코드 작성보다 테스트하는데 시간이 더 많이 걸리는 상황이 되었다.
 
-그럼 EJB 없이, WAS에 종속적이지 않게 웹 애플리케이션 만들 수 없을까? &rarr; Spring의 탄생
+그럼 EJB 없이, WAS에 종속적이지 않게 웹 애플리케이션 만들 수 없을까? → Spring의 탄생
 
-Spring
+### Spring
+
 Java 엔터프라이즈 개발을 편하게 해주는 **오픈소스** **경량급** **애플리케이션** 프레임워크.
 
-**애플리케이션** &rarr; 엔터프라이즈 개발 용이
+**애플리케이션** → 엔터프라이즈 개발 용이
 
 개발자가 복잡하고 실수하기 쉬운 low level에 많이 신경 쓰지 않고 비즈니스 로직에 전념할 수 있다.
 
-**경량급** &rarr; 서블릿 엔진이 필요 없다.
+**경량급** → 서블릿 엔진이 필요 없다.
 
-**오픈소스** &rarr; 오픈소스의 장점과 오픈소스의 단점, 한계를 상당 극복했다.(지원이 빵빵함)
+**오픈소스** → 오픈소스의 장점과 오픈소스의 단점, 한계를 상당 극복했다.(지원이 빵빵함)
 
-Spring의 전략
+### Spring의 전략
+
 **전략**
 
-**POJO**를 기반으로 **DI, AOP, Portable Service Abstraction**을 적용해 웹 서비스 개발을 구현하자
+**POJO**를 기반으로 **DI, AOP, Portable Service Abstraction**을 적용해 웹 서비스 개발을 구현하자
 
 **Portable Service Abstraction**
 
-LOW LEVEL의 기술을 기술 구현과 기술을 사용하는 인터페이스로 분리했다. &rarr; 종속성을 없앴음
+LOW LEVEL의 기술을 기술 구현과 기술을 사용하는 인터페이스로 분리했다. → 종속성을 없앴음
 
-OXM 추상화 &rarr; Object와 XML을 Mapping 하는 기술
+OXM 추상화 → Object와 XML을 Mapping 하는 기술
 
 **IoC**
 
 프레임워크, 컨테이너가 객체를 생성해서 주입해준다. Spring 은 IoC 컨테이너를 제공한다.
 
-SPRING-BOOT
+### SPRING-BOOT
+
 핵심 키워드 - STAND ALONE
 
 서블릿 엔진(tomcat, jetty, undertow 등) 없이 JAR 파일만으로 즉시 실행할 수 있는 Spring 기반 프레임워크
 
-HIKARI_CP, JACKSON, MYBATIS 등의 특정 서드파티 라이브러리를 적용할 때 혼란을 최소화하도록 의존성 부분의 설정을 최소화시켰다.
+HIKARI\_CP, JACKSON, MYBATIS 등의 특정 서드파티 라이브러리를 적용할 때 혼란을 최소화하도록 의존성 부분의 설정을 최소화시켰다.
 
-"starter&rdquo; 의존성을 통해 많이 사용하는 의존성을 충돌 없이 묶어놓은 의존성 묶음을 제공한다.
+"starter” 의존성을 통해 많이 사용하는 의존성을 충돌 없이 묶어놓은 의존성 묶음을 제공한다.
 
-**어노테이션으로 web.xml 등에 설정을 작성할 필요가 없도록 구현 &rarr; XML 이 없다.**
+**어노테이션으로 web.xml 등에 설정을 작성할 필요가 없도록 구현 → XML 이 없다.**
 
 HEALTH CHECKS(모니터링) 기능을 제공하는 액츄에이터를 제공한다.
 
-POJO
+### POJO
+
 JVM만 있으면 작동하는 JAVA 오브젝트를 의미함
 
 컨테이너의 HTTPSERVLET 등을 상속받지 않고, 특정 기술에 종속된 클래스를 상속받지 않는 JAVA 오브젝트
 
-POJO CLASS DIAGRAM
+### POJO CLASS DIAGRAM
+
 interface는 API가 제공하고 실제 구현체는 벤더가 제공한다.
 
 즉 실제 구현체는 언제든지 바뀔 수 있게 코드에는 **상위 인터페이스 타입만 적어주고**, **어떤 구현체를 사용할지는 xml에 기술된 것을 참고해서** 그것을 생성해서 주입한다.
 
 이렇게 하면 이식성도 좋아지고, 특정 회사의 특정 기술에 종속받지 않는 로직을 구현할 수 있다.
 
-Bean과 xml 예제
-
+### Bean과 xml 예제
 
 ```
 <?xml version="1.0" encoding="UTF-8"?>
@@ -114,8 +131,7 @@ Bean과 xml 예제
 </beans>
 ```
 
-BeanFactory
-
+### BeanFactory
 
 ```
 package myspring.di.xml.test;
@@ -130,12 +146,11 @@ public class HelloBeanTest {
 		// BeanFactory는 최상위 인터페이스, GenericXmlApplicationContext는 그 구현체
 		// Bean spec을 알려주는 xml파일을 적어줌
 		BeanFactory factory = new GenericXmlApplicationContext("config/springbeans.xml");
-		
+
 	}
 
 }
 ```
-
 
 팩토리를 생성하면 xml에 기술한 bean 객체가 자동으로 생성된 상태로 시작함
 

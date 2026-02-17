@@ -10,20 +10,26 @@ date: 2021-08-07T08:43:48+09:00
 
 > 원문: https://doljae.tistory.com/201
 
-![cover](https://blog.kakaocdn.net/dna/q1TTf/btrbvchKJJV/AAAAAAAAAAAAAAAAAAAAAIqA3rbQHk4qHWvs4PKDe-KahE22fm86QIByEFvMlPKy/img.png?credential=yqXZFxpELC7KVnFOS48ylbz2pIh7yKj8&expires=1772290799&allow_ip=&allow_referer=&signature=nrUPgUIDt5swB1wDcqYO2ckotrc%3D)
+[Sort the Matrix Diagonally - LeetCode
+
+Level up your coding skills and quickly land a job. This is the best place to expand your knowledge and get prepared for your next interview.
+
+leetcode.com](https://leetcode.com/problems/sort-the-matrix-diagonally/)
+
+<!-- truncate -->
 
 2차원 배열이 주어진다.
 
 배열을 우측 하단 대각성 방향으로 오름차순 정렬한 뒤 반환하는 문제다.
 
-<!-- truncate -->
+![](https://blog.kakaocdn.net/dna/q1TTf/btrbvchKJJV/AAAAAAAAAAAAAAAAAAAAAIqA3rbQHk4qHWvs4PKDe-KahE22fm86QIByEFvMlPKy/img.png?credential=yqXZFxpELC7KVnFOS48ylbz2pIh7yKj8&expires=1772290799&allow_ip=&allow_referer=&signature=nrUPgUIDt5swB1wDcqYO2ckotrc%3D)
 
-1. 구현
+이렇게...
 
+### 1\. 구현
 
 ```
 from typing import *
-
 
 class Solution:
     def diagonalSort(self, mat: List[List[int]]) -> List[List[int]]:
@@ -67,6 +73,8 @@ class Solution:
         return mat
 ```
 
+![](https://blog.kakaocdn.net/dna/r3ziG/btrbrT4itUG/AAAAAAAAAAAAAAAAAAAAAFqvQSjck22jn8nVKvk79qWWdYxj9rkntm8twOFxUiO8/img.png?credential=yqXZFxpELC7KVnFOS48ylbz2pIh7yKj8&expires=1772290799&allow_ip=&allow_referer=&signature=St5AUA69McA%2FxK69TeUGatuFc5M%3D)
+
 우선 위 조건대로 정렬을 하려면 위 조건대로 탐색을 해야 한다.
 
 대각선 대로 탐색하는 것도 고려해야 하는데 이 부분에서 2차원 배열의 길이도 고려해줘야 한다.
@@ -74,5 +82,9 @@ class Solution:
 2차원 배열을 직사각형으로 본다면 대각선의 시작은 윗변과 왼쪽 변에서 시작한다.
 
 구체적으론 (0, width -1) ~ (0, 0) ~ (height, 0)으로 시작한다.
+
+![](https://blog.kakaocdn.net/dna/3fu9B/btrbuAb5m2G/AAAAAAAAAAAAAAAAAAAAAPJLzahHO2-jmvOOh0cgBAr84RzcliLxIGsfFCUrvVfC/img.png?credential=yqXZFxpELC7KVnFOS48ylbz2pIh7yKj8&expires=1772290799&allow_ip=&allow_referer=&signature=5MZJecOYyh6EoWxsG8HjCh18Lzs%3D)
+
+이런식으로...
 
 변을 타면서 x, y 좌표값을 height, width 길이를 넘어가지 않을 때까지 탐색한 결과를 temp에 닮고 정렬 후 다시 넣어주는 것을 반복하면 된다.

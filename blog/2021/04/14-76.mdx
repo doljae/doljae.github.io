@@ -10,20 +10,24 @@ date: 2021-04-14T18:34:38+09:00
 
 > 원문: https://doljae.tistory.com/76
 
-![cover](https://blog.kakaocdn.net/dna/D2TUw/btq2zB5Zutb/AAAAAAAAAAAAAAAAAAAAADOIUN0A2kmAAoEcV9qLFxqSSKXQZlFKAqSV3w7VqkrU/img.png?credential=yqXZFxpELC7KVnFOS48ylbz2pIh7yKj8&expires=1772290799&allow_ip=&allow_referer=&signature=iyMp84ZdpGcQoKhC0u84%2F6gWbyI%3D)
+[Cheapest Flights Within K Stops - LeetCode
 
-1. Dijkstra와 경유지 횟수를 고려한 최단 거리 알고리즘 (실패)
+Level up your coding skills and quickly land a job. This is the best place to expand your knowledge and get prepared for your next interview.
+
+leetcode.com](https://leetcode.com/problems/cheapest-flights-within-k-stops/)
+
+<!-- truncate -->
+
+### 1\. Dijkstra와 경유지 횟수를 고려한 최단 거리 알고리즘 (실패)
+
 **원인**
 
 결국 최단거리 배열에 저장되는 거리는 경유지 횟수를 고려하지 않은 최단거리가 될 수밖에 없음
-
-<!-- truncate -->
 
 ```
 from typing import *
 from heapq import *
 from collections import defaultdict
-
 
 # k번 이하의 경유지를 이용할 수 있을 경우의 최단거리를 구하시오
 # 내가 생각하는 해결법
@@ -64,14 +68,16 @@ class Solution:
         return dist[dst] if dist[dst] != float("inf") else -1
 ```
 
-2. 동일한 알고리즘, 목적지를 만난 순간 바로 반환
+![](https://blog.kakaocdn.net/dna/D2TUw/btq2zB5Zutb/AAAAAAAAAAAAAAAAAAAAADOIUN0A2kmAAoEcV9qLFxqSSKXQZlFKAqSV3w7VqkrU/img.png?credential=yqXZFxpELC7KVnFOS48ylbz2pIh7yKj8&expires=1772290799&allow_ip=&allow_referer=&signature=iyMp84ZdpGcQoKhC0u84%2F6gWbyI%3D)
+
+### 2\. 동일한 알고리즘, 목적지를 만난 순간 바로 반환
+
 우선순위 큐에는 항상 최단거리가 우선적으로 나오기 때문에 뭐가 어찌 되었든 큐에 나온 값이 목적지라면 그것이 최단거리이고 바로 반환하는 것으로 해결.
 
 ```
 from typing import *
 from heapq import *
 from collections import defaultdict
-
 
 class Solution:
     def findCheapestPrice(self, n: int,
@@ -96,3 +102,5 @@ class Solution:
                     heappush(q, (cur_cost + adj_cost, adj_node, cur_k - 1))
         return -1
 ```
+
+![](https://blog.kakaocdn.net/dna/pSJH9/btq2DF0mNII/AAAAAAAAAAAAAAAAAAAAAF_g7Zsk8TovMhoGcAAOvCYMMOCdaR1Ons0Y5FoXTCcK/img.png?credential=yqXZFxpELC7KVnFOS48ylbz2pIh7yKj8&expires=1772290799&allow_ip=&allow_referer=&signature=bXToK0C1RNU3Lldo8F0N26brrlU%3D)

@@ -10,53 +10,48 @@ date: 2020-12-27T13:13:43+09:00
 
 > 원문: https://doljae.tistory.com/11
 
-![cover](http://bimage.interpark.com/goods_image/2/6/6/1/211422661h.jpg)
+### 트랜잭션(Transaction)
 
-트랜잭션(Transaction)
-1. 어떤 Action에 대해서 데이터베이스를 조작할 때는 다양한 쿼리가 혼합된다.
+1\. 어떤 Action에 대해서 데이터베이스를 조작할 때는 다양한 쿼리가 혼합된다.
 
-2. 예를 들어 "상품 구매"라는 Action을 처리하기 위해서 DB는
+2\. 예를 들어 "상품 구매"라는 Action을 처리하기 위해서 DB는
 
 <!-- truncate -->
 
-3. 재고 조사(select), 현재 고른 상품 추가(insert), 소지금 및 재고 감소(update), 구매 내역 갱신(insert, update 등)...
+3\. 재고 조사(select), 현재 고른 상품 추가(insert), 소지금 및 재고 감소(update), 구매 내역 갱신(insert, update 등)...
 
-4. 만일 Action이 실패했다면, 데이터베이스는 "업무를 처리하기 이전 상태로 되돌리기"를 할 수 있어야 한다.
+4\. 만일 Action이 실패했다면, 데이터베이스는 "업무를 처리하기 이전 상태로 되돌리기"를 할 수 있어야 한다.
 
-5. 하지만 Action은 다양한 쿼리로 구성되어있고 이 쿼리가 진행되는 도중에 장애가 발생한다면 어떻게 복구할 것인가?
+5\. 하지만 Action은 다양한 쿼리로 구성되어있고 이 쿼리가 진행되는 도중에 장애가 발생한다면 어떻게 복구할 것인가?
 
-6. 이런 문제, 즉 데이터베이스의 일관성을 유지하고 일관성 있는 상태로 자동 복구하기 위한 구조가 트랜잭션이다.
+6\. 이런 문제, 즉 데이터베이스의 일관성을 유지하고 일관성 있는 상태로 자동 복구하기 위한 구조가 트랜잭션이다.
 
-무정지성 확보하기
-1. "무정 지성"은 OS, 서버 등 장애가 발생하여 그로부터 데이터베이스를 재기동한 때에 "장애 직전까지의 커밋 결과를 손실하지 않고 마치는 것"을 보장하는 특성이다.
+#### 무정지성 확보하기
 
-2. Oracle, InnoDB는 "REDO 로그"를 이용한 아키텍처로 무정 지성을 보장한다.
+1\. "무정 지성"은 OS, 서버 등 장애가 발생하여 그로부터 데이터베이스를 재기동한 때에 "장애 직전까지의 커밋 결과를 손실하지 않고 마치는 것"을 보장하는 특성이다.
 
-3. InnoDB에서는 트랜잭션을 커밋하면 그때마다 LSN(Log Sequence Number)이라는 시퀀스 번호가 증가하고 그 번호와 갱신 대상의 블록의 정보(갱신할 곳의 블록 ID 및 갱신할 곳의 위치 및 값)를 REDO 로그 파일에 쓴다.
+2\. Oracle, InnoDB는 "REDO 로그"를 이용한 아키텍처로 무정 지성을 보장한다.
 
-4. 일반적으로 커밋을 할 때마다 데이터가 실시간으로 바뀌지 않는다.
+3\. InnoDB에서는 트랜잭션을 커밋하면 그때마다 LSN(Log Sequence Number)이라는 시퀀스 번호가 증가하고 그 번호와 갱신 대상의 블록의 정보(갱신할 곳의 블록 ID 및 갱신할 곳의 위치 및 값)를 REDO 로그 파일에 쓴다.
 
-5. 우리가 쿼리를 통해 보는 데이터는 캐시 영역의 것이고, 정기적으로 디스크에 기록하는 "체크 포인트"라는 동작을 통해 디스크에 반영한다.
+4\. 일반적으로 커밋을 할 때마다 데이터가 실시간으로 바뀌지 않는다.
 
-6. 즉 실제 데이터는 과거의 데이터인 상태로, 우리가 보는 데이터는 캐시에서 갱신되는 데이터라는 것이다.
+5\. 우리가 쿼리를 통해 보는 데이터는 캐시 영역의 것이고, 정기적으로 디스크에 기록하는 "체크 포인트"라는 동작을 통해 디스크에 반영한다.
 
-7. REDO 로그는 최신의 커밋 기록을 계속 가지고 있다. 반면에 실제 데이터는 과거의 데이터를 가지고 있지만 실제로 애플리케이션에서는 캐시의 그것을 반환받기 때문에 논리적으로 모순이 발생하지 않는다.
+6\. 즉 실제 데이터는 과거의 데이터인 상태로, 우리가 보는 데이터는 캐시에서 갱신되는 데이터라는 것이다.
 
-8. 서버가 문제로 인해 재기동하는 경우, 캐시 영역의 데이터는 사라졌기 때문에 데이터 파일은 과거의 그것인 상태로 남아있게 된다.
+7\. REDO 로그는 최신의 커밋 기록을 계속 가지고 있다. 반면에 실제 데이터는 과거의 데이터를 가지고 있지만 실제로 애플리케이션에서는 캐시의 그것을 반환받기 때문에 논리적으로 모순이 발생하지 않는다.
 
-9. 이때 REDO 로그에 기록을 데이터 파일에 적용시켜 나감으로써 데이터 파일과 REDO 로그의 LSN을 일치시키는 작업인 "충돌 복구(Crash Recovery)"을 수행한다.
+8\. 서버가 문제로 인해 재기동하는 경우, 캐시 영역의 데이터는 사라졌기 때문에 데이터 파일은 과거의 그것인 상태로 남아있게 된다.
 
-10. 가장 오래된 LSN을 특정한 뒤 그 위치에서부터 REDO 로그의 내용을 순차적으로 적용해 장애 이전 상태로 복구할 수 있다.
+9\. 이때 REDO 로그에 기록을 데이터 파일에 적용시켜 나감으로써 데이터 파일과 REDO 로그의 LSN을 일치시키는 작업인 "충돌 복구(Crash Recovery)"을 수행한다.
 
-11. REDO 로그까지 작성하면 두 번의 기록(데이터 업데이트, 로그 작성)을 해야 하는데 이것이 자원 소모 아닌가?
+10\. 가장 오래된 LSN을 특정한 뒤 그 위치에서부터 REDO 로그의 내용을 순차적으로 적용해 장애 이전 상태로 복구할 수 있다.
+
+11\. REDO 로그까지 작성하면 두 번의 기록(데이터 업데이트, 로그 작성)을 해야 하는데 이것이 자원 소모 아닌가?
 
 답: REDO 로그는 Sequential Write 작업이고 이것은 Random Write 보다 매우 빠른 작업이다. 실제로 그렇게 느리지 않다.
 
 출처 및 참고문헌
 
-데이터베이스를 지탱하는 기술
-국내도서
-저자 : 마쯔노부 요시노리 / 정인식역
-출판 : 제이펍 2012.11.18
-
-상세보기
+&lt;table class="tt-plugin-interpark" style="background: #fff; border: 1px solid #e0e0e0; width: 408px;" border="0" width="100%" cellspacing="0" data-darkreader-inline-bgimage="" data-darkreader-inline-bgcolor="" data-darkreader-inline-border-top="" data-darkreader-inline-border-right="" data-darkreader-inline-border-bottom="" data-darkreader-inline-border-left=""&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td style="vertical-align: top; padding: 10px 0 10px 10px;" width="70"&gt;&lt;a href="http://book.interpark.com/blog/integration/product/itemDetail.rdo?prdNo=211422661&amp;refererType=8303&amp;bookblockname=bpmain_in&amp;booklinkname=wg_search_EFEB8364BC43711681CC6C69032386A3753E74A4F9E4F62B3FA06C4836C10BAB&amp;key=EFEB8364BC43711681CC6C69032386A3753E74A4F9E4F62B3FA06C4836C10BAB" target="_blank" rel="noopener"&gt;&lt;img style="border: 0 none;" src="http://bimage.interpark.com/goods_image/2/6/6/1/211422661h.jpg" width="66" height="90" data-darkreader-inline-border-top="" data-darkreader-inline-border-right="" data-darkreader-inline-border-bottom="" data-darkreader-inline-border-left=""&gt;&lt;/a&gt;&lt;/td&gt;&lt;td style="vertical-align: top; padding: 10px 10px 10px 15px;"&gt;&lt;dl style="margin: 0; padding: 2px 0 0 0; list-style: none; font: 11px dotum, sans-serif; letter-spacing: -1px; color: #777;" data-darkreader-inline-color=""&gt;&lt;dt style="padding: 0; margin: 0;"&gt;&lt;a style="font-size: 12px; color: #444 !important; font-weight: bold; text-decoration: none !important;" href="http://book.interpark.com/blog/integration/product/itemDetail.rdo?prdNo=211422661&amp;refererType=8303&amp;bookblockname=bpmain_in&amp;booklinkname=wg_search_EFEB8364BC43711681CC6C69032386A3753E74A4F9E4F62B3FA06C4836C10BAB&amp;key=EFEB8364BC43711681CC6C69032386A3753E74A4F9E4F62B3FA06C4836C10BAB" target="_blank" rel="noopener" data-darkreader-inline-color=""&gt;데이터베이스를 지탱하는 기술&lt;/a&gt;&lt;/dt&gt;&lt;dd style="padding: 7px 0 0 0; margin: 0; color: #a0a0a0;" data-darkreader-inline-color=""&gt;국내도서&lt;/dd&gt;&lt;dd style="padding: 17px 0 0 0; margin: 0;"&gt;저자 : 마쯔노부 요시노리 / 정인식역&lt;/dd&gt;&lt;dd style="padding: 4px 0 0 0; margin: 0;"&gt;출판 : 제이펍 &lt;span style="letter-spacing: normal;"&gt;2012.11.18&lt;/span&gt;&lt;/dd&gt;&lt;/dl&gt;&lt;a style="float: right; width: 44px; height: 11px; background: url('//t1.daumcdn.net/tistory_admin/static/images/icon_ipark_detail.gif') no-repeat; overflow: hidden; display: block; text-indent: -1000em;" href="http://book.interpark.com/blog/integration/product/itemDetail.rdo?prdNo=211422661&amp;refererType=8303&amp;bookblockname=bpmain_in&amp;booklinkname=wg_search_EFEB8364BC43711681CC6C69032386A3753E74A4F9E4F62B3FA06C4836C10BAB&amp;key=EFEB8364BC43711681CC6C69032386A3753E74A4F9E4F62B3FA06C4836C10BAB" target="_blank" rel="noopener" data-darkreader-inline-bgcolor=""&gt;상세보기&lt;/a&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;

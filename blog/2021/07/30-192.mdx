@@ -10,16 +10,21 @@ date: 2021-07-30T22:01:39+09:00
 
 > 원문: https://doljae.tistory.com/192
 
+[Max Increase to Keep City Skyline - LeetCode
+
+Level up your coding skills and quickly land a job. This is the best place to expand your knowledge and get prepared for your next interview.
+
+leetcode.com](https://leetcode.com/problems/max-increase-to-keep-city-skyline/)
+
+<!-- truncate -->
+
 2차원 배열이 주어진다.
 
 2차원 배열을 4방으로 보았을 때 생기는 등고선(skyline)을 유지하면서 최대로 올릴 수 있는 건물의 사이즈를 반환하는 문제다.
 
-예를 들어서 [5,2]라는 1차원 배열을 왼쪽에서 바라보면 5만 보일 것이고, 2가 있는 자리에 3을 더해서 [5, 5]로 만들어도 보이는 모습은 같을 것이다. 이걸 2차원 배열의 경우로 생각할 때 더할 수 있는 최댓값을 반환하는 문제다.
+예를 들어서 \[5,2\]라는 1차원 배열을 왼쪽에서 바라보면 5만 보일 것이고, 2가 있는 자리에 3을 더해서 \[5, 5\]로 만들어도 보이는 모습은 같을 것이다. 이걸 2차원 배열의 경우로 생각할 때 더할 수 있는 최댓값을 반환하는 문제다.
 
-<!-- truncate -->
-
-1. row, col의 최댓값을 이용한 계산
-
+### 1\. row, col의 최댓값을 이용한 계산
 
 ```
 class Solution(object):

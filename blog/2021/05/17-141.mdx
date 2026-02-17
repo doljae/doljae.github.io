@@ -10,10 +10,15 @@ date: 2021-05-17T13:14:58+09:00
 
 > 원문: https://doljae.tistory.com/141
 
-![cover](https://blog.kakaocdn.net/dna/bvfnfu/btq4YtkGP46/AAAAAAAAAAAAAAAAAAAAADveTVDFK7UIwHwMq87jdIOuHzgOoyUYOeXua0DWnyfx/img.png?credential=yqXZFxpELC7KVnFOS48ylbz2pIh7yKj8&expires=1772290799&allow_ip=&allow_referer=&signature=0zj4zXMJf9O4nF02f%2BQdjpKS02Q%3D)
+[Perfect Squares - LeetCode
 
-1. DP 풀이
+Level up your coding skills and quickly land a job. This is the best place to expand your knowledge and get prepared for your next interview.
 
+leetcode.com](https://leetcode.com/problems/perfect-squares/)
+
+<!-- truncate -->
+
+### 1\. DP 풀이
 
 ```
 class Solution:
@@ -32,12 +37,11 @@ class Solution:
         return dp[n]
 ```
 
-<!-- truncate -->
+![](https://blog.kakaocdn.net/dna/bvfnfu/btq4YtkGP46/AAAAAAAAAAAAAAAAAAAAADveTVDFK7UIwHwMq87jdIOuHzgOoyUYOeXua0DWnyfx/img.png?credential=yqXZFxpELC7KVnFOS48ylbz2pIh7yKj8&expires=1772290799&allow_ip=&allow_referer=&signature=0zj4zXMJf9O4nF02f%2BQdjpKS02Q%3D)
 
 실행시간을 보면 아무리 생각해봐도 최적화가 필요한 것 같다.
 
-2. DP 풀이(최적화)
-
+### 2\. DP 풀이(최적화)
 
 ```
 class Solution:
@@ -53,14 +57,14 @@ class Solution:
         return dp[n]
 ```
 
+![](https://blog.kakaocdn.net/dna/Fb3nj/btq41lGzNbd/AAAAAAAAAAAAAAAAAAAAAIQGKcUZUWM7ePlyIwBJzor5YtG0SdONYUXtR4nqtejG/img.png?credential=yqXZFxpELC7KVnFOS48ylbz2pIh7yKj8&expires=1772290799&allow_ip=&allow_referer=&signature=LZCm0nRKRxFUJltSXGHbVnK4hxQ%3D)
+
 30퍼센트 정도 시간을 줄였다. 테스트 케이스가 원래 좀 빡빡한 것 같다.
 
-3. BFS
-
+### 3\. BFS
 
 ```
 from collections import deque
-
 
 class Solution:
     def numSquares(self, n: int) -> int:
@@ -77,7 +81,10 @@ class Solution:
                     set1.add(temp)
                     q.append((temp, cur_level + 1))
                 j += 1
+
 ```
+
+![](https://blog.kakaocdn.net/dna/bjk54S/btq49SJzDRI/AAAAAAAAAAAAAAAAAAAAABsTV9520cNt__L0Ac1PX_TRKkNFC5UqNfbzplmxLvOL/img.png?credential=yqXZFxpELC7KVnFOS48ylbz2pIh7yKj8&expires=1772290799&allow_ip=&allow_referer=&signature=BEOScpiY9CYNsvW1J0tDXD0hnLg%3D)
 
 놀랍게도 BFS로 풀 수 있다.
 

@@ -18,11 +18,9 @@ date > /tmp/date.txt
 cat /tmp/date.txt
 ```
 
-
-진짜 기초 기초 기초 명령어
+## 진짜 기초 기초 기초 명령어
 
 <!-- truncate -->
-
 
 ```
 # 에코 내용으로 txt 파일을 만들기
@@ -55,9 +53,7 @@ rm -i test.txt
 rm -rf -i src_old
 ```
 
-
-문서 편집기
-
+## 문서 편집기
 
 ```
 # vim ~/.vimrc
@@ -69,9 +65,7 @@ set expandtab
 set shiftwidth=4
 ```
 
-
-shell 2 - 표준 출력, 표준 오류
-
+## shell 2 - 표준 출력, 표준 오류
 
 ```
 # 모든 프로세스중 httpd 관련 파일만 뽑아냄
@@ -89,7 +83,7 @@ ls test.py > mylist
 # 에러 결과를 mylist에 저장하기
 ls test.py 2> result.txt
 
-# 다 저장하기, 오류 메시지를 1번 디스크립터에 저장하시는데 
+# 다 저장하기, 오류 메시지를 1번 디스크립터에 저장하시는데
 # 1번 디스크립터는 mylist와 연결되어있습니다
 ls test.py > mylist 2>&1
 
@@ -97,9 +91,7 @@ ls test.py > mylist 2>&1
 write ktds < letter
 ```
 
-
-환경 변수
-
+## 환경 변수
 
 ```
 echo $PATH
@@ -112,9 +104,7 @@ echo $PWD
 $ export PS1='[$PWD]`
 ```
 
-
-alias
-
+## alias
 
 ```
 alias
@@ -131,9 +121,7 @@ alias rm='rm -i'
 export PATH=$PATH:/opt/ktds/bin
 ```
 
-
-chmod
-
+## chmod
 
 ```
 chmod g+x test.txt
@@ -148,9 +136,7 @@ touch 도 기본권한이 다름
 .bashrc 에서 uamsk 기본 권한을 022로 설정해서 쓰곤 함.
 ```
 
-
-SetUID
-
+## SetUID
 
 ```
 SetUID가 설정된 파일을 실행하면 해당 파일이 실행되는 동안에는
@@ -165,16 +151,13 @@ su root
 SetUID를 쓰면 된다고 하는데 어떻게 해야할지는 잘 모르겠다.
 ```
 
-
-예제
-
+## 예제
 
 ```
 #backup.sh
 filename=$(date +%Y%m%d)
 ls -R /home/ktds > ktds_backup${filename}
 ```
-
 
 ```
 #잘 안됨 실행 권한이 없기 때문임
@@ -185,11 +168,11 @@ ls -l backup.sh
 ./backup.sh
 ```
 
+## 리눅스 프로세스 상태 전이 & 코드
 
-리눅스 프로세스 상태 전이 & 코드
-리눅스 프로세스2
+[리눅스 프로세스2](https://gsk121.tistory.com/441)
 
-프로세스 상태 전이 &gt; 도리의 디지털라이프
+[프로세스 상태 전이 &gt; 도리의 디지털라이프](http://blog.skby.net/%ED%94%84%EB%A1%9C%EC%84%B8%EC%8A%A4-%EC%83%81%ED%83%9C-%EC%A0%84%EC%9D%B4/)
 
 ```
 cd proc/sys/kernel
@@ -248,9 +231,7 @@ kill $(pgrep sleep)
 top
 ```
 
-
-포그라운드, 백그라운드
-
+### 포그라운드, 백그라운드
 
 ```
 # 사용자가 입력하는 일반적인 명령어.
@@ -259,7 +240,7 @@ top
 
 # 백그라운드 작업
 # 이렇게 쓰면 바로 다음 터미널 명령어를 입력해서 결과를 볼 수 있다
-sleep 100 & 
+sleep 100 &
 
 # 현재 터미널에서 실행되는 백그라운드 작업 보기
 jobs
@@ -271,9 +252,9 @@ fg
 # 혹은 swp 파일 등 job 파일을 삭제 후 재실행할것
 ```
 
+### at, crontab 명령
 
-at, crontab 명령
-리눅스 크론탭(Linux Crontab) 사용법
+[리눅스 크론탭(Linux Crontab) 사용법](https://jdm.kr/blog/2)
 
 ```
 # 정해진 시간에 항상 실행하는 명령어를 설정한다
@@ -293,8 +274,8 @@ crontab -e
 crontab -l
 ```
 
+## 파일 시스템
 
-파일 시스템
 운영체제 마다 나름대로 파일을 관리하는 시스템을 가지고 있다.
 
 윈도우는 NTFS 라는 파일 시스템을 기본적으로 사용한다.
@@ -309,7 +290,8 @@ USB는 FAT를 사용한다.
 
 swap, proc 등 물리적인 디스크에 구성된 것이 아닌 가상의 파일시스템도 있다. 특수한 목적으로 사용되어서 대상이 메모리인 그런 파일 시스템.
 
-마운트 포인트
+### 마운트 포인트
+
 /etc/fstab 파일의 기능
 
 파일 시스템의 마운트 설정 정보를 가지고 있음
@@ -334,7 +316,6 @@ du -sh ~
 cd /var/log
 ```
 
-
 SELinux
 
 강력한 보안 시스템, 너무 강력해서 불편한게 많은데 서버같은데선 씀, 안전해야하니깐.
@@ -346,7 +327,6 @@ systemd가 만드는 데몬 프로세스는 독립형 데몬이다.
 ```
 systemctl status
 ```
-
 
 SSH와 텔넷의 차이
 
@@ -370,9 +350,7 @@ systemctl enable sshd
 systemctl disable sshd
 ```
 
-
-dnf
-
+### dnf
 
 ```
 dnf repolist
@@ -401,9 +379,7 @@ systemctl status httpd
 cat /etc/hosts
 ```
 
-
-파일 아카이브
-
+### 파일 아카이브
 
 ```
 tar
@@ -421,11 +397,9 @@ ls
 tar cvzf /tmp/weblog_${filename}.tar.gz /var/log/httpd
 ```
 
-
 ftp.gnu.org
 
-사용자 추가
-
+### 사용자 추가
 
 ```
 useradd hkd
@@ -437,7 +411,7 @@ grep ^hkd /etc/shadow
 디렉토리 생성자, 파일 생성자를 보는 법은 ls -l 쓰면 볼 수 있다.
 sudo chmod 777 디렉토리이름/
 
-이젠 원격이나 혹은 다른 사용자(이 디렉토리를 만들지 않은 사용자)가 
+이젠 원격이나 혹은 다른 사용자(이 디렉토리를 만들지 않은 사용자)가
 이 안에서 파일을 쓸 수가 있음
 
 디렉토리의 쓰기 권한이 필요한 경우엔 sticky 권한을 주어서
@@ -457,9 +431,7 @@ etc/shadow 에 있다.
 etc/group 에 있다.
 ```
 
-
-etc/sudoers
-
+### etc/sudoers
 
 ```
 특정 사용자에게 특정 명령어를 sudo로 실행할 수 있는 권한을 설정하는 방법이 있다.
@@ -474,11 +446,9 @@ user2 localhost=/sbin/useradd, /sbin/usermod
 visudo
 ```
 
-
 일반적으로 관리자 암호는 관리자 본인만 알고 있고, 권한을 위임해서 sudo 작업을 일부 허용하는 식으로 운영한다.
 
-네트워크 설정
-
+### 네트워크 설정
 
 ```
 ip addr show
@@ -508,9 +478,7 @@ netstat -au
 netstat -aup
 ```
 
-
-웹 서버 올려보기
-
+## 웹 서버 올려보기
 
 ```
 systemctl status httpd

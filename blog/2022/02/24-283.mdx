@@ -10,49 +10,67 @@ date: 2022-02-24T13:58:19+09:00
 
 > 원문: https://doljae.tistory.com/283
 
-![cover](https://blog.kakaocdn.net/dna/kQRV3/btruc7wp2ZB/AAAAAAAAAAAAAAAAAAAAAA3cAFD3sjVqcJotFO48xMvINPXViA90c0bELHouNZv9/img.png?credential=yqXZFxpELC7KVnFOS48ylbz2pIh7yKj8&expires=1772290799&allow_ip=&allow_referer=&signature=SqS5wSu5XdjkiOwtJDQYmgXTCVQ%3D)
+![](https://blog.kakaocdn.net/dna/kQRV3/btruc7wp2ZB/AAAAAAAAAAAAAAAAAAAAAA3cAFD3sjVqcJotFO48xMvINPXViA90c0bELHouNZv9/img.png?credential=yqXZFxpELC7KVnFOS48ylbz2pIh7yKj8&expires=1772290799&allow_ip=&allow_referer=&signature=SqS5wSu5XdjkiOwtJDQYmgXTCVQ%3D)
+
+Google에 'IntelliJ 테스트 속도'로 검색한 결과
 
 IntelliJ로 Spring 베이스의 프로젝트를 개발하거나 공부해본 경험이 있는 분들이 있다면 한 번쯤은 검색해보았을 키워드가 바로 **테스트 속도, 빌드 속도**일 것이다. 검색 결과의 내용은 **거의 대부분 아래와 같은 방법으로 속도를 올릴 수 있다고 나온다.**
 
-프로젝트 빌드 툴을 Gradle로 사용하고 있는 경우,
-IntelliJ의 Preference -&gt; Build, Execution, Deployment -&gt; Gradle -&gt; Build and run 탭을 확인한다.
-Build and run using과 Run tests using을 전부 Gradle이 아닌 IntelliJ로 변경한다.
-
 <!-- truncate -->
+
+![](https://blog.kakaocdn.net/dna/bAp6Cd/btrt9UER7qr/AAAAAAAAAAAAAAAAAAAAAGcnfAt9KkDyj68e-2OoKHDDrUmCHezDFMrK8JO1P7OX/img.png?credential=yqXZFxpELC7KVnFOS48ylbz2pIh7yKj8&expires=1772290799&allow_ip=&allow_referer=&signature=KaYJ9zA6DzmSTT7AoKNRlXpQ0No%3D)
+
+2개의 Select Box의 값을 Gradle이 아닌 IntelliJ로 설정
+
+1.  프로젝트 빌드 툴을 Gradle로 사용하고 있는 경우,
+2.  IntelliJ의 Preference -&gt; Build, Execution, Deployment -&gt; Gradle -&gt; Build and run 탭을 확인한다.
+3.  Build and run using과 Run tests using을 전부 Gradle이 아닌 IntelliJ로 변경한다.
 
 하지만 왜 이렇게 하면 속도가 빨라지는지, 그리고 Gradle, IntelliJ의 두 Runner가 무엇이 다른지에 대한 설명이 상세하게 되어있는 글은 찾기 어렵다. 이와 관련해서 최근에 경험했던 내용들을 바탕으로 정리해보려 한다.
 
-공식 문서에도 자세하게 설명이 되어있진 않다.
+### 공식 문서에도 자세하게 설명이 되어있진 않다.
+
 공식 문서에서도 두 가지 Runner의 차이가 상세하게 설명되어있지 않다. 여기서 말하는 상세하다는 것은 내부 구조까지 설명하면서 왜 속도 차이가 날 수밖에 없는지에 대한 기술적인 설명을 말한다.(못 찾은 걸 수도 있지만...)
+
+ [Testing in Gradle | IntelliJ IDEA
+
+www.jetbrains.com](https://www.jetbrains.com/help/idea/work-with-tests-in-gradle.html#configure_gradle_test_runner)
 
 하지만 두 Runner에 대한 간단한 소개는 하고 있다. 요약하면...
 
-**Gradle** Runner는 **CI/CD 환경에서 빌드한 것과 동일한 결과**를 얻을 수 있다.
-**IntelliJ** Runner는 **JUnit Test Runner를 사용해** Incremental Compilation으로 인해 **테스트 속도가 빠르다.**
+-   **Gradle** Runner는 **CI/CD 환경에서 빌드한 것과 동일한 결과**를 얻을 수 있다.
+-   **IntelliJ** Runner는 **JUnit Test Runner를 사용해** Incremental Compilation으로 인해 **테스트 속도가 빠르다.**
 
 이러한 이유로 인해 테스트 케이스 실행 시 IntelliJ Runner로 설정한 뒤에 수행하면 좀 더 빠른 속도가 나왔던 것이다.
 
-하지만 Runner 선택에 대한 가이드는 하고 있다.
+### 하지만 Runner 선택에 대한 가이드는 하고 있다.
+
+ [Gradle projects | IntelliJ IDEA
+
+www.jetbrains.com](https://www.jetbrains.com/help/idea/work-with-gradle-projects.html#delegate_build_gradle)
+
+![](https://blog.kakaocdn.net/dna/Ei4ZD/btrubvxLZ7Z/AAAAAAAAAAAAAAAAAAAAAOkBEa16WFOUAUoxAFpBh8TxZdGeNkc8BXXXWjfVpA43/img.png?credential=yqXZFxpELC7KVnFOS48ylbz2pIh7yKj8&expires=1772290799&allow_ip=&allow_referer=&signature=gvLUOxpMzvXFSdF3BKyIVUBVyTQ%3D)
+
+![](https://blog.kakaocdn.net/dna/5asZL/btrufEm2vSX/AAAAAAAAAAAAAAAAAAAAABfI-k7-3FurUZbxKgHK54n0cqQzHYyXGhN0kLna7RUu/img.png?credential=yqXZFxpELC7KVnFOS48ylbz2pIh7yKj8&expires=1772290799&allow_ip=&allow_referer=&signature=98ovzgOsnztdqtTxSFwImLYuZNc%3D)
 
 Runner를 설정하는 부분에도 작은 글씨로 가이드를 하고 있지만, 공식 문서 내용과 함께 요약하면...
 
-Pure Java/Kotlin 프로젝트인 경우 IntelliJ Runner를 선택하면 좀 더 빠른 속도를 기대할 수 있다.
+-   Pure Java/Kotlin 프로젝트인 경우 IntelliJ Runner를 선택하면 좀 더 빠른 속도를 기대할 수 있다.
+    -   여기서 말하는 Pure 하다는 것은 Native Java/Kotlin 프로젝트를 말하는 것 같다.
+-   하지만 **IntelliJ Runner는 모든 Gradle 플러그인을 지원하지 않는다. 그래서 빌드 시 Gradle의 빌드 결과와 동일하지 않을 수 있다**.
+-   프로젝트에서 Annotation Processor를 사용하고 있다면 Gradle Runner를 사용하는 것을 권장한다.
+    -   쉽게 말해서 Lombok을 사용하는 것이 Annotation Processor를 사용하는 것이라고 생각하면 된다.
 
-여기서 말하는 Pure 하다는 것은 Native Java/Kotlin 프로젝트를 말하는 것 같다.
+### 실제로 차이가 난다.
 
-하지만 **IntelliJ Runner는 모든 Gradle 플러그인을 지원하지 않는다. 그래서 빌드 시 Gradle의 빌드 결과와 동일하지 않을 수 있다**.
-프로젝트에서 Annotation Processor를 사용하고 있다면 Gradle Runner를 사용하는 것을 권장한다.
-
-쉽게 말해서 Lombok을 사용하는 것이 Annotation Processor를 사용하는 것이라고 생각하면 된다.
-
-실제로 차이가 난다.
 내가 겪은 사례는 다음과 같다.
 
-특정 테스트 케이스에 대해서 IntelliJ Runner로 빌드한 뒤 IntelliJ Runner로 실행 시 실패
-특정 테스트 케이스에 대해서 Gradle Runner로 빌드한 뒤 IntelliJ Runner로 실행 시 성공
-특정 테스트 케이스에 대해서 Gradle Runner로 빌드한 뒤 IntelliJ Runner로 실행 시 실패
+-   특정 테스트 케이스에 대해서 IntelliJ Runner로 빌드한 뒤 IntelliJ Runner로 실행 시 실패
+-   특정 테스트 케이스에 대해서 Gradle Runner로 빌드한 뒤 IntelliJ Runner로 실행 시 성공
+-   특정 테스트 케이스에 대해서 Gradle Runner로 빌드한 뒤 IntelliJ Runner로 실행 시 실패
 
 로컬에서 테스트 케이스가 실패하는데 정작 현재 작업 브랜치는 CI/CD로 빌드가 잘 되어 성공하는 경우를 겪은 뒤로는 그냥 속 편하게 빌드, 테스트 둘 다 Gradle Runner를 사용하고 있다.
 
-결론
+## 결론
+
 Spring Initializer로 생성되는 기본 빌드 스크립트의 형태에서 크게 벗어나지 않는다면 실제로 속도가 좀 더 빠른 IntelliJ Runner를 선택하지 않을 이유가 없다. 다만 IntelliJ Runner의 경우 빌드 스크립트가 복잡해지거나 여러 플러그인을 사용하는 경우 위와 같은 이슈가 발생할 수 있고, CI/CD를 통해 빌드된 결과물과 조금 다를 수 있다는 사실을 염두하면 좋을 것 같다.

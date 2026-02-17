@@ -10,10 +10,7 @@ date: 2021-02-07T19:07:46+09:00
 
 > 원문: https://doljae.tistory.com/49
 
-![cover](https://blog.kakaocdn.net/dna/b1zt5a/btqV36YowYM/AAAAAAAAAAAAAAAAAAAAADUhNOhFHoBVoyRdKCnSpuTN7tnSV1zg2hy9zA5n328N/img.png?credential=yqXZFxpELC7KVnFOS48ylbz2pIh7yKj8&expires=1772290799&allow_ip=&allow_referer=&signature=dgITvDFDtYPJqjPvhHfGjVfMF4g%3D)
-
-@SpringBootApplication의 정체
-
+### @SpringBootApplication의 정체
 
 ```
 @Target(ElementType.TYPE)
@@ -30,16 +27,22 @@ date: 2021-02-07T19:07:46+09:00
 public @interface SpringBootApplication {
 ```
 
+### spring.factories의 정체
+
 <!-- truncate -->
 
+![](https://blog.kakaocdn.net/dna/b1zt5a/btqV36YowYM/AAAAAAAAAAAAAAAAAAAAADUhNOhFHoBVoyRdKCnSpuTN7tnSV1zg2hy9zA5n328N/img.png?credential=yqXZFxpELC7KVnFOS48ylbz2pIh7yKj8&expires=1772290799&allow_ip=&allow_referer=&signature=dgITvDFDtYPJqjPvhHfGjVfMF4g%3D)
 
-spring.factories의 정체
+![](https://blog.kakaocdn.net/dna/cOm52E/btqV2afS0HX/AAAAAAAAAAAAAAAAAAAAAPVYNDJcvaWVtmcVCr0J0QaT7YEmE-c_xHxPsBC9-zUN/img.png?credential=yqXZFxpELC7KVnFOS48ylbz2pIh7yKj8&expires=1772290799&allow_ip=&allow_referer=&signature=DgZPosAm%2FtVHUi0iuMyciWXKPZE%3D)
+
+![](https://blog.kakaocdn.net/dna/bfivgJ/btqV35rENnn/AAAAAAAAAAAAAAAAAAAAADUJQZbghblf7s8L8fATmqLY_xkr8NLgk6UX-9Ir-fkV/img.png?credential=yqXZFxpELC7KVnFOS48ylbz2pIh7yKj8&expires=1772290799&allow_ip=&allow_referer=&signature=y9YRa0VuL4zPlYwuaqKn05jVOVM%3D)
 
 수많은 기본 설정들.
 
 즉 SpringBoot는 이런 기본 설정이 디폴트로 들어있다.
 
-org.springframework.boot.autoconfigure.web.servlet.WebMvcAutoConfiguration
+### org.springframework.boot.autoconfigure.web.servlet.WebMvcAutoConfiguration
+
 팁: 클래스 이름을 드래그하고 ctrl+shift+t를 누르면 소스를 볼 수 있다.
 
 이 클래스의 내부 코드 중 일부는 다음과 같다.
@@ -77,8 +80,13 @@ private boolean singleDispatcherServlet() {
 디폴트로 가장 많이 쓰는 설정으로 들어가있기 때문이다.
 ```
 
+## Thymeleaf
 
-Thymeleaf
+ [\[Spring Boot\] 스프링 웹 MVC - Thymeleaf
+
+「스프링부트 개념과 활용」 - 4부 WebMVC
+
+velog.io](https://velog.io/@dsunni/Spring-Boot-%EC%8A%A4%ED%94%84%EB%A7%81-%EC%9B%B9-MVC-Thymeleaf)
 
 JAR에서도 돌아가고 WAR에서도 돌아가는 독립 템플릿 엔진
 
@@ -86,8 +94,7 @@ JAR에서도 돌아가고 WAR에서도 돌아가는 독립 템플릿 엔진
 
 하지만 Thymeleaf는 기본적으로 HTML 파일이기 때문에 브라우저에서 직접 실행이 가능하다.
 
-JAR 배포 방법
-
+### JAR 배포 방법
 
 ```
 <?xml version="1.0" encoding="UTF-8"?>
@@ -119,29 +126,31 @@ JAR 배포 방법
 </project>
 ```
 
-oom.xml에 &lt;packaging&gt;jar&lt;/packaging&gt;&lt;packaging&gt; jar &lt;/packaging&gt; 추가해주기
-run &rarr; maven build로 jar 만들고
-cmd에서 java -jar xxxxxx.jar로 실행하기
+1.  oom.xml에 &lt;packaging&gt;jar&lt;/packaging&gt;&lt;packaging&gt; jar &lt;/packaging&gt; 추가해주기
+2.  run → maven build로 jar 만들고
+3.  cmd에서 java -jar xxxxxx.jar로 실행하기
 
-Spring Boot로 jsp 포함한 war 배포할 때&hellip;
+### Spring Boot로 jsp 포함한 war 배포할 때…
 
-의존성에 jasper embeded를 추가해야 함
+ [Maven Repository: org.apache.tomcat.embed » tomcat-embed-jasper
 
-이유는 내장 톰캣에는 jasper가 없기 때문임. jasper 가 jsp를 처리하는 건데 없음.
-boot는 JSP와 친하지 않다.
-&lt;scope&gt; provided &lt;/scope&gt; 추가하기
+Core Tomcat implementation VersionRepositoryUsagesDate10.0.x10.0.2Central 0 Feb, 202110.0.0Central2Dec, 202010.0.0-M10Central1Nov, 202010.0.0-M9Central 0 Oct, 202010.0.0-M8Central1Sep, 202010.0.0-M7Central 0 Jul, 202010.0.0-M6Central1Jun, 202010.0.0-M5Cent
 
-의존성에 jstl 추가해줘야 함
-appplication.properties
+mvnrepository.com](https://mvnrepository.com/artifact/org.apache.tomcat.embed/tomcat-embed-jasper)
+
+1.  의존성에 jasper embeded를 추가해야 함
+    1.  이유는 내장 톰캣에는 jasper가 없기 때문임. jasper 가 jsp를 처리하는 건데 없음.
+    2.  boot는 JSP와 친하지 않다.
+    3.  &lt;scope&gt; provided &lt;/scope&gt; 추가하기
+2.  의존성에 jstl 추가해줘야 함
+3.  appplication.properties
 
 ```
 // JSP를 BOOT에서 쓰려면 webapp/WEB-INF/무언가폴더/ (이 곳에 jsp를 두고 써야함)
 spring.mvc.view.prefix=/WEB-INF/jsp spring.mvc.view.suffix=.jsp
 ```
 
-
-Spring-boot-test의 scope 관련&hellip;
-
+## Spring-boot-test의 scope 관련…
 
 ```
 <dependency>
@@ -157,17 +166,30 @@ Spring-boot-test의 scope 관련&hellip;
 </dependency>
 ```
 
+#### &lt;scope&gt;
 
-&lt;scope&gt;
 기존에 프로젝트는 main과 test가 분리되어있지 않지만 boot는 test 하는 패키지가 따로 있음.
 
-그래서 test하는 패키지에만 test 관련 의존성을 쓰게 &lt;scope&gt;를 주는 것임.
+그래서 test하는 패키지에만 test 관련 의존성을 쓰게 &lt;scope&gt;를 주는 것임.
 
-&lt;scope&gt; provided &lt;/scope&gt;
+#### &lt;scope&gt; provided &lt;/scope&gt;
+
 boot 프로젝트 의존 성중에서 tomcat, jasper 등에 scope에 provided를 줘야 한다.
 
 실제로 외부환경, 즉 웹 애플리케이션 서버 환경에 대한 의존성은 배포할 때만 주어야하기 때문.
 
-BOOT를 WAR 배포할 때 생기는 서블릿의 정체
+## BOOT를 WAR 배포할 때 생기는 서블릿의 정체
 
-2개 이상 DataSource 쓰기
+ [Spring Boot 웹 애플리케이션을 WAR로 배포할 때 왜 SpringBootServletInitializer를 상속해야 하는걸까?
+
+Spring Boot로 웹 애플리케이션을 만들고 이를 WAR로 배포할 때에는(Apache Tomcat 같은 Servlet Container에) SpringBootServletInitializer를 상속 하도록 가이드 하고 있다.
+
+medium.com](https://medium.com/@SlackBeck/spring-boot-%EC%9B%B9-%EC%95%A0%ED%94%8C%EB%A6%AC%EC%BC%80%EC%9D%B4%EC%85%98%EC%9D%84-war%EB%A1%9C-%EB%B0%B0%ED%8F%AC%ED%95%A0-%EB%95%8C-%EC%99%9C-springbootservletinitializer%EB%A5%BC-%EC%83%81%EC%86%8D%ED%95%B4%EC%95%BC-%ED%95%98%EB%8A%94%EA%B1%B8%EA%B9%8C-a07b6fdfbbde)
+
+# 2개 이상 DataSource 쓰기
+
+ [doljae/SpringBoot\_MyBatis\_Multiple\_DataSource
+
+Contribute to doljae/SpringBoot\_MyBatis\_Multiple\_DataSource development by creating an account on GitHub.
+
+github.com](https://github.com/doljae/SpringBoot_MyBatis_Multiple_DataSource)

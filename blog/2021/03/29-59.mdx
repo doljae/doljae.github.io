@@ -10,17 +10,16 @@ date: 2021-03-29T20:13:53+09:00
 
 > 원문: https://doljae.tistory.com/59
 
-![cover](https://blog.kakaocdn.net/dna/onFSx/btq1ovLvcfO/AAAAAAAAAAAAAAAAAAAAAKc_BVaLhn8f02r08KesuGwKyjsJK_g5jcm5kvtkKESx/img.png?credential=yqXZFxpELC7KVnFOS48ylbz2pIh7yKj8&expires=1772290799&allow_ip=&allow_referer=&signature=mOxem%2FOkOtuXN3y4h3weX51XDmU%3D)
+## 요약
 
-요약
+1.  M1 맥북에서 Python은 지원하지만 기존 라이브러리 호환성에 문제가 있다.
+2.  M1용 Python이 있지만 몇몇 데이터 분석 관련 라이브러리(Numpy, Pandas)는 사용할 수 없다. (21.03.29. 기준)
+3.  Anaconda를 이용해 기존 라이브러리들을 지원하는 Python Runtime환경을 Interpreter로 사용하자.
 
-M1 맥북에서 Python은 지원하지만 기존 라이브러리 호환성에 문제가 있다.
-M1용 Python이 있지만 몇몇 데이터 분석 관련 라이브러리(Numpy, Pandas)는 사용할 수 없다. (21.03.29. 기준)
-Anaconda를 이용해 기존 라이브러리들을 지원하는 Python Runtime환경을 Interpreter로 사용하자.
+## 설명
 
 <!-- truncate -->
 
-설명
 기존에 윈도우 환경에서 업무로 Python과 Pandas 라이브러리를 사용하고 있었다. 무심코 맥북으로 테스팅을 해보려고 Pandas를 설치했는데 무한 로딩 증상이 생겼다.
 
 현재 맥북에선 M1 호환 Python을 설치해서 사용하고 있었는데, 아무래도 기존 라이브러리들, 특히 데이터 분석, 머신러닝 등 뭔가 C 코드를 사용해서 고속 연산을 하고 있을 것 같은 라이브러리들에 대한 지원이 아직 되고 있지 않는 것 같다.
@@ -31,16 +30,17 @@ Anaconda를 이용해 기존 라이브러리들을 지원하는 Python Runtime�
 
 아무래도 Anaconda에서 만들어주는 Python 런타임은 x86-64 기반이여서 그런 것 같다.(자세히는 모름...)
 
-설치 방법
+## 설치 방법
+
 Homebrew, iterm2는 설치했다고 가정하에 아래와 같이 진행한다.
 
-1. anaconda 설치하기
+1\. anaconda 설치하기
 
 ```
 brew install anaconda
 ```
 
-2. zshrc 에서 환경변수 추가해주기
+2\. zshrc 에서 환경변수 추가해주기
 
 ```
 vi .zshrc
@@ -48,41 +48,40 @@ vi .zshrc
 export PATH=/opt/homebrew/anaconda3/bin:$PATH
 ```
 
-
 특별히 Homebrew 설치 경로를 수정하거나 Anaconda 설치할 때 경로를 따로 주지 않았다면 위와 같은 경로에 설치가 될 것이다.
-
 환경변수를 추가해서 conda 명령어를 어디서나 쓸 수 있게 해준다.
 
-3. .zshrc 업데이트
+3\. .zshrc 업데이트
 
 ```
 source .zshrc
 ```
 
-
-4. conda 확인하기
+4\. conda 확인하기
 
 ```
 conda --version
 ```
 
-
 요기서 버전이 뜨면 잘 설치가 되었다고 생각하면 된다.
 
-5. 가상 Runtime 만들기
+5\. 가상 Runtime 만들기
 
 ```
 conda create --name 가상환경이름 python=3.7
 ```
 
-
-나는 conda_python이란 이름의 Python 3.7 버전의 가상 런타임을 만들었다.
+나는 conda\_python이란 이름의 Python 3.7 버전의 가상 런타임을 만들었다.
 
 여기까지 하면 아래 경로에 다음과 같은 파일들이 있을 것이다.
 
-envs 폴더는 anaconda가 관리하는 가상 런타임이 모여있는 폴더이고, 아까 만든 conda_python의 bin 폴더에 **python **이란 파일이 생성된 것을 확인할 수 있다.
+![](https://blog.kakaocdn.net/dna/onFSx/btq1ovLvcfO/AAAAAAAAAAAAAAAAAAAAAKc_BVaLhn8f02r08KesuGwKyjsJK_g5jcm5kvtkKESx/img.png?credential=yqXZFxpELC7KVnFOS48ylbz2pIh7yKj8&expires=1772290799&allow_ip=&allow_referer=&signature=mOxem%2FOkOtuXN3y4h3weX51XDmU%3D)
+
+envs 폴더는 anaconda가 관리하는 가상 런타임이 모여있는 폴더이고, 아까 만든 conda\_python의 bin 폴더에 **python** 이란 파일이 생성된 것을 확인할 수 있다.
 
 이제 이 경로를 잘 기억해두었다가 사용하는 개발환경에서 Interpreter로 설정해주면 된다.
+
+![](https://blog.kakaocdn.net/dna/xkmp5/btq1pAsgQRB/AAAAAAAAAAAAAAAAAAAAAIuyF03uIz4jDAkXfs0CyozJY74bMr_S_mebv64IeGJR/img.png?credential=yqXZFxpELC7KVnFOS48ylbz2pIh7yKj8&expires=1772290799&allow_ip=&allow_referer=&signature=0pwXOzX%2Bpfsig3o4dqOQQ4H5Ppw%3D)
 
 numpy, pandas 등이 잘 설치가 되고 사용도 잘 된다.
 

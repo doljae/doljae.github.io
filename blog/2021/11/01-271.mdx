@@ -10,17 +10,23 @@ date: 2021-11-01T20:43:14+09:00
 
 > 원문: https://doljae.tistory.com/271
 
-![cover](https://blog.kakaocdn.net/dna/3ycnk/btrjvRSShGI/AAAAAAAAAAAAAAAAAAAAAMYkAU3FHJUYownJAXdbShCTyse7cWRo_uboUkb-4elh/img.png?credential=yqXZFxpELC7KVnFOS48ylbz2pIh7yKj8&expires=1772290799&allow_ip=&allow_referer=&signature=5PyWi%2FVR69Nh8CdGnGgoIduy%2BqE%3D)
+[First Missing Positive - LeetCode
+
+Level up your coding skills and quickly land a job. This is the best place to expand your knowledge and get prepared for your next interview.
+
+leetcode.com](https://leetcode.com/problems/first-missing-positive/)
+
+<!-- truncate -->
 
 정수로 구성된 배열이 주어진다.
 
 이 정수 배열에 존재하지 않는 가장 작은 양의 정수를 반환하는 문제다.
 
-<!-- truncate -->
-
 단 시간 복잡도는 O(N)으로 제한하고, 추가 공간은 상수 레벨까지만 허용한다.
 
-예시
+### 예시
+
+```
 1
 Input: nums = [1,2,0]
 Output: 3
@@ -32,24 +38,31 @@ Output: 2
 3
 Input: nums = [7,8,9,11,12]
 Output: 1
+```
+
 1번 예시는 배열에 0, 1, 2가 있으니 이 정수 배열에 존재하지 않는 가장 작은 양의 정수는 3이다.
 
 2번 예시는 배열에 3, 4가 있으니 이 정수 배열에 존재하지 않는 가장 작은 양의 정수는 1이다.
 
 3번 예시는 마찬가지로 이 정수 배열에 존재하지 않는 가장 작은 양의 정수는 1이다.
 
-1.  구현
+### 1.  구현
+
+```
 class Solution:
-    def firstMissingPositive(self, nums: List[int]) -&gt; int:
+    def firstMissingPositive(self, nums: List[int]) -> int:
         answer = [1] * 2147483647
 
         for num in nums:
-            if num &gt;=0 :
+            if num >=0 :
                 answer[num] = 0
 
         for i in range(1, len(answer)):
             if answer[i] == 1:
                 return i
+```
+
+![](https://blog.kakaocdn.net/dna/3ycnk/btrjvRSShGI/AAAAAAAAAAAAAAAAAAAAAMYkAU3FHJUYownJAXdbShCTyse7cWRo_uboUkb-4elh/img.png?credential=yqXZFxpELC7KVnFOS48ylbz2pIh7yKj8&expires=1772290799&allow_ip=&allow_referer=&signature=5PyWi%2FVR69Nh8CdGnGgoIduy%2BqE%3D)
 
 런타임 에러 원인은 메모리 초과다.
 
@@ -59,20 +72,25 @@ int 범위에 해당하는 공간을 할당할 수 있는 방법은 일반적으
 
 참고로 Dict으로 구현해도 마찬가지다. 내부가 배열로 구현되어 있기 때문에 이런 식의 접근 방법으론 해결할 수 없다.
 
-2. 약간 Greedy
+### 2\. 약간 Greedy
+
+```
 from typing import *
 
 class Solution:
-    def firstMissingPositive(self, nums: List[int]) -&gt; int:
+    def firstMissingPositive(self, nums: List[int]) -> int:
         seq = [0] * (len(nums) + 2)
         max_len = len(seq)
         for num in nums:
-            if 0 &lt; num &lt; max_len:
+            if 0 < num < max_len:
                 seq[num] = 1
 
         for i in range(1, len(seq)):
             if seq[i] == 0:
                 return i
+```
+
+![](https://blog.kakaocdn.net/dna/bqyfZA/btrjD3juGTz/AAAAAAAAAAAAAAAAAAAAAL8LaHR5ew1McczrVNP9h8gmc7VHXwhBbcMn_MMbwK0X/img.png?credential=yqXZFxpELC7KVnFOS48ylbz2pIh7yKj8&expires=1772290799&allow_ip=&allow_referer=&signature=E3Cyt07YEOBnIssKD%2FBx6H2hQ1M%3D)
 
 동일하게 방문 배열을 사용하지만 길이가 nums 길이보다 2 크게 잡아주었다.
 
@@ -80,9 +98,9 @@ class Solution:
 
 이렇게 하는 이유는 다음과 같다.
 
-주어진 nums의 길이가 3이라고 한다면 정답은 1, 2, 3, 4 중 하나가 된다.
-예를 들어 [1,2,3] 이 주어지면 답은 4가 되고, [-2,-1,0]이 주어지면 답은 1이 된다.
-어떻게 하더라도 정답은 (1 ~ nums의 길이 + 2) 범위 안에 존재하게 된다.
+-   주어진 nums의 길이가 3이라고 한다면 정답은 1, 2, 3, 4 중 하나가 된다.
+-   예를 들어 \[1,2,3\] 이 주어지면 답은 4가 되고, \[-2,-1,0\]이 주어지면 답은 1이 된다.
+-   어떻게 하더라도 정답은 (1 ~ nums의 길이 + 2) 범위 안에 존재하게 된다.
 
 이 원리를 이용해 방문 배열을 필요한 만큼 만들 수 있다. 정확히는 nums의 길이 + 1 만큼 필요하게 구현할 수도 있지만 인덱스에 -1 하고 싶지 않아서 한 칸 더 넉넉하게 줬다.
 

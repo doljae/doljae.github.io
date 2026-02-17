@@ -10,10 +10,15 @@ date: 2021-05-18T10:03:08+09:00
 
 > 원문: https://doljae.tistory.com/143
 
-![cover](https://blog.kakaocdn.net/dna/tv56y/btq415YpBSh/AAAAAAAAAAAAAAAAAAAAAFMqWBPkQI6xfDBbkQWvSP9TAGyiELcovMsTo3TI5IWK/img.png?credential=yqXZFxpELC7KVnFOS48ylbz2pIh7yKj8&expires=1772290799&allow_ip=&allow_referer=&signature=EHrs8gFaQQxZdXosZcgEyydBC%2FA%3D)
+[Search a 2D Matrix II - LeetCode
 
-1. Brute Force
+Level up your coding skills and quickly land a job. This is the best place to expand your knowledge and get prepared for your next interview.
 
+leetcode.com](https://leetcode.com/problems/search-a-2d-matrix-ii/)
+
+<!-- truncate -->
+
+### 1\. Brute Force
 
 ```
 class Solution:
@@ -26,12 +31,11 @@ class Solution:
         return False
 ```
 
-<!-- truncate -->
+![](https://blog.kakaocdn.net/dna/tv56y/btq415YpBSh/AAAAAAAAAAAAAAAAAAAAAFMqWBPkQI6xfDBbkQWvSP9TAGyiELcovMsTo3TI5IWK/img.png?credential=yqXZFxpELC7KVnFOS48ylbz2pIh7yKj8&expires=1772290799&allow_ip=&allow_referer=&signature=EHrs8gFaQQxZdXosZcgEyydBC%2FA%3D)
 
 그냥 이렇게 배열을 정말 탐색해도 통과는 된다.
 
-2. 이진 탐색
-
+### 2\. 이진 탐색
 
 ```
 class Solution:
@@ -49,6 +53,8 @@ class Solution:
                 row += 1
         return False
 ```
+
+![](https://blog.kakaocdn.net/dna/bo9lHp/btq5aMbW9e0/AAAAAAAAAAAAAAAAAAAAAK0wLOw3-WU-acTf-zsL2AxDRGuSw6im7DLL2iNPwD04/img.png?credential=yqXZFxpELC7KVnFOS48ylbz2pIh7yKj8&expires=1772290799&allow_ip=&allow_referer=&signature=FeL7P9sBPpc%2BrIkBuFtDTgbLTBw%3D)
 
 정렬이 되어있는데 탐색을 해야 한다면 이진 탐색을 한번 생각해보면 좋다.
 

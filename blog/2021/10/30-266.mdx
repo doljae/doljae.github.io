@@ -10,25 +10,39 @@ date: 2021-10-30T13:32:43+09:00
 
 > 원문: https://doljae.tistory.com/266
 
-![cover](https://blog.kakaocdn.net/dna/cfk0lR/btrjmWyevU0/AAAAAAAAAAAAAAAAAAAAAEInYpw-Z24KLNtyxZzebKQskSWkVntGJu7j3A-omMFW/img.jpg?credential=yqXZFxpELC7KVnFOS48ylbz2pIh7yKj8&expires=1772290799&allow_ip=&allow_referer=&signature=mMCTryUrdum20vOyuWxjgWcojJQ%3D)
+[Sort List - LeetCode
+
+Level up your coding skills and quickly land a job. This is the best place to expand your knowledge and get prepared for your next interview.
+
+leetcode.com](https://leetcode.com/problems/sort-list/)
+
+<!-- truncate -->
 
 단방향 연결 리스트가 주어진다.
 
 주어진 연결 리스트를 value 값 기준으로 오름차순 정렬해 반환하는 문제다.
 
-<!-- truncate -->
-
 단 가능하다면 시간 복잡도를 O(NlogN), 추가 공간 없이 해결해보는 것이 요구사항이다.
 
-예시
+### 예시
 
+![](https://blog.kakaocdn.net/dna/cfk0lR/btrjmWyevU0/AAAAAAAAAAAAAAAAAAAAAEInYpw-Z24KLNtyxZzebKQskSWkVntGJu7j3A-omMFW/img.jpg?credential=yqXZFxpELC7KVnFOS48ylbz2pIh7yKj8&expires=1772290799&allow_ip=&allow_referer=&signature=mMCTryUrdum20vOyuWxjgWcojJQ%3D)
+
+```
 Input: head = [4,2,1,3]
 Output: [1,2,3,4]
+```
 
+![](https://blog.kakaocdn.net/dna/AON9C/btrjoPlkvDJ/AAAAAAAAAAAAAAAAAAAAAIjN_hl06adWC4QNohLSStdNZ0ZuxT5eRAzyMMa3RvHH/img.jpg?credential=yqXZFxpELC7KVnFOS48ylbz2pIh7yKj8&expires=1772290799&allow_ip=&allow_referer=&signature=zaHTgb%2BJuCermHdW3Q4agfxWvs8%3D)
+
+```
 Input: head = [-1,5,3,4,0]
 Output: [-1,0,3,4,5]
+```
 
-풀이 1
+### 풀이 1
+
+```
 from typing import *
 
 class ListNode:
@@ -37,7 +51,7 @@ class ListNode:
         self.next = next
 
 class Solution:
-    def sortList(self, head: Optional[ListNode]) -&gt; Optional[ListNode]:
+    def sortList(self, head: Optional[ListNode]) -> Optional[ListNode]:
 
         if not head:
             return None
@@ -53,12 +67,17 @@ class Solution:
 
         trace[-1].next = None
         return trace[0]
+```
+
+![](https://blog.kakaocdn.net/dna/5xsAD/btrjqoOyjA5/AAAAAAAAAAAAAAAAAAAAAFwqWSH07R_zBH0UWcQteMjY07mNXQ0DV73GPhQLNcD6/img.png?credential=yqXZFxpELC7KVnFOS48ylbz2pIh7yKj8&expires=1772290799&allow_ip=&allow_referer=&signature=WQ1uB%2FIf90IrjLCt3lrPk4cxR1E%3D)
 
 시간 복잡도는 O(N) + O(NlogN) + O(N) = O(NlogN), 공간 복잡도는 N인 풀이법이다.
 
 가장 단순하게 연결 리스트를 탐색하면서 노드를 trace에 저장하고 trace를 value 기준으로 정렬한 뒤 앞에서 뒤로 차례대로 연결해주면 해결할 수 있다.
 
-풀이 2
+### 풀이 2
+
+```
 from typing import *
 
 class ListNode:
@@ -67,7 +86,7 @@ class ListNode:
         self.next = next
 
 class Solution:
-    def sortList(self, head: Optional[ListNode]) -&gt; Optional[ListNode]:
+    def sortList(self, head: Optional[ListNode]) -> Optional[ListNode]:
 
         if not head or not head.next:
             return head
@@ -96,7 +115,7 @@ class Solution:
         cur = temp
 
         while left and right:
-            if left.val &gt;= right.val:
+            if left.val >= right.val:
                 cur.next = right
                 right = right.next
             else:
@@ -106,14 +125,19 @@ class Solution:
 
         cur.next = left if left else right
         return temp.next
+```
 
-시간 복잡도는 O(N) * O(logN) = O(NlogN), 공간 복잡도는 logN인 풀이다. Top-Down 방식으로 머지 소트를 구현하는 방식이다. 시간 복잡도는 O(N)이 두 연결 리스트의 head의 value를 비교하면서 병합하기 때문에 걸리는 시간이고, O(logN)이 머지 소트의 최대 깊이(ㅇepth)이기 때문에 둘을 곱한 값이 총 시간 복잡도가 된다.
+![](https://blog.kakaocdn.net/dna/baSnYc/btrjqoHMLo2/AAAAAAAAAAAAAAAAAAAAALsxEKF5ncS_5xp5Mbk835XFG_GBUReSSwouiw5jYUWm/img.png?credential=yqXZFxpELC7KVnFOS48ylbz2pIh7yKj8&expires=1772290799&allow_ip=&allow_referer=&signature=gzQKND1NShhCsxSI7CHCV%2BekN%2Fc%3D)
+
+시간 복잡도는 O(N) \* O(logN) = O(NlogN), 공간 복잡도는 logN인 풀이다. Top-Down 방식으로 머지 소트를 구현하는 방식이다. 시간 복잡도는 O(N)이 두 연결 리스트의 head의 value를 비교하면서 병합하기 때문에 걸리는 시간이고, O(logN)이 머지 소트의 최대 깊이(ㅇepth)이기 때문에 둘을 곱한 값이 총 시간 복잡도가 된다.
 
 공간 복잡도의 경우 최대 깊이만큼 재귀 call stack에서 추가 메모리를 저장하기 때문에 logN 만큼의 공간을 소모한다.
 
 머지 소트의 top-bottom 구현 방식이다.
 
-풀이 3
+### 풀이 3
+
+```
 class Solution(object):
     def sortList(self, head):
         """
@@ -146,7 +170,7 @@ class Solution(object):
             # Given dummy_start, merge two lists, and return the tail of merged list
             curr = dummy_start
             while l1 and l2:
-                if l1.val &lt;= l2.val:
+                if l1.val <= l2.val:
                     curr.next, l1 = l1, l1.next
                 else:
                     curr.next, l2 = l2, l2.next
@@ -162,7 +186,7 @@ class Solution(object):
         dummy.next = head
         start, dummy_start, size = None, None, 1
 
-        while size &lt; total_length:
+        while size < total_length:
             dummy_start = dummy
             start = dummy.next
             while start:
@@ -172,9 +196,12 @@ class Solution(object):
                 dummy_start = merge(left, right, dummy_start)  # returned tail = next dummy_start
             size *= 2
         return dummy.next
+```
+
+![](https://blog.kakaocdn.net/dna/b5WooV/btrjlQyDeAw/AAAAAAAAAAAAAAAAAAAAAG1NUeyLEHK0GozvtqbMX4bSTgaOMYah7tjBep1RLnlY/img.png?credential=yqXZFxpELC7KVnFOS48ylbz2pIh7yKj8&expires=1772290799&allow_ip=&allow_referer=&signature=c7lFCtgauUwx9rEzS8eyaVO0uOk%3D)
 
 풀이 2와 동일하게 머지 소트를 구현했으나 bottom-up 방식이다.
 
-시간 복잡도는 O(N) * O(logN) = O(NlogN), 추가 공간을 사용하지 않는 문제의 정해다.
+시간 복잡도는 O(N) \* O(logN) = O(NlogN), 추가 공간을 사용하지 않는 문제의 정해다.
 
 즉 이 문제는 머지 소트를 bottom-up 방식으로 구현하라는 문제다.

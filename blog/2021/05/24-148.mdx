@@ -10,15 +10,18 @@ date: 2021-05-24T13:39:34+09:00
 
 > 원문: https://doljae.tistory.com/148
 
-![cover](https://blog.kakaocdn.net/dna/t2Jji/btq5AQypzVi/AAAAAAAAAAAAAAAAAAAAAAcZtMzh2ufUg0iS2u0aGLf3XPsrcJNMjdB-SyZSFscE/img.png?credential=yqXZFxpELC7KVnFOS48ylbz2pIh7yKj8&expires=1772290799&allow_ip=&allow_referer=&signature=cXHG8C4YIGzl0K%2Fj74Ps2ApIRrs%3D)
+[Game of Life - LeetCode
 
-1. 구현
+Level up your coding skills and quickly land a job. This is the best place to expand your knowledge and get prepared for your next interview.
 
+leetcode.com](https://leetcode.com/problems/game-of-life/)
+
+<!-- truncate -->
+
+### 1\. 구현
 
 ```
 from typing import *
-
-<!-- truncate -->
 
 '''
 Any live cell with fewer than two live neighbors dies as if caused by under-population.
@@ -30,7 +33,6 @@ Any live cell with more than three live neighbors dies, as if by over-population
 Any dead cell with exactly three live neighbors becomes a live cell, as if by reproduction.
 8방으로 이웃이 정확히 3개면 생산한다.
 '''
-
 
 class Solution:
     def neighbor_num(self, x, y, board):
@@ -64,6 +66,8 @@ class Solution:
             x, y = item
             board[x][y] = 0
 ```
+
+![](https://blog.kakaocdn.net/dna/t2Jji/btq5AQypzVi/AAAAAAAAAAAAAAAAAAAAAAcZtMzh2ufUg0iS2u0aGLf3XPsrcJNMjdB-SyZSFscE/img.png?credential=yqXZFxpELC7KVnFOS48ylbz2pIh7yKj8&expires=1772290799&allow_ip=&allow_referer=&signature=cXHG8C4YIGzl0K%2Fj74Ps2ApIRrs%3D)
 
 좌표에서 8방을 보고 1의 개수 조건에 맞게 처리를 하는 구현 문제였다.
 

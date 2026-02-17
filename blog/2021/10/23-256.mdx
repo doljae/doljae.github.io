@@ -10,16 +10,19 @@ date: 2021-10-23T16:04:27+09:00
 
 > 원문: https://doljae.tistory.com/256
 
-![cover](https://blog.kakaocdn.net/dna/c2Bd6P/btriArmW1Cv/AAAAAAAAAAAAAAAAAAAAAFMgqsDYb8Ak0Ig3HdTcD_x8zN8RAU8o3S19jYDkghmj/img.png?credential=yqXZFxpELC7KVnFOS48ylbz2pIh7yKj8&expires=1772290799&allow_ip=&allow_referer=&signature=QWe20qs3X93KMK4FQ4BPwRM%2FyKE%3D)
+[Longest Substring with At Least K Repeating Characters - LeetCode
+
+Level up your coding skills and quickly land a job. This is the best place to expand your knowledge and get prepared for your next interview.
+
+leetcode.com](https://leetcode.com/problems/longest-substring-with-at-least-k-repeating-characters/)
+
+<!-- truncate -->
 
 문자열 s와 양의 정수 k가 주어진다.
 
 s의 부분 문자열을 구성하는 문자의 출현 빈도수가 k보다 같거나 큰 조건을 만족하는 부분 문자열의 최대 길이를 반환하는 문제다.
 
-<!-- truncate -->
-
-예시
-
+### 예시
 
 ```
 Input: s = "aaabb", k = 3
@@ -28,16 +31,14 @@ Explanation: The longest substring is "aaa", as 'a' is repeated 3 times.
 
 Input: s = "ababbc", k = 2
 Output: 5
-Explanation: The longest substring is "ababb", as 'a' is repeated 2 times 
+Explanation: The longest substring is "ababb", as 'a' is repeated 2 times
 and 'b' is repeated 3 times.
 ```
 
-1. Greedy
-
+### 1\. Greedy
 
 ```
 from collections import defaultdict
-
 
 class Solution:
     def longestSubstring(self, s: str, k: int) -> int:
@@ -66,19 +67,20 @@ class Solution:
         return answer + 1 if answer != 0 else 0
 ```
 
+![](https://blog.kakaocdn.net/dna/c2Bd6P/btriArmW1Cv/AAAAAAAAAAAAAAAAAAAAAFMgqsDYb8Ak0Ig3HdTcD_x8zN8RAU8o3S19jYDkghmj/img.png?credential=yqXZFxpELC7KVnFOS48ylbz2pIh7yKj8&expires=1772290799&allow_ip=&allow_referer=&signature=QWe20qs3X93KMK4FQ4BPwRM%2FyKE%3D)
+
 어떤 문자열이 출현하는 인덱스 목록을 저장한 뒤, 인덱스 목록의 길이, 마지막 인덱스 값을 이용해 최대 길이를 구해보려고 했다.
 
 예를 들어 인덱스 목록의 길이는 문자의 출현 빈도수이고, k보다 같거나 크면 인덱스 목록의 마지막 값이 현재 조건을 만족하는 최대 문자열 길이라는 생각으로 접근했다.
 
 하지만 예외 케이스를 통과하지 못했고, 이렇게는 풀지 못할 걸 예상해서 빨리 접었다.
 
-2. 재귀
-
+### 2\. 재귀
 
 ```
 class Solution:
     def longestSubstring(self, s: str, k: int) -> int:
-        
+
         for char in set(list(s)):
             if s.count(char) < k:
                 return max(self.longestSubstring(sub_str, k) for sub_str in s.split(char))
@@ -86,18 +88,18 @@ class Solution:
         return len(s)
 ```
 
+![](https://blog.kakaocdn.net/dna/bNmVgl/btriz82ieYR/AAAAAAAAAAAAAAAAAAAAAA5St4rNWiaQZPL0QKCnz4l3eS6ZZNz63xmnZiDV2KK8/img.png?credential=yqXZFxpELC7KVnFOS48ylbz2pIh7yKj8&expires=1772290799&allow_ip=&allow_referer=&signature=ZPQgnwebjyulcVEb6hHO2cSwTCQ%3D)
+
 코드를 보면 맞는 수긍이 간다.
 
 예를 들어 현재 문자열에서 어떤 문자 a의 빈도수가 k보다 작다면, k를 포함한 문자열은 우리가 찾는 부분 문자열이 아니다. 다시 말해서 우리가 찾는 부분 문자열엔 문자 a가 존재할 수 없고, a를 제외한 부분 문자열이 우리가 찾는 부분 문자열일 것이다.
 
 그렇기 때문에 현재 문자열을 빈도수가 부족한 문자열로 split 한 부분 문자열의 목록들 중에서 우리가 찾는 문자열이 존재할 수밖에 없고, 그 문자열들 중 가장 긴 문자열의 길이를 재귀로 반환시키면 문제 요구 사항을 해결할 수 있다.
 
-3. 재귀 (최적화)
-
+### 3\. 재귀 (최적화)
 
 ```
 from collections import Counter
-
 
 class Solution:
     def longestSubstring(self, s: str, k: int) -> int:
@@ -110,6 +112,8 @@ class Solution:
 
         return len(s)
 ```
+
+![](https://blog.kakaocdn.net/dna/XwUsq/btriAftfqXI/AAAAAAAAAAAAAAAAAAAAAJgV2uhjMZG3C32hOpq5IKCclCBAyYQ3PxsKJs2X2lBP/img.png?credential=yqXZFxpELC7KVnFOS48ylbz2pIh7yKj8&expires=1772290799&allow_ip=&allow_referer=&signature=6LJigK6C%2FZjqAnyIUjBdYVGWQnE%3D)
 
 로직은 동일하지만 내장 함수 Counter를 사용해 빈도수가 가장 낮은 문자와 출현 빈도수를 구할 수 있다.
 

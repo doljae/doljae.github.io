@@ -10,10 +10,15 @@ date: 2021-06-08T11:20:27+09:00
 
 > 원문: https://doljae.tistory.com/160
 
-![cover](https://blog.kakaocdn.net/dna/N3s4T/btq6L4P1IEm/AAAAAAAAAAAAAAAAAAAAAD1b9ofHTOqzBhYy1RCqvb2oVE_8L-sxmPHCATEntIpR/img.png?credential=yqXZFxpELC7KVnFOS48ylbz2pIh7yKj8&expires=1772290799&allow_ip=&allow_referer=&signature=AglGF%2FeP5FKnCy9iJ5I22bGJq1U%3D)
+[Valid Palindrome - LeetCode
 
-1. isalnum()
+Level up your coding skills and quickly land a job. This is the best place to expand your knowledge and get prepared for your next interview.
 
+leetcode.com](https://leetcode.com/problems/valid-palindrome/)
+
+<!-- truncate -->
+
+### 1\. isalnum()
 
 ```
 class Solution:
@@ -23,12 +28,12 @@ class Solution:
             if char.isalnum():
                 stack.append(char.lower())
 
-<!-- truncate -->
-
         if len(stack) % 2 == 1:
             return stack[:len(stack) // 2] == stack[len(stack) // 2 + 1:][::-1]
         else:
             return stack[:len(stack) // 2] == stack[len(stack) // 2:][::-1]
 ```
+
+![](https://blog.kakaocdn.net/dna/N3s4T/btq6L4P1IEm/AAAAAAAAAAAAAAAAAAAAAD1b9ofHTOqzBhYy1RCqvb2oVE_8L-sxmPHCATEntIpR/img.png?credential=yqXZFxpELC7KVnFOS48ylbz2pIh7yKj8&expires=1772290799&allow_ip=&allow_referer=&signature=AglGF%2FeP5FKnCy9iJ5I22bGJq1U%3D)
 
 건질 만한 건 isalnum() 정도?...

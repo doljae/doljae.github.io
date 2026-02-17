@@ -12,21 +12,21 @@ date: 2021-10-23T18:35:16+09:00
 
 kubectl get pods
 
-kubectl run POD_NAME --image=IMAGE_NAME
+kubectl run POD\_NAME --image=IMAGE\_NAME
 
 kubectl get pods -o wide
 
 <!-- truncate -->
 
-kubectl describe pod POD_NAME | grep image
+kubectl describe pod POD\_NAME | grep image
 
-kubectl delete pod POD_NAME
+kubectl delete pod POD\_NAME
 
-kubectl run POD_NAME --image=IMAGE_NAME --dry-run=client -o yaml &gt; pod-definition.yaml
+kubectl run POD\_NAME --image=IMAGE\_NAME --dry-run=client -o yaml &gt; pod-definition.yaml
 
 kubectl apply -f application.yaml
 
-kubectl edit pod POD_NAME
+kubectl edit pod POD\_NAME
 
 kubectl get replicaset
 
@@ -34,15 +34,15 @@ kubectl get rs
 
 kubectl create -f replicaset-definition-1.yaml
 
-kubectl delete replicaset REPLICA_SET_NAME
+kubectl delete replicaset REPLICA\_SET\_NAME
 
-kubectl delete -f REPLICA_SET_DEFINITION.yaml
+kubectl delete -f REPLICA\_SET\_DEFINITION.yaml
 
-kubectl apply -f XXX_DEFINITION.yaml
+kubectl apply -f XXX\_DEFINITION.yaml
 
-kubectl get rs REPLICA_SET_NAME -o=yaml &gt; REPLICA_SET.yaml
+kubectl get rs REPLICA\_SET\_NAME -o=yaml &gt; REPLICA\_SET.yaml
 
-kubectl scale rs REPLICA_SET_NAME --replicas=5
+kubectl scale rs REPLICA\_SET\_NAME --replicas=5
 
 kubectl get all
 
@@ -54,4 +54,4 @@ kubectl create -f nginx-deployment.yaml
 
 kubectl create deployment --image=nginx nginx --replicas=4 --dry-run=client -o yaml &gt; nginx-deployment.yaml
 
-kubectl create deploy DEPLOYMENT_NAME --image=nginx nginx --replicas=2
+kubectl create deploy DEPLOYMENT\_NAME --image=nginx nginx --replicas=2

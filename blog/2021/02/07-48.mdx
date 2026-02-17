@@ -10,19 +10,19 @@ date: 2021-02-07T18:49:50+09:00
 
 > 원문: https://doljae.tistory.com/48
 
-외부 JSP 파일을 JSP 파일에 포함하는 방법 2가지
+## 외부 JSP 파일을 JSP 파일에 포함하는 방법 2가지
+
 방법 1. &lt;%@ include file=""%&gt;
 
 1.jsp + 2.jsp 가 하나의 서블릿으로 변환
 
-방법 2. &lt;jsp:include page="" /&gt;
-
 <!-- truncate -->
+
+방법 2. &lt;jsp:include page="" /&gt;
 
 서블릿 2개가 만들어짐
 
-Tomcat만 직접 실행하기
-
+### Tomcat만 직접 실행하기
 
 ```
 # 톰캣 설치 경로에 진입
@@ -53,7 +53,6 @@ C:\apache-tomcat-9.0.41\webapps
 C:\myjava\apache-tomcat-9.0.41\work\Catalina\localhost\spring\org\apache\jsp
 ```
 
-
 주의 사항
 
 WAR를 배포할 당시의 JRE 버전과 WAR를 돌릴 tomcat의 JRE 버전이 맞지 않다면 작동하지 않는다.
@@ -62,7 +61,37 @@ WAR를 배포할 당시의 JRE 버전과 WAR를 돌릴 tomcat의 JRE 버전이 �
 
 그럼 실행이 안됨.
 
-Spring MVC Annotation
+# Spring MVC Annotation
+
+ [\[Spring Framework\] Spring MVC : 개념
+
+ 개념  :  DispatcherSerlvet이 처리하지 못한 요청을 DefaultSerlvet에게 넘겨주는 역할을 하는 핸들러  \*.css와 같은 컨트롤러에 매핑되어 있지 않은 URL 요청은 최종적으로 Default Servlet에 전달되어 처..
+
+develop-im.tistory.com](https://develop-im.tistory.com/9)
+
+ [\[Spring\] HTTP Request 를 처리하는 과정 - DispatcherServlet 원리
+
+먼저 이 글은 Spring Web MVC 에 해당되며, Spring WebFlux 는 다른 글을 참고하시길 바랍니다. HTTP Request 를 처리하는 과정 - DispatcherServlet 원리 Spring Web MVC 에서 HTTP Request 를 처리하는 핵심 클..
+
+ibocon.tistory.com](https://ibocon.tistory.com/208)
+
+ [\[Spring\] 방명록 애플리케이션 (4) - 정적 파일 처리 ( DefaultServletHandler )
+
+Spring으로 방명록 애플리케이션을 구현하는 시리즈입니다. \[Spring\] 방명록 애플리케이션 (1) - 환경 설정 \[Spring\] 방명록 애플리케이션 (2) - 준비 단계 ( 스프링 활용하기 ) \[Spring\] 방명록 애플리케이
+
+victorydntmd.tistory.com](https://victorydntmd.tistory.com/165?category=698080)
+
+ [\[Web/JSP | Servlet\] 서블릿 매핑에서 /와 /\* 차이
+
+과거에는 서블릿 매핑값이 다음과 같았다. dispatcher org.springframework.web.servlet.DispatcherServlet contextConfigLocation MvcConfig.java dispatcher \*.do url-pattern을 \*.do 또는 \*.action 처럼 특정..
+
+pangtrue.tistory.com](https://pangtrue.tistory.com/108)
+
+ [\[Spring\] Spring Annotation 활성화 - Heee's Development Blog
+
+Step by step goes a long way.
+
+gmlwjd9405.github.io](https://gmlwjd9405.github.io/2018/12/18/spring-annotation-enable.html)
 
 ```
 package myspring.user.controller;

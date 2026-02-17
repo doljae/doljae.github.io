@@ -10,24 +10,32 @@ date: 2021-09-12T11:16:56+09:00
 
 > 원문: https://doljae.tistory.com/233
 
-![cover](https://blog.kakaocdn.net/dna/by7h6g/btrfouTuCzV/AAAAAAAAAAAAAAAAAAAAAGuPtGCxdYl1jS-9JuiNFrBEk0q7LbDMEW7MIpO-j_5k/img.png?credential=yqXZFxpELC7KVnFOS48ylbz2pIh7yKj8&expires=1772290799&allow_ip=&allow_referer=&signature=CGU1Oz%2BJ8oeJnnre8DLSRz5BQjQ%3D)
+[2022 KAKAO BLIND RECRUITMENT
 
-요약
+진행 정보 2022 KAKAO BLIND RECRUITMENT 전체 전형 절차 및 일정 지원 접수 : 8월 19일(목) ~ 9월 6일(월) 17:00 1차 코딩 테스트 : 9월 11일(토) 2차 코딩 테스트 : 9월 25일(토) 2차 코딩테스트는 1차 코딩테스트
+
+programmers.co.kr](https://programmers.co.kr/competitions/1571)
+
+<!-- truncate -->
+
+### 요약
+
 5시간 7문제가 나왔다.
 
 타율은 4/7 (4.5라고 하고 싶지만...)
 
-<!-- truncate -->
+### 문제 소감
 
-문제 소감
-1번
+#### 1번
+
 구현 문제.
 
 key-value 스타일의 자료구조를 사용하면 무난하게 해결할 수 있다.
 
 여기서 value를 set으로 해주면 더욱 편하다.
 
-2번
+#### 2번
+
 구현 + 수학 문제.
 
 개인적으로 약간 문제 설명이 좀 모호했다고 본다.
@@ -38,7 +46,8 @@ key-value 스타일의 자료구조를 사용하면 무난하게 해결할 수 �
 
 item이 소수인지 판단해주면 된다. 소수 판단 알고리즘의 경우 미리 구해놓지 않아도 여유롭게 통과하는 것 같다.
 
-3번
+#### 3번
+
 구현 문제.
 
 1, 2번 보다 지문이 길어졌지만 구현해야 하는 기능을 함수로 잘 쪼개서 천천히 접근했다.
@@ -47,7 +56,8 @@ item이 소수인지 판단해주면 된다. 소수 판단 알고리즘의 경�
 
 마지막에 정렬하는 것을 잊지 말 것.
 
-4번
+#### 4번
+
 DFS.
 
 다른 방법도 있겠지만 DFS로 해결했다.
@@ -56,9 +66,10 @@ DFS.
 
 해당 점수 과녁에 화살을 0발 ~ 남은 화살 발수까지 맞춘 상태로 DFS를 넘겨서 잔여 화살이 0 발이거나 더 이상 고려할 점수가 없는 경우에 둘의 점수 차이를 비교해 결과를 저장해줬다.
 
-마지막에 정렬하는 부분에서 Java 등의 언어는 Comparator 등을 구현했어야 했고, Python의 경우 functools의 cmp_to_key를 구현해서 정렬할 수 있다.
+마지막에 정렬하는 부분에서 Java 등의 언어는 Comparator 등을 구현했어야 했고, Python의 경우 functools의 cmp\_to\_key를 구현해서 정렬할 수 있다.
 
-5번
+#### 5번
+
 그래프 + 우선순위 큐
 
 주어진 입력으로 그래프를 그린다.
@@ -71,7 +82,8 @@ DFS.
 
 우선 예제 케이스 및 내가 만든 테스트 케이스에서는 문제없이 작동했으나 위 방법이 고려하지 못하는 경우가 있는 것 같다. 결국 3개의 테스트 케이스를 통과하지 못했다.
 
-6번
+#### 6번
+
 2D-Segment Tree with range update query
 
 range 업데이트 쿼리를 때리려면 그냥 구간 트리가 아니라 2차원 구간 트리가 필요하다.
@@ -82,12 +94,14 @@ range 업데이트 쿼리를 때리려면 그냥 구간 트리가 아니라 2차
 
 알고 보니 2차원 누적합을 응용하면 해결이 가능하다고 한다. 2차원 누적합인가라고 생각했을 때 단순 2차원 누적합으로는 range 업데이트가 불가능해서 넘겼는데, 이를 응용하면 된다고 한다. 심지어 대회러 기준 꽤 전형적인 문제라고 하니...
 
-7번
+#### 7번
+
 ?
 
 문제는 이해했지만 이것을 어떻게 접근해야 하는지 감이 오지 않아서 스킵했다.
 
-후기
+### 후기
+
 우선 앞부분 문제의 난이도가 내려갔다. 꽤 오랫동안 준비하신 분들의 경우는 4문제 까지는 맞추실 수 있었을 것 같다.
 
 커트라인이 몇 문제일지에 따라 다를 것 같다. 만약에 4문제라면 기존과 같은 상대적으로 어려운 코딩 테스트의 무언가 알 수 없는 문제점이 있다거나, 혹은 시험 삼아서 그렇게 해본 걸 수도 있겠다 싶다.
@@ -95,5 +109,7 @@ range 업데이트 쿼리를 때리려면 그냥 구간 트리가 아니라 2차
 개인적으로 문제에 카카오 프렌즈가 많이 나오지 않아서 좋았다. 무지가 실수하고, 어피치가 뭔갈 해야 하고... 문제 자체가 담백해져서 좋았다. 새로 접한 유형들에 대해서는 시간 날 때 관련 문제들을 OJ에서 찾아서 풀어봐야겠다.
 
 21.09.17.
+
+![](https://blog.kakaocdn.net/dna/by7h6g/btrfouTuCzV/AAAAAAAAAAAAAAAAAAAAAGuPtGCxdYl1jS-9JuiNFrBEk0q7LbDMEW7MIpO-j_5k/img.png?credential=yqXZFxpELC7KVnFOS48ylbz2pIh7yKj8&expires=1772290799&allow_ip=&allow_referer=&signature=CGU1Oz%2BJ8oeJnnre8DLSRz5BQjQ%3D)
 
 합격했다. 딱 커트라인이였던것 같다.

@@ -10,28 +10,28 @@ date: 2021-06-14T21:42:32+09:00
 
 > 원문: https://doljae.tistory.com/164
 
-![cover](https://blog.kakaocdn.net/dna/n4Acd/btq7grEeTzH/AAAAAAAAAAAAAAAAAAAAALJ_n6zmJpNcls1QihPuPEa1qC5FoPoNtW7VWjIXnwOl/img.png?credential=yqXZFxpELC7KVnFOS48ylbz2pIh7yKj8&expires=1772290799&allow_ip=&allow_referer=&signature=KnCJLFeEwIMKRBZ5RO19cAjpUH8%3D)
+[Shuffle an Array - LeetCode
+
+Level up your coding skills and quickly land a job. This is the best place to expand your knowledge and get prepared for your next interview.
+
+leetcode.com](https://leetcode.com/problems/shuffle-an-array/)
+
+<!-- truncate -->
 
 ```
 class Solution:
 
     def __init__(self, nums: List[int]):
-        
-
-<!-- truncate -->
 
     def reset(self) -> List[int]:
         """
         Resets the array to its original configuration and return it.
         """
-        
 
     def shuffle(self) -> List[int]:
         """
         Returns a random shuffling of the array.
         """
-        
-
 
 # Your Solution object will be instantiated and called as such:
 # obj = Solution(nums)
@@ -39,16 +39,13 @@ class Solution:
 # param_2 = obj.shuffle()
 ```
 
-
 위 메서드를 구현하면 되는 문제다.
 
-1.  Python 치트키
-
+### 1.  Python 치트키
 
 ```
 from typing import *
 import random
-
 
 class Solution:
 
@@ -68,18 +65,18 @@ class Solution:
         return random.sample(self.nums, len(self.nums))
 ```
 
+![](https://blog.kakaocdn.net/dna/n4Acd/btq7grEeTzH/AAAAAAAAAAAAAAAAAAAAALJ_n6zmJpNcls1QihPuPEa1qC5FoPoNtW7VWjIXnwOl/img.png?credential=yqXZFxpELC7KVnFOS48ylbz2pIh7yKj8&expires=1772290799&allow_ip=&allow_referer=&signature=KnCJLFeEwIMKRBZ5RO19cAjpUH8%3D)
+
 random 모듈의 sapmle 메서드를 쓰면 어떤 입력값에 대해서 어떤 길이만큼의 랜덤 한 값을 반환한다.
 
 내장 함수 모듈을 적극적으로 사용했기 때문에 가장 빠르다.
 
-2. Fisher-Yates Algorithm
-
+### 2\. Fisher-Yates Algorithm
 
 ```
 from typing import *
 from copy import deepcopy
 import random
-
 
 class Solution:
 
@@ -103,7 +100,9 @@ class Solution:
         return temp
 ```
 
-문제의 출제 의도는 **Fisher-Yates Algorithm **알고리즘의 구현이다.
+![](https://blog.kakaocdn.net/dna/bDv7vf/btq7gW5mWot/AAAAAAAAAAAAAAAAAAAAAETqCq-tPAzwIHUh7p8sZXqKvSOVA3KQptWMLPhLUnDe/img.png?credential=yqXZFxpELC7KVnFOS48ylbz2pIh7yKj8&expires=1772290799&allow_ip=&allow_referer=&signature=wrdx1xz16Yh6FfEyWO7OFdufwJ8%3D)
+
+문제의 출제 의도는 **Fisher-Yates Algorithm** 알고리즘의 구현이다.
 
 보통 랜덤 음악 재생하기 같은 곳에 사용하는 알고리즘이라고 한다.
 
@@ -111,7 +110,6 @@ class Solution:
 from typing import *
 from copy import deepcopy
 import random
-
 
 class Solution:
 
@@ -136,6 +134,15 @@ class Solution:
         return temp
 ```
 
+![](https://blog.kakaocdn.net/dna/bEZQF0/btq7gYhQhP0/AAAAAAAAAAAAAAAAAAAAAID0vuYx_G7V4sRa1mmKNDonu8LA-okulCNmtxHSk0hQ/img.png?credential=yqXZFxpELC7KVnFOS48ylbz2pIh7yKj8&expires=1772290799&allow_ip=&allow_referer=&signature=HxrzLgzcg4JYczJ9UmE7SHrcGzM%3D)
+
 위 코드와 완벽히 동일한데 temp에 값을 할당할 때 deepcopy가 아니라 python에서 list를 복사할 때 간간히 쓰는 문법을 통해서 할당해줬다. 그러니깐 속도가 빨라졌다. 아무래도 deepcopy가 훨씬 더 무거운 작업인 것 같은데 실제로 내부 구현에서 어떻게 차이가 나는지는 공부를 해봐야겠다.
+
+ [Shuffle Algorithm : 무작위로 섞기 알고리즘 - Fisher-Yates Shuffle & Knuth Shuffle
+
+Dana Daheen Lee
+#iOS #Swift #CleanCode #Programming
+
+daheenallwhite.github.io](https://daheenallwhite.github.io/programming/algorithm/2019/06/27/Shuffle-Algorithm-Fisher-Yates/)
 
 세상에는 다양한 문제를 해결하기 위해 만들어진 알고리즘이 많이 있는 것 같다.

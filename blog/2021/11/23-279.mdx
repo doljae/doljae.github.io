@@ -10,16 +10,22 @@ date: 2021-11-23T21:43:55+09:00
 
 > 원문: https://doljae.tistory.com/279
 
-![cover](https://blog.kakaocdn.net/dna/Chl7b/btrlT0MT9ZV/AAAAAAAAAAAAAAAAAAAAAGfgnuLoVFir7Qeg0yRJ_aq7w13wrJJczl8AmsWtPKYp/img.png?credential=yqXZFxpELC7KVnFOS48ylbz2pIh7yKj8&expires=1772290799&allow_ip=&allow_referer=&signature=AeDTegykmeJXmBUiQb9bppzKz%2Fg%3D)
+[Edit Distance - LeetCode
+
+Level up your coding skills and quickly land a job. This is the best place to expand your knowledge and get prepared for your next interview.
+
+leetcode.com](https://leetcode.com/problems/edit-distance/)
+
+<!-- truncate -->
 
 정직하게 편집 거리 알고리즘을 구현하는 문제다.
 
-1. 편집 거리 알고리즘
-class Solution:
-    def minDistance(self, word1: str, word2: str) -&gt; int:
-        len1, len2 = len(word1), len(word2)
+### 1\. 편집 거리 알고리즘
 
-<!-- truncate -->
+```
+class Solution:
+    def minDistance(self, word1: str, word2: str) -> int:
+        len1, len2 = len(word1), len(word2)
 
         board = [[0] * (len2 + 1) for _ in range(len1 + 1)]
 
@@ -36,5 +42,8 @@ class Solution:
                     board[i][j] = min(board[i - 1][j - 1], board[i - 1][j], board[i][j - 1]) + 1
 
         return board[-1][-1]
+```
+
+![](https://blog.kakaocdn.net/dna/Chl7b/btrlT0MT9ZV/AAAAAAAAAAAAAAAAAAAAAGfgnuLoVFir7Qeg0yRJ_aq7w13wrJJczl8AmsWtPKYp/img.png?credential=yqXZFxpELC7KVnFOS48ylbz2pIh7yKj8&expires=1772290799&allow_ip=&allow_referer=&signature=AeDTegykmeJXmBUiQb9bppzKz%2Fg%3D)
 
 도전적인 문제를 풀어야하는데...

@@ -10,26 +10,43 @@ date: 2021-11-09T12:08:00+09:00
 
 > 원문: https://doljae.tistory.com/275
 
-![cover](https://blog.kakaocdn.net/dna/cCtWAb/btrkiJrWpJL/AAAAAAAAAAAAAAAAAAAAAI3IrRcC1OfVTSl4k2Fhd_PnYhCT1evOedxrC48G5zzj/img.png?credential=yqXZFxpELC7KVnFOS48ylbz2pIh7yKj8&expires=1772290799&allow_ip=&allow_referer=&signature=QugfL8pyxYooIGFuC29r2caq6yA%3D)
+[Is Subsequence - LeetCode
+
+Level up your coding skills and quickly land a job. This is the best place to expand your knowledge and get prepared for your next interview.
+
+leetcode.com](https://leetcode.com/problems/is-subsequence/)
+
+<!-- truncate -->
 
 문자열 s가 문자열 t의 최장 공통부분 문자열인지 찾는 문제다.
 
 관련 개념을 가장 잘 설명한 블로그 링크.
 
-<!-- truncate -->
+ [\[알고리즘\] 그림으로 알아보는 LCS 알고리즘 - Longest Common Substring와 Longest Common Subsequence
 
-1. Brute Force
+LCS는 주로 최장 공통 부분수열(Longest Common Subsequence)을 말합니다만, 최장 공통 문자열(Longest Common Substring)을 말하기도 합니다.
+
+velog.io](https://velog.io/@emplam27/%EC%95%8C%EA%B3%A0%EB%A6%AC%EC%A6%98-%EA%B7%B8%EB%A6%BC%EC%9C%BC%EB%A1%9C-%EC%95%8C%EC%95%84%EB%B3%B4%EB%8A%94-LCS-%EC%95%8C%EA%B3%A0%EB%A6%AC%EC%A6%98-Longest-Common-Substring%EC%99%80-Longest-Common-Subsequence)
+
+### 1\. Brute Force
+
+```
 class Solution:
-    def isSubsequence(self, s: str, t: str) -&gt; bool:
+    def isSubsequence(self, s: str, t: str) -> bool:
 
         for item in combinations(list(t), len(s)):
             if "".join(list(item)) == s:
                 return True
         return False
+```
 
-2. DP, O(NM)
+![](https://blog.kakaocdn.net/dna/cCtWAb/btrkiJrWpJL/AAAAAAAAAAAAAAAAAAAAAI3IrRcC1OfVTSl4k2Fhd_PnYhCT1evOedxrC48G5zzj/img.png?credential=yqXZFxpELC7KVnFOS48ylbz2pIh7yKj8&expires=1772290799&allow_ip=&allow_referer=&signature=QugfL8pyxYooIGFuC29r2caq6yA%3D)
+
+### 2\. DP, O(NM)
+
+```
 class Solution:
-    def isSubsequence(self, s: str, t: str) -&gt; bool:
+    def isSubsequence(self, s: str, t: str) -> bool:
         dp = [[0] * (len(s) + 1) for _ in range(len(t) + 1)]
         max_length = 0
         for i in range(1, len(t) + 1):
@@ -46,23 +63,33 @@ class Solution:
                 max_length = max(max_length, dp[i][j])
 
         return max_length == len(s)
+```
 
-3. Two Pointers, O(N+M)
+![](https://blog.kakaocdn.net/dna/4u6cp/btrkelyNuG8/AAAAAAAAAAAAAAAAAAAAAHJ5ma3-GxlJGXoA9ajQ5MI4sJDLm8dhfWGXQ-nFFhSz/img.png?credential=yqXZFxpELC7KVnFOS48ylbz2pIh7yKj8&expires=1772290799&allow_ip=&allow_referer=&signature=yMoSfrtOgFlyW%2FpGJKBbdISUlZQ%3D)
+
+### 3\. Two Pointers, O(N+M)
+
+```
 class Solution:
-    def isSubsequence(self, s: str, t: str) -&gt; bool:
+    def isSubsequence(self, s: str, t: str) -> bool:
         p1, p2 = 0, 0
 
-        while p1 &lt; len(s) and p2 &lt; len(t):
+        while p1 < len(s) and p2 < len(t):
             p1, p2 = p1 + (s[p1] == t[p2]), p2 + 1
 
         return p1 == len(s)
+```
 
-4. Binary Search, O(MlogN)
+![](https://blog.kakaocdn.net/dna/djTvc5/btrkhqffhSe/AAAAAAAAAAAAAAAAAAAAAIAML1MXNizqhEkz7FrPYjoZqMsdw2UO9FA5ElpvrP8v/img.png?credential=yqXZFxpELC7KVnFOS48ylbz2pIh7yKj8&expires=1772290799&allow_ip=&allow_referer=&signature=9Duluu1rDA22mE2A2XbOwO5%2FS%2Fo%3D)
+
+### 4\. Binary Search, O(MlogN)
+
+```
 from bisect import bisect_left
 from collections import defaultdict
 
 class Solution:
-    def isSubsequence(self, s: str, t: str) -&gt; bool:
+    def isSubsequence(self, s: str, t: str) -> bool:
         dict1 = defaultdict(list)
         for index, char in enumerate(t):
             dict1[char].append(index)
@@ -71,15 +98,20 @@ class Solution:
 
         for char in s:
             target = bisect_left(dict1[char], cur_index)
-            if target &gt;= len(dict1[char]):
+            if target >= len(dict1[char]):
                 return False
             cur_index = dict1[char][target] + 1
 
         return True
+```
 
-5. Using Iterator, O(N+M)
+![](https://blog.kakaocdn.net/dna/egmda8/btrkfW6vBJ8/AAAAAAAAAAAAAAAAAAAAAG8oZgQ4oNqgpw-zxLoX-YJWW979HxdQaXMZpaWvFHnn/img.png?credential=yqXZFxpELC7KVnFOS48ylbz2pIh7yKj8&expires=1772290799&allow_ip=&allow_referer=&signature=WoMEpXzAleQjT9eKQOzMnAsc4VI%3D)
+
+### 5\. Using Iterator, O(N+M)
+
+```
 class Solution:
-    def isSubsequence(self, s: str, t: str) -&gt; bool:
+    def isSubsequence(self, s: str, t: str) -> bool:
         iterator = iter(t)
         for char in s:
             if char not in iterator:
@@ -88,7 +120,7 @@ class Solution:
 
 # 위 풀이를 풀어쓰면 아래와 같다.
 class Solution:
-    def isSubsequence(self, s: str, t: str) -&gt; bool:
+    def isSubsequence(self, s: str, t: str) -> bool:
 
         for char in s:
             index = t.find(char)
@@ -102,6 +134,9 @@ class Solution:
 def isSubsequence(self, s, t):
     t = iter(t)
     return all(c in t for c in s)
+```
+
+![](https://blog.kakaocdn.net/dna/dSBre1/btrkjaJzwtv/AAAAAAAAAAAAAAAAAAAAAJxl9LNqFCTHMI8IW793q28-4sCx811ewNBtJJRmZ0l6/img.png?credential=yqXZFxpELC7KVnFOS48ylbz2pIh7yKj8&expires=1772290799&allow_ip=&allow_referer=&signature=FtmvCuoO3l1kw9nVcwdTefvbQXk%3D)
 
 1번이 TLE인건 당연하고, 2번이 일반적으로 알고 있는 정해다.
 

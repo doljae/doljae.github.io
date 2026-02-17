@@ -10,10 +10,15 @@ date: 2021-04-30T13:52:53+09:00
 
 > 원문: https://doljae.tistory.com/99
 
-![cover](https://blog.kakaocdn.net/dna/bYZ8Fk/btq3O55aGuK/AAAAAAAAAAAAAAAAAAAAACONPp2Xc2k1AVs_F-VNq5gII6WQsO3y6EAJAzSAynUO/img.png?credential=yqXZFxpELC7KVnFOS48ylbz2pIh7yKj8&expires=1772290799&allow_ip=&allow_referer=&signature=qtAgzYjo2BvbLRAL1Jmlh0K4wuA%3D)
+[Intersection of Two Linked Lists - LeetCode
 
-1. 객체 ID값을 이용한 분기점 반환
+Level up your coding skills and quickly land a job. This is the best place to expand your knowledge and get prepared for your next interview.
 
+leetcode.com](https://leetcode.com/problems/intersection-of-two-linked-lists/)
+
+<!-- truncate -->
+
+### 1\. 객체 ID값을 이용한 분기점 반환
 
 ```
 class Solution:
@@ -40,14 +45,13 @@ class Solution:
             p_a = p_a.next
 ```
 
-<!-- truncate -->
+![](https://blog.kakaocdn.net/dna/bYZ8Fk/btq3O55aGuK/AAAAAAAAAAAAAAAAAAAAACONPp2Xc2k1AVs_F-VNq5gII6WQsO3y6EAJAzSAynUO/img.png?credential=yqXZFxpELC7KVnFOS48ylbz2pIh7yKj8&expires=1772290799&allow_ip=&allow_referer=&signature=qtAgzYjo2BvbLRAL1Jmlh0K4wuA%3D)
 
 객체 고유의 주소값을 저장하면서 두 LinkedList의 겹치는 경로를 집합으로 저장한다.
 
 그 후 다시 한 번 선형 탐색을 하면서 위에서 만든 집합의 주 솟값과 동일한 주소값이 된 순간이 분기하는 순간이다.
 
-2. Cycle 그래프의 특성을 이용한 풀이
-
+### 2\. Cycle 그래프의 특성을 이용한 풀이
 
 ```
     def getIntersectionNode(self, headA, headB):
@@ -57,5 +61,7 @@ class Solution:
             p2 = headA if not p2 else p2.next
         return p1
 ```
+
+![](https://blog.kakaocdn.net/dna/kYZPx/btq3OMSio2b/AAAAAAAAAAAAAAAAAAAAANorPcUDQAzkePXd2qtkz_cPWET1JQ4QIDUTATvfD0JC/img.png?credential=yqXZFxpELC7KVnFOS48ylbz2pIh7yKj8&expires=1772290799&allow_ip=&allow_referer=&signature=0x3Tgo8j9kAxgnkfeekca2KHfuA%3D)
 
 이해가 안 된다면 손으로 그려볼 것.

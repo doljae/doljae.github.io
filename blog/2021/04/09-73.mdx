@@ -10,10 +10,15 @@ date: 2021-04-09T11:24:10+09:00
 
 > 원문: https://doljae.tistory.com/73
 
-![cover](https://blog.kakaocdn.net/dna/90ofl/btq2bKvmcEN/AAAAAAAAAAAAAAAAAAAAAH6a0ysGRT4fFsQjEEvi1NBigXD0NoyFEmqwGVBidimn/img.png?credential=yqXZFxpELC7KVnFOS48ylbz2pIh7yKj8&expires=1772290799&allow_ip=&allow_referer=&signature=hyaGT8RbO9hNhOY1ILiQwP5Uf6w%3D)
+[Counting Bits - LeetCode
 
-1. 내장 함수를 이용한 탐색
+Level up your coding skills and quickly land a job. This is the best place to expand your knowledge and get prepared for your next interview.
 
+leetcode.com](https://leetcode.com/problems/counting-bits/)
+
+<!-- truncate -->
+
+### 1\. 내장 함수를 이용한 탐색
 
 ```
     def countBits(self, num: int) -> List[int]:
@@ -23,11 +28,7 @@ date: 2021-04-09T11:24:10+09:00
         return answer
 ```
 
-<!-- truncate -->
-
-
-2. 비트의 성질을 이용한 반복 사용
-
+### 2\. 비트의 성질을 이용한 반복 사용
 
 ```
     def countBits(self, num: int) -> List[int]:
@@ -41,9 +42,7 @@ date: 2021-04-09T11:24:10+09:00
         return answer
 ```
 
-
-3. Offset의 성질을 이용한 Dynamic Programming
-
+### 3\. Offset의 성질을 이용한 Dynamic Programming
 
 ```
     def countBits(self, num: int) -> List[int]:
@@ -58,9 +57,15 @@ date: 2021-04-09T11:24:10+09:00
         return answer
 ```
 
+### 4\. 분할 정복을 이용한 방법
 
-4. 분할 정복을 이용한 방법
 아이디어 참고 링크
+
+ [\[C\] 1비트수 세기
+
+첫 번째 방법은 2로 나누어 가면서 나머지가 1인것의 개수를 세는 방법이다.가장 단순한 방법이다.두 번째 방법은 2로 나누는것을 비트연산을 통해 조금더 빠르게 개선한 방법이다.세 번째 방법
+
+velog.io](https://velog.io/@springkim/C-1%EB%B9%84%ED%8A%B8%EC%88%98-%EC%84%B8%EA%B8%B0)
 
 ```
     def countBits(self, vv: int) -> List[int]:
@@ -75,7 +80,12 @@ date: 2021-04-09T11:24:10+09:00
         return answer
 ```
 
-느낀 점
+![](https://blog.kakaocdn.net/dna/90ofl/btq2bKvmcEN/AAAAAAAAAAAAAAAAAAAAAH6a0ysGRT4fFsQjEEvi1NBigXD0NoyFEmqwGVBidimn/img.png?credential=yqXZFxpELC7KVnFOS48ylbz2pIh7yKj8&expires=1772290799&allow_ip=&allow_referer=&signature=hyaGT8RbO9hNhOY1ILiQwP5Uf6w%3D)
+
+위에서 부터 4번, 3번, 2번, 1번 풀이 방식으로 제출했을 때 결과
+
+### 느낀 점
+
 **내장 함수(메서드)를 제대로 이해하고 적극적으로 활용하자**
 
 특히 Python의 경우 몇몇 내장 함수가 C로 작성되어있고, 다양한 알고리즘을 통해 최적화까지 되어있다.

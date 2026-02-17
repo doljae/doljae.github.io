@@ -10,10 +10,15 @@ date: 2021-04-07T11:30:41+09:00
 
 > 원문: https://doljae.tistory.com/70
 
-![cover](https://blog.kakaocdn.net/dna/kH3E4/btq1ZFOzqku/AAAAAAAAAAAAAAAAAAAAAKboAS6-c2tET5-70iWJe5MWglCljbPj6fPabNhewIY6/img.png?credential=yqXZFxpELC7KVnFOS48ylbz2pIh7yKj8&expires=1772290799&allow_ip=&allow_referer=&signature=D8TDQ9S4ijlItIlf%2F3ceADLK%2B20%3D)
+[Find the Duplicate Number - LeetCode
 
-1. 선형 탐색 (시간 초과)
+Level up your coding skills and quickly land a job. This is the best place to expand your knowledge and get prepared for your next interview.
 
+leetcode.com](https://leetcode.com/problems/find-the-duplicate-number/)
+
+<!-- truncate -->
+
+### 1\. 선형 탐색 (시간 초과)
 
 ```
 class Solution:
@@ -24,10 +29,7 @@ class Solution:
                 return nums[i]
 ```
 
-<!-- truncate -->
-
-2. HashMap or Set (공간 초과)
-
+### 2\. HashMap or Set (공간 초과)
 
 ```
 class Solution:
@@ -39,12 +41,10 @@ class Solution:
             seen.add(num)
 ```
 
-3. Floyd 순환 알고리즘 (2 pointer, Runner)
-
+### 3\. Floyd 순환 알고리즘 (2 pointer, Runner)
 
 ```
 from typing import *
-
 
 class Solution:
     def findDuplicate(self, nums: List[int]) -> int:
@@ -61,3 +61,5 @@ class Solution:
             pointer2 = nums[pointer2]
         return pointer1
 ```
+
+![](https://blog.kakaocdn.net/dna/kH3E4/btq1ZFOzqku/AAAAAAAAAAAAAAAAAAAAAKboAS6-c2tET5-70iWJe5MWglCljbPj6fPabNhewIY6/img.png?credential=yqXZFxpELC7KVnFOS48ylbz2pIh7yKj8&expires=1772290799&allow_ip=&allow_referer=&signature=D8TDQ9S4ijlItIlf%2F3ceADLK%2B20%3D)

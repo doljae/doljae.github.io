@@ -12,61 +12,72 @@ date: 2021-04-27T13:28:44+09:00
 
 온라인 강의를 듣고 배운 점들을 기록한다.
 
-@RequiredArgsConstructor
-- Lombok 어노테이션, final 필드, @NonNull이 붙은 필드에 대한 생성자를 제공한다.
+### @RequiredArgsConstructor
 
-- 참고로 @AllArgsConstructor는 모든 필드에 대한 생성자를 제공한다.
+\- Lombok 어노테이션, final 필드, @NonNull이 붙은 필드에 대한 생성자를 제공한다.
 
 <!-- truncate -->
 
-- Controller에서 주입되는 Service나 Service에서 주입되는 Repository 등을 final 필드로 선언할 때 주로 사용하는 것 같다.
+\- 참고로 @AllArgsConstructor는 모든 필드에 대한 생성자를 제공한다.
 
-schema.sql & data.sql
-- SpringBoot에서 resources 디렉터리 아래에 위 파일들이 있다면, 내용을 읽어서 해당하는 DDL, DML을 수행한다.
+\- Controller에서 주입되는 Service나 Service에서 주입되는 Repository 등을 final 필드로 선언할 때 주로 사용하는 것 같다.
 
-- 특히 JPA와 H2 DB를 사용할 때 ApplicationRunner를 사용하지 않고 초기 DB 형태를 만드는데 유용하다.
+### schema.sql & data.sql
 
-- 하지만 yml 옵션과 꼬이면 에러가 생길 수 있기 때문에 위 파일을 사용할 때는 ddl-auto 옵션을 none으로 하고 사용하는 게 편하다.
+\- SpringBoot에서 resources 디렉터리 아래에 위 파일들이 있다면, 내용을 읽어서 해당하는 DDL, DML을 수행한다.
 
-- yml 설정을 통해 다른 디렉터리의 sql 파일도 읽어서 수행할 수 있다.
+\- 특히 JPA와 H2 DB를 사용할 때 ApplicationRunner를 사용하지 않고 초기 DB 형태를 만드는데 유용하다.
 
-@PatchMapping
+\- 하지만 yml 옵션과 꼬이면 에러가 생길 수 있기 때문에 위 파일을 사용할 때는 ddl-auto 옵션을 none으로 하고 사용하는 게 편하다.
 
-- PUT은 URI에 해당하는 리소스 전체에 대한 변경이라고 한다면, PATCH는 일부를 변경한다.
+\- yml 설정을 통해 다른 디렉터리의 sql 파일도 읽어서 수행할 수 있다.
 
-- 구현 방법에 따라 PUT과 동일한 기능을 하게 할 수 있다.
+### @PatchMapping
 
-- 예를 들어 사용자의 전화번호 정보만 변경할 때 사용한다.
+ [PATCH - HTTP | MDN
 
-- 추가적으로 메서드가 다르기 때문에 같은 URI에 대해서 PUT과 중복되지 않고 사용할 수 있다는 장점이 있다.
+PATCH HTTP PATCH 메소드는 리소스의 부분적인 수정을 할 때에 사용됩니다. HTTP PUT 메소드는 문서 전체의 완전한 교체만을 허용합니다. 반면 PATCH 메소드는 PUT 메소드와 달리 멱등성을 가지지 않
 
-findByIdIn
-- findById는 JpaRepository를 상속받아서 Repository를 만들었을 때, Id 값에 대한 Entity를 Optional로 Wrapping 해서 반환한다.
+developer.mozilla.org](https://developer.mozilla.org/ko/docs/Web/HTTP/Methods/PATCH)
 
-- JPA keyword를 이용해 간단한 쿼리를 생성할 수 있다.
+\- PUT은 URI에 해당하는 리소스 전체에 대한 변경이라고 한다면, PATCH는 일부를 변경한다.
 
-- findByIdIn이라는 메서드를 만들어주고 사용하면 JPA는 "select * from entity where id in (subquery)"라는 SQL 쿼리를 만들고, subquery에는 함수 인자로 들어오는 List &lt;&gt;의 값들이 들어간다.
+\- 구현 방법에 따라 PUT과 동일한 기능을 하게 할 수 있다.
 
-- 이 외에도 In, Between, And, Or 등의 키워드를 활용하면 쿼리를 자동으로 만들어 준다.
+\- 예를 들어 사용자의 전화번호 정보만 변경할 때 사용한다.
 
-spring-boot-starter-validation
-- Validation 의존성은 객체의 파라미터에 대한 입력값에 대한 제한 조건을 설정하고, 위반 시 에러 처리를 할 수 있도록 도와준다.
+\- 추가적으로 메서드가 다르기 때문에 같은 URI에 대해서 PUT과 중복되지 않고 사용할 수 있다는 장점이 있다.
 
-- 일반적으로 Input용으로 만든 class에 제약을 걸고, controller에서 해당 클래스를 입력받을 때 조건을 체크한다.
+### findByIdIn
 
-- 정수 타입의 변수에는 @Max, @Min을 사용해 그 값을 제한할 수 있다.
+\- findById는 JpaRepository를 상속받아서 Repository를 만들었을 때, Id 값에 대한 Entity를 Optional로 Wrapping 해서 반환한다.
 
-- 문자 타입의 변수에는 @Size를 사용해 최대 길이, 최소 길이를 제한할 수 있다.
+\- JPA keyword를 이용해 간단한 쿼리를 생성할 수 있다.
 
-- 컨트롤러에는 해당 Input Class 앞에 @Valid를 붙여서 Validator를 사용하고 있음을 알려줘야 한다.
+\- findByIdIn이라는 메서드를 만들어주고 사용하면 JPA는 "select \* from entity where id in (subquery)"라는 SQL 쿼리를 만들고, subquery에는 함수 인자로 들어오는 List &lt;&gt;의 값들이 들어간다.
 
-- 적합하지 못한 입력값이 할당되어서 Controller에 진입하면 Errors 객체에 해당 에러를 받을 수 있다.
+\- 이 외에도 In, Between, And, Or 등의 키워드를 활용하면 쿼리를 자동으로 만들어 준다.
 
-Errors
-- Controller에 진입할 때 에러가 발생한다면 그 에러에 대한 정보를 담고 있는 객체다.
+### spring-boot-starter-validation
 
-- hasErrors()로 에러 유무 조건을 분기할 수 있다.
+\- Validation 의존성은 객체의 파라미터에 대한 입력값에 대한 제한 조건을 설정하고, 위반 시 에러 처리를 할 수 있도록 도와준다.
 
-- getAllErrors()로 발생한 모든 에러를 받을 수 있고, 이때 타입은 ObjectError다.
+\- 일반적으로 Input용으로 만든 class에 제약을 걸고, controller에서 해당 클래스를 입력받을 때 조건을 체크한다.
 
-- 보통 Input Class의 특정 필드 값이 Validator 조건에 맞지 않아 에러를 발생시킬 때는 그 필드 정보를 얻기 위해서 FieldError로 형 변환을 해준 뒤에 getField(), getDefaultMessage() 등의 메서드를 통해 에러 정보를 받는 것이 일반적이라고 한다.
+\- 정수 타입의 변수에는 @Max, @Min을 사용해 그 값을 제한할 수 있다.
+
+\- 문자 타입의 변수에는 @Size를 사용해 최대 길이, 최소 길이를 제한할 수 있다.
+
+\- 컨트롤러에는 해당 Input Class 앞에 @Valid를 붙여서 Validator를 사용하고 있음을 알려줘야 한다.
+
+\- 적합하지 못한 입력값이 할당되어서 Controller에 진입하면 Errors 객체에 해당 에러를 받을 수 있다.
+
+### Errors
+
+\- Controller에 진입할 때 에러가 발생한다면 그 에러에 대한 정보를 담고 있는 객체다.
+
+\- hasErrors()로 에러 유무 조건을 분기할 수 있다.
+
+\- getAllErrors()로 발생한 모든 에러를 받을 수 있고, 이때 타입은 ObjectError다.
+
+\- 보통 Input Class의 특정 필드 값이 Validator 조건에 맞지 않아 에러를 발생시킬 때는 그 필드 정보를 얻기 위해서 FieldError로 형 변환을 해준 뒤에 getField(), getDefaultMessage() 등의 메서드를 통해 에러 정보를 받는 것이 일반적이라고 한다.

@@ -10,17 +10,20 @@ date: 2021-05-18T10:23:07+09:00
 
 > 원문: https://doljae.tistory.com/144
 
-![cover](https://blog.kakaocdn.net/dna/py3zL/btq44O3qmMr/AAAAAAAAAAAAAAAAAAAAAGKEC3XtboyLjhQ5OIeCwH_aUs7D9wh4sJJch0JoZJij/img.png?credential=yqXZFxpELC7KVnFOS48ylbz2pIh7yKj8&expires=1772290799&allow_ip=&allow_referer=&signature=3wQ4f114DYDmloZnaTDJTFNS1Qs%3D)
+[Implement Trie (Prefix Tree) - LeetCode
 
-1. Trie 자료구조 구현
+Level up your coding skills and quickly land a job. This is the best place to expand your knowledge and get prepared for your next interview.
 
+leetcode.com](https://leetcode.com/problems/implement-trie-prefix-tree/)
+
+<!-- truncate -->
+
+### 1\. Trie 자료구조 구현
 
 ```
 class Trie:
     def __init__(self):
         self.head = Node()
-
-<!-- truncate -->
 
     def insert(self, word: str) -> None:
         cur = self.head
@@ -48,7 +51,6 @@ class Trie:
             cur = cur.child[char]
         return True
 
-
 class Node:
     def __init__(self, val="0"):
         self.val = val
@@ -57,6 +59,8 @@ class Node:
     def __str__(self):
         return f"val: {self.val}, child:{self.child}"
 ```
+
+![](https://blog.kakaocdn.net/dna/py3zL/btq44O3qmMr/AAAAAAAAAAAAAAAAAAAAAGKEC3XtboyLjhQ5OIeCwH_aUs7D9wh4sJJch0JoZJij/img.png?credential=yqXZFxpELC7KVnFOS48ylbz2pIh7yKj8&expires=1772290799&allow_ip=&allow_referer=&signature=3wQ4f114DYDmloZnaTDJTFNS1Qs%3D)
 
 스스로도 한 번에 통과해서 놀랐다.
 

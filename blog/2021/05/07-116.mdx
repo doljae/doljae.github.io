@@ -10,10 +10,15 @@ date: 2021-05-07T09:46:15+09:00
 
 > 원문: https://doljae.tistory.com/116
 
-![cover](https://blog.kakaocdn.net/dna/AhvpL/btq4lkf8lOi/AAAAAAAAAAAAAAAAAAAAACyCkXi7P82kEaQe_aQqMlAFXSMdFZqqNV7T-YUrDW8T/img.png?credential=yqXZFxpELC7KVnFOS48ylbz2pIh7yKj8&expires=1772290799&allow_ip=&allow_referer=&signature=vF75erhnoalkyZqHwANe%2BUGUmCE%3D)
+[Kth Smallest Element in a BST - LeetCode
 
-1. In-Order Traversal using Iteration
+Level up your coding skills and quickly land a job. This is the best place to expand your knowledge and get prepared for your next interview.
 
+leetcode.com](https://leetcode.com/problems/kth-smallest-element-in-a-bst/)
+
+<!-- truncate -->
+
+## 1\. In-Order Traversal using Iteration
 
 ```
 class Solution:
@@ -26,17 +31,16 @@ class Solution:
             inorder(cur.left)
             answers.append(cur.val)
             inorder(cur.right)
-            
+
         inorder(root)
         return answers[k-1]
 ```
 
-<!-- truncate -->
+![](https://blog.kakaocdn.net/dna/AhvpL/btq4lkf8lOi/AAAAAAAAAAAAAAAAAAAAACyCkXi7P82kEaQe_aQqMlAFXSMdFZqqNV7T-YUrDW8T/img.png?credential=yqXZFxpELC7KVnFOS48ylbz2pIh7yKj8&expires=1772290799&allow_ip=&allow_referer=&signature=vF75erhnoalkyZqHwANe%2BUGUmCE%3D)
 
 이진 탐색 트리는 in-order로 순회하면 오름차순으로 정렬된 값을 얻을 수 있다.
 
-2. In-Order Traversal using Stack
-
+### 2\. In-Order Traversal using Stack
 
 ```
 class Solution:
@@ -52,5 +56,7 @@ class Solution:
                 return root.val
             root = root.right
 ```
+
+![](https://blog.kakaocdn.net/dna/cj3MOu/btq4kF5TTSS/AAAAAAAAAAAAAAAAAAAAAC3qbh4zldIaolqpxp6NXZsmMw6ZsxoH8W8rsHpzFPJL/img.png?credential=yqXZFxpELC7KVnFOS48ylbz2pIh7yKj8&expires=1772290799&allow_ip=&allow_referer=&signature=fglQfz%2BtRjkoNqtZEo9szpdw6jA%3D)
 
 in-order 순회는 stack으로도 구현이 가능하다.

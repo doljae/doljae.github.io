@@ -10,29 +10,29 @@ date: 2021-07-05T10:15:20+09:00
 
 > 원문: https://doljae.tistory.com/176
 
-![cover](https://blog.kakaocdn.net/dna/cTpbAZ/btq8NvkWa0r/AAAAAAAAAAAAAAAAAAAAAAiyaQ5SIdEI0ZdWWJm5rKy2Wc9K-7iEuiMPyaHC-U9e/img.png?credential=yqXZFxpELC7KVnFOS48ylbz2pIh7yKj8&expires=1772290799&allow_ip=&allow_referer=&signature=vza3P8c16giLuannNfzp0WyITdY%3D)
+[Set Matrix Zeroes - LeetCode
+
+Level up your coding skills and quickly land a job. This is the best place to expand your knowledge and get prepared for your next interview.
+
+leetcode.com](https://leetcode.com/problems/set-matrix-zeroes/)
+
+<!-- truncate -->
 
 2차원 배열이 주어진다.
 
 2차원 배열에서 (row, col)에 해당하는 값이 0이라면 해당 row와 col을 배열 끝까지 0의 값으로 채우는 문제다.
 
-<!-- truncate -->
-
-1. 구현
-
+### 1\. 구현
 
 ```
 from typing import *
 
-
 def set_row(board, row):
     board[row] = [1] * len(board[row])
-
 
 def set_col(board, col):
     for row in range(len(board)):
         board[row][col] = 1
-
 
 class Solution:
     def setZeroes(self, matrix: List[List[int]]) -> None:
@@ -47,6 +47,8 @@ class Solution:
                 if board[row][col] == 1:
                     matrix[row][col] = 0
 ```
+
+![](https://blog.kakaocdn.net/dna/cTpbAZ/btq8NvkWa0r/AAAAAAAAAAAAAAAAAAAAAAiyaQ5SIdEI0ZdWWJm5rKy2Wc9K-7iEuiMPyaHC-U9e/img.png?credential=yqXZFxpELC7KVnFOS48ylbz2pIh7yKj8&expires=1772290799&allow_ip=&allow_referer=&signature=vza3P8c16giLuannNfzp0WyITdY%3D)
 
 2차원 배열을 하나 더 만든 뒤 입력된 배열을 순회하면서 0의 위치를 함수를 사용해 마킹했다.
 

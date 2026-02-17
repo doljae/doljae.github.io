@@ -10,10 +10,15 @@ date: 2021-05-10T09:25:32+09:00
 
 > 원문: https://doljae.tistory.com/123
 
-![cover](https://blog.kakaocdn.net/dna/onR9e/btq4rd92JO6/AAAAAAAAAAAAAAAAAAAAAFC1p_1U7PXlAwm8CR6kfQOSppG6yCtpv7t3O3nKHenX/img.png?credential=yqXZFxpELC7KVnFOS48ylbz2pIh7yKj8&expires=1772290799&allow_ip=&allow_referer=&signature=W%2BSENFa9AsH9GKqfV0vK1BHe284%3D)
+[Group Anagrams - LeetCode
 
-1. 소팅된 문자열을 Key로 하는 Dict(HashMap)을 이용한 풀이
+Level up your coding skills and quickly land a job. This is the best place to expand your knowledge and get prepared for your next interview.
 
+leetcode.com](https://leetcode.com/problems/group-anagrams/)
+
+<!-- truncate -->
+
+### 1\. 소팅된 문자열을 Key로 하는 Dict(HashMap)을 이용한 풀이
 
 ```
 class Solution:
@@ -26,20 +31,20 @@ class Solution:
             else:
                 dict1[temp].append(str)
         return dict1.values()
+
 ```
 
-<!-- truncate -->
+![](https://blog.kakaocdn.net/dna/onR9e/btq4rd92JO6/AAAAAAAAAAAAAAAAAAAAAFC1p_1U7PXlAwm8CR6kfQOSppG6yCtpv7t3O3nKHenX/img.png?credential=yqXZFxpELC7KVnFOS48ylbz2pIh7yKj8&expires=1772290799&allow_ip=&allow_referer=&signature=W%2BSENFa9AsH9GKqfV0vK1BHe284%3D)
 
 문자열을 소팅하고, 소팅한 문자열을 Key로 하는 Dict을 만들어서 해결했다. 하지만 모든 문자열을 정렬하고 처리해야 하기 때문에 약간 빡빡하게 제한시간이 걸린다면 TLE가 날 수도 있다.
 
-2. 문자열을 소팅 없이 Counting 한 결과를 Key로 하는 Dict(HashMap)을 이용한 풀이
-
+### 2\. 문자열을 소팅 없이 Counting 한 결과를 Key로 하는 Dict(HashMap)을 이용한 풀이
 
 ```
 class Solution:
     def groupAnagrams(self, strs: List[str]) -> List[List[str]]:
         dict1={}
-        
+
         def count(input_string):
             count_list=[0]*26
             for char in input_string:
@@ -47,8 +52,7 @@ class Solution:
             # python dict의 key값에는 모든 것이 가능하다
             # tuple도 가능하기 때문에 key로 사용할 수 있음
             return tuple(count_list)
-            
-        
+
         for str in strs:
             temp=count(str)
             if temp not in dict1:
@@ -56,7 +60,10 @@ class Solution:
             else:
                 dict1[temp].append(str)
         return dict1.values()
+
 ```
+
+![](https://blog.kakaocdn.net/dna/d8MO0B/btq4t4Li6WM/AAAAAAAAAAAAAAAAAAAAAL5fzfvMYYMOJ8ARCioN0fKmkWLxlcDnn88VS7Q8xcp1/img.png?credential=yqXZFxpELC7KVnFOS48ylbz2pIh7yKj8&expires=1772290799&allow_ip=&allow_referer=&signature=WS0WAgWeyaofB7CLMC4XUKzXjaI%3D)
 
 입력된 문자열을 선형 탐색해서 알파벳 빈도수를 key로 하는 Dict을 사용해 풀 수 있다.
 

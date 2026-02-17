@@ -10,159 +10,206 @@ date: 2024-10-13T15:58:10+09:00
 
 > 원문: https://doljae.tistory.com/340
 
-서론
-최근에 이펙티브 코틀린을 다시 읽고 있습니다. 처음 읽었을 때 이해가 잘 안 되어서 넘긴 내용이 이제는 조금씩 읽혀서 신기하기도 하고 다행이기도 하고 그렇습니다. 책에서 다루는 내용 중 **"아이템 24. 제네릭 타입과 variance 한정자를 활용하라" **챕터에서 다루는 코틀린의 제네릭과 변성에 대해서 이해한 내용을 정리했습니다. 예시 코드는 코틀린으로 작성했지만 여러 프로그래밍 언어에서 다루는 개념인 만큼 이번 글을 통해 제네릭의 변성과 관련된 개념을 정확하게 이해하실 수 있도록 풀어보겠습니다.
+## 서론
 
-제네릭
-위키백과에선 **제네릭 프로그래밍**을 데이터 형식에 의존하지 않고, 하나의 값이 여러 다른 데이터 타입들을 가질 수 있는 기술에 중점을 두어 재사용성을 높일 수 있는 프로그래밍 방식이라고 설명합니다. 제네릭은 제네릭 프로그래밍을 할 때 사용하는 프로그래밍 언어에서 지원하는 문법이라고 생각하면 될 것 같습니다.
+최근에 [이펙티브 코틀린](https://ebook.insightbook.co.kr/book/111)을 다시 읽고 있습니다. 처음 읽었을 때 이해가 잘 안 되어서 넘긴 내용이 이제는 조금씩 읽혀서 신기하기도 하고 다행이기도 하고 그렇습니다. 책에서 다루는 내용 중 **"아이템 24. 제네릭 타입과 variance 한정자를 활용하라"** 챕터에서 다루는 코틀린의 제네릭과 변성에 대해서 이해한 내용을 정리했습니다. 예시 코드는 코틀린으로 작성했지만 여러 프로그래밍 언어에서 다루는 개념인 만큼 이번 글을 통해 제네릭의 변성과 관련된 개념을 정확하게 이해하실 수 있도록 풀어보겠습니다.
 
-제네릭의 가장 단순하면서도 큰 효과는 중복 로직(코드)을 줄여준다는 점입니다. 아래 예시의 로직은 동일하지만 파라미터 타입만 다른 함수의 경우 제네릭을 사용하면 하나의 함수로 공통화할 수 있습니다.
+## 제네릭
 
 <!-- truncate -->
 
+[위키백과](https://ko.wikipedia.org/wiki/%EC%A0%9C%EB%84%A4%EB%A6%AD_%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%B0%8D)에선 **제네릭 프로그래밍**을 데이터 형식에 의존하지 않고, 하나의 값이 여러 다른 데이터 타입들을 가질 수 있는 기술에 중점을 두어 재사용성을 높일 수 있는 프로그래밍 방식이라고 설명합니다. 제네릭은 제네릭 프로그래밍을 할 때 사용하는 프로그래밍 언어에서 지원하는 문법이라고 생각하면 될 것 같습니다.
+
+제네릭의 가장 단순하면서도 큰 효과는 중복 로직(코드)을 줄여준다는 점입니다. 아래 예시의 로직은 동일하지만 파라미터 타입만 다른 함수의 경우 제네릭을 사용하면 하나의 함수로 공통화할 수 있습니다.
+
+```
 // 파라미터 타입만 다른 같은 일을 하는 함수
-fun hitTheKlaxon(car: Car) &#123;&#125;
+fun hitTheKlaxon(car: Car) {}
 
-fun hitTheKlaxon(truck: Truck) &#123;&#125;
+fun hitTheKlaxon(truck: Truck) {}
 
-fun hitTheKlaxon(bike: Bike) &#123;&#125;
+fun hitTheKlaxon(bike: Bike) {}
+```
+
+```
 // 제네릭을 쓰면...
-fun &lt;T&gt; hitTheKlaxon(t: T) &#123;&#125;
+fun <T> hitTheKlaxon(t: T) {}
 
-fun main() &#123;
+fun main() {
     hitTheKlaxon(Car())
     hitTheKlaxon(Truck())
     hitTheKlaxon(Bike())
-&#125;
-공변성, 반공변성
-위키백과에선 프로그래밍 언어의 **공변성(영어: Covariance)**과 **반공변성(영어: Contravariance)**은 프로그래밍 언어가 타입 생성자(영어: type constructor)에 있어 서브타입을 처리하는 방법을 나타내는 것이라고 설명합니다.
+}
+```
+
+## 공변성, 반공변성
+
+[위키백과](https://ko.wikipedia.org/wiki/%EA%B3%B5%EB%B3%80%EC%84%B1%EA%B3%BC_%EB%B0%98%EA%B3%B5%EB%B3%80%EC%84%B1_\(%EC%BB%B4%ED%93%A8%ED%84%B0_%EA%B3%BC%ED%95%99\))에선 프로그래밍 언어의 **공변성(영어: Covariance)**과 **반공변성(영어: Contravariance)**은 프로그래밍 언어가 타입 생성자(영어: type constructor)에 있어 서브타입을 처리하는 방법을 나타내는 것이라고 설명합니다.
 
 정확하진 않지만 이 부분을 이해하기 쉽게, 머릿속에 남게 하기 위해 다음과 같이 정리하겠습니다.
 
-**공변성**은 서브타입을 슈퍼타입으로 **업캐스트**해서 사용할 수 있는 성질입니다.
-**반공변성**은 공변성의 반대로 슈퍼타입을 서브타입으로 **다운캐스트**해서 사용할 수 있는 성질입니다.
+-   **공변성**은 서브타입을 슈퍼타입으로 **업캐스트**해서 사용할 수 있는 성질입니다.
+-   **반공변성**은 공변성의 반대로 슈퍼타입을 서브타입으로 **다운캐스트**해서 사용할 수 있는 성질입니다.
 
 공변성은 업캐스트라는 것만 잘 기억하시면 반대인 반공변성도 쉽게 잊지 않으실 겁니다. 사실 공변성과 반공변성은 우리가 흔히 사용하는 함수에서 쉽게 찾아볼 수 있습니다. 예를 들어서 설명해 보겠습니다.
 
+```
 open class Animal
 class Dog : Animal()
 
-fun returnAnimal(): Animal &#123;
+fun returnAnimal(): Animal {
     return Dog()
-&#125;
+}
 
-fun main() &#123;
+fun main() {
     val animal: Animal = returnAnimal()
-&#125;
+}
+```
+
 함수 반환값에서는 공변성을 찾아볼 수 있습니다. 실제로 반환하는 타입은 Dog지만 Animal 타입으로 반환하는 것이 가능합니다. 즉 서브타입이 들어갈 자리에 슈퍼타입이 들어갈 수 있으니 업캐스팅 성질이 있고 이는 공변성에 해당합니다.
 
+```
 open class Animal
 class Dog : Animal()
 
-fun acceptAnimal(animal: Animal) &#123;
+fun acceptAnimal(animal: Animal) {
     println("Received an Animal")
-&#125;
+}
 
-fun main() &#123;
+fun main() {
     val dog: Dog = Dog()
     acceptAnimal(dog)
-&#125;
+}
+```
+
 함수 파라미터에는 반공변성을 찾아볼 수 있습니다. 파라미터 타입이 Animal이지만 Dog를 아규먼트로 전달해서 사용하는 것이 가능합니다. 즉 슈퍼타입이 들어갈 자리에 서브타입이 들어갈 수 있으니 다운캐스트 성질이 있고 이는 반공변성에 해당합니다.
 
-제네릭과 변성
+## 제네릭과 변성
+
 지금까지 다룬 내용에 의하면 공변성, 반공변성은 슈퍼타입과 서브타입 간의 타입 변경과 관련된 개념입니다. 이를 제네릭에 대입해 보겠습니다.
 
 제네릭의 타입 파라미터는 기본적으로 업캐스팅, 다운캐스팅이 불가능합니다. 즉 변성 관계가 없는 **무공변(영어: Invariance)입니다.** 예를 들어 Animal과 Dog가 슈퍼타입과 서브타입 관계이고 Box&lt;T&gt;라는 제네릭을 사용한 클래스가 있다면 **Box&lt;Dog&gt;는 Box&lt;Animal&gt;로 치환될 수 없고 그 반대도 불가능합니다.** 즉 제네릭의 타입 파라미터는 타입의 상속 계층 관계를 무시합니다.
 
+```
 open class Dog
 class Puppy : Dog()
-class MyBox&lt;T&gt; &#123;&#125;
+class MyBox<T> {}
 
-fun main() &#123;
-    val puppyBox = MyBox&lt;Puppy&gt;()
-    val dogBox: MyBox&lt;Dog&gt; = puppyBox // 에러!
+fun main() {
+    val puppyBox = MyBox<Puppy>()
+    val dogBox: MyBox<Dog> = puppyBox // 에러!
 
-    val dogBox2 = MyBox&lt;Dog&gt;()
-    val puppyBox2: MyBox&lt;Puppy&gt; = dogBox2 // 에러!
-&#125;
+    val dogBox2 = MyBox<Dog>()
+    val puppyBox2: MyBox<Puppy> = dogBox2 // 에러!
+}
+```
+
 Puppy는 Dog의 서브타입입니다. Puppy는 Dog로 업캐스팅이 가능합니다. 하지만 MyBox&lt;Puppy&gt;는 MyBox&lt;Dog&gt;로 업캐스팅이 불가능합니다. 그 반대도 마찬가지입니다.
 
-제네릭에 변성을 부여하기
+## 제네릭에 변성을 부여하기
+
 이렇게 제네릭에는 우리가 무의식적으로 사용하고 있는 변성 개념이 기본적으로 포함되어 있지 않습니다. 그렇다면 제네릭에 변성이 필요한 경우에는 어떻게 할 수 있을까요? 여러 프로그래밍 언어에선 이를 위한 키워드가 문법으로 제공되고 있습니다. 코틀린에선 **in**과 **out**이 이에 해당합니다.
 
+```
 open class Dog
 class Puppy : Dog()
-class MyBox&lt;in T&gt; &#123;&#125;
+class MyBox<in T> {}
 
-fun main() &#123;
-    val puppyBox = MyBox&lt;Puppy&gt;()
-    val dogBox: MyBox&lt;Dog&gt; = puppyBox // OK!
-&#125;
+fun main() {
+    val puppyBox = MyBox<Puppy>()
+    val dogBox: MyBox<Dog> = puppyBox // OK!
+}
+```
+
 **in 키워드**를 사용하면 **제네릭 클래스에 공변성을 부여**합니다. 이를 통해 MyBox&lt;Puppy&gt;가 MyBox&lt;Dog&gt;로 타입캐스팅해서 사용할 수 있습니다.
 
+```
 open class Dog
 class Puppy : Dog()
-class MyBox&lt;out T&gt; &#123;&#125;
+class MyBox<out T> {}
 
-fun main() &#123;
-    val dogBox = MyBox&lt;Dog&gt;()
-    val puppyBox: MyBox&lt;Puppy&gt; = dogBox // OK!
-&#125;
+fun main() {
+    val dogBox = MyBox<Dog>()
+    val puppyBox: MyBox<Puppy> = dogBox // OK!
+}
+```
+
 **out 키워드**를 사용하면 **제네릭 클래스에 반공변성을 부여**합니다. 이를 통해 MyBox&lt;Dog&gt;가 MyBox&lt;Puppy&gt;로 타입캐스팅해서 사용할 수 있습니다.
 
-제네릭이 기본적으로 무공변성인 이유
+## 제네릭이 기본적으로 무공변성인 이유
+
 이를 설명하기 위해서 유명한 제네릭 클래스인 List로 예시 코드를 적어보겠습니다.
 
-fun main() &#123;
-    val puppies: MutableList&lt;Puppy&gt; = mutableListOf(Puppy())
-    val dogs: MutableList&lt;Dog&gt; = puppies // 에러!
-&#125;
+```
+fun main() {
+    val puppies: MutableList<Puppy> = mutableListOf(Puppy())
+    val dogs: MutableList<Dog> = puppies // 에러!
+}
+```
+
 MutableList는 컬렉션 안에 원소를 추가할 수 있는 제네릭 클래스입니다. Puppy 한 마리가 담겨 있는 MutableList&lt;Puppy&gt;를 MutableList&lt;Dog&gt;로 변경하면 IDE에서 컴파일 에러가 발생합니다. **만일 dogs를 MutableList&lt;Dog&gt;로 타입캐스팅할 수 있다면 Dog를 상속하는 Hound나 다른 Dog 서브타입도 MutableList에 추가할 수 있게 됩니다.** 이는 puppies를 최초로 선언할 때 담긴 Puppy 타입 인스턴스를 담은 컬렉션이라는 의도가 변질되고 버그 가능성을 높입니다. puppies를 사용하는 코드는 puppies에 Puppy 인스턴스만 담겨있다고 가정하고 작성되었을 텐데 실제로는 컬렉션 안에 Puppy가 아닌 다른 타입의 인스턴스도 담겨있으니 런타임에 에러가 발생할 수 있습니다.
 
-fun main() &#123;
-    val dogs: MutableList&lt;Dog&gt; = mutableListOf(Dog(), Hound())
-    val puppies: MutableList&lt;Puppy&gt; = dogs // 에러!
-&#125;
+```
+fun main() {
+    val dogs: MutableList<Dog> = mutableListOf(Dog(), Hound())
+    val puppies: MutableList<Puppy> = dogs // 에러!
+}
+```
+
 MutableList&lt;Dog&gt;는 Dog와 Dog를 상속하는 서브타입을 담을 수 있는 컬렉션입니다. Dog와 Dog의 서브타입 Hound를 담은 dogs를 MutableList&lt;Puppy&gt;로 타입캐스팅을 할 수 있다면 어떻게 될까요? 이전 예시와 마찬가지로 **실제 puppies는 Puppy 타입이 아닌 다른 타입의 인스턴스도 담고 있으니 이를 사용하는 다른 코드에서 에러가 발생할 수 있습니다.**
 
 위 두 예시가 왜 제네릭은 기본적으로 변성이 없는 무공변성의 성질을 띄는지 보여줍니다. 만일 제네릭에 아무런 조건 없이 변성을 부여한다면 제네릭의 장점이자 사용하는 이유 중 하나인 타입 안정성을 만족하지 못하게 됩니다. 이로 인해 발생하는 버그는 런타임의 특정 상황에서만 발생하기 때문이죠.
 
-제네릭에 변성을 "안전하게" 부여하기
+## 제네릭에 변성을 "안전하게" 부여하기
+
 그래서 코틀린에선 제네릭에 변성을 부여할 때는 **변성의 종류**에 따라 **제약 조건**을 두었고 이를 **어기면 컴파일 타임에 감지**할 수 있게 설계했습니다.
 
+```
 open class Dog
 class Puppy : Dog()
 // 공변성을 부여할 때 T에 해당하는 값을 val로 선언해 한 번 쓰면(set) 이후에는 읽기(get)만 가능하도록
-class MyBox&lt;out T&gt;(val value: T)
+class MyBox<out T>(val value: T)
 
-fun main() &#123;
-    val puppyBox = MyBox&lt;Puppy&gt;(Puppy())
-    val dogBox: MyBox&lt;Dog&gt; = puppyBox // OK!
-&#125;
+fun main() {
+    val puppyBox = MyBox<Puppy>(Puppy())
+    val dogBox: MyBox<Dog> = puppyBox // OK!
+}
+```
+
+```
 // T에 해당하는 값을 var로 선언하면 읽기, 쓰기가 모두 가능함, 컴파일 에러 발생
-class MyBox&lt;out T&gt;(var value: T)
-제네릭에 **out **키워드로 **공변성**을 부여할 땐 제네릭 타입 파라미터에 해당하는 값을 최초에 초기화하거나 할당한 후에는 **읽기만 가능하게** 하고 쓰기는 못하게 합니다. 이렇게 하면 타입 파라미터의 업캐스팅도 지원하면서 타입 안정성도 보장할 수 있습니다.
+class MyBox<out T>(var value: T)
+```
 
+제네릭에 **out** 키워드로 **공변성**을 부여할 땐 제네릭 타입 파라미터에 해당하는 값을 최초에 초기화하거나 할당한 후에는 **읽기만 가능하게** 하고 쓰기는 못하게 합니다. 이렇게 하면 타입 파라미터의 업캐스팅도 지원하면서 타입 안정성도 보장할 수 있습니다.
+
+```
 open class Dog
 class Puppy : Dog()
 // 반공변성을 부여할 때 T에 해당하는 값을 private var로 선언해 쓰기는 가능하지만 읽기(get)는 불가능하도록
-class MyBox&lt;in T&gt;(private var value: T) &#123;
+class MyBox<in T>(private var value: T) {
 
-    fun setValue(value: T) &#123;
+    fun setValue(value: T) {
         this.value = value
-    &#125;
-&#125;
+    }
+}
 
-fun main() &#123;
-    val dogBox = MyBox&lt;Dog&gt;(Puppy())
-    val puppyBox: MyBox&lt;Puppy&gt; = dogBox // OK!
-&#125;
+fun main() {
+    val dogBox = MyBox<Dog>(Puppy())
+    val puppyBox: MyBox<Puppy> = dogBox // OK!
+}
+```
+
+```
 // T에 해당하는 값을 var로 선언하면 읽기, 쓰기가 모두 가능함, 컴파일 에러 발생
-class MyBox&lt;in T&gt;(var value: T)
+class MyBox<in T>(var value: T)
+```
+
 비슷한 결로 제네릭에 **in** 키워드로 **반공변성**을 부여할 땐 제네릭 타입 파라미터에 해당하는 값을 **할당하는 것만 가능하게** 하고 읽기는 못하게 합니다. 이렇게 하면 타입 파라미터의 다운캐스팅도 지원하면서 타입 안정성도 보장할 수 있습니다. 그리고 이 규칙을 지키지 않는 경우 컴파일러는 런타임이 아닌 컴파일 단계에서 아래 에러를 발생시켜 제네릭 클래스의 잘못된 설계를 막습니다.
 
-Type parameter 'T' is declared as 'out' but occurs in 'invariant' position in type 'T'.
-Type parameter 'T' is declared as 'in' but occurs in 'invariant' position in type 'T'.
+-   Type parameter 'T' is declared as 'out' but occurs in 'invariant' position in type 'T'.
+-   Type parameter 'T' is declared as 'in' but occurs in 'invariant' position in type 'T'.
 
-결론
+## 결론
+
 이렇게 제네릭의 변성에 대해서 다뤄봤습니다. 예시 코드를 코틀린으로 작성했지만 제네릭을 지원하는 많은 프로그래밍 언어는 모두 비슷한 개념 아래에서 제네릭 타입의 변성 부여 기능을 지원합니다. 이 글을 통해 한번쯤은 짚고 넘어가야 하는 제네릭의 변성에 대해서 잘 이해가 되셨으면 좋겠습니다.

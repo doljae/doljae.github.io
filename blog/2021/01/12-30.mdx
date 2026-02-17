@@ -10,54 +10,50 @@ date: 2021-01-12T17:31:58+09:00
 
 > 원문: https://doljae.tistory.com/30
 
-![cover](http://bimage.interpark.com/goods_image/9/5/5/2/207819552h.jpg)
+### B+ 트리 vs 이분 트리
 
-B+ 트리 vs 이분 트리
-1. 이분 트리는 노드가 반드시 하나로 정해져 있다. 반면에 B트리는 유동적으로 개수를 조정할 수 있다.
+1\. 이분 트리는 노드가 반드시 하나로 정해져 있다. 반면에 B트리는 유동적으로 개수를 조정할 수 있다.
 
-2. 노드의 데이터 개수를 유동적으로 조정해 노드 하나의 크기를 4KB 등으로 고정할 수 있다. 즉 각 노드의 크기를 적당한 사이즈로 정할 수 있다.
+2\. 노드의 데이터 개수를 유동적으로 조정해 노드 하나의 크기를 4KB 등으로 고정할 수 있다. 즉 각 노드의 크기를 적당한 사이즈로 정할 수 있다.
 
 <!-- truncate -->
 
-3. 다시 말해서 노드 1개를 디스크 1블록만큼 할당하면 B트리로 디스크에 저장했을 때 각 노드를 딱 한 블록만큼으로 해서 저장할 수 있다. 이는 디스크 Seek을 줄여 탐색 속도를 빠르게 한다.
+3\. 다시 말해서 노드 1개를 디스크 1블록만큼 할당하면 B트리로 디스크에 저장했을 때 각 노드를 딱 한 블록만큼으로 해서 저장할 수 있다. 이는 디스크 Seek을 줄여 탐색 속도를 빠르게 한다.
 
-4. 결론적으로 인덱스 트리를 순회할 때 디스크 Seek 발생 횟수를 최소화할 수 있다. 한번 읽은 데이터는 메모리에 캐싱되기 때문에 같은 노드 내의 데이터는 디스크 Seek 없이 탐색할 수 있다.
+4\. 결론적으로 인덱스 트리를 순회할 때 디스크 Seek 발생 횟수를 최소화할 수 있다. 한번 읽은 데이터는 메모리에 캐싱되기 때문에 같은 노드 내의 데이터는 디스크 Seek 없이 탐색할 수 있다.
 
-5. 반면에 이분 트리는 특정 노드를 모아서 1블록에 저장하는 등의 작업이 어려워 디스크 탐색 횟수 최적화를 하는 것이 힘들다.
+5\. 반면에 이분 트리는 특정 노드를 모아서 1블록에 저장하는 등의 작업이 어려워 디스크 탐색 횟수 최적화를 하는 것이 힘들다.
 
-기본적인 MySQL 파티셔닝 전략
-1. 데이터가 메모리에 올라가는 크기라면 상관없지만
+### 기본적인 MySQL 파티셔닝 전략
 
-2. 그것이 아니라면 메모리를 증설한다
+1\. 데이터가 메모리에 올라가는 크기라면 상관없지만
 
-3. 메모리 증설이 불가능하면 파티셔닝
+2\. 그것이 아니라면 메모리를 증설한다
+
+3\. 메모리 증설이 불가능하면 파티셔닝
 
 파티셔닝을 전제로 한 설계에서 주의할 점
 
-1. JOIN 쿼리는 대상이 되는 테이블을 앞으로도 서버 분할하지 않을 것이라고 보장할 수 있을 때에만 사용한다.
+1\. JOIN 쿼리는 대상이 되는 테이블을 앞으로도 서버 분할하지 않을 것이라고 보장할 수 있을 때에만 사용한다.
 
-2. 파티셔닝을 하면 운용이 복잡해지고 고장률이 높아진다.
+2\. 파티셔닝을 하면 운용이 복잡해지고 고장률이 높아진다.
 
 다중화에 필요한 서버 대수는 몇 대?
 
 마스터 1, 슬레이브 1 구조에서는 추가적으로 슬레이브 2가 더 필요하다.
 
-1. 만일 슬레이브 1이 고장 났다면, 슬레이브 2가 있기 때문에 서비스엔 문제가 없다.
+1\. 만일 슬레이브 1이 고장 났다면, 슬레이브 2가 있기 때문에 서비스엔 문제가 없다.
 
-2. 하지만 슬레이브 3이 없다면 복구를 위해서 데이터를 복사할 때 슬레이브 2를 중지시켜야 하는데 중지시키면 서비스가 중지된다.
+2\. 하지만 슬레이브 3이 없다면 복구를 위해서 데이터를 복사할 때 슬레이브 2를 중지시켜야 하는데 중지시키면 서비스가 중지된다.
 
-3. 마스터가 중지되면 쓰기 작업이 불가능하고, 슬레이브를 중지하면 참조할 수 없게 되기 때문에 서비스를 중지하지 않으면 복구할 수 없게 된다.
+3\. 마스터가 중지되면 쓰기 작업이 불가능하고, 슬레이브를 중지하면 참조할 수 없게 되기 때문에 서비스를 중지하지 않으면 복구할 수 없게 된다.
 
-4. 하지만 슬레이브 3까지 있다면 슬레이브 1이 고장 나더라도 서비스를 중단하지 않고 복구할 수 있다. 즉 무정지 복구를 할 수 있다.
+4\. 하지만 슬레이브 3까지 있다면 슬레이브 1이 고장 나더라도 서비스를 중단하지 않고 복구할 수 있다. 즉 무정지 복구를 할 수 있다.
 
-데이터 압축
-1. Trie
+### 데이터 압축
 
-2. AC(Aho-Corasick 법) -&gt; Trie 압축 알고리즘
+1\. Trie
 
-대규모 서비스를 지탱하는 기술
-국내도서
-저자 : 이토 나오야,다나카 신지 / 진명조역
-출판 : 제이펍 2011.02.28
+2\. AC(Aho-Corasick 법) -&gt; Trie 압축 알고리즘
 
-상세보기
+&lt;table class="tt-plugin-interpark" style="background: #fff; border: 1px solid #e0e0e0; width: 408px;" border="0" width="100%" cellspacing="0" data-darkreader-inline-bgimage="" data-darkreader-inline-bgcolor="" data-darkreader-inline-border-top="" data-darkreader-inline-border-right="" data-darkreader-inline-border-bottom="" data-darkreader-inline-border-left=""&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td style="vertical-align: top; padding: 10px 0 10px 10px;" width="70"&gt;&lt;a href="http://book.interpark.com/blog/integration/product/itemDetail.rdo?prdNo=207819552&amp;refererType=8303&amp;bookblockname=bpmain_in&amp;booklinkname=wg_search_EFEB8364BC43711681CC6C69032386A3753E74A4F9E4F62B3FA06C4836C10BAB&amp;key=EFEB8364BC43711681CC6C69032386A3753E74A4F9E4F62B3FA06C4836C10BAB" target="_blank" rel="noopener"&gt;&lt;img style="border: 0 none;" src="http://bimage.interpark.com/goods_image/9/5/5/2/207819552h.jpg" width="66" height="90" data-darkreader-inline-border-top="" data-darkreader-inline-border-right="" data-darkreader-inline-border-bottom="" data-darkreader-inline-border-left=""&gt;&lt;/a&gt;&lt;/td&gt;&lt;td style="vertical-align: top; padding: 10px 10px 10px 15px;"&gt;&lt;dl style="margin: 0; padding: 2px 0 0 0; list-style: none; font: 11px dotum, sans-serif; letter-spacing: -1px; color: #777;" data-darkreader-inline-color=""&gt;&lt;dt style="padding: 0; margin: 0;"&gt;&lt;a style="font-size: 12px; color: #444 !important; font-weight: bold; text-decoration: none !important;" href="http://book.interpark.com/blog/integration/product/itemDetail.rdo?prdNo=207819552&amp;refererType=8303&amp;bookblockname=bpmain_in&amp;booklinkname=wg_search_EFEB8364BC43711681CC6C69032386A3753E74A4F9E4F62B3FA06C4836C10BAB&amp;key=EFEB8364BC43711681CC6C69032386A3753E74A4F9E4F62B3FA06C4836C10BAB" target="_blank" rel="noopener" data-darkreader-inline-color=""&gt;대규모 서비스를 지탱하는 기술&lt;/a&gt;&lt;/dt&gt;&lt;dd style="padding: 7px 0 0 0; margin: 0; color: #a0a0a0;" data-darkreader-inline-color=""&gt;국내도서&lt;/dd&gt;&lt;dd style="padding: 17px 0 0 0; margin: 0;"&gt;저자 : 이토 나오야,다나카 신지 / 진명조역&lt;/dd&gt;&lt;dd style="padding: 4px 0 0 0; margin: 0;"&gt;출판 : 제이펍 &lt;span style="letter-spacing: normal;"&gt;2011.02.28&lt;/span&gt;&lt;/dd&gt;&lt;/dl&gt;&lt;a style="float: right; width: 44px; height: 11px; background: url('//t1.daumcdn.net/tistory_admin/static/images/icon_ipark_detail.gif') no-repeat; overflow: hidden; display: block; text-indent: -1000em;" href="http://book.interpark.com/blog/integration/product/itemDetail.rdo?prdNo=207819552&amp;refererType=8303&amp;bookblockname=bpmain_in&amp;booklinkname=wg_search_EFEB8364BC43711681CC6C69032386A3753E74A4F9E4F62B3FA06C4836C10BAB&amp;key=EFEB8364BC43711681CC6C69032386A3753E74A4F9E4F62B3FA06C4836C10BAB" target="_blank" rel="noopener" data-darkreader-inline-bgcolor=""&gt;상세보기&lt;/a&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;

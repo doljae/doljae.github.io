@@ -10,17 +10,20 @@ date: 2021-05-17T10:57:15+09:00
 
 > 원문: https://doljae.tistory.com/140
 
-![cover](https://blog.kakaocdn.net/dna/blzE4D/btq41lfmwTa/AAAAAAAAAAAAAAAAAAAAAJRYhhNqZ5kMWLMFXzTdCAMOZ7tYU199yTUe_4hA5-9S/img.png?credential=yqXZFxpELC7KVnFOS48ylbz2pIh7yKj8&expires=1772290799&allow_ip=&allow_referer=&signature=WN8xmwcIKg7l6n74Sl%2B0OtlH2e4%3D)
+[Lowest Common Ancestor of a Binary Tree - LeetCode
 
-1. DFS
+Level up your coding skills and quickly land a job. This is the best place to expand your knowledge and get prepared for your next interview.
 
+leetcode.com](https://leetcode.com/problems/lowest-common-ancestor-of-a-binary-tree/)
+
+<!-- truncate -->
+
+### 1\. DFS
 
 ```
 class Solution:
     def lowestCommonAncestor(self, root: TreeNode, p: TreeNode, q: TreeNode) -> 'TreeNode':
         p_seq, q_seq = [], []
-
-<!-- truncate -->
 
         def dfs(cur, seq):
             nonlocal p_seq, q_seq
@@ -44,14 +47,15 @@ class Solution:
                 return cur_node
 ```
 
+![](https://blog.kakaocdn.net/dna/blzE4D/btq41lfmwTa/AAAAAAAAAAAAAAAAAAAAAJRYhhNqZ5kMWLMFXzTdCAMOZ7tYU199yTUe_4hA5-9S/img.png?credential=yqXZFxpELC7KVnFOS48ylbz2pIh7yKj8&expires=1772290799&allow_ip=&allow_referer=&signature=WN8xmwcIKg7l6n74Sl%2B0OtlH2e4%3D)
+
 DFS 탐색을 통해서 타깃이 되는 2개의 노드의 경로를 담는다.
 
 담은 뒤에 두 경로를 뒤에서부터 비교하면서 가장 먼저 매칭 되는 노드가 공통 조상이고 이것을 반환한다.
 
 노드의 값이 아니라 노드 자체를 반환해야 해서 담아서 관리하는 방법을 사용했다.
 
-2. DFS(약간 최적화)
-
+### 2\. DFS(약간 최적화)
 
 ```
 class Solution:
@@ -81,6 +85,8 @@ class Solution:
             if cur_node in q_seq_set:
                 return cur_node
 ```
+
+![](https://blog.kakaocdn.net/dna/bn0E6p/btq44OA8xbs/AAAAAAAAAAAAAAAAAAAAAOCFi-2CFb83hBIdmw2_aT7ef3LRPZzJTI9oloOcW8_W/img.png?credential=yqXZFxpELC7KVnFOS48ylbz2pIh7yKj8&expires=1772290799&allow_ip=&allow_referer=&signature=0nNHOndZivLoEInLzT0REhLF2g8%3D)
 
 공통 조상을 찾는 부분을 list 순회가 아니라 set 순회로 바꿔서 시간을 단축시켰다.
 

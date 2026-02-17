@@ -10,25 +10,25 @@ date: 2020-12-27T12:33:05+09:00
 
 > 원문: https://doljae.tistory.com/9
 
-![cover](http://bimage.interpark.com/goods_image/2/6/6/1/211422661h.jpg)
+### 데이터베이스를 사용해야 하는 이유
 
-데이터베이스를 사용해야 하는 이유
-1. 대량의 데이터 중에서 필요한 것을 빨리 반환할 수 있다.
+1\. 대량의 데이터 중에서 필요한 것을 빨리 반환할 수 있다.
 
-2. 대량의 데이터를 메모리 내에서만으로는 취급할 수 없다.
+2\. 대량의 데이터를 메모리 내에서만으로는 취급할 수 없다.
 
 <!-- truncate -->
 
-3. 장애가 발생했을 때 빠른 복구가 어렵다.
+3\. 장애가 발생했을 때 빠른 복구가 어렵다.
 
-4. 병렬성 제어가 어렵다.
+4\. 병렬성 제어가 어렵다.
 
-5. 데이터 무결성을 보장하는 것이 어렵다.
+5\. 데이터 무결성을 보장하는 것이 어렵다.
 
-인덱스(Index)
-1. 전체 검색(Full Scan)은 대량의 데이터에 적합하지 않다.
+### 인덱스(Index)
 
-2. 원하는 위치까지 순식간에 도달하는 방법 생각하기
+1\. 전체 검색(Full Scan)은 대량의 데이터에 적합하지 않다.
+
+2\. 원하는 위치까지 순식간에 도달하는 방법 생각하기
 
 방법 1
 
@@ -38,15 +38,15 @@ date: 2020-12-27T12:33:05+09:00
 
 구체적인 문제점
 
-1. 고정 길이 파일이 모든 사용자 정보를 담을 수 있다는 보장이 없다.
+1\. 고정 길이 파일이 모든 사용자 정보를 담을 수 있다는 보장이 없다.
 
-2. 새로운 데이터를 추가할 때 데이터가 고정 길이만큼인지 체크를 해줘야 한다.
+2\. 새로운 데이터를 추가할 때 데이터가 고정 길이만큼인지 체크를 해줘야 한다.
 
-3. 그렇다고 고정 길이를 처음부터 많이 할당하기엔 너무 비효율적이다.
+3\. 그렇다고 고정 길이를 처음부터 많이 할당하기엔 너무 비효율적이다.
 
 구현 방법
 
-1. HashMap을 사용하기
+1\. HashMap을 사용하기
 
 문제점
 
@@ -60,31 +60,26 @@ B+Tree를 사용하기
 
 인덱스의 문제점
 
-1. Search 성능을 올릴 수 있지만 Update가 일어날 경우 데이터와, 인덱스 자료구조 또한 변화해야 하고 업데이트 성능이 떨어짐
+1\. Search 성능을 올릴 수 있지만 Update가 일어날 경우 데이터와, 인덱스 자료구조 또한 변화해야 하고 업데이트 성능이 떨어짐
 
-2. 데이터에 변경이 가해질 경우 B+Tree, 테이블 둘 다 변화해야 함. 모든 데이터는 추가될 때 특정한 Key값 기준으로 오름차순 순으로 데이터가 입력된다는 보장이 없음.
+2\. 데이터에 변경이 가해질 경우 B+Tree, 테이블 둘 다 변화해야 함. 모든 데이터는 추가될 때 특정한 Key값 기준으로 오름차순 순으로 데이터가 입력된다는 보장이 없음.
 
-3. 이러한 케이스에는 인덱스의 리프 블록의 이곳저곳이 무작위에 가까운 형태로 업데이트되어 간다. 랜덤 액세스는 느리기 때문에 이 비용을 얼마나 감소시키느냐가 성능에 있어 중요하다.
+3\. 이러한 케이스에는 인덱스의 리프 블록의 이곳저곳이 무작위에 가까운 형태로 업데이트되어 간다. 랜덤 액세스는 느리기 때문에 이 비용을 얼마나 감소시키느냐가 성능에 있어 중요하다.
 
 MySQL의 해결법
 
-1. 데이터베이스에서는 무 정지성을 높이기 위해 업데이트된 부분(블록)을 최대한 빨리 디스크에 저장해야 한다.
+1\. 데이터베이스에서는 무 정지성을 높이기 위해 업데이트된 부분(블록)을 최대한 빨리 디스크에 저장해야 한다.
 
-2. 업데이트된 정보를 메모리나 전용 파일 등에 일시적으로 기록하여 두고 나중에 모아서 단번에 리프 블록을 갱신하는 구조를 채택한다.
+2\. 업데이트된 정보를 메모리나 전용 파일 등에 일시적으로 기록하여 두고 나중에 모아서 단번에 리프 블록을 갱신하는 구조를 채택한다.
 
-3. 이를 Random Write가 아닌 Sequential Write를 사용한다고 한다.
+3\. 이를 Random Write가 아닌 Sequential Write를 사용한다고 한다.
 
-4. 병렬 갱신 성능을 높이기 위해서 B+Tree의 인덱스 리프 블록의 내용을 이동시키는 "리프 분할" 처리가 필요하다.
+4\. 병렬 갱신 성능을 높이기 위해서 B+Tree의 인덱스 리프 블록의 내용을 이동시키는 "리프 분할" 처리가 필요하다.
 
-5. 리프 분할할 때, 즉 인덱스의 재편성 처리가 이루어질 때 MySQL은 참조 및 갱신 처리를 Lock을 통해 막는다.
+5\. 리프 분할할 때, 즉 인덱스의 재편성 처리가 이루어질 때 MySQL은 참조 및 갱신 처리를 Lock을 통해 막는다.
 
-6. 다른 방법으로 Partition Table을 사용하기도 한다. 사용자에게는 테이블이 1개로 보이지만 내부적으로 복수로 분할 관리되는 것으로, 인덱스도 복수로 구분하고 있기 때문에 병렬 갱신이 가능하다.
+6\. 다른 방법으로 Partition Table을 사용하기도 한다. 사용자에게는 테이블이 1개로 보이지만 내부적으로 복수로 분할 관리되는 것으로, 인덱스도 복수로 구분하고 있기 때문에 병렬 갱신이 가능하다.
 
 출처 및 참고문헌
 
-데이터베이스를 지탱하는 기술
-국내도서
-저자 : 마쯔노부 요시노리 / 정인식역
-출판 : 제이펍 2012.11.18
-
-상세보기
+&lt;table class="tt-plugin-interpark" style="background: #fff; border: 1px solid #e0e0e0; width: 408px;" border="0" width="100%" cellspacing="0" data-darkreader-inline-bgimage="" data-darkreader-inline-bgcolor="" data-darkreader-inline-border-top="" data-darkreader-inline-border-right="" data-darkreader-inline-border-bottom="" data-darkreader-inline-border-left=""&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td style="vertical-align: top; padding: 10px 0 10px 10px;" width="70"&gt;&lt;a href="http://book.interpark.com/blog/integration/product/itemDetail.rdo?prdNo=211422661&amp;refererType=8303&amp;bookblockname=bpmain_in&amp;booklinkname=wg_search_EFEB8364BC43711681CC6C69032386A3753E74A4F9E4F62B3FA06C4836C10BAB&amp;key=EFEB8364BC43711681CC6C69032386A3753E74A4F9E4F62B3FA06C4836C10BAB" target="_blank" rel="noopener"&gt;&lt;img style="border: 0 none;" src="http://bimage.interpark.com/goods_image/2/6/6/1/211422661h.jpg" width="66" height="90" data-darkreader-inline-border-top="" data-darkreader-inline-border-right="" data-darkreader-inline-border-bottom="" data-darkreader-inline-border-left=""&gt;&lt;/a&gt;&lt;/td&gt;&lt;td style="vertical-align: top; padding: 10px 10px 10px 15px;"&gt;&lt;dl style="margin: 0; padding: 2px 0 0 0; list-style: none; font: 11px dotum, sans-serif; letter-spacing: -1px; color: #777;" data-darkreader-inline-color=""&gt;&lt;dt style="padding: 0; margin: 0;"&gt;&lt;a style="font-size: 12px; color: #444 !important; font-weight: bold; text-decoration: none !important;" href="http://book.interpark.com/blog/integration/product/itemDetail.rdo?prdNo=211422661&amp;refererType=8303&amp;bookblockname=bpmain_in&amp;booklinkname=wg_search_EFEB8364BC43711681CC6C69032386A3753E74A4F9E4F62B3FA06C4836C10BAB&amp;key=EFEB8364BC43711681CC6C69032386A3753E74A4F9E4F62B3FA06C4836C10BAB" target="_blank" rel="noopener" data-darkreader-inline-color=""&gt;데이터베이스를 지탱하는 기술&lt;/a&gt;&lt;/dt&gt;&lt;dd style="padding: 7px 0 0 0; margin: 0; color: #a0a0a0;" data-darkreader-inline-color=""&gt;국내도서&lt;/dd&gt;&lt;dd style="padding: 17px 0 0 0; margin: 0;"&gt;저자 : 마쯔노부 요시노리 / 정인식역&lt;/dd&gt;&lt;dd style="padding: 4px 0 0 0; margin: 0;"&gt;출판 : 제이펍 &lt;span style="letter-spacing: normal;"&gt;2012.11.18&lt;/span&gt;&lt;/dd&gt;&lt;/dl&gt;&lt;a style="float: right; width: 44px; height: 11px; background: url('//t1.daumcdn.net/tistory_admin/static/images/icon_ipark_detail.gif') no-repeat; overflow: hidden; display: block; text-indent: -1000em;" href="http://book.interpark.com/blog/integration/product/itemDetail.rdo?prdNo=211422661&amp;refererType=8303&amp;bookblockname=bpmain_in&amp;booklinkname=wg_search_EFEB8364BC43711681CC6C69032386A3753E74A4F9E4F62B3FA06C4836C10BAB&amp;key=EFEB8364BC43711681CC6C69032386A3753E74A4F9E4F62B3FA06C4836C10BAB" target="_blank" rel="noopener" data-darkreader-inline-bgcolor=""&gt;상세보기&lt;/a&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;

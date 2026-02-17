@@ -22,7 +22,7 @@ kubectl get all --selector env=prod
 
 kubectl get pods --selector env=prod,bu=finance,tier=frontend
 
-kubectl taint nodes NODE_NAME key=value:TAINT_EFFECT
+kubectl taint nodes NODE\_NAME key=value:TAINT\_EFFECT
 
 kubectl taint nodes node1 app=blue:NoSchedule
 
@@ -34,6 +34,7 @@ kubectl describe node node01 | grep Taints
 
 kubectl taint nodes node01 spray=mortein:noSchedule
 
+```
 apiVersion: v1
 kind: Pod
 metadata:
@@ -47,9 +48,11 @@ spec:
     value: mortein
     effect: NoSchedule
     operator: Equal
+```
+
 kubectl taint nodes controlplane node-role.kubernetes.io/master:NoSchedule-
 
-kubectl label nodes NODE_NAME LABEL_KEY=LABEL_VALUE
+kubectl label nodes NODE\_NAME LABEL\_KEY=LABEL\_VALUE
 
 kubectl label nodes node-1 size=Large
 
@@ -63,6 +66,7 @@ kubectl get pods -o wide
 
 kubectl get pods -o wide | grep XXX
 
+```
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -91,7 +95,9 @@ spec:
                 operator: In
                 values:
                 - blue
+```
 
+```
 kind: Deployment
 metadata:
   name: red
@@ -116,3 +122,4 @@ spec:
             - matchExpressions:
               - key: node-role.kubernetes.io/master
                 operator: Exists
+```

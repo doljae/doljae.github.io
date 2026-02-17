@@ -10,10 +10,15 @@ date: 2021-05-11T10:32:57+09:00
 
 > 원문: https://doljae.tistory.com/125
 
-![cover](https://blog.kakaocdn.net/dna/bfY3DA/btq4ErTqD7H/AAAAAAAAAAAAAAAAAAAAAAy3zfnlevdQQViA-isg93UBaCm0yUxpSXmCWfH2PJ1E/img.png?credential=yqXZFxpELC7KVnFOS48ylbz2pIh7yKj8&expires=1772290799&allow_ip=&allow_referer=&signature=fq07uzOuI6SsfgeAUxHDT7%2BA%2FG4%3D)
+[Binary Tree Level Order Traversal - LeetCode
 
-1. Queue를 사용한 풀이
+Level up your coding skills and quickly land a job. This is the best place to expand your knowledge and get prepared for your next interview.
 
+leetcode.com](https://leetcode.com/problems/binary-tree-level-order-traversal/)
+
+<!-- truncate -->
+
+### 1\. Queue를 사용한 풀이
 
 ```
 class Solution:
@@ -39,12 +44,11 @@ class Solution:
         return answer
 ```
 
-<!-- truncate -->
+![](https://blog.kakaocdn.net/dna/bfY3DA/btq4ErTqD7H/AAAAAAAAAAAAAAAAAAAAAAy3zfnlevdQQViA-isg93UBaCm0yUxpSXmCWfH2PJ1E/img.png?credential=yqXZFxpELC7KVnFOS48ylbz2pIh7yKj8&expires=1772290799&allow_ip=&allow_referer=&signature=fq07uzOuI6SsfgeAUxHDT7%2BA%2FG4%3D)
 
 Queue를 이용하면 트리의 높이 순서대로 노드를 탐색할 수 있다.
 
-2. 리팩토링
-
+### 2\. 리팩토링
 
 ```
 class Solution:
@@ -64,3 +68,5 @@ class Solution:
             answer.append(trace[level])
         return answer
 ```
+
+![](https://blog.kakaocdn.net/dna/tNMT7/btq4EsdLYBR/AAAAAAAAAAAAAAAAAAAAAOeB424BictnR9DUu8nNDMsEfcgm7cOl3o2gHpJQmwtI/img.png?credential=yqXZFxpELC7KVnFOS48ylbz2pIh7yKj8&expires=1772290799&allow_ip=&allow_referer=&signature=oDDEaZ5AnQyWLnZVhDovsCzt50A%3D)

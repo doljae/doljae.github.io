@@ -10,20 +10,22 @@ date: 2021-06-17T16:23:27+09:00
 
 > 원문: https://doljae.tistory.com/167
 
-![cover](https://blog.kakaocdn.net/dna/Gmipd/btq7ybtwYnA/AAAAAAAAAAAAAAAAAAAAAJy-2m8d2_2NarABSc-C-PCF0lEtoZG0WMKRc5URQo7a/img.png?credential=yqXZFxpELC7KVnFOS48ylbz2pIh7yKj8&expires=1772290799&allow_ip=&allow_referer=&signature=BsGee5%2FRWg7memUXk3uMDVp6Nxc%3D)
+[Palindrome Partitioning - LeetCode
+
+Level up your coding skills and quickly land a job. This is the best place to expand your knowledge and get prepared for your next interview.
+
+leetcode.com](https://leetcode.com/problems/palindrome-partitioning/)
+
+<!-- truncate -->
 
 문자열이 입력된다.
 
 입력된 문자열의 연속된 부분 문자열이 모두 Palindrome(회문, 앞에서 읽어도, 뒤에서 읽어도 같은 문자열)이 되게 하는 그 결과 목록을 반환하는 문제다.
 
-<!-- truncate -->
-
-1. DP + DFS
-
+### 1\. DP + DFS
 
 ```
 from typing import *
-
 
 class Solution:
     def partition(self, s: str) -> List[List[str]]:
@@ -61,6 +63,8 @@ class Solution:
         dfs(0, [])
         return answers
 ```
+
+![](https://blog.kakaocdn.net/dna/Gmipd/btq7ybtwYnA/AAAAAAAAAAAAAAAAAAAAAJy-2m8d2_2NarABSc-C-PCF0lEtoZG0WMKRc5URQo7a/img.png?credential=yqXZFxpELC7KVnFOS48ylbz2pIh7yKj8&expires=1772290799&allow_ip=&allow_referer=&signature=BsGee5%2FRWg7memUXk3uMDVp6Nxc%3D)
 
 처음에 DFS 한 번으로 해결이 가능한가에 대해서 고민을 했고, 가능할 것 같았다.
 

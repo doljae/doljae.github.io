@@ -10,13 +10,17 @@ date: 2021-08-10T11:01:50+09:00
 
 > 원문: https://doljae.tistory.com/203
 
-![cover](https://blog.kakaocdn.net/dna/TV7tz/btrbENiLifX/AAAAAAAAAAAAAAAAAAAAABA0BdOEqXpkxn3fYCWCXXcHQcyw7XdnLchQ5s9iMlRU/img.png?credential=yqXZFxpELC7KVnFOS48ylbz2pIh7yKj8&expires=1772290799&allow_ip=&allow_referer=&signature=OD30SRSh0BaNndxqpOSPH0pCI3I%3D)
+[Maximum Binary Tree - LeetCode
+
+Level up your coding skills and quickly land a job. This is the best place to expand your knowledge and get prepared for your next interview.
+
+leetcode.com](https://leetcode.com/problems/maximum-binary-tree/)
+
+<!-- truncate -->
 
 중복된 값이 없는 정수로 구성된 list가 주어진다.
 
 이 list를 이용해서 아래 조건에 부합하는 tree를 만들어 root를 반환하는 문제다.
-
-<!-- truncate -->
 
 ```
 1. Create a root node whose value is the maximum value in nums.
@@ -24,15 +28,13 @@ date: 2021-08-10T11:01:50+09:00
 3. Recursively build the right subtree on the subarray suffix to the right of the maximum value.
 ```
 
-
 조건을 해석해보면 다음과 같다.
 
-root는 list에서 가장 큰 값을 val(== maximum value)로 가진다.
-왼쪽 서브 트리는 maximum value의 index 왼쪽에 해당하는 값들로 만든다.
-오른쪽 서브 트리는 maximum value의 index 오른쪽에 해당하는 값들로 만든다.
+1.  root는 list에서 가장 큰 값을 val(== maximum value)로 가진다.
+2.  왼쪽 서브 트리는 maximum value의 index 왼쪽에 해당하는 값들로 만든다.
+3.  오른쪽 서브 트리는 maximum value의 index 오른쪽에 해당하는 값들로 만든다.
 
-1. 재귀 구현
-
+### 1\. 재귀 구현
 
 ```
 class Solution:
@@ -54,14 +56,15 @@ class Solution:
         return dfs(nums)
 ```
 
+![](https://blog.kakaocdn.net/dna/TV7tz/btrbENiLifX/AAAAAAAAAAAAAAAAAAAAABA0BdOEqXpkxn3fYCWCXXcHQcyw7XdnLchQ5s9iMlRU/img.png?credential=yqXZFxpELC7KVnFOS48ylbz2pIh7yKj8&expires=1772290799&allow_ip=&allow_referer=&signature=OD30SRSh0BaNndxqpOSPH0pCI3I%3D)
+
 문제 조건대로 그대로 구현한다.
 
-재귀 함수는 cur_list만 들고 진입하고, 내용은 다음과 같다.
+재귀 함수는 cur\_list만 들고 진입하고, 내용은 다음과 같다.
 
-cur_list에서 가장 큰 값의 index를 찾는다( == pivot)
-1번에서 찾은 가장 큰 값을 이용해 cur_node를 만든다. (TreeNode Spec은 주어진다.)
-pivot을 이용해서 left_list, right_list를 만들어준다.
-cur_node의 왼쪽 서브 트리는 left_list를 들고 재귀를 타고, 오른쪽 서브 트리는 right_list를 들고 재귀를 탄다.
-cur_node를 반환한다.
-
-만일 함수 진입 시에 list의 길이가 0, 즉 cur_list가 없다면(== None) None을 반환한다.
+1.  cur\_list에서 가장 큰 값의 index를 찾는다( == pivot)
+2.  1번에서 찾은 가장 큰 값을 이용해 cur\_node를 만든다. (TreeNode Spec은 주어진다.)
+3.  pivot을 이용해서 left\_list, right\_list를 만들어준다.
+4.  cur\_node의 왼쪽 서브 트리는 left\_list를 들고 재귀를 타고, 오른쪽 서브 트리는 right\_list를 들고 재귀를 탄다.
+5.  cur\_node를 반환한다.
+    1.  만일 함수 진입 시에 list의 길이가 0, 즉 cur\_list가 없다면(== None) None을 반환한다.

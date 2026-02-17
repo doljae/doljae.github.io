@@ -10,33 +10,33 @@ date: 2021-01-23T14:56:57+09:00
 
 > 원문: https://doljae.tistory.com/35
 
-![cover](http://bimage.interpark.com/goods_image/2/0/8/1/213202081h.jpg)
+### 변수와 함수를 합쳐서 모형을 만드는 법
 
-변수와 함수를 합쳐서 모형을 만드는 법
-1. 모듈, 패키지
+1\. 모듈, 패키지
 
-2. 퍼스트 클래스: 함수를 해쉬에 넣기
+2\. 퍼스트 클래스: 함수를 해쉬에 넣기
 
 <!-- truncate -->
 
-3. 클로저
+3\. 클로저
 
-4. 클래스
+4\. 클래스
 
-상속
-1. 일반화/특수화
+### 상속
+
+1\. 일반화/특수화
 
 부모 클래스로 일반적인 기능을 구현하고 자식 클래스로 목적에 특화된 기능을 구현하는 접근
 
 자식 클래스는 부모 클래스를 특수화하는 설계 방법
 
-2. 공통부분을 추출
+2\. 공통부분을 추출
 
 복수 클래스의 공통부분을 부모 클래스로서 추출하는 접근법
 
 자식 클래스는 부모 클래스의 일종이라고 할 수 없다.
 
-3. 차분 구현
+3\. 차분 구현
 
 상속 후 변경된 부분만을 구현하면 효율이 좋다는 접근법. 상속을 재사용을 위해 사용하는 방법.
 
@@ -44,11 +44,11 @@ date: 2021-01-23T14:56:57+09:00
 
 단점
 
-1. 상속을 많이 사용하면 코드가 복잡해진다.
+1\. 상속을 많이 사용하면 코드가 복잡해진다.
 
-2. 상속이 많을수록 깊은 상속 트리가 만들어지고, 이것은 프로그램을 이해하기 어렵게 만든다.
+2\. 상속이 많을수록 깊은 상속 트리가 만들어지고, 이것은 프로그램을 이해하기 어렵게 만든다.
 
-3. 상속이 많을수록 리스 코프 치환 원칙을 위배할 가능성이 높아진다.
+3\. 상속이 많을수록 리스 코프 치환 원칙을 위배할 가능성이 높아진다.
 
 리스 코프 치환 원칙
 
@@ -78,7 +78,7 @@ A라는 메서드를 호출하면 현재 클래스가 A메서드가 없는 경�
 
 해결법
 
-1. 다중 상속 금지
+1\. 다중 상속 금지
 
 Java의 경우가 그러함, 하지만 불편함 -&gt; Interface로 우회함
 
@@ -88,23 +88,18 @@ Java의 경우가 그러함, 하지만 불편함 -&gt; Interface로 우회함
 
 복수의 코드를 가지고 있을 때 충돌하지만 다중 인터페이스 상속의 경우 코드의 실체인 내용이 없기 때문에 문제가 되지 않는다.
 
-2. 메서드 해결 순서를 정해준다
+2\. 메서드 해결 순서를 정해준다
 
 현실적으로 문제가 발생할 수 있는 방법, 마름모 상속이 발생할 수 있다
 
-3. 처리를 섞기
+3\. 처리를 섞기
 
 Mix-in 설계를 통해 재사용하고 싶은 기능만을 모은 작은 클래스를 만들어서 해당 기능을 추가하고 싶은 클래스에 섞는 방법
 
 상속 트리의 깊이를 줄일 수 있다
 
-4. 트레이트
+4\. 트레이트
 
 재사용 단위라는 역할에 특화된 보다 작은 구조(트레이트 = 메서드 묶음)를 만들어서 해결하기
 
-코딩을 지탱하는 기술
-국내도서
-저자 : 니시오 히로카즈 / 김완섭역
-출판 : 비제이퍼블릭 2013.10.16
-
-상세보기
+&lt;table class="tt-plugin-interpark" style="background: #fff; border: 1px solid #e0e0e0; width: 408px;" border="0" width="100%" cellspacing="0" data-darkreader-inline-bgimage="" data-darkreader-inline-bgcolor="" data-darkreader-inline-border-top="" data-darkreader-inline-border-right="" data-darkreader-inline-border-bottom="" data-darkreader-inline-border-left=""&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td style="vertical-align: top; padding: 10px 0 10px 10px;" width="70"&gt;&lt;a href="http://book.interpark.com/blog/integration/product/itemDetail.rdo?prdNo=213202081&amp;refererType=8303&amp;bookblockname=bpmain_in&amp;booklinkname=wg_search_EFEB8364BC43711681CC6C69032386A3753E74A4F9E4F62B3FA06C4836C10BAB&amp;key=EFEB8364BC43711681CC6C69032386A3753E74A4F9E4F62B3FA06C4836C10BAB" target="_blank" rel="noopener"&gt;&lt;img style="border: 0 none;" src="http://bimage.interpark.com/goods_image/2/0/8/1/213202081h.jpg" width="66" height="90" data-darkreader-inline-border-top="" data-darkreader-inline-border-right="" data-darkreader-inline-border-bottom="" data-darkreader-inline-border-left=""&gt;&lt;/a&gt;&lt;/td&gt;&lt;td style="vertical-align: top; padding: 10px 10px 10px 15px;"&gt;&lt;dl style="margin: 0; padding: 2px 0 0 0; list-style: none; font: 11px dotum, sans-serif; letter-spacing: -1px; color: #777;" data-darkreader-inline-color=""&gt;&lt;dt style="padding: 0; margin: 0;"&gt;&lt;a style="font-size: 12px; color: #444 !important; font-weight: bold; text-decoration: none !important;" href="http://book.interpark.com/blog/integration/product/itemDetail.rdo?prdNo=213202081&amp;refererType=8303&amp;bookblockname=bpmain_in&amp;booklinkname=wg_search_EFEB8364BC43711681CC6C69032386A3753E74A4F9E4F62B3FA06C4836C10BAB&amp;key=EFEB8364BC43711681CC6C69032386A3753E74A4F9E4F62B3FA06C4836C10BAB" target="_blank" rel="noopener" data-darkreader-inline-color=""&gt;코딩을 지탱하는 기술&lt;/a&gt;&lt;/dt&gt;&lt;dd style="padding: 7px 0 0 0; margin: 0; color: #a0a0a0;" data-darkreader-inline-color=""&gt;국내도서&lt;/dd&gt;&lt;dd style="padding: 17px 0 0 0; margin: 0;"&gt;저자 : 니시오 히로카즈 / 김완섭역&lt;/dd&gt;&lt;dd style="padding: 4px 0 0 0; margin: 0;"&gt;출판 : 비제이퍼블릭 &lt;span style="letter-spacing: normal;"&gt;2013.10.16&lt;/span&gt;&lt;/dd&gt;&lt;/dl&gt;&lt;a style="float: right; width: 44px; height: 11px; background: url('//t1.daumcdn.net/tistory_admin/static/images/icon_ipark_detail.gif') no-repeat; overflow: hidden; display: block; text-indent: -1000em;" href="http://book.interpark.com/blog/integration/product/itemDetail.rdo?prdNo=213202081&amp;refererType=8303&amp;bookblockname=bpmain_in&amp;booklinkname=wg_search_EFEB8364BC43711681CC6C69032386A3753E74A4F9E4F62B3FA06C4836C10BAB&amp;key=EFEB8364BC43711681CC6C69032386A3753E74A4F9E4F62B3FA06C4836C10BAB" target="_blank" rel="noopener" data-darkreader-inline-bgcolor=""&gt;상세보기&lt;/a&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;

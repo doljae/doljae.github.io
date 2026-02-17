@@ -10,8 +10,7 @@ date: 2021-02-07T17:38:23+09:00
 
 > 원문: https://doljae.tistory.com/43
 
-Oracle 설치 후 연결 및 계정 생성
-
+### Oracle 설치 후 연결 및 계정 생성
 
 ```
 # 연결 테스트
@@ -24,15 +23,14 @@ select * from employees;
 
 <!-- truncate -->
 
-
 # 사용자 계정 만들기
 conn sys as sysdba;
 create user scott identified by tiger default tablespace users temporary tablespace temp;
 grant connect,resource to scott;
 ```
 
+### Oracle JDBC 드라이버 J2EE 프로젝트 설정
 
-Oracle JDBC 드라이버 J2EE 프로젝트 설정
 Oracle JDBC 드라이버는 maven에 없음.
 
 ```
@@ -48,13 +46,11 @@ Oracle JDBC 드라이버는 maven에 없음.
 </dependency>
 ```
 
-
-MySQL 설치 후 연결 및 계정 생성
-
+### MySQL 설치 후 연결 및 계정 생성
 
 ```
 -- MySQL Database 생성
-mysql -u root &ndash;p
+mysql -u root –p
 show databases;
 use mysql;
 create user scott@localhost identified by 'tiger';
@@ -72,9 +68,9 @@ show databases;
 use java_db;
 ```
 
+### Oracle Sequence 생성
 
-Oracle Sequence 생성
-MySQL. MariaDB의 경우는 기본키를 자동으로 1씩 증가시키면서 할당하는 auto_increment 기능이 있다.
+MySQL. MariaDB의 경우는 기본키를 자동으로 1씩 증가시키면서 할당하는 auto\_increment 기능이 있다.
 
 Oracle, PostgreSQL의 경우는 그것이 없어서, sequence를 만들어줘야 한다.
 
@@ -84,10 +80,21 @@ H2 DB의 경우는 따로 table을 만들어서 기본키를 관리하는 전략
 create SEQUENCE user_seq start with 1 INCREMENT BY 1 MAXVALUE 1000 CYCLE NOCACHE;
 ```
 
+### Oracle의 char, varchar, varchar2
 
-Oracle의 char, varchar, varchar2
+ [\[Oracle\] CHAR, VARCHAR, VARCHAR2
 
-Factory Method
+오라클에서 문자타입을 사용 하다 보면 CHAR, VARCHAR, VARCHAR2를 보실수 있습니다. 처음에는 아무생각 없이 쓰다가 어느순간 문제가 발생 해 검색을 하는 경우가 생길 거라 생각이 듭니다. 그 순간
+
+0taeng.tistory.com](https://0taeng.tistory.com/26)
+
+### Factory Method
+
+ [팩토리 메소드 패턴(Factory Method Pattern) :: JDM's Blog
+
+이번 포스팅은 팩토리 메소드 패턴Factory Method Pattern에 대해 알아보고자 합니다. Factory Method Pattern 기본적으로 팩토리는 공장이란 뜻을 내포하고 있습니다. 따라서 팩토리 메소드 패턴도 무언가
+
+jdm.kr](https://jdm.kr/blog/180)
 
 종속적인 코드를 방지하는 메서드
 
@@ -95,9 +102,16 @@ Factory Method
 
 DriverManager의 getConnection() 메서드가 T4 CConnection 객체를 생성하므로 Factory Method다.
 
-JDBC 중요한 interface 목록
+### JDBC 중요한 interface 목록
 
-MVC 패턴
+ [\[JSP\] JDBC 프로그래밍에 사용되는 객체
+
+JDBC 프로그래밍에 사용되는 객체 1. DriverManager 클래스 - DriverManager 클래스는 데이터 원본에 JDBC 드라이버를 통하여 커넥션을 만드는 역할을 한다. DriverManager는 Class.forName() 메소드를 통해서 생..
+
+hyeonstorage.tistory.com](https://hyeonstorage.tistory.com/111)
+
+### MVC 패턴
+
 Model, View, Controller로 책임을 나눠 코드를 분리해 스파게티 코드를 막는 아키텍처 패턴
 
 Model은 DAO, VO, Service(Business Logic)
