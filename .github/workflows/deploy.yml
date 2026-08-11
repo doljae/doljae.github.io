@@ -1,18 +1,28 @@
 name: Deploy to GitHub Pages
 
+# Shows the deployed branch in the Actions run list, which matters now that
+# any branch can be the source.
+run-name: Deploy ${{ github.ref_name }} by @${{ github.actor }}
+
+# Manual only. Deploying is a publish action, so it is triggered on demand
+# rather than on every push to main.
+#
+# No branch input is needed: the "Run workflow" UI already provides a branch
+# selector, and checkout below defaults to the ref you pick there. Adding an
+# input would just duplicate that -- and be misleading, since GitHub always
+# reads this workflow file from the selected ref regardless.
+#
+# Note: workflow_dispatch only appears in the UI once this file is on the
+# default branch, which it is.
 on:
-  push:
-    branches:
-      - main
-    # Review gh actions docs if you want to further define triggers, paths, etc
-    # https://docs.github.com/en/actions/using-workflows/workflow-syntax-for-github-actions#on
+  workflow_dispatch:
 
 # The repo default GITHUB_TOKEN is read-only, so the gh-pages push needs an
 # explicit write grant. Scoped to this job only rather than widened repo-wide.
 permissions:
   contents: write
 
-# Two pushes in quick succession would otherwise force-push ./build to
+# Two runs triggered close together would otherwise force-push ./build to
 # gh-pages concurrently and could publish the older build last.
 concurrency:
   group: deploy-gh-pages
@@ -49,3 +59,6 @@ jobs:
           # You can swap them out with your own user credentials.
           user_name: github-actions[bot]
           user_email: 41898282+github-actions[bot]@users.noreply.github.com
+          # Deploys can now come from any branch, so record which ref produced
+          # the live site. Without this the gh-pages log only shows a bare sha.
+          commit_message: "deploy ${{ github.ref_name }}@${{ github.sha }}"
