@@ -1,0 +1,1 @@
+"use strict";(globalThis.webpackChunkdoljae_github_io||=[]).push([[66113],{65320(e){e.exports=JSON.parse('{"metadata":{"permalink":"/blog/page/32","page":32,"postsPerPage":10,"totalPages":35,"totalCount":349,"previousPage":"/blog/page/31","nextPage":"/blog/page/33","blogDescription":"Engineering notes, reviews, and migration logs.","blogTitle":"Posts"}}')}}]);

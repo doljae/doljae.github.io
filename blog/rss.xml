@@ -1,0 +1,889 @@
+<?xml version="1.0" encoding="utf-8"?>
+<rss version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+    <channel>
+        <title>Zero to Hero Feed</title>
+        <link>https://doljae.github.io/blog</link>
+        <description>Latest posts from Zero to Hero</description>
+        <lastBuildDate>Tue, 09 Dec 2025 13:56:08 GMT</lastBuildDate>
+        <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
+        <generator>https://github.com/jpmonette/feed</generator>
+        <language>ko</language>
+        <copyright>Copyright © 2026 Zero to Hero</copyright>
+        <item>
+            <title><![CDATA[실무로 통하는 LLM 애플리케이션 설계]]></title>
+            <link>https://doljae.github.io/blog/360</link>
+            <guid>https://doljae.github.io/blog/360</guid>
+            <pubDate>Tue, 09 Dec 2025 13:56:08 GMT</pubDate>
+            <description><![CDATA[원문//doljae.tistory.com/360]]></description>
+            <content:encoded><![CDATA[<blockquote>
+<p>원문: <a href="https://doljae.tistory.com/360" target="_blank" rel="noopener noreferrer" class="">https://doljae.tistory.com/360</a></p>
+</blockquote>
+<p><img decoding="async" loading="lazy" src="https://blog.kakaocdn.net/dn/bJhpEm/dJMcaiV5StA/w6BiPyUlHkiznhymjEEkdK/img.jpg" alt="cover" class="img_ev3q"></p>
+<p><strong>한빛미디어 서평단 &lt;나는리뷰어다&gt; 활동을 위해서 책을 협찬 받아 작성된 서평입니다.</strong></p>
+<p>요즘 LLM 관련 도서는 많지만, 단순히 모델 사용법을 나열하는 데 그치지 않고 '실무'와 '설계'의 관점을 제대로 다룬 책은 드물었습니다. 그런 면에서 이 책은 LLM을 이용해 토이 프로젝트 수준을 넘어 실제 서비스(Product)를 구축하려는 사람들에게 꽤 유용한 가이드가 되어줍니다.</p>
+<p>책은 크게 3부로 나뉘어 구성되어 있는데, 흐름이 매우 논리적입니다.</p>
+<p>초반부에서는 LLM의 기본기를 다지는데, 단순히 이론적인 설명에 그치지 않습니다. 예를 들어 토큰화를 설명할 때도 단순히 단어를 쪼개는 것을 넘어, 이것이 모델의 속도, 비용, 컨텍스트 길이에 어떤 영향을 미치는지 '설계 변수'로서 접근하는 점이 인상적이었습니다. 트랜스포머 구조나 스케일링 법칙에 대한 설명도 실무자가 이해해야 할 수준으로 깔끔하게 정리되어 있습니다.</p>
+<p>중반부와 후반부로 갈수록 이 책의 진가가 드러납니다. 현업에서 가장 고민하게 되는 지점들, 즉 "파인튜닝을 할 것인가, RAG(검색 증강 생성)를 쓸 것인가?" 와 같은 트레이드오프를 명확하게 분석해 줍니다. 특히 환각(Hallucination) 현상을 단순히 오류로 치부하지 않고 유형별로 분류해 대응 전략을 제시한 부분이나, 실제 서비스 품질을 좌우하는 추론 최적화(TPT, KV 캐싱 등)를 다룬 챕터는 엔지니어링 관점에서 큰 도움이 되었습니다.</p>
+<p>물론 아쉬운 점이 없는 것은 아닙니다. '설계'에 초점을 맞추다 보니 당장 복사해서 쓸 수 있는 코드 레벨의 예제는 상대적으로 적은 편이고, 영어 기반 모델 중심이라 멀티 모달에 대한 내용은 깊게 다루지 않습니다. 하지만 책에 수록된 연습문제(가드레일 설정, JSON 스키마 추출 등)를 따라가다 보면 LLM 애플리케이션의 전체 구조를 잡는 데에는 부족함이 없습니다.</p>
+<p>개인적으로, 이 책은 LLM 입문자보다는 이미 랭체인이나 API를 한두 번 써봤고, 이제 안정적인 시스템을 구축하고 싶은 중급 개발자나 아키텍트, PM에게 적합합니다. 코드 한 줄보다는 전체 시스템의 아키텍처를 어떻게 그릴지, 비용과 효율을 어떻게 최적화할지 고민하는 분들에게 일독을 권합니다.</p>]]></content:encoded>
+            <category>agent</category>
+            <category>ai</category>
+            <category>llm</category>
+            <category>나는리뷰어다</category>
+            <category>실무</category>
+            <category>실무로-통하는-llm-애플리케이션-설계</category>
+            <category>최적화</category>
+            <category>한빛미디어</category>
+        </item>
+        <item>
+            <title><![CDATA[정지훈의 양자 컴퓨터 강의]]></title>
+            <link>https://doljae.github.io/blog/359</link>
+            <guid>https://doljae.github.io/blog/359</guid>
+            <pubDate>Tue, 30 Sep 2025 00:05:23 GMT</pubDate>
+            <description><![CDATA[원문//doljae.tistory.com/359]]></description>
+            <content:encoded><![CDATA[<blockquote>
+<p>원문: <a href="https://doljae.tistory.com/359" target="_blank" rel="noopener noreferrer" class="">https://doljae.tistory.com/359</a></p>
+</blockquote>
+<p><strong>한빛미디어 서평단 &lt;나는리뷰어다&gt; 활동을 위해서 책을 협찬 받아 작성된 서평입니다.</strong></p>
+<p><img decoding="async" loading="lazy" src="https://blog.kakaocdn.net/dn/XZY6W/btsQVtDn2u6/WWOVHbxW72ys8YYwwCi67K/img.jpg" alt="" class="img_ev3q"></p>
+<p>양자 컴퓨터는 AI 다음의 기술로 주목받고 있지만, 비전공자에게는 여전히 막연하고 어려운 주제다. 『정지훈의 양자 컴퓨터 강의』는 이러한 진입 장벽을 낮춰주는 훌륭한 입문서 역할을 한다. 이 책의 가장 큰 장점은 양자 컴퓨팅의 핵심 개념을 복잡한 수학 공식 없이, 명쾌한 비유와 도식을 통해 설명한다는 점이다.</p>
+<p>책은 먼저 고전 컴퓨터와의 차이점을 짚어주며 '큐비트'가 무엇인지, '중첩'과 '얽힘'이라는 고유한 특성이 어떻게 강력한 연산 능력으로 이어지는지를 보여준다. 특히 초전도, 이온 트랩 등 다양한 방식으로 큐비트를 구현하려는 현재의 기술 경쟁 구도를 소개해, 양자 컴퓨터가 아직 초기 단계에 있는 역동적인 분야임을 이해하게 한다.</p>
+<p>기술 원리 설명에만 머무르지 않는 점도 인상적이다. 기존 암호 체계를 위협하는 '쇼어 알고리즘'과 그에 대한 방어 기술인 '양자 내성 암호(PQC)'를 함께 다루며 기술의 양면성을 균형 있게 조명한다. 또한, 클라우드 플랫폼과 파이썬 기반의 개발 도구를 통해 이제는 누구나 양자 컴퓨터에 접근하고 실험해 볼 수 있는 현실적인 방법론도 제시한다.</p>
+<p>나아가 신약 개발, 금융, AI 등 다양한 산업에서 양자 컴퓨터가 가져올 변화와 잠재력을 구체적인 사례를 통해 소개하고, 기술의 한계와 투자 관점까지 폭넓게 다룬다. 덕분에 독자는 기술의 개념부터 생태계 전반에 이르는 큰 그림을 체계적으로 파악할 수 있다.</p>
+<p>요컨대 이 책은 양자 컴퓨터라는 낯선 주제에 대해 꼭 알아야 할 핵심 지식을 군더더기 없이 전달한다. 기술의 원리부터 실용적인 응용과 미래 전망까지, 균형 잡힌 시각을 제공하는 책을 찾는다면 좋은 선택이 될 것이다.</p>]]></content:encoded>
+            <category>ai</category>
+            <category>나는리뷰어다</category>
+            <category>양자-컴퓨팅</category>
+            <category>얽힘</category>
+            <category>정지훈의-양자-컴퓨터-강의</category>
+            <category>중첩</category>
+            <category>큐비트</category>
+            <category>클라우드</category>
+        </item>
+        <item>
+            <title><![CDATA[아키텍트 첫걸음]]></title>
+            <link>https://doljae.github.io/blog/358</link>
+            <guid>https://doljae.github.io/blog/358</guid>
+            <pubDate>Sun, 31 Aug 2025 12:40:45 GMT</pubDate>
+            <description><![CDATA[원문//doljae.tistory.com/358]]></description>
+            <content:encoded><![CDATA[<blockquote>
+<p>원문: <a href="https://doljae.tistory.com/358" target="_blank" rel="noopener noreferrer" class="">https://doljae.tistory.com/358</a></p>
+</blockquote>
+<p><strong>한빛미디어 서평단 &lt;나는리뷰어다&gt; 활동을 위해서 책을 협찬 받아 작성된 서평입니다.</strong></p>
+<p><img decoding="async" loading="lazy" src="https://blog.kakaocdn.net/dn/bnXNZR/btsQedIKGrZ/LUyYJOdEPtyFKZxEvC53yK/img.jpg" alt="" class="img_ev3q"></p>
+<p>불과 몇 년 전만에도 아키텍트(Architect)라는 직무를 가진 사람들이 좀 보였다. 회사, 혹은 특정 프로젝트에서 가장 경험이 많은 시니어 개발자가 주로 가지고 있는 직무였는데, 신입 시절의 나는 시스템, 애플리케이션 구조를 설계하고 개발에 영향을 주는 여러 가지 주제에 대해 의사결정을 하는 시니어 개발자가 아키텍트인가 보다는 생각을 가지고 있었다. 연차가 많이 쌓이면 맡게 되는 직무 정도라는 인식이었다.</p>
+<p>아키텍트는 기업의 비즈니스 목표와 IT전략을 효과적으로 연결하기 위한 최적의 기술 아키텍처를 설계하고 구현하는 일을 하는 사람이다. 만일 당신이 회사의 제품, 혹은 진행 중인 프로젝트에 영향을 주는 기술적 결정을 했거나 할 수 있는 사람이라면 아키텍트 직무를 수행하고 있다고 생각해도 좋다. 단순히 요구사항을 만족하는 기능을 구현하는 것에 그치지 않고 하드웨어 및 소프트웨어 관련 기술을 활용해 고객과 제품의 비즈니스 목표를 달성하고, 이 과정에서 발생할 수 있는 기술적 리스크까지 고려하며 최적의 의사결정을 하는 것이 아키텍트가 하는 일이다.</p>
+<p>아키텍트는 아키텍처를 설계하는 사람이다. 시스템은 특정 과제를 해결하고 사용자에게 가치를 제공하는 것을 목표로 하는데, 이를 위해서 미리 갖춰야 할 특성이 있다. 이런 특성을 구현하는 과정, 다른 방식으로 말하면 소프트웨어를 어떻게 설계하고 앞으로 어떻게 발전시킬지를 결정하는 기본 원리와 원칙이 아키텍처다. 시스템 레벨에서 모놀로 식, 마이크로서비스를 선택하는 것도, 애플리케이션 레벨에서 레이어드, 헥사날 아키텍처를 선택하는 것도 아키텍처를 설계하는 일이다. 즉 아키텍트는 최적의 아키텍처를 설계하기 위해 많은 선택지 중에서 하나를 결정하는 사람이라고 봐도 될 것 같다.</p>
+<p>이 책은 그런 아키텍트 일을 해야 하는 사람이 어떤 일을 어떻게 해야 하는지에 대해서 다루고 있다. 요즘은 아키텍트라는 직무로 활동하는 사람이 많진 않지만 그것은 아키텍트가 해야 할 일을 구성원이 나눠서 하고 있어서이지 아키텍트가 하던 일이 이제 더 이상 필요하지 않아서가 아니다. 이 책은 아키텍트가 프로젝트 생명 주기 동안 할 일과 결정해야 할 일, 그리고 무엇을 어떻게 준비해야 하는지를 이해하기 쉽게 설명한다. 보통 이런 주제를 다루는 경우 좋은 게 좋은 거다라는 느낌으로 장황하거나 뭔가 읽었을 때 당연한 이야기를 해서 공감이 안 되는 경우가 많은데 무엇을 어떻게 해야 하는지를 예시와 함께 알려주는 점이 굉장히 좋았다.</p>
+<p>또 우리가 정말 자주 말하고 듣는, 하지만 정확한 뜻은 대답하기 어려운 그런 용어들을 일목요연하게 다룬다. 클래스, 컴포넌트, 모듈이 어떻게 다른 것인지, 특정 개발 단계에서 일반적으로 어떤 다이어그램을 그리는지, 이런 내용을 담고 있는 문서를 뭐라고 부르는지 등 우리가 별생각 없이 관성적으로 말하고 있는 용어가 뭘 말하는 건지 궁금한 사람이라면 이 책 한 권으로 대부분의 궁금증을 해결할 수 있을 것이라고 생각한다.</p>
+<p>아키텍트는 시니어 개발자가 아니다. 당신이 무언가 기술적으로 의사결정을 할 수 있고 하고 있다면 이미 아키텍트의 일을 하고 있는 것이다. 당신이 더 현명하게 잘 결정하고 싶거나, 혹은 가까운 미래에 더 높은 의사 결정을 가졌을 때 프로젝트를 제대로 해보고 싶은 개발자라면 이 책을 읽는 시간이 헛되진 않을 것이라고 확신한다.</p>]]></content:encoded>
+            <category>ddd</category>
+            <category>msa</category>
+            <category>나는리뷰어다</category>
+            <category>디자인</category>
+            <category>설계</category>
+            <category>아키텍트</category>
+            <category>아키텍트-첫걸음</category>
+            <category>한빛미디어</category>
+        </item>
+        <item>
+            <title><![CDATA[핸즈온 LLM]]></title>
+            <link>https://doljae.github.io/blog/357</link>
+            <guid>https://doljae.github.io/blog/357</guid>
+            <pubDate>Wed, 30 Jul 2025 14:45:08 GMT</pubDate>
+            <description><![CDATA[원문//doljae.tistory.com/357]]></description>
+            <content:encoded><![CDATA[<blockquote>
+<p>원문: <a href="https://doljae.tistory.com/357" target="_blank" rel="noopener noreferrer" class="">https://doljae.tistory.com/357</a></p>
+</blockquote>
+<p><strong>한빛미디어 서평단 &lt;나는리뷰어다&gt; 활동을 위해서 책을 협찬 받아 작성된 서평입니다.</strong></p>
+<p><img decoding="async" loading="lazy" src="https://blog.kakaocdn.net/dn/7ueca/btsPBHxIup6/sUH8fxvDfEq3JwELFOxhAk/img.png" alt="" class="img_ev3q"></p>
+<p>최근 몇 년간 폭발적으로 성장한 LLM(대규모 언어 모델) 기술은 이제 개발자에게 선택이 아닌 필수이다. 『핸즈온 LLM』은 단순히 LLM을 사용하는 것을 넘어, 그 <strong>내부 구조와 동작 원리를 깊이 이해하고 직접 응용하고자 하는 개발자에게 최적화된 책</strong>이다. 나 역시 LLM API를 몇 번 호출해 본 수준에 머물러 있었는데, 이 책을 통해 비로소 LLM의 블랙박스 같던 부분이 명확하게 이해되기 시작했다.</p>
+<p>이 책은 <strong>개념 설명과 함께 풍부한 실습 예제를 제공</strong>하여 이론을 몸으로 체득할 수 있도록 돕는다. 예를 들어, 책 초반에 나오는 <strong>BoW(Bag of Words) 방식부터 토큰화, 임베딩</strong>과 같은 기본 개념을 시각 자료와 함께 설명하여 왜 단어를 숫자로 바꾸고 토큰 ID를 부여하는지, 그 중요성을 직접 토크나이저를 돌려보며 이해할 수 있었다. 특히 GPT-4와 GPT-3.5가 토큰을 나누는 방식이 달라 요금이 차이 나는 이유를 실습을 통해 다루는 것도 흥미로웠다.</p>
+<p><strong>실전 활용에 대한 깊이 있는 내용</strong>도 인상 깊었다. 4장 텍스트 분류에서는 영화 리뷰 데이터를 활용해 실제 분류 모델을 학습시키고, 임베딩을 사용한 분류 작업이 기존 모델보다 얼마나 직관적이고 안정적인 성능을 보여주는지 직접 경험했다. 또한, 8장 <strong>시맨틱 검색과 RAG(검색 증강 생성)</strong> 부분은 실무 적용 가능성이 가장 크게 느껴졌다. OpenAI의 리랭크 API를 활용한 검색 결과 재정렬 실습은 코드가 완벽하게 작동했으며, LLM 기반 검색이 키워드 검색보다 훨씬 똑똑하다는 것을 체감하게 했다. 덕분에 회사 챗봇 검색 기능 개선에 적용해 볼 아이디어를 얻을 수 있었다.</p>
+<p>멀티모달 LLM을 다루는 9장에서는 <strong>ViT(Vision Transformer)를 통해 이미지를 언어 모델 입력으로 처리하는 원리</strong>를 그림과 함께 설명해 주어 "이미지를 어떻게 텍스트 모델에 넣는다는 거지?"라는 막연한 궁금증을 해소할 수 있었다. 실습보다는 개념 중심이었지만, 추후 멀티모달 프로젝트를 진행할 때 다시 찾아볼 중요한 챕터가 될 것 같다.</p>
+<p>이 책은 <strong>복잡한 내용을 필요한 수준에서 설명하고, 적절한 코드 예제를 제공하여 따라 하면서 자연스럽게 개념을 익힐 수 있도록 구성</strong>되어 있다. 물론 한 권으로 설명해도 부족한 개념을 제한된 지면 안에서 다루다 보니 마냥 쉬운 책은 아니었다. 그럼에도 불구하고 LLM을 단순히 사용하는 수준을 넘어, <strong>LLM의 구조를 이해하고 조작하며 응용하는 단계로 나아가고 싶은 개발자에게 강력히 추천</strong>한다. 이론에만 그치지 않고 코드로 직접 검증하며 배우고 싶은 실무 개발자에게도 큰 도움이 될 것 같다.</p>]]></content:encoded>
+            <category>ai</category>
+            <category>ai-agent</category>
+            <category>chatgpt</category>
+            <category>claude</category>
+            <category>llm</category>
+            <category>rag</category>
+            <category>vector</category>
+            <category>나는리뷰어다</category>
+        </item>
+        <item>
+            <title><![CDATA[김길성의 네트워크 딥다이브]]></title>
+            <link>https://doljae.github.io/blog/356</link>
+            <guid>https://doljae.github.io/blog/356</guid>
+            <pubDate>Sun, 29 Jun 2025 14:11:37 GMT</pubDate>
+            <description><![CDATA[원문//doljae.tistory.com/356]]></description>
+            <content:encoded><![CDATA[<blockquote>
+<p>원문: <a href="https://doljae.tistory.com/356" target="_blank" rel="noopener noreferrer" class="">https://doljae.tistory.com/356</a></p>
+</blockquote>
+<p><strong>한빛미디어 서평단 &lt;나는리뷰어다&gt; 활동을 위해서 책을 협찬 받아 작성된 서평입니다.</strong></p>
+<p><img decoding="async" loading="lazy" src="https://blog.kakaocdn.net/dn/bkshOt/btsOXO3qTGT/FxbPlK09digvb8YcVxmJG1/img.jpg" alt="" class="img_ev3q"></p>
+<p>웹 애플리케이션 개발을 하다 보면 네트워크 이슈를 마주할 때가 있다. 그럴 때마다 "네트워크는 어려워"라며 회피하곤 했는데, 이 책을 읽고 나니 그 어려움의 원인을 알 수 있었다. 단순히 개념만 나열하는 것이 아니라 각 기술이 왜 생겨났는지, 어떤 문제를 해결하기 위한 것인지부터 설명하기 때문이다.</p>
+<p>특히 광 통신 부분에서 단일모드와 다중모드 광섬유의 차이를 설명하는 부분이 인상적이었다. 물리적인 빛의 전파 방식부터 시작해서 실제 데이터센터에서 어떤 케이블을 선택해야 하는지까지 연결지어 설명한다. 클라우드 서비스를 사용할 때 지연시간이나 대역폭을 고려하는 이유를 물리적 관점에서 이해할 수 있었다.</p>
+<p>또한 로드밸런서 부분에서 L4와 L7의 차이점을 다룬 내용도 유용했다. 사내 클라우드 환경에서 배포할 때 매뉴얼에 따라 설정하긴 했지만 왜 이런 설정을 해야 하는지 제대로 이해하지 못했었다. 이 책을 통해 세션 어피니티나 로드밸런싱 알고리즘이 실제 서비스 성능에 어떤 영향을 미치는지, 그리고 그동안 막무가내로 따라했던 네트워크 설정들의 의미를 명확하게 파악할 수 있었다.</p>
+<p>저자가 네이버와 Juniper Networks에서 쌓은 실무 경험을 바탕으로 쓴 만큼, 이론보다는 실제 현장에서 마주하는 문제들과 해결책에 초점을 맞춘다. 네트워크 전문가가 아니어도 충분히 이해할 수 있도록 용어의 기원부터 설명하는 것도 좋았다.</p>
+<p>네트워크 기초를 탄탄히 다지고 싶은 개발자, 시스템 성능 최적화의 근본적인 이해를 얻고 싶은 사람들에게 이 책을 추천한다.</p>]]></content:encoded>
+            <category>bgp</category>
+            <category>광케이블</category>
+            <category>김길성의-네트워크-딥다이브</category>
+            <category>나는리뷰어다</category>
+            <category>네트워크</category>
+            <category>로드밸런서</category>
+            <category>한빛미디어</category>
+        </item>
+        <item>
+            <title><![CDATA[LLM 서비스 설계와 최적화 - 비용은 낮추고 성능은 극대화하는 AI 서비스 구축과 운영 가이드]]></title>
+            <link>https://doljae.github.io/blog/355</link>
+            <guid>https://doljae.github.io/blog/355</guid>
+            <pubDate>Tue, 03 Jun 2025 08:19:05 GMT</pubDate>
+            <description><![CDATA[원문//doljae.tistory.com/355]]></description>
+            <content:encoded><![CDATA[<blockquote>
+<p>원문: <a href="https://doljae.tistory.com/355" target="_blank" rel="noopener noreferrer" class="">https://doljae.tistory.com/355</a></p>
+</blockquote>
+<p><strong>한빛미디어 서평단 &lt;나는리뷰어다&gt; 활동을 위해서 책을 협찬 받아 작성된 서평입니다.</strong></p>
+<p><img decoding="async" loading="lazy" src="https://blog.kakaocdn.net/dn/bhq4JJ/btsOovjnvPr/1NLj2xOjleKoAok9olqE90/img.jpg" alt="" class="img_ev3q"></p>
+<p>23년에 ChatGPT가 LLM 모델 전쟁의 서막을 열었고 24년에 여러 AI 도구가 출시되었다면 25년에는 AI를 서비스에 녹이는 것이 주된 이야깃거리 중 하나다. 이전에는 ChatGPT를 잘 쓰는 법이 관심사였다면, 지금은 어떻게 ChatGPT와 같은 AI 서비스를 만들 수 있을까에 더 관심이 모이고 있는 것 같다. 자체 개발 LLM이 없더라도 Ollama 등 오픈소스 LLM으로 모델은 확보할 수 있다. 하지만 이 모델을 가지고 실제 서비스를 개발, 운영하는 것은 조금 다른 이야기이다.</p>
+<p>전통적인 애플리케이션에서의 문제 해결 방법은 특정 상황에만 대응할 수 있는 코드, 함수, API를 만드는 것이다. 즉 어떤 목적을 달성하기 위한 프로그램이기에 유연하지 못 하지만 굉장히 굉장히 빠르고 결정적인 결과를 만들어 내고 이는 개발자가 프로그램의 결과를 예상하고 이에 대응할 수 있다는 장점이 있다. AI 서비스는 이와 정반대의 특징을 가진다. 성능이 검증된 일정 크기의 LLM 모델을 사용하는 것만으로도 여러 가지 상황에 대응하고 다양한 종류의 문제를 풀 수 있다. 하지만 개발자는 LLM이 만들어내는 결과를 예상하는 것이 거의 불가능하다. 심지어 같은 입력에 대해서도 LLM 모델은 다른 결과를 내는데 이것을 제어하기 위해 LLM에 제공할 입력 값인 프롬프트를 튜닝하는 것이 최선이다. 뿐만 아니라 AI 모델은 리소스도 많이 소모한다. 학습이 완료된 모델을 사용하기만 하더라도 일반적인 애플리케이션에서 필요한 인프라 자원보다 훨씬 더 여유로운 RAM과 저장소 용량이 필요하다. 만일 클라우드 서비스로 AI 모델을 사용한다면 생성되는 답변의 길이에 비례해서 운영 비용이 증가한다. 심지어 답변이 길 수록 응답 속도마저 느리다.</p>
+<p>이처럼 LLM 모델을 활용한 AI 서비스는 전통적인 웹 서비스와 비교했을 때 운영 관점에서 새롭게 고려해야 할 부분이 많다. ChatGPT를 쓰는 건 쉽지만 ChatGPT를 만드는 것은 전혀 다르다. 이 책은 LLM 서비스를 구축하고 운영할 때 고려해야 할 여러 가지 부분을 친절하게 짚어준다. 잘 그려진 시스템 구조도와 함께 AI 서비스를 개발할 때 겪게 되는 여러 가지 문제와 이에 대한 해결책 혹은 타협책을 제시한다.</p>
+<p>서비스 개발자 입장에서 읽기 쉽게 작성되었다는 점도 좋았다. 내가 읽었던 AI, LLM 관련 책은 대부분 관련 지식이 전무하거나 많이 부족한 초심자를 위함이거나, 혹은 숙련된 전문가를 위한 책이었는데 이 책은 초심자와 전문가 사이에 있는 사람들이 읽었을 때 충분히 책 제목에서 기대하는 그런 내용을 얻을 수 있지 않나 싶다.</p>
+<p>최근에 국내에 열린 AWS Summit에서도 Bedrock이라는 AI 에이전트 서비스를 굉장히 많이 홍보했었는데. 세션에서 나온 AI 서비스의 구조와 이 책에서도 몇 가지 유사한 점을 발견할 수 있었다. 이런 점을 보면 이젠 AI를 활용한 서비스의 시스템 구조도 어느 정도 정형화가 되지 않았나 싶다. LLM 모델을 활용해 여러 가지 상황에 유연하게 대응하면서도, 전통적인 웹 서비스처럼 속도와 비용 효율도 잡아야 한다면 이 책의 내용에서 뭔가 건져갈 수 있지 않을까 싶다.</p>]]></content:encoded>
+            <category>ai-agent</category>
+            <category>bedrock</category>
+            <category>chatgpt</category>
+            <category>llm-서비스-설계와-최적화</category>
+            <category>나는리뷰어다</category>
+            <category>비용</category>
+            <category>토큰</category>
+        </item>
+        <item>
+            <title><![CDATA[플랫폼 엔지니어링]]></title>
+            <link>https://doljae.github.io/blog/354</link>
+            <guid>https://doljae.github.io/blog/354</guid>
+            <pubDate>Fri, 25 Apr 2025 14:56:37 GMT</pubDate>
+            <description><![CDATA[원문//doljae.tistory.com/354]]></description>
+            <content:encoded><![CDATA[<blockquote>
+<p>원문: <a href="https://doljae.tistory.com/354" target="_blank" rel="noopener noreferrer" class="">https://doljae.tistory.com/354</a></p>
+</blockquote>
+<p><strong>한빛미디어 서평단 &lt;나는리뷰어다&gt; 활동을 위해서 책을 협찬 받아 작성된 서평입니다.</strong></p>
+<p><img decoding="async" loading="lazy" src="https://blog.kakaocdn.net/dn/qp4ed/btsNAfJfZuq/NccQSfBIvxE40ZWlcgAOq0/img.jpg" alt="" class="img_ev3q"></p>
+<p>개발자 채용 공고는 크게 두 가지로 분류되는데 하나가 플랫폼 개발이고 다른 하나가 서비스 개발이다. 일반적으로 플랫폼은 조직, 혹은 특정 제품 내부에서 사용하는 어떤 기능을 제공한다. 서비스 개발, 애플리케이션 개발 조직은 이 플랫폼을 활용해서 빠른 속도로 새 기능을 구현한다. 이 책은 플랫폼 개발 조직에 엔지니어링 기법이자 문화인 플랫폼 엔지니어링에 대해 다루는 책이다.</p>
+<p>플랫폼 조직은 아래와 같은 특징을 가지고 있다.</p>
+<ul>
+<li class="">개발 산출물(플랫폼)을 사용하는 고객이 같은 회사의 다른 팀이다.</li>
+<li class="">여러 서비스 개발 팀에서 공통적으로 필요한 기능을 추상화해서 이를 쉽게 사용할 수 있도록 제공하는 한다.</li>
+<li class="">플랫폼 또한 소프트웨어이고 지속적으로 유지보수해야 하는 대상이다. 특히 이를 의존하는 사내 제품이 많이 질수록 영향도가 커진다.</li>
+<li class="">플랫폼에서 제공하는 기능은 범용적이어야 한다.</li>
+<li class="">플랫폼의 경쟁 상대는 비슷한 기능을 하는 오픈소스다.</li>
+</ul>
+<p>이러한 플랫폼을 개발하는 플랫폼 조직이 가지는 특징들을 잘 이해하고 이에 맞는 적절한 개발 방법론을 사용하고 조직 운영을 해야 하는데 책에선 구체적으로 어떻게 하면 될지에 대해서 다루고 있다. 실무자가 읽어도 좋지만 관리자, 특히 플랫폼 조직을 만들지에 대한 의사 결정을 해야 하는 상황에서 읽으면 좋은 책이다.</p>
+<p>이 책은 이런 내용을 담고 있다.</p>
+<ul>
+<li class="">왜 플랫폼 조직을 만들 때 신중해야 하는지?</li>
+<li class="">플랫폼 조직은 어떤 역할의 구성원들로 구성해야 하는지? 이 구성원들은 어떤 특징을 가지고 있고 어떻게 채용해야 하는지?</li>
+<li class="">어떤 기능을 플랫폼으로 만들 것인지?</li>
+<li class="">플랫폼을 어떻게 유지보수 할 것인지?</li>
+<li class="">플랫폼 조직에 필요한 자원을 확보할 수 있도록 경영진을 어떻게 하면 설득할 수 있을지?</li>
+</ul>
+<p>플랫폼 조직을 운영하고 있거나, 혹은 운영해야 하거나 플랫폼 조직을 만들어야 하는 테크니컬 리드나 매니저가 읽으면 많은 인사이트를 얻을 수 있을 것이다.</p>]]></content:encoded>
+            <category>나는리뷰어다</category>
+            <category>조직-구성</category>
+            <category>플랫폼</category>
+            <category>플랫폼-엔지니어링</category>
+            <category>한빛미디어</category>
+        </item>
+        <item>
+            <title><![CDATA[자바 코드의 품질을 높이는 100가지 방법]]></title>
+            <link>https://doljae.github.io/blog/353</link>
+            <guid>https://doljae.github.io/blog/353</guid>
+            <pubDate>Sun, 30 Mar 2025 15:47:06 GMT</pubDate>
+            <description><![CDATA[원문//doljae.tistory.com/353]]></description>
+            <content:encoded><![CDATA[<blockquote>
+<p>원문: <a href="https://doljae.tistory.com/353" target="_blank" rel="noopener noreferrer" class="">https://doljae.tistory.com/353</a></p>
+</blockquote>
+<p><strong>한빛미디어 서평단 &lt;나는리뷰어다&gt; 활동을 위해서 책을 협찬 받아 작성된 서평입니다.</strong></p>
+<p><img decoding="async" loading="lazy" src="https://blog.kakaocdn.net/dn/bf4Xs2/btsM1MUFYcL/SkP4A2KnWitZw6kY48OUxK/img.jpg" alt="" class="img_ev3q"></p>
+<p>이 책은 자바 개발자들이 흔히 저지르는 100가지 실수를 다루며, 이를 피하는 방법을 설명한다. 각 장은 특정 주제나 오류 유형에 초점을 맞춰, 실수의 원인과 문제점, 그리고 올바른 해결 방법을 알려주는 식으로 진행된다.</p>
+<p>개인적으로 생각하는 이 책의 가장 큰 장점은 풍부한 코드 예제와 명확한 설명인데 단순히 '이렇게 하면 안 된다'는 경고를 넘어, 실제로 어떻게 개선할 수 있는지를 구체적으로 보여주는 점이 인상 깊었다. 표현식, 숫자 처리, 예외 처리, 문자열, 객체 비교, 컬렉션과 맵, 라이브러리 메서드, 유닛 테스트 등 다양한 주제에 관련된 실무에서 자주 접하는 문제들을 깊이 있게 다룬다. 특히, 자바 언어의 미묘한 부분이나 잘 알려지지 않은 함정을 짚어주는데 단순히 실수를 나열하는 것이 아니라, 실수의 본질적인 원인과 해결 방안을 함께 설명한다는 점에서 저자의 내공이 느껴졌다.</p>
+<p>IDE, 정적 분석 도구, AI까지 코드를 작성하고 검토하는 방법이 너무 많은 세상이지만, 자바 개발자라면 한 번쯤은 읽어볼 만한 좋은 책이다.</p>]]></content:encoded>
+            <category>ide</category>
+            <category>나는리뷰어다</category>
+            <category>버그</category>
+            <category>자바</category>
+            <category>자바-코드의-품질을-높이는-100가지-방법</category>
+            <category>정적-분석</category>
+            <category>코드리뷰</category>
+            <category>한빛미디어</category>
+        </item>
+        <item>
+            <title><![CDATA[글또 10기 활동을 마무리하며]]></title>
+            <link>https://doljae.github.io/blog/352</link>
+            <guid>https://doljae.github.io/blog/352</guid>
+            <pubDate>Sun, 30 Mar 2025 07:36:35 GMT</pubDate>
+            <description><![CDATA[원문//doljae.tistory.com/352]]></description>
+            <content:encoded><![CDATA[<blockquote>
+<p>원문: <a href="https://doljae.tistory.com/352" target="_blank" rel="noopener noreferrer" class="">https://doljae.tistory.com/352</a></p>
+</blockquote>
+<p>작년 10월부터 시작한 <a href="https://geultto.github.io/" target="_blank" rel="noopener noreferrer" class="">글또</a> 활동을 마무리하면서 소감을 정리해 봤습니다.</p>
+<p>[</p>
+<p>글또 - 글쓰는 또라이가 세상을 바꾼다</p>
+<p>글쓰는 개발자 모임, 글또입니다</p>
+<p>geultto.github.io</p>
+<p>](<a href="https://geultto.github.io/" target="_blank" rel="noopener noreferrer" class="">https://geultto.github.io/</a>)</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="글은-썼지만">글은 썼지만...<a href="https://doljae.github.io/blog/352#%EA%B8%80%EC%9D%80-%EC%8D%BC%EC%A7%80%EB%A7%8C" class="hash-link" aria-label="글은 썼지만...에 대한 직접 링크" title="글은 썼지만...에 대한 직접 링크" translate="no">​</a></h2>
+<p>저는 10개의 글을 제출했습니다. 총 12번의 글을 제출해야 하는 일정에서 한 번은 패스, 한 번은 글자수 미달로 미제출 처리된 것을 제외해서 10번입니다. 원래 한 달에 한 편 정도는 책 리뷰 글을 쓰고 있었기에 2주에 한 번씩 글을 쓰는 것이 어렵진 않았습니다. 하지만 뭔가 책 리뷰 글은 따로 가져가고 글또에는 다른 주제의 이야기를 다룬 글을 제출하고 싶었습니다. 그래서 개인적으로 생각하고 있던 개발 관련된 것들을 정리해서 제출했습니다. 막상 글로 표현하려고 하니깐 시간이 좀 걸렸지만 이런 과정을 통해서 머릿속을 정리할 수 있어서 좋았습니다.</p>
+<p><strong>하지만 정말 공들여서 글을 썼느냐라고 물어보신다면 아니오라고 답할 수밖에 없는 것이 부끄럽습니다.</strong> 저는 몇 년 전에 제가 당시에 할 수 있는 모든 글쓰기 능력을 발휘해서 회사 기술 블로그에 글을 투고한 적이 있습니다. 제가 몇 개월간 했던 경험을 압축해서 글로 표현해야 했었는데요. 정말 많은 시간과 노력을 들여 한 편의 글을 작성했습니다. 초안이 나온 이후로 과장 없이 백여 번은 수정했던 것 같습니다. 이런 노력을 알아주신 건지 많은 분들께서 글을 읽어주셨고 블로그 조회수 1위도 달성했었습니다.</p>
+<p>그렇기에 글을 제출할 때 내 글을 큐레이션 후보에 넣을지 말지를 선택할 수 있었는데요 저는 한 번도 제 글을 후보로 넣지 않았습니다. 정확히는 넣을 수 없었습니다. 머릿속에 있는 것을 끄집어내기만 해도 멋진 글을 쓰시는 분도 계시겠지만 저는 그런 쪽의 사람은 아니기에 제가 생각하는, 만족할 수 있는 좋은 글은 많은 시간과 노력이 필요하다는 것을 알고 있었으깐요... 한 편 정도는 꼭 큐레이션 후보에 등록하고 뽑혀보고도 싶었는데 그것을 못 하고 활동을 마무리하는 것이 아쉽습니다. (사실 아쉬울 것도 없죠. 제가 안 한 거니깐요...)</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="활동도-했지만">활동도 했지만...<a href="https://doljae.github.io/blog/352#%ED%99%9C%EB%8F%99%EB%8F%84-%ED%96%88%EC%A7%80%EB%A7%8C" class="hash-link" aria-label="활동도 했지만...에 대한 직접 링크" title="활동도 했지만...에 대한 직접 링크" translate="no">​</a></h2>
+<p>글또는 글을 쓰고 제출하는 것 이외에도 구성원끼리의 자유로운 교류와 네트워킹을 장려하는 커뮤니티입니다. 슬랙에는 지역 기반, 공통 관심사 등 다양한 주제로 수십 개가 넘는 소모임 채널이 만들어졌습니다. 회사 밖의 사람들과 이야기를 나누고 인간관계를 늘려보고 싶다는 것도 글또를 참석한 계기였기에 공통 채널에 올라오는 소모임 홍보 글을 보고 들어갈지 말지를 고민했는데요. 저는 외향적인 사람도 아니고, 같은 채널에서 쓴 글을 공유하는 정도만으로도 커뮤니티 활동 욕구(?)가 충족이 되는 사람이라서 <strong>직군 별로 묶어 주신 글 제출 채널에 계신 분들과 우선 교류해 보고 조금씩 활동 범위를 넓혀보자라고 생각했습니다.</strong> 같은 채널로 묶인 분들의 블로그를 보니 제가 인상 깊게 읽었던 글의 저자분들도 계셔서 좀 더 그분들과 이야기해보고 싶은 마음도 있었고요.</p>
+<p>그런데 제가 생각했던 것과 다르게 글 제출 채널에서의 적극적인 네트워킹은 없었습니다. 딱히 제가 글 제출 말고 뭔가 하지 않았으니 이런 말을 할 자격이 없긴 하지만요... 제가 처음에 생각했던(기대했던) 모습은 글을 제출하면 채널의 모든 분들이 그 글을 읽어보고 코멘트나 피드백을 주는 것이었습니다. 다만 적어도 제가 있던 채널에선 이것이 잘 이뤄지진 않은 것 같은데요. 제가 생각해 본 이유는 아래와 같습니다.</p>
+<ol>
+<li class="">초반에는 몇몇 분께서 글이 올라오면 적극적으로 감상평 및 피드백 코멘트를 달아주셨지만 이런 것들을 함께 당겨주고 유지할 수 있도록 도와주는 노력이 부족했다.</li>
+<li class="">현생을 살면서 2주마다 글을 쓰는 것도 쉽지 않은데 거기에 네트워킹까지 할 여유가 없었다.</li>
+<li class="">(적어도 이번 기수에는) 글 피드백을 반드시 해야 한다 등의 규칙이 없었다. 다른 사람의 글에 대해 피드백을 하는 부담스러운 일을 꼭 하지 않아도 된다.</li>
+</ol>
+<p><strong>동상이몽이라는 말이 있는 것처럼</strong> 같은 채널에 있지만 모두가 다른 목적과 생각을 가지고 있습니다. 혹은 활동 전에 가지고 있던 생각이 활동을 하면서 바뀌셨을 수도 있죠. 단지 꾸준히 글을 쓰는 습관을 만들고 싶으셔서 참여하고 계신 분들에겐 그 이외의 활동들은 생각이 없거나 부담스러울 것입니다. 새로운 인연을 만들고 싶어 적극적으로 활동하시는 분들께선 정적인 분위기에서 나만 혼자 이러고 있는 것 같아서 아쉬우실 것입니다. <strong>다만 저 스스로에 대해서만 피드백을 해보면 스스로 먼저 나서진 못하더라도 적극적으로 활동하시는 분들의 열정의 불꽃이 사그라들지 않도록 열심히 장작이라도 더 넣어봤으면 어떨까라는 생각이 들어서 아쉽기도 하고 죄송스럽기도 합니다.</strong></p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="커피팻">커피팻<a href="https://doljae.github.io/blog/352#%EC%BB%A4%ED%94%BC%ED%8C%BB" class="hash-link" aria-label="커피팻에 대한 직접 링크" title="커피팻에 대한 직접 링크" translate="no">​</a></h2>
+<p>연초에 커피챗을 했습니다. 비슷한 연차의 다른 회사에 다니시는 분들과 퇴근 후에 만나서 여러 가지 이야기를 나눴습니다. 처음 보는 사람에게 개인적인 이야기를 하는 것이 익숙하진 않았는데요. 커리어 관련 고민이라는 공통 주제를 발견하고 긴 시간 동안 즐겁게 이야기를 나눴습니다. 한 분께선 저랑 비슷한 상황에서 비슷한 고민을 하시는 것 같았지만 저보다 훨씬 성숙하게 회사 생활을 하고 계신 것 같았습니다. 또 한 분께선 벌써 팀장 역할을 하고 계시는데 팀장이 되고 나니 보이는 것들과 고민에 대해서 솔직하게 말씀해 주셨습니다. 글또 활동 중에 가장 많이 기대했었던 것이 커피챗인데요. 리프레시도 되고 많이 배울 수 있는 좋은 시간이었습니다. 상황은 다르지만 다들 열심히 살고 계시는구나라는 생각도 하면서 마음도 다잡을 수 있었고요.</p>
+<p>(추가로 글 제출 채널에 계신 분들과도 커피챗을 할 기회가 있었는데 일정을 조율할 수 없어서 참석하지 못한 게 너무 아쉽습니다...)</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="커뮤니티를-만들고-운영하는-법">커뮤니티를 만들고 운영하는 법<a href="https://doljae.github.io/blog/352#%EC%BB%A4%EB%AE%A4%EB%8B%88%ED%8B%B0%EB%A5%BC-%EB%A7%8C%EB%93%A4%EA%B3%A0-%EC%9A%B4%EC%98%81%ED%95%98%EB%8A%94-%EB%B2%95" class="hash-link" aria-label="커뮤니티를 만들고 운영하는 법에 대한 직접 링크" title="커뮤니티를 만들고 운영하는 법에 대한 직접 링크" translate="no">​</a></h2>
+<p><strong>사실 글또 활동에서 정말 인상 깊었던 것은 글또 그 자체입니다.</strong> 저는 글또 활동을 통해서 어떻게 커뮤니티를 만들고 운영해야 하는 가에 대한 간접 경험을 했습니다.</p>
+<p>글또의 거의 모든 활동은 슬랙 봇과 워크플로를 통해 이용할 수 있습니다. 커뮤니티 기능을 슬랙을 활용하고 그 위에 봇으로 글또의 아이덴티티인 글 제출 기능을 구현했습니다. 간단한 명령어로 글을 제출할 수 있을 뿐만 아니라 구성원이 생각하는 대부분의 기능을 버튼 하나로 사용할 수 있습니다. 그리고 이 모든 것이 사용할 때 이질감없이 부드럽게 이뤄집니다.</p>
+<p>글또 운영진 분들은 직접 만드신 봇과 함께 커뮤니티를 운영하셨습니다. 10명이 안 되는 인원으로 스터디를 할 때도 운영 중에 크고 작은 문제가 생기기 마련입니다. 그런데 600명이 넘는 규모의 커뮤니티를 큰 문제없이 운영하신 다는 것은 대단한 일입니다. 그리고 이를 지탱하기 위해 녹아있는 수 많은 요건(?)들을 보면 모든 것이 다 치밀한 설계 아래에 만들어진 것이라는 것을 옅볼 수 있습니다. 기획, 개발, 운영... 모든 것이 지난 2018년 글또 1기부터 시작해서 하나부터 열까지 많은 고민과 논의 끝에 만들어진 결과겠죠.</p>
+<p><strong>그리고 저는 이 모든 과정에서 진심을 느꼈습니다.</strong> 공지 사항 전파, 커피챗 조편성, 익명 대나무숲과 감사 편지, 심지어 슬랙 봇에서마저도 말로 표현하기 어렵지만 일관성 있게 한 방향을 보는, 마음을 울리는 무언가가 있었습니다. 좋은 것을 잘해보려는 진심을 가진 운영진과 그들의 진심을 느낀 구성원들. <strong>모두의 선한 영향력이 만들어내는 변화를 본 점이 제가 글또 활동에서 건진 최고의 경험이라고 생각합니다.</strong> 다음에라도 기회가 된다면 글또를 만드신 성윤 님과 이야기를 나눠보고 싶습니다. 그분이 보여주신 카리스마와 리더십에서 느낀 점이 많았기에...</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="맺음말">맺음말<a href="https://doljae.github.io/blog/352#%EB%A7%BA%EC%9D%8C%EB%A7%90" class="hash-link" aria-label="맺음말에 대한 직접 링크" title="맺음말에 대한 직접 링크" translate="no">​</a></h2>
+<p>글또의 최신이면서 마지막 버전인 글또 10기를 함께할 수 있어서 정말 좋았습니다 :)</p>]]></content:encoded>
+            <category>10기</category>
+            <category>글또</category>
+            <category>운영</category>
+            <category>커뮤니티</category>
+            <category>회고</category>
+            <category>후기</category>
+        </item>
+        <item>
+            <title><![CDATA[레디스 이것저것]]></title>
+            <link>https://doljae.github.io/blog/351</link>
+            <guid>https://doljae.github.io/blog/351</guid>
+            <pubDate>Sat, 15 Mar 2025 15:03:28 GMT</pubDate>
+            <description><![CDATA[원문//doljae.tistory.com/351]]></description>
+            <content:encoded><![CDATA[<blockquote>
+<p>원문: <a href="https://doljae.tistory.com/351" target="_blank" rel="noopener noreferrer" class="">https://doljae.tistory.com/351</a></p>
+</blockquote>
+<p>지난 1년간 레디스를 실무에서 처음 접하면서 여러 가지 작업을 했다. 뭔가 명확한 정보를 전달한다기보다는 경험과 트러블슈팅을 기록한다는 느낌으로 끄적여본다.</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="끄적-1-레디스는-데이터를-메모리에-저장한다">끄적 1, 레디스는 데이터를 메모리에 저장한다.<a href="https://doljae.github.io/blog/351#%EB%81%84%EC%A0%81-1-%EB%A0%88%EB%94%94%EC%8A%A4%EB%8A%94-%EB%8D%B0%EC%9D%B4%ED%84%B0%EB%A5%BC-%EB%A9%94%EB%AA%A8%EB%A6%AC%EC%97%90-%EC%A0%80%EC%9E%A5%ED%95%9C%EB%8B%A4" class="hash-link" aria-label="끄적 1, 레디스는 데이터를 메모리에 저장한다.에 대한 직접 링크" title="끄적 1, 레디스는 데이터를 메모리에 저장한다.에 대한 직접 링크" translate="no">​</a></h2>
+<p>레디스를 사용하는 가장 큰 이유 중 하나는 데이터를 디스크가 아닌 메모리에 저장하기 때문이다. 일반적으로 데이터베이스에 데이터를 저장하면 디스크에 이를 보관한다. 이 말은 디스크에 저장되어 있는 데이터를 조회하면 디스크와 메모리와 네트워크를 거친다는 말과 같다. 디스크, 메모리, 네트워크의 경계에서 발생하는 유저 &amp; 커널 스레드 전환 및 버퍼에 데이터를 옮기는 과정 중 가장 느린 디스크에서 데이터를 옮기는 작업이 없으니 당연히 데이터 읽기 및 수정 요청의 응답 속도가 빠를 수밖에 없다. 물론 레디스도 AOF(Append Only File)나 RDB(Snapshot) 방식으로 데이터를 디스크에 저장할 수 있지만, 기본적으로는 메모리 기반이라는 점에서 큰 성능 차이를 가진다.</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="끄적-2-레디스는-여러-가지-형식으로-데이터를-저장할-수-있다">끄적 2, 레디스는 여러 가지 형식으로 데이터를 저장할 수 있다.<a href="https://doljae.github.io/blog/351#%EB%81%84%EC%A0%81-2-%EB%A0%88%EB%94%94%EC%8A%A4%EB%8A%94-%EC%97%AC%EB%9F%AC-%EA%B0%80%EC%A7%80-%ED%98%95%EC%8B%9D%EC%9C%BC%EB%A1%9C-%EB%8D%B0%EC%9D%B4%ED%84%B0%EB%A5%BC-%EC%A0%80%EC%9E%A5%ED%95%A0-%EC%88%98-%EC%9E%88%EB%8B%A4" class="hash-link" aria-label="끄적 2, 레디스는 여러 가지 형식으로 데이터를 저장할 수 있다.에 대한 직접 링크" title="끄적 2, 레디스는 여러 가지 형식으로 데이터를 저장할 수 있다.에 대한 직접 링크" translate="no">​</a></h2>
+<p>레디스는 키-값 저장소인데, 여기서 값에 해당하는 데이터를 여러 가지 형식으로 저장할 수 있다. 단순히 숫자, 문자도 저장할 수 있지만 여러 가지 자료구조도 지원한다. List, Set, SortedSet, Hash 등 우리가 생각하는 대부분의 자료구조를 레디스의 값으로 사용할 수 있다. 그리고 이 자료구조를 효율적으로 사용할 수 있는 여러 가지 명령어도 함께 제공한다. 예를 들어 List는 Queue에서 제공하는 왼쪽에 값 추가(LPUSH), 오른쪽에 값 추가(RPUSH), 왼쪽의 값 읽고 제거(LPOP) 등의 연산을 지원한다.</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="끄적-3-레디스는-많은-문제를-해결한다">끄적 3, 레디스는 많은 문제를 해결한다.<a href="https://doljae.github.io/blog/351#%EB%81%84%EC%A0%81-3-%EB%A0%88%EB%94%94%EC%8A%A4%EB%8A%94-%EB%A7%8E%EC%9D%80-%EB%AC%B8%EC%A0%9C%EB%A5%BC-%ED%95%B4%EA%B2%B0%ED%95%9C%EB%8B%A4" class="hash-link" aria-label="끄적 3, 레디스는 많은 문제를 해결한다.에 대한 직접 링크" title="끄적 3, 레디스는 많은 문제를 해결한다.에 대한 직접 링크" translate="no">​</a></h2>
+<p>위에서 언급한 특징과 연관된 내용으로 레디스만 잘 써도 애플리케이션 레벨에서 발생하는 문제와 고민을 해결할 수 있다.</p>
+<p>여러 서버에서 공통으로 사용해야 하는 데이터를 저장할 때 이 데이터를 빠르게 접근하고 동시성 문제없이 조작해야 할 때 사용 중인 RDB에서 다루기 어려운 형식의 데이터가 생겼을 때 급하게, 혹은 임시로 무언가 저장해야 할 때 단적으로 말하면 대부분의 상황에 대응할 수 있는 데이터가 레디스라고 해도 과언이 아니다. 거기에 복제 설정, 클러스터 설정까지 하면 만능이라고 불러도 될 정도라고 생각한다. 개발자 실수로 레디스에 큰 데이터가 계속 추가되어서 OOM이 발생하지만 않는다면 레디스가 스스로 뭔가 문제가 생겨서 죽는 일은 거의 없다고 보면 된다.</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="끄적-4-레디스-키-패턴을-잘-결정해야-한다">끄적 4, 레디스 키 패턴을 잘 결정해야 한다.<a href="https://doljae.github.io/blog/351#%EB%81%84%EC%A0%81-4-%EB%A0%88%EB%94%94%EC%8A%A4-%ED%82%A4-%ED%8C%A8%ED%84%B4%EC%9D%84-%EC%9E%98-%EA%B2%B0%EC%A0%95%ED%95%B4%EC%95%BC-%ED%95%9C%EB%8B%A4" class="hash-link" aria-label="끄적 4, 레디스 키 패턴을 잘 결정해야 한다.에 대한 직접 링크" title="끄적 4, 레디스 키 패턴을 잘 결정해야 한다.에 대한 직접 링크" translate="no">​</a></h2>
+<p>정말 중요하다. 개인적인 의견이지만 키 패턴만 잘 정해도 레디스 운영의 대부분의 문제는 해결된다고 생각할 정도로 키 패턴을 잘 정하는 것이 중요하다. 키가 짧고 길고를 이야기하는 것은 아니다. 내가 생각하는 포인트는 레디스에 저장되어 있는 키 목록을 레디스 조회 없이 알 수 있게 키 패턴을 정하는 것이다.</p>
+<p>레디스를 단일 인스턴스 형태로 사용하거나 작게만 사용하는 경우에는 레디스에 저장되어 있는 키를 조회하는 KEYS 명령어를 사용해도 큰 부담이 없다. 비록 KEYS 명령어가 블로킹(blocking) 명령어라 다른 요청을 모두 블로킹시키지는 않지만, 전체 데이터를 탐색해야 하므로 성능 저하를 초래할 수 있다. 운영 환경에서는 주의해서 사용해야 하는 명령어다. 그래서 KEYS 대신 SCAN 명령어를 사용하는 것이 기본이다. SCAN은 다른 연산을 거의 블로킹하지 않는다고 한다.</p>
+<p>그런데 여기서 포인트가 있다. KEYS, SCAN 모두 특정 키 패턴에 대해서 레디스에 검색을 하는 명령어다. 하지만 레디스는 키 패턴이 아니라 특정 키의 유무는 바로 알 수 있다. 다시 말하면 레디스에 존재하는 모든 키를 레디스를 조회하지 않고도 알 수 있는 방법이 있다면 운영할 때 굉장히 편하다는 것이다.</p>
+<p>레디스를 하드하게 사용하는 곳은 굉장히 큰 용량의 레디스를 사용하고 이 레디스를 수많은 요청량이 많은 서버가 바라보고 있는 경우가 많다. 이 상태에서 단순히 레디스의 데이터를 읽는 연산만 생기더라도 레디스에 부하가 꽤 있을 것이라는 건 누구나 예상할 수 있다. 그런데 만일 레디스에 저장되지 말아야 할 데이터가 저장되었다고 가정해 보자. 설령 KEYS와 DEL 대신 SCAN과 UNLINK를 사용해 부하가 적더라도 커다란 레디스 클러스터를 뒤지는 것은 같은 레디스를 사용하고 있는 다른 모든 서버에 영향을 주기에 부담스러운 일이다. 만일 내가 서버 로그, 혹은 RDB 등 모종의 방법으로 레디스에 저장될 수밖에 없는 모든 키를 만들 수 있다면? 그냥 키 목록만 CSV 파일로 만들어서 스크립트만 돌리면 된다.</p>
+<p>이렇게 사용할 수 있으려면 레디스를 조회하지 않고도 레디스 키를 알 수 있도록 키 패턴을 가져가면 좋다. RDB PK, 몽고DB의 도큐먼트 ID 등 뭔가 고유한 값이 레디스 키 패턴에 들어가 있다면 좋겠다. 또한 TTL(Time-To-Live) 설정이나 eviction policy(데이터 자동 삭제 정책)도 함께 고려하면 보다 안정적인 운영이 가능할 것이다.</p>]]></content:encoded>
+            <category>programming</category>
+            <category>del</category>
+            <category>keys</category>
+            <category>scan</category>
+            <category>sortedset</category>
+            <category>ttl</category>
+            <category>unlink</category>
+            <category>레디스</category>
+        </item>
+        <item>
+            <title><![CDATA[고작 다섯 명이 한 말을 어떻게 믿어요?]]></title>
+            <link>https://doljae.github.io/blog/350</link>
+            <guid>https://doljae.github.io/blog/350</guid>
+            <pubDate>Tue, 25 Feb 2025 14:37:26 GMT</pubDate>
+            <description><![CDATA[원문//doljae.tistory.com/350]]></description>
+            <content:encoded><![CDATA[<blockquote>
+<p>원문: <a href="https://doljae.tistory.com/350" target="_blank" rel="noopener noreferrer" class="">https://doljae.tistory.com/350</a></p>
+</blockquote>
+<p><strong>한빛미디어 서평단 &lt;나는리뷰어다&gt; 활동을 위해서 책을 협찬 받아 작성된 서평입니다.</strong></p>
+<p><img decoding="async" loading="lazy" src="https://blog.kakaocdn.net/dna/cbi04o/btsMxjSzAQb/AAAAAAAAAAAAAAAAAAAAAKNoWdpxd7K1IIxxBhvWQ3Kyu0vFXwImxSL7HbIkMmU6/img.jpg?credential=yqXZFxpELC7KVnFOS48ylbz2pIh7yKj8&amp;expires=1772290799&amp;allow_ip=&amp;allow_referer=&amp;signature=Z%2B7FAm3yNz6dKtwdyEQv4FG0qpg%3D" alt="" class="img_ev3q"></p>
+<p>정성 연구와 UX 리서치에 대해서 다루는 책이다. 우리는 정량적인 것, 즉 명확한 숫자로 표현되는 데이터에 익숙하다. 많은 곳에서 정량 데이터를 통해 의사결정을 한다. 데이터를 기반으로 한 의사 결정, 이것만으로도 훌륭하지만 충분하진 않다는 것을 이 책을 통해 알게 되었다. 단순히 정량 데이터의 숫자에만 집중하는 것이 아니라 그 숫자가 어떻게 나왔는지에 대해서도 고려가 되어야 한다는 것, 정성 연구가 필요하다는 것을 말이다.</p>
+<p>정량 연구에 비해 정성 연구는 상대적으로 어렵다는 느낌이 있다. 숫자를 가지고 통계를 내는 것에 익숙하니깐. 하지만 저자는 경제적 측면, 자원 효율성 측면에서 올바르게 UX 리서치와 정성 연구를 하면 효과가 크다고 말한다. 일반적으로 제품을 실제로 만드는 디자이너, 개발자의 수가 UX 연구자의 수보다 훨씬 많다. 그러므로 잘못된 기능과 제품을 만들었을 때 드는 비용이 UX 리서치에 드는 비용과 비교했을 때 훨씬 더 크다. 이 말은 만들기 전에, 어떤 방법으로 만들지 고민하기 전에 사용자가 정말로 '문제'라고 생각하는 문제를 정확히 파악하는 단계가 꼭 필요하다는 것이다. UX 리서치를 해야 하는 이유다.</p>
+<p>저자는 UX 리서치는 유저의 경험을 깊이 있게 분석하여 이를 바탕으로 사용자 경험을 개선하는 체계적인 과정이고, 그렇기에 유저의 생각과 감정, 행동을 심층적으로 이해하기 위한 연구 방법인 정성 연구는 UX 리서치에 반드시 필요하다고 말한다. 같은 클릭 한 번이더라도 그것을 만들어낸 원인은 사람마다 제각각일 것이기 때문이다. 말 그대로 UX(User eXperience)를 개선하기 위해선 사용자의 행동 뒤에 숨은 동기와 감정을 깊이 탐구하여 사용자 경험의 맥락을 알아내는 것이 필요하다는 것이 이 책이 말하고자 하는 핵심이다.</p>
+<p>또 실무자가 참고하기 좋은 내용을 많이 담고 있다. 사용성 테스트, 심층 인터뷰, 설문 조사, 에스노그라피 등 실제 현업에서 UX 리서치를 할 때 사용하는 방법과 특징, 주의할 점을 다룬다. 주제를 관통하거나 중요한 내용은 밑줄이 그어져 있어 관련 지식이 없는 사람도 쉽게 내용을 따라갈 수 있었다.</p>]]></content:encoded>
+            <category>tistory</category>
+        </item>
+        <item>
+            <title><![CDATA[몽고DB 이것저것]]></title>
+            <link>https://doljae.github.io/blog/349</link>
+            <guid>https://doljae.github.io/blog/349</guid>
+            <pubDate>Sun, 16 Feb 2025 13:47:14 GMT</pubDate>
+            <description><![CDATA[원문//doljae.tistory.com/349]]></description>
+            <content:encoded><![CDATA[<blockquote>
+<p>원문: <a href="https://doljae.tistory.com/349" target="_blank" rel="noopener noreferrer" class="">https://doljae.tistory.com/349</a></p>
+</blockquote>
+<p>지난 1년간 몽고DB를 실무에서 처음 접하면서 여러 가지 작업을 했다. 뭔가 명확한 정보를 전달한다기보다는 경험과 트러블슈팅을 기록한다는 느낌으로 끄적여본다.</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="끄적-1-몽고db는-nosql이다">끄적 1, 몽고DB는 NoSQL이다.<a href="https://doljae.github.io/blog/349#%EB%81%84%EC%A0%81-1-%EB%AA%BD%EA%B3%A0db%EB%8A%94-nosql%EC%9D%B4%EB%8B%A4" class="hash-link" aria-label="끄적 1, 몽고DB는 NoSQL이다.에 대한 직접 링크" title="끄적 1, 몽고DB는 NoSQL이다.에 대한 직접 링크" translate="no">​</a></h2>
+<p>몽고DB는 NoSQL이라고 불리는 제품 중에서 현재 가장 유명하고 범용적이다. 전통적인 RDB와 다르게 스키마 없이(Schema-Less) 사용하는 것이 가능하고 RDB의 단점 중 하나인 확장성(Scalability)을 적극적으로 지원한다. 여러 개의 노드로 구성된 클러스터에 데이터를 분산해서 저장하는 방식인 Sharded Cluster이 그것이다.</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="끄적-2-몽고db-관련-도구는-compass를-추천한다">끄적 2, 몽고DB 관련 도구는 <a href="https://www.mongodb.com/ko-kr/products/tools/compass" target="_blank" rel="noopener noreferrer" class="">Compass</a>를 추천한다.<a href="https://doljae.github.io/blog/349#%EB%81%84%EC%A0%81-2-%EB%AA%BD%EA%B3%A0db-%EA%B4%80%EB%A0%A8-%EB%8F%84%EA%B5%AC%EB%8A%94-compass%EB%A5%BC-%EC%B6%94%EC%B2%9C%ED%95%9C%EB%8B%A4" class="hash-link" aria-label="끄적-2-몽고db-관련-도구는-compass를-추천한다에 대한 직접 링크" title="끄적-2-몽고db-관련-도구는-compass를-추천한다에 대한 직접 링크" translate="no">​</a></h2>
+<p>터미널로 직접 접근해서 사용하는 것을 좋아하는 분들도 계시겠지만 나는 GUI 환경을 지원하는 도구를 사용하는 것을 좋아한다. 몽고DB GUI 도구도 선택지가 몇 가지 있다. IntelliJ Ulitmate 버전에서 지원하는 DB 플러그인이나 <a href="https://www.jetbrains.com/ko-kr/datagrip/features/mongodb/" target="_blank" rel="noopener noreferrer" class="">DataGrip에서 몽고DB를 지원한다</a>. 개발 IDE에서 화면 전환 없이 사용할 수 있다는 장점이 있다. 다만 RDB와 비교했을 때 상대적으로 최근에 지원을 했기 때문에 아직 여러 가지로 개선되었으면 좋겠는 부분이 있다. <a href="https://nosqlbooster.com/" target="_blank" rel="noopener noreferrer" class="">NoSQL Booster</a>라는 도구도 있는데 개인적으로 GUI가 맘에 들고 특히 유료 버전은 굉장히 강력한 기능을 제공한다. 하지만 대부분의 상황에서 가장 좋은 선택지는 Compass라고 생각한다. Compass는 몽고DB에서 공식적으로 개발 &amp; 운영하고 있는 GUI 도구다. 우리가 DB 도구에 기대할 수 있는 대부분의 기능을 깔끔한 GUI와 함께 제공한다. 무료라는 점도 포인트지만, 개인적으로 내가 가장 좋아하는 부분은 꾸준히 업데이트가 되고 있다는 것이다. 게다가 요즘 추세에 맞게 AI 프롬프트 기능도 있다. SQL과 비교했을 때 몽고DB의 쿼리는 복잡해지면 상대적으로 장황해지고 어려운데(이건 아직 내가 익숙하지 않아서 그럴 가능성도 있지만...) 이럴 때 유용한 기능인 것 같다.</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="끄적-3-몽고db는-cdc를-지원한다">끄적 3, 몽고DB는 CDC를 지원한다.<a href="https://doljae.github.io/blog/349#%EB%81%84%EC%A0%81-3-%EB%AA%BD%EA%B3%A0db%EB%8A%94-cdc%EB%A5%BC-%EC%A7%80%EC%9B%90%ED%95%9C%EB%8B%A4" class="hash-link" aria-label="끄적 3, 몽고DB는 CDC를 지원한다.에 대한 직접 링크" title="끄적 3, 몽고DB는 CDC를 지원한다.에 대한 직접 링크" translate="no">​</a></h2>
+<p>CDC(Change Data Capture)라는 기술이 있다. 말 그대로 데이터의 변경을 감지하고 잡아내는 것인데 몽고DB는 <a href="https://www.mongodb.com/ko-kr/docs/kafka-connector/current/" target="_blank" rel="noopener noreferrer" class="">MongoDB Kafka Connector</a>로 CDC를 공식적으로 지원한다. 이 기술을 사용하면 몽고DB의 특정 컬렉션의 특정 도큐먼트에 무언가의 변경이 가해지면 이 정보를 카프카 토픽을 통해 produce, consume 할 수 있다. 신규 도큐먼트의 추가(Insert), 기존 도큐먼트의 변경(Update), 삭제(Delete) 뿐만 아니라 컬렉션의 삭제(Drop) 등의 이벤트가 발생하면 이 이벤트 정보를 카프카 토픽으로 흘려보내준다. 이런 특징을 활용해 실무에선 몽고DB의 데이터를 어딘가에 실시간으로 동기화할 때 주로 사용하곤 한다.</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="끄적-4-몽고db는-가능하면-join해서-쓰지-말자">끄적 4, 몽고DB는 가능하면 JOIN해서 쓰지 말자<a href="https://doljae.github.io/blog/349#%EB%81%84%EC%A0%81-4-%EB%AA%BD%EA%B3%A0db%EB%8A%94-%EA%B0%80%EB%8A%A5%ED%95%98%EB%A9%B4-join%ED%95%B4%EC%84%9C-%EC%93%B0%EC%A7%80-%EB%A7%90%EC%9E%90" class="hash-link" aria-label="끄적 4, 몽고DB는 가능하면 JOIN해서 쓰지 말자에 대한 직접 링크" title="끄적 4, 몽고DB는 가능하면 JOIN해서 쓰지 말자에 대한 직접 링크" translate="no">​</a></h2>
+<p>몽고DB도 컬렉션 간의 JOIN 연산이 가능하다. 하지만 가능하면 하지 않는 것이 좋고, 하지 않게 설계해서 사용하는 것이 좋다. 물론 조회하는 데이터의 크기가 작고 복잡하지 않다면 괜찮다. 하지만 RDB에서 여러 개의 테이블을 엮고 조건을 걸어서 조회하는, 흔히 말하는 한 방 쿼리를 쓰는 것은 지양해야 한다. 비교적 큰 데이터를 대상으로 컬렉션 N개를 JOIN해서 한 번에 조회하는 것보다 N번 호출해서 애플리케이션 레벨에서 엮는 것이 메모리 및 응답 속도 관점에서 훨씬 좋은 상황을 경험했다. 물론 이것은 조건에 따라서 다른 것이니 모든 상황에서 정답은 아니지만, 몽고DB가 JOIN에 약하다는 말이 괜히 있는 건 아닌 것 같다.</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="끄적-5-몽고db도-스키마-있이-사용하면-좋다">끄적 5, 몽고DB도 스키마 있이 사용하면 좋다.<a href="https://doljae.github.io/blog/349#%EB%81%84%EC%A0%81-5-%EB%AA%BD%EA%B3%A0db%EB%8F%84-%EC%8A%A4%ED%82%A4%EB%A7%88-%EC%9E%88%EC%9D%B4-%EC%82%AC%EC%9A%A9%ED%95%98%EB%A9%B4-%EC%A2%8B%EB%8B%A4" class="hash-link" aria-label="끄적 5, 몽고DB도 스키마 있이 사용하면 좋다.에 대한 직접 링크" title="끄적 5, 몽고DB도 스키마 있이 사용하면 좋다.에 대한 직접 링크" translate="no">​</a></h2>
+<p>이건 개인적인 의견인데 몽고DB를 스키마 있이 사용하는 것이 좋다고 생각한다. 몽고 DB는 내가 특정 도큐먼트에 어떤 키를 추가해도, 기존에 있던 키를 삭제하거나 키에 대한 값의 타입을 바꿔도 동작한다. 그런데 이 자유로움이 실무 운영 환경에선 굉장히 많은 버그와 생산성 저하의 원인이 된다. 정확히는 이런 컬렉션을 사용하는 쪽에서는 굉장히 골치가 아프다. 스키마가 없는 몽고DB는 컬렉션의 특정 도큐먼트를 보더라도 그 도큐먼트가 스키마라고 생각할 수 없다. 내가 본 도큐먼트의 키 구성과 다른 도큐먼트의 키 구성이 다를 수 있고, 심지어 키 개수와 타입마저 달라도 된다. 이런 컬렉션은 사용하는 입장에서 굉장히 까다롭다. 만일 이런 컬렉션의 도큐먼트를 담을 수 있는 클래스를 작성하려면 어떻게 해야 할까?</p>
+<ol>
+<li class="">쿼리로 컬렉션의 모든 도큐먼트가 가진 키 목록을 조회한다.</li>
+<li class="">조회한 키 목록을 필드로 하는 클래스를 만든다.</li>
+<li class="">그리고 모든 필드는 Nullable 하게 설계한다, 모든 도큐먼트가 해당 키를 가지고 있지 않을 수 있기 때문에.</li>
+</ol>
+<p>예를 들어 코틀린으로 클래스를 설계한다면 모든 프로퍼티가 Nullable 한 data class를 하나 만들게 될 것이다. 이 클래스가 주는 정보는 혼란스럽다. 모든 프로퍼티에 대해서 (있거나, 없거나)니깐 이 클래스는 "이 컬렉션에서 도큐먼트를 조회하면 이런 이름을 가진 프로퍼티가 있을 수도 있고 없을 수도 있습니다"라는 정보를 준다. 반면에 RDB는 테이블이 스키마 그 자체다. 테이블에 DESC 명령어 하나로 테이블 스펙을 확인할 수 있다. RDB 테이블의 데이터를 담을 클래스를 만들어보면 아주 명확하다. 클래스 자체가 DB 테이블 스펙이고 이것 만으로도 개발자에게 의미 있는 정보를 전달한다.</p>
+<p>물론 외부에서 운영하는 컬렉션을 사용하는 입장이라면 여러 가지 이해관계와 복잡한 사정으로 사용하는 쪽에서 이런 것들을 잘 발라내야 할 수 있다. 하지만 직접 운영하는 컬렉션이라면 억지로 스키마를 유연하게 만들지 말자. 실제로 특정 도큐먼트에서만 사용하는 키를 스키마를 맞추기 위해 모든 도큐먼트에 일괄 추가하는 것이 거부감이 있을 수 있다는 것은 이해한다. 직접 몽고DB 클러스터와 컬렉션을 운영하지 않고 사용만 하는 입장이기에 할 수 있는 생각일 수 있다고 생각한다. 실제로 유연한 스키마는 몇몇 상황에서 굉장히 유용하고 RDB가 선택할 수 없는 단순하고 쉬운 방법으로 문제를 해결할 수 있다. 하지만 그래도 가능하다면 조금 더 컬렉션(테이블) 설계에 공을 들여 스키마가 없지만 있게 사용한다면 좋을 것 같다.</p>]]></content:encoded>
+            <category>tistory</category>
+        </item>
+        <item>
+            <title><![CDATA[2024년 회고]]></title>
+            <link>https://doljae.github.io/blog/348</link>
+            <guid>https://doljae.github.io/blog/348</guid>
+            <pubDate>Fri, 31 Jan 2025 14:36:39 GMT</pubDate>
+            <description><![CDATA[원문//doljae.tistory.com/348]]></description>
+            <content:encoded><![CDATA[<blockquote>
+<p>원문: <a href="https://doljae.tistory.com/348" target="_blank" rel="noopener noreferrer" class="">https://doljae.tistory.com/348</a></p>
+</blockquote>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="기">기<a href="https://doljae.github.io/blog/348#%EA%B8%B0" class="hash-link" aria-label="기에 대한 직접 링크" title="기에 대한 직접 링크" translate="no">​</a></h2>
+<p>조금 늦었지만 2024년 회고를 남긴다. 이번에는 어떤 식으로 정리하면 좋을지 글을 적는 것이 쉽지 않았다.&nbsp;원래는 두 편(개발자 편, !개발자 편) 이렇게 나눠서 썼지만 담백하게 한 편으로 정리해보려고 한다.</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="승">승<a href="https://doljae.github.io/blog/348#%EC%8A%B9" class="hash-link" aria-label="승에 대한 직접 링크" title="승에 대한 직접 링크" translate="no">​</a></h2>
+<p>&nbsp;[퇴직, 그리고 새로운 도전</p>
+<p>회사에서 2년 8개월간의 근무를 마무리하고 퇴직했습니다. 그간의 일을 정리하고 기록하고 회고해보려고 합니다. 2021년 - 입사, 재택근무 21년 여름, 저는 회사의 신입 개발자 공채에 합격해 핀테</p>
+<p>doljae.tistory.com](<a href="https://doljae.tistory.com/330" target="_blank" rel="noopener noreferrer" class="">https://doljae.tistory.com/330</a>)</p>
+<p>연초, 정확히는 1월에 이직을 했다. 이전 회사에서도 조직개편으로 전배가 예정되어 있던 상황이다 보니 당시에는 시의적절했다고 생각했다. 사실 어디로 이직했다고 말하기는 조금 부끄러워서 블로그에는 언급하지 않았다. 왜냐면 다른 사람이 볼 때는 옆 회사로 옮긴 느낌 정도일 거라서... 계획하지 않았던 일이었기에 시간적 여유는 없었지만 그래도 궁금했던 곳이고, 누구나 다 아는 그런 회사니깐 조금은 들뜬 마음이었던 것도 사실이었다. 게다가 (나도 그렇게 생각했었지만) 옆 회사로 가는 것이니, 조금 큰 전배 느낌이니 큰 부담 없이 선택했던 것도 없지 않다.</p>
+<p>하지만 지난 1년은 내가 사회생활을 시작한 이래로 가장 힘든 1년이었다. 내가 약 3년 간, 신입부터 쌓아 올린 경험과 업무 하는 방식이 먹히지 않았다. 내가 하는 생각, 제안 대부분이 거절당했다. 처음에는 이게 힘든 건지 몰랐다. 그런데 시간이 흐르면서 계속 누적이 되니 몸에서 신호가 왔다. 그제야 "나 지금 힘들구나"라는 걸 알게 되었다. 정확히 말하면 힘든 지는 좀 되었고, 연말이 되어서야 이 사실을 받아들인 셈이다.</p>
+<p>어떤 상황을 만드는 요인은 여러 가지가 많다. 하지만 다 떠나서 <strong>관점을 나 자신으로 놓고</strong> 생각했다. 무엇을 잘못했을까? 무엇이 부족했을까? 굉장히 많은 고민 끝에 몇 가지를 정리해 봤다.</p>
+<h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="너무-안일했다">너무 안일했다.<a href="https://doljae.github.io/blog/348#%EB%84%88%EB%AC%B4-%EC%95%88%EC%9D%BC%ED%96%88%EB%8B%A4" class="hash-link" aria-label="너무 안일했다.에 대한 직접 링크" title="너무 안일했다.에 대한 직접 링크" translate="no">​</a></h4>
+<p>여기서 안일했다는 것은 "이전 직장과 큰 차이 없겠지, 하던 대로 하면 되겠지."라는 생각이 안일했다는 의미다. <strong>같은 회사와 조직 안에서도 팀이 다르면 그냥 다 다르다고 생각해야 한다.</strong> 왜냐면 그 팀을 구성하는 사람이 다르니깐. 그런데 나는 이 사실을 간과했다.</p>
+<p>내가 신입 때부터 쌓아 올린 일하는 방식, 생각하는 방법 이런 것들이 나도 모르는 사이에 나의 디폴트(Default) 값이 되어 있었다. 새로운 곳에서는 그곳만의 디폴트가 있는데 이것이 내가 가진 디폴트와 너무 많이 달랐다. 그런데 이 다른 부분에 대해서 나는 내 나름대로 확신이 있었기에 그것을 피력했다. 왜냐면 이 디폴트로 나는 이전에 (적어도 내가 생각할 때는) 괜찮은 평가를 받았었고, 이것이 갑자기 뜬금없이 내 머릿속에서 나온 것이 아닌 나도 어디선가 배운 좋은 것이라서 이것을 팀에 전파하는 것이 좋은 영향을 줄 것이라는 확신이 있었기 때문이다. 하지만 이런 모습은 결과적으로 나에게 악재로 돌아왔다. 옳고 그름을 따지기 전에 나의 이런 모습은 적어도 그때 당시 팀에선 쉽게 받아들일 수 없었던 것 같다.</p>
+<h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="처세를-못-했다">처세를 못 했다.<a href="https://doljae.github.io/blog/348#%EC%B2%98%EC%84%B8%EB%A5%BC-%EB%AA%BB-%ED%96%88%EB%8B%A4" class="hash-link" aria-label="처세를 못 했다.에 대한 직접 링크" title="처세를 못 했다.에 대한 직접 링크" translate="no">​</a></h4>
+<p>나는 거짓말을 잘 못 한다. 얼굴에 티가 다 나는 사람이라 그래서 거짓말을 안 한다. 솔직하게, 단 무례하지 않게 내 생각을 말하는 것이 결국 나에게는 최선이고 이것이 옳다고 생각한다. 인지하고 있는 부분이고 예전보단 많이 나아졌다고 생각하지만 여전히 부족한 것이 이런 부분인 것 같다. 눈치가 없다랑은 조금 다른 것 같다.(사실 눈치도 없긴 하다.)</p>
+<p>나는 나에게 설득하려고 하지 않는 전혀 공감이 안 되는 이야기를 공감할 수도 없거니와 거짓말로 공감한다고 할 수도 없다.&nbsp;<strong>나와 다른 의견이지만 그래도 존중하니 따라가겠다</strong>가 최선이라고 생각하고, 이 이상을 바라는 것은 상대방의 욕심이라고 생각한다. 내가 어떤 의견에 전혀 공감이 되지 않을 수 있고, 그럼에도 불구하고 그 의견을 동의할 때가 있다. 내가 동의하기로 마음을 먹었으니깐 동의를 하는데 문제는 받아들이는 사람 입장에서 <strong>저 사람이 내 의견에 진짜 동의하는 건가라는</strong> 느낌이 들었다면 오히려 안 하느니만 못 한 것이다. 평소에도 신경 쓰고 있는 부분인데 지인과 이야기하면서 인정할 수밖에 없었다. 나는 처세를 못 했다(한다).</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="전">전<a href="https://doljae.github.io/blog/348#%EC%A0%84" class="hash-link" aria-label="전에 대한 직접 링크" title="전에 대한 직접 링크" translate="no">​</a></h2>
+<p>그럼 일 년 동안 건진 건 없을까? 그렇진 않다.</p>
+<h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="내가-부족했던-부분을-배웠다">내가 부족했던 부분을 배웠다.<a href="https://doljae.github.io/blog/348#%EB%82%B4%EA%B0%80-%EB%B6%80%EC%A1%B1%ED%96%88%EB%8D%98-%EB%B6%80%EB%B6%84%EC%9D%84-%EB%B0%B0%EC%9B%A0%EB%8B%A4" class="hash-link" aria-label="내가 부족했던 부분을 배웠다.에 대한 직접 링크" title="내가 부족했던 부분을 배웠다.에 대한 직접 링크" translate="no">​</a></h4>
+<p>절망 편에 적은 두 가지 내용을 포함한 여러 가지 부족했던 부분을 직시하고 인정하고 받아들였다. 고칠 수 있는 부분은 고치면 된다. 내가 제어할 수 있는 것은 나 자신 밖에 없다. 못 하는 것도 연습하다 보면 그래도 이전보단 나아질 거라고 믿는다.</p>
+<h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="내가-어떤-사람인지-이해했다">내가 어떤 사람인지 이해했다.<a href="https://doljae.github.io/blog/348#%EB%82%B4%EA%B0%80-%EC%96%B4%EB%96%A4-%EC%82%AC%EB%9E%8C%EC%9D%B8%EC%A7%80-%EC%9D%B4%ED%95%B4%ED%96%88%EB%8B%A4" class="hash-link" aria-label="내가 어떤 사람인지 이해했다.에 대한 직접 링크" title="내가 어떤 사람인지 이해했다.에 대한 직접 링크" translate="no">​</a></h4>
+<p>힘들다 보니 나 스스로에게 질문하고 생각하고 고민하고 답하는 시간을 많이 가졌다. 그 과정을 통해 내가 어떤 사람인지 조금 더 잘 이해했다. 나는 무엇을 좋아하고, 싫어하는지. 내 강점과 약점은 무엇인지. 내가 어떻게 일할 때 행복한지에 대해서 이전보다 훨씬 구체적으로 알게 되었다. 나라는 사람이 가진 고유한 기질은 쉽게 바뀌지 않는다. 그게 나니깐 받아들이자. 나는 세상의 모든 자물쇠를 열 수 있는 만능열쇠는 아니지만 내가 그 누구보다 빠르게, 알맞게 풀 수 있는 자물쇠는 분명 있을 테니 말이다.</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="결">결<a href="https://doljae.github.io/blog/348#%EA%B2%B0" class="hash-link" aria-label="결에 대한 직접 링크" title="결에 대한 직접 링크" translate="no">​</a></h2>
+<p>여러 가지 의미로 정말 많이 배운 한 해였다. 이런 이벤트를 조금이라도 더 일찍 경험했다는 점에서 다행이라고 생각하려고 한다. 작년에는 새로운 환경이라는 물속에서 첨벙첨벙 만 댔다면, 올해는 나름대로 목표와 방향성을 가지고 수영을 하려 한다. 개인적으로 관심 있는 기술 주제도 생겼고, 나 자신의 내실을 체계적으로 다지려고 한다. 그래도 힘든 삶을 어찌어찌 살아가게 하는 건 내 옆에 있는 사랑하는 소중한 사람들 덕분이 아닐까 싶다. 육체적, 정신적으로 많이 의지가 되었다.</p>
+<p>올해도 잘 부탁드립니다.</p>]]></content:encoded>
+            <category>tistory</category>
+        </item>
+        <item>
+            <title><![CDATA[코틀린 하나의 파일에 클래스 하나만 사용하기 vs 여러 개 사용하기]]></title>
+            <link>https://doljae.github.io/blog/347</link>
+            <guid>https://doljae.github.io/blog/347</guid>
+            <pubDate>Sun, 19 Jan 2025 12:44:49 GMT</pubDate>
+            <description><![CDATA[원문//doljae.tistory.com/347]]></description>
+            <content:encoded><![CDATA[<blockquote>
+<p>원문: <a href="https://doljae.tistory.com/347" target="_blank" rel="noopener noreferrer" class="">https://doljae.tistory.com/347</a></p>
+</blockquote>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="서론">서론<a href="https://doljae.github.io/blog/347#%EC%84%9C%EB%A1%A0" class="hash-link" aria-label="서론에 대한 직접 링크" title="서론에 대한 직접 링크" translate="no">​</a></h2>
+<p>코틀린은 하나의 파일(. kt)에 원하면 여러 개의 클래스 파일을 선언할 수 있다. 하나의 파일(. java)에 하나의 클래스만 선언할 수 있는 자바와 다른 점이다. 연관된 클래스를 하나의 파일에 선언할 수 있다는 장점이 있지만 나는 이 부분에 대해서는&nbsp;<strong>하나의 파일에 하나의 클래스만 사용하는 방식이 여러모로 좋다</strong>고 생각하는데. 이와 관련된 이야기를 해보려고 한다.</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="이유-1-하나의-파일에서-많은-코드를-다루는-것은-가독성-관점에서-좋지-않다">이유 1. 하나의 파일에서 많은 코드를 다루는 것은 가독성 관점에서 좋지 않다<a href="https://doljae.github.io/blog/347#%EC%9D%B4%EC%9C%A0-1-%ED%95%98%EB%82%98%EC%9D%98-%ED%8C%8C%EC%9D%BC%EC%97%90%EC%84%9C-%EB%A7%8E%EC%9D%80-%EC%BD%94%EB%93%9C%EB%A5%BC-%EB%8B%A4%EB%A3%A8%EB%8A%94-%EA%B2%83%EC%9D%80-%EA%B0%80%EB%8F%85%EC%84%B1-%EA%B4%80%EC%A0%90%EC%97%90%EC%84%9C-%EC%A2%8B%EC%A7%80-%EC%95%8A%EB%8B%A4" class="hash-link" aria-label="이유 1. 하나의 파일에서 많은 코드를 다루는 것은 가독성 관점에서 좋지 않다에 대한 직접 링크" title="이유 1. 하나의 파일에서 많은 코드를 다루는 것은 가독성 관점에서 좋지 않다에 대한 직접 링크" translate="no">​</a></h2>
+<p>단순히 생각해 봤을 때 하나의 클래스에 절대적인 코드량이 많다면 이를 이해하는 것이 쉽지 않을 것이다. 사람의 뇌는 한 번에 처리할 수 있는 정보의 양이 제한적이라고 한다. 내가 파일을 열었을 때 받아들여야 하는 코드 양이 적은 것이 많은 것보다 훨씬 집중이 되고, 이는 하나의 파일에서 볼 수 있는 N개의 클래스를 N개의 파일로 만듦으로 생기는 부가적인 마우스 클릭(혹은 파일 이동) 비용보다 훨씬 큰 가치를 가진다고 생각한다.</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="이유-2-파일-이름을-정하기-어렵다">이유 2. 파일 이름을 정하기 어렵다<a href="https://doljae.github.io/blog/347#%EC%9D%B4%EC%9C%A0-2-%ED%8C%8C%EC%9D%BC-%EC%9D%B4%EB%A6%84%EC%9D%84-%EC%A0%95%ED%95%98%EA%B8%B0-%EC%96%B4%EB%A0%B5%EB%8B%A4" class="hash-link" aria-label="이유 2. 파일 이름을 정하기 어렵다에 대한 직접 링크" title="이유 2. 파일 이름을 정하기 어렵다에 대한 직접 링크" translate="no">​</a></h2>
+<p>하나의 파일에 여러 개의 클래스가 생기면 이 파일의 이름을 정하는 것이 어렵다. 보통 처음에는 하나의 파일에 하나의 클래스가 있는 상태에서 뭔가 기존 클래스와 연관된 새 클래스를 선언하는 것으로 시작하는데. 이렇게 클래스가 하나씩 추가되면 결국 이 클래스들을 엮을 적절한 파일 이름을 고민해야 한다. 클래스가 하나둘씩 늘어나면 결국 이 모든 클래스 파일을 대표하는 이름을 찾는 것이 불가능해지는 경우도 있다. 하나의 파일에 하나의 클래스만 있다면 해당 파일 이름은 클래스 이름과 동일하게 가져가면 된다.</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="이유-3-파일-이름에-오타가-생길-가능성이-있다">이유 3. 파일 이름에 오타가 생길 가능성이 있다<a href="https://doljae.github.io/blog/347#%EC%9D%B4%EC%9C%A0-3-%ED%8C%8C%EC%9D%BC-%EC%9D%B4%EB%A6%84%EC%97%90-%EC%98%A4%ED%83%80%EA%B0%80-%EC%83%9D%EA%B8%B8-%EA%B0%80%EB%8A%A5%EC%84%B1%EC%9D%B4-%EC%9E%88%EB%8B%A4" class="hash-link" aria-label="이유 3. 파일 이름에 오타가 생길 가능성이 있다에 대한 직접 링크" title="이유 3. 파일 이름에 오타가 생길 가능성이 있다에 대한 직접 링크" translate="no">​</a></h2>
+<p>이유 2와 연결된 내용이다. 즉 N개의 클래스를 대표하는 파일 이름을 정하기가 어렵고, 적절한 파일 이름을 고민하는 것보다 그냥 편하게 내버려 두는 선택으로 우리를 유혹한다. 우리는 대부분 IDE 환경에서 개발을 하고 클래스는 내가 어떻게 작성했는지와 관계없이 IDE의 기능으로 내가 원하는 클래스로 내 모니터 화면을 전환시킬 수 있기 때문이다. 이렇게 쉬운 길을 선택하게 되면 어느 순간 해당 파일에 선언한 N개의 클래스를 대표하기 적절한 이름은커녕 파일 이름 자체에 typo가 생긴 상태로 방치하게 된다.</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="이유-4-ide에서-볼-때-클래스-아이콘이-더-이쁘다">이유 4. IDE에서 볼 때 클래스 아이콘이 더 이쁘다(?)<a href="https://doljae.github.io/blog/347#%EC%9D%B4%EC%9C%A0-4-ide%EC%97%90%EC%84%9C-%EB%B3%BC-%EB%95%8C-%ED%81%B4%EB%9E%98%EC%8A%A4-%EC%95%84%EC%9D%B4%EC%BD%98%EC%9D%B4-%EB%8D%94-%EC%9D%B4%EC%81%98%EB%8B%A4" class="hash-link" aria-label="이유 4. IDE에서 볼 때 클래스 아이콘이 더 이쁘다(?)에 대한 직접 링크" title="이유 4. IDE에서 볼 때 클래스 아이콘이 더 이쁘다(?)에 대한 직접 링크" translate="no">​</a></h2>
+<p><img decoding="async" loading="lazy" src="https://blog.kakaocdn.net/dna/l57kW/btsLRKq4sSm/AAAAAAAAAAAAAAAAAAAAAAz_PCRq-LAuE6bTVYr7Hqhbkycas-MAwoEgi1yvxYD4/tfile.dat?credential=yqXZFxpELC7KVnFOS48ylbz2pIh7yKj8&amp;expires=1772290799&amp;allow_ip=&amp;allow_referer=&amp;signature=k9Nsy%2FiTRVlm3ZMaA80BxMOpKdY%3D" alt="" class="img_ev3q"></p>
+<p>이건 정말 취향이다</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="결론">결론<a href="https://doljae.github.io/blog/347#%EA%B2%B0%EB%A1%A0" class="hash-link" aria-label="결론에 대한 직접 링크" title="결론에 대한 직접 링크" translate="no">​</a></h2>
+<p>결론적으로, 하나의 파일에 하나의 클래스만 사용하는 방식은 여러 측면에서 장점을 가진다고 생각한다. 이 방식은 파일 안의 코드량을 줄여 가독성을 높이고, 한눈에 필요한 정보를 파악하기 쉽게 만들어 개발자가 코드를 더 쉽게 이해하고 유지보수할 수 있게 한다. 또한, 파일 이름을 클래스 이름과 동일하게 설정할 수 있어 직관적이고 명확한 관리가 가능하며, 이 과정에서 발생할 수 있는 오타를 방지할 수 있다. 이처럼 하나의 파일에 여러 클래스를 선언할 수 있는 코틀린의 유연성은 장점일 수 있지만, 나는 코드의 집중력과 효율성을 유지하기 위해 하나의 파일에 하나의 클래스만 사용하는 방식을 권장하고 선호한다.</p>]]></content:encoded>
+            <category>tistory</category>
+        </item>
+        <item>
+            <title><![CDATA[AGI의 시대]]></title>
+            <link>https://doljae.github.io/blog/345</link>
+            <guid>https://doljae.github.io/blog/345</guid>
+            <pubDate>Sun, 22 Dec 2024 08:27:51 GMT</pubDate>
+            <description><![CDATA[원문//doljae.tistory.com/345]]></description>
+            <content:encoded><![CDATA[<blockquote>
+<p>원문: <a href="https://doljae.tistory.com/345" target="_blank" rel="noopener noreferrer" class="">https://doljae.tistory.com/345</a></p>
+</blockquote>
+<p><img decoding="async" loading="lazy" src="https://blog.kakaocdn.net/dna/l3ikX/btsLqPl1T4L/AAAAAAAAAAAAAAAAAAAAAP_hzKihExOngYfckLuJWlyFiU-mgS4hDRDFav2w7Fmf/img.jpg?credential=yqXZFxpELC7KVnFOS48ylbz2pIh7yKj8&amp;expires=1772290799&amp;allow_ip=&amp;allow_referer=&amp;signature=d7Nq4BelI8K0rjP7GDbESW9XIlg%3D" alt="" class="img_ev3q"></p>
+<p>요즘 AI 신의 가장 뜨거운 주제 중 하나가 AGI(Artificial General Intelligence)라고 한다. AGI에 대한 정의가 여러 기관마다 다르다. 예를 들어 오픈 AI는 "가장 경제적으로 가치 있는 작업에서 인간을 능가하는 고도로 자율적인 시스템"으로 정의한다. 또 뉴욕 대학교의 게리 마커스 교수는 "유연하고 일반적이며, 인간 지능에 필적하는(또는 그 이상의) 수완과 신뢰성을 갖춘 모든 지능"으로 정의한다. 영화 "아이, 로봇"에서 등장하는 VIKI(Virtual&nbsp;Interactive&nbsp;Kinetic&nbsp;Intelligence)나 "아이언맨"에 등장하는 JARVIS(Just A Rather Very Intelligent System)처럼 ChatGPT, Gemini를 넘는 범용적인 AI가 AGI지 아닐까 싶다.</p>
+<p>이 책은 AGI의 정의부터 시작해서 연구자, 기업, 국가 등 여러 이해관계자들이 AGI에 대해서 어떤 생각을 가지고 무슨 일을 하고 있는지 등 AGI의 전체적인 현황을 다룬다. 몇 가지 기억에 남는 내용을 정리해 보면....</p>
+<p>AGI 파멸론자, 효과적 가속주의자, 효과적 이타주의자</p>
+<p>AGI가 인류 생존에 위협적인 존재가 될 것인가에 대한 세 가지 관점에 대한 이야기다.</p>
+<ul>
+<li class="">파멸론자: AI 위협이 명확하고 예상보다 그 시기가 빠르게 올 것이기 때문에 개발 속도를 늦추고 중단해야 한다.</li>
+<li class="">효과적 가속주의자: AI 위협은 단순한 걱정이고 인류의 번영을 위해 더 적극적으로 개발해야 한다.</li>
+<li class="">효과적 이타주의자: 위협이 있을 수 있지만 이를 적극적으로 대응하고 극복해서 장점을 취해 유용하게 사용해야 한다.</li>
+</ul>
+<p>얼라인먼트</p>
+<p>인간의 가치에 일치하는 판단을 하도록 AI 시스템을 어떻게 만들 것인가에 대한 이야기다.</p>
+<ul>
+<li class="">AI가 인간의 의도를 이해하고 목적을 달성하게 하는 것이 가능할까?</li>
+<li class="">종이 클립 재앙 - AI에게 "종이 클립 생산을 최대화해 줘"라는 명령을 주면 세상의 모든 자원을 효율적인 종이 클립 생산을 위해 사용하고 방해되는 모든 것을 제거하려 한다.</li>
+<li class="">AI 키케로 - 인간은 AI가 하는 속임수를 감지할 수 있을까?, 인간을 속이는 AI를 과연 믿을 수 있을까?</li>
+<li class="">트롤리 문제 - AI는 학습된 데이터를 바탕으로 모델마다 다른 도덕관념을 가지고 있다. 인간 통념에 맞는 도덕관념을 어떤 기준으로 정의하고 이를 적용하는 것이 가능할까?</li>
+</ul>
+<p>규제, 감시 집단과 정책적 대응</p>
+<p>다가올 AGI 시대를 위해 다양한 목적과 관점 아래에서 여러 가지 법과 표준을 정의하는 집단에 대한 이야기다.</p>
+<ul>
+<li class="">G7 히로시마 AI 프로세스 - 국제 거버넌스가 AI 기술의 성장 속도에 따라가지 못하고 있다.</li>
+<li class="">EU - 세계 최초로 AI에 관련된 법을 제정했고 4단계로 위험 범주를 정의했다.</li>
+<li class="">영국 AI안전연구소 - 블래츨리 정상회의 이후 공익을 위한 AI 기술에 초점을 맞춰 AI 국제 거버넌스 및 규제를 다루기 위해 설립했다.</li>
+</ul>
+<p>저자는 미디어에서 혼란스럽게 떠도는 AGI 이야기를 명확하게 이해하는 것을 돕기 위해 작성했다고 한다. 그리고 이 책은 그 의도를 충분히 달성하는 책이라고 생각한다. ChatGPT에게 "AGI의 역사와 현황에 대해서 책 한 권 정도 분량으로 정리해 줘"라고 하면 이 책이 나오지 않을까 싶을 정도로 전문가, 비전문가 모두에게 유익한 정보를 잘 녹여냈다고 생각한다. AI 문외한인 나도 책을 다 읽고 나니 언젠가 다가올 AGI의 시대와 그 시대를 사는 개인의 역할, 그리고 무엇을 준비해야 할까에 대해서 생각해 볼 기회가 되었다.</p>
+<p><strong>한빛미디어 서평단 &lt;나는리뷰어다&gt; 활동을 위해서 책을 제공받아 작성된 서평입니다.</strong></p>]]></content:encoded>
+            <category>tistory</category>
+        </item>
+        <item>
+            <title><![CDATA[한 권으로 배우는 게임 프로그래밍]]></title>
+            <link>https://doljae.github.io/blog/344</link>
+            <guid>https://doljae.github.io/blog/344</guid>
+            <pubDate>Tue, 26 Nov 2024 13:40:45 GMT</pubDate>
+            <description><![CDATA[원문//doljae.tistory.com/344]]></description>
+            <content:encoded><![CDATA[<blockquote>
+<p>원문: <a href="https://doljae.tistory.com/344" target="_blank" rel="noopener noreferrer" class="">https://doljae.tistory.com/344</a></p>
+</blockquote>
+<p><img decoding="async" loading="lazy" src="https://blog.kakaocdn.net/dna/br0jGK/btsKWbKbCCc/AAAAAAAAAAAAAAAAAAAAAOJX2UIsLhA69KsyEb08ZWtp1kogkMzGrQnYf_9LQ4l9/img.jpg?credential=yqXZFxpELC7KVnFOS48ylbz2pIh7yKj8&amp;expires=1772290799&amp;allow_ip=&amp;allow_referer=&amp;signature=ZZ7aVEYUynVHLgu9zdWqmObvk18%3D" alt="" class="img_ev3q"></p>
+<p>나는 어렸을 때부터 게임을 좋아했다. 그때와 달라진 게 하나 있다면 어렸을 때는 마냥 즐겁게 게임만 했지만 지금은 이걸 어떻게 많들었을까라는 생각을 한다는 점이다. 당연하지만 게임도 소프트웨어고 컴퓨터에서 동작하는 프로그램이기에 코드로 만든다. 웹 개발자인 내가 게임 개발 관련해서 알고 있는 점은 유니티, 언리얼과 같은 게임 개발의 핵심 프레임워크가 되는 게임 엔진이라는 것과 주로 C#을 개발 언어로 사용한다는 것이다. 선수지식이 없는 나로선 이 책을 펼치는 것이 마냥 쉽진 않았다.</p>
+<p>하지만 이 책은 언리얼 엔진 개발 가이드 같은 느낌의 게임 도메인에 국한된 특정 기술 사용법을 다루지 않는다. 대신 게임을 개발할 때 반드시 필요한 기본 개념과 원리에 대해 다룬다. 2D, 3D와 같은 그래픽과 벡터, 라디안 등 수학적 지식, 길 찾기, 충돌 판정 로직에 들어가는 여러 가지 대표적인 알고리즘까지 게임을 구성하는 핵심 요소들에 대해서 가볍지만 쉽고 명확하게 설명한다. 읽으면서 몇 가지 기억에 남는 내용을 정리해 봤다.</p>
+<ul>
+<li class="">게임의 모든 요소는 객체로 표현하고 이는 코드 레벨에서도 그렇다. 조이스틱도 객체고 스틱이 움직일 수 있는 범위를 코드로 구현한다.</li>
+<li class="">캐릭터가 입고 있는 옷이나 모자는 캐릭터 객체의 하위 객체로 구현한다. 그리고 캐릭터 좌표를 기준으로 옷과 모자가 있어야 하는 좌표를 상댓값으로 설정하면 캐릭터가 움직여도 옷과 모자가 있어야 할 위치에 있을 수 있다.</li>
+<li class="">캐릭터가 목적지로 이동할 때 최단 거리를 계산할 때 최단 거리 알고리즘을 사용한다. 단 비교적 유명한 다익스트라 알고리즘은 실시간 게임에서는 연산량이 많아서 다른 알고리즘을 사용한다.</li>
+</ul>
+<p>이 책은 게임 개발 관련해서 뭘 모르는지 모르는 사람들에게 알아야 할 내용을 담고 있다. 예시 코드는 C#으로 작성되어 있지만 개발 경험이 있는 분들은 쉽게 이해할 수 있는 수준이다. 무엇보다 특정 개념을 딱 필요한 만큼의 깊이로 설명하는 작가 분들의 필력에 놀랐다. 게임 개발의 본질을 이해하고 자신만의 게임을 창작하는 데 필요한 자신감을 얻게 될 것이다라는 책 소개에 적극 동의한다. 미래에 문득 게임 개발을 해보아야겠다는 생각이 들었을 때 다시 한번 읽어볼 책으로 기억 속에 남긴다.</p>
+<p><strong>한빛미디어 서평단 &lt;나는리뷰어다&gt; 활동을 위해서 책을 제공받아 작성된 서평입니다.</strong></p>]]></content:encoded>
+            <category>tistory</category>
+        </item>
+        <item>
+            <title><![CDATA[기술 블로그 포스팅 후기 01 - 실전! Spring Boot 3 마이그레이션]]></title>
+            <link>https://doljae.github.io/blog/343</link>
+            <guid>https://doljae.github.io/blog/343</guid>
+            <pubDate>Sun, 24 Nov 2024 14:53:04 GMT</pubDate>
+            <description><![CDATA[원문//doljae.tistory.com/343]]></description>
+            <content:encoded><![CDATA[<blockquote>
+<p>원문: <a href="https://doljae.tistory.com/343" target="_blank" rel="noopener noreferrer" class="">https://doljae.tistory.com/343</a></p>
+</blockquote>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="서론">서론<a href="https://doljae.github.io/blog/343#%EC%84%9C%EB%A1%A0" class="hash-link" aria-label="서론에 대한 직접 링크" title="서론에 대한 직접 링크" translate="no">​</a></h2>
+<p>&nbsp;[실전! Spring Boot 3 마이그레이션</p>
+<p>들어가며 안녕하세요. LINE Plus에서 태국 LINE BK 채널 서버 개발 및 운영 업무를 맡고 있는 이석재입니다. LINE BK에서는 지난 9월에 LINE BK 보험 중개 서...</p>
+<p>techblog.lycorp.co.jp](<a href="https://techblog.lycorp.co.jp/ko/how-to-migrate-to-spring-boot-3" target="_blank" rel="noopener noreferrer" class="">https://techblog.lycorp.co.jp/ko/how-to-migrate-to-spring-boot-3</a>)</p>
+<p>작년 11월에 회사 기술 블로그에 글을 투고했습니다. 글을 올린 지 벌써 일 년이 넘었습니다. 작년 회고에서 간단하게 소감을 남기긴 했습니다. 하지만 제대로 된 후기를 남긴 적은 없기도 하고 최근에 다시 한번 관련해서 생각할 일이 있어서 이번 기회에 글 작성 동기부터 시작해서 소감까지 기억을 더듬어가면서 다뤄보려고 합니다. 2023년 기준 회사 블로그 조회 수 1위를 달성한 글이 어떻게 탄생하게 되었는지 이야기해 보겠습니다.</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="글을-작성하게-된-계기">글을 작성하게 된 계기<a href="https://doljae.github.io/blog/343#%EA%B8%80%EC%9D%84-%EC%9E%91%EC%84%B1%ED%95%98%EA%B2%8C-%EB%90%9C-%EA%B3%84%EA%B8%B0" class="hash-link" aria-label="글을 작성하게 된 계기에 대한 직접 링크" title="글을 작성하게 된 계기에 대한 직접 링크" translate="no">​</a></h2>
+<p>개발자 커리어를 시작한 지 얼마 지나지 않았을 때 몇 가지 목표를 세웠습니다. 그중 하나가 회사 기술 블로그에 글을 투고하는 것이었습니다. 회사 기술 블로그에 글이 올라가려면 주제도 어느 정도 의미 있고 공유할만한 것이어야 합니다. 뿐만 아니라 글도 잘 써야 하고요. 그래서 저는 회사 블로그에 글을 쓴다라는 것은 개발 생태계에 긍정적인 영향을 주는 콘텐츠를 만들었다고 생각합니다. 당시의 저는 이렇게 구체적인 생각은 없었던 것 같고 이유도 명확하진 않지만 회사의 기술력과 좋은 문화를 홍보하는 장인 기술 블로그에 글을 투고한다면 그것만으로도 굉장히 의미 있는 일이 아닐까라고 생각했던 것 같습니다.</p>
+<p>구체적으로 회사 블로그에 글을 올리고 싶다고 생각은 <a href="https://spring.io/blog/2022/11/24/spring-boot-3-0-goes-ga" target="_blank" rel="noopener noreferrer" class="">2022년 11월에 Spring Boot 3가 정식 릴리즈</a>되었을 때 들었습니다. 당시 저는 신규 프로젝트에 참여해서 Kotlin과 Spring으로 새 API 서버를 개발 중이었습니다. 2023년 연초 오픈을 앞두고 있던 시점에서 Boot 3 릴리즈는 팀 내부적으로 중요한 이슈였습니다. 개발 중인 API 서버는 Boot 2로 개발 중이었는데요. 이것을 업그레이드해서 오픈할지 말지에 대한 결정을 해야 하는 상황이었습니다. 저는 Boot 3 정식 릴리즈전부터 공식 문서, 블로그 포스트, 영상 등 여러 가지 콘텐츠를 참고해서 버전 업그레이드 시 발생하는 변경점에 대해서 정리하고 있었고 개인적으로 Boot 2 코드 베이스를 Boot 3 코드 베이스로 마이그레이션, 테스트하고 이를 공유하는 등 신규 프로젝트를 Boot 3을 적용해서 오픈하려고 많은 준비를 했습니다. 감사하게도 팀에선 저의 노력을 인정해 주시고 믿어주신 덕분에 <a href="https://www.linebk.com/en/news/detail/line-bk-boosts-insurance-brokerage/" target="_blank" rel="noopener noreferrer" class="">개발 중인 프로젝트를 Boot 3로 마이그레이션 하고 예정된 날짜에 문제없이 오픈했습니다.</a> 이후에도 팀에서 운영 중인 여러 프로젝트를 Boot 3 환경으로 이관하는 작업을 리뷰했습니다.</p>
+<p>지나고 보니 추억(?)이지 당시에 굉장히 많은 삽질을 했습니다. 당시에는 관련 정보가 거의 없었을 때라서 공식 문서나 릴리즈 노트로 알 수 없는 정보는 GitHub 이슈를 찾고 물어보거나 직접 코드를 확인해서 동작 방식이나 설정 방법을 찾았습니다. 이를 통해서 Boot 3 버전 업그레이드 관련해서는 내공이 쌓였고, 이 경험을 모두에게 공유하면 좋겠다고 생각했습니다. 버전 업그레이드는 방법을 모르면 짧게는 몇 시간 길게는 며칠 동안 헤매는 성격의 작업인데요. 삽질은 제가 했으니 이 경험을 잘 정리해서 정보 전달 성격의 콘텐츠를 하나 만들면 적어도 국내에서 Boot 3 마이그레이션 작업을 맡으신 수많은 개발자 분들의 작업 시간을 좀 줄여드릴 수 있지 않을까라고 생각했습니다. 모든 Spring 프로젝트에 대한 변경점을 다루는 것은 현실적으로 어렵지만 적어도 제가 경험한 포인트가 될만한 부분들을 정리해서 한글로 작성된 마이그레이션 가이드 글이 있으면 좋겠다는 생각이었습니다.</p>
+<p>다들 공감하시겠지만 글을 쓰는 것은 어렵습니다. 그것도 좋은 글을, 회사 블로그에 올릴만한 글을 쓰는 건 더 어렵습니다. 그래도 시작이 반이라는 말이 있는 것처럼 노트 앱을 열고 모니터와 키보드 앞에 앉았는데요. 다음과 같은 이유로 영 진도가 나가지 않았습니다.</p>
+<ol>
+<li class="">정보 전달 성격의 글이다 보니 하나라도 잘못된 정보가 들어가면 글의 신뢰도에 영향을 줍니다.</li>
+<li class="">시간이 지나면 유효하지 않거나 잘못된 정보가 될 수 있습니다.</li>
+<li class="">전달해야 하는 정보가 많다 보니 글의 구조를 어떻게 잡아야 하는지 감이 오지 않습니다.</li>
+</ol>
+<p>1번은 마이그레이션을 하면서 출처를 잘 정리해 놨기 때문에 어느 정도 준비가 되어있었습니다만 2번, 3번이 발목을 잡았습니다. Boot 3 업그레이드와 연관된 수많은 Spring 프로젝트의 변경점을 어떤 구조와 전개 방식으로 다룰지 감이 오질 않았습니다. 무엇보다 마이그레이션 가이드라는 주제 특성상 현재는 안 되던 기능과 버그가 미래에는 지원되고 개선될 텐데 이렇게 되면 결국 제 글은 시간이 지나면 죽은 글이 될 것이라는 생각이 들자 더 글을 쓰기 어려웠습니다. 차라리 개인 블로그에 노트 정리하는 느낌으로 올려볼까라는 생각, 그래도 이 경험을 멋진 모습으로 잘 풀어서 공유하고 싶다는 생각이 머릿속에 가득 차올랐고 진도는 더 나가질 않았습니다.</p>
+<p>이렇게 나름대로 고민하던 중에 첫발을 내딛을 수 있게 도와준 좋은 기회가 생겼는데요 2편에서 이어서 다뤄보겠습니다.</p>]]></content:encoded>
+            <category>tistory</category>
+        </item>
+        <item>
+            <title><![CDATA[2024 당근 테크 밋업 후기 🥕]]></title>
+            <link>https://doljae.github.io/blog/342</link>
+            <guid>https://doljae.github.io/blog/342</guid>
+            <pubDate>Sun, 10 Nov 2024 12:35:31 GMT</pubDate>
+            <description><![CDATA[원문//doljae.tistory.com/342]]></description>
+            <content:encoded><![CDATA[<blockquote>
+<p>원문: <a href="https://doljae.tistory.com/342" target="_blank" rel="noopener noreferrer" class="">https://doljae.tistory.com/342</a></p>
+</blockquote>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="서론">서론<a href="https://doljae.github.io/blog/342#%EC%84%9C%EB%A1%A0" class="hash-link" aria-label="서론에 대한 직접 링크" title="서론에 대한 직접 링크" translate="no">​</a></h2>
+<p>&nbsp;[2024 당근 테크 밋업</p>
+<p>당근이 성장하며 얻은 경험과 통찰을 나누며, 함께 더 나은 미래를 그려가요.</p>
+<p>tech-meetup.daangn.com](<a href="https://tech-meetup.daangn.com/" target="_blank" rel="noopener noreferrer" class="">https://tech-meetup.daangn.com/</a>)</p>
+<p>지난 10월에 2024 당근 테크 밋업에 다녀왔습니다. 처음에 추첨으로 참가자를 뽑을 땐 아쉽게 당첨이 안 됐는데요. 감사하게도 지인 분이 VIP로 초대해 주셔서 다녀왔습니다. (고마워요 브룩 님 👍)</p>
+<p><img decoding="async" loading="lazy" src="https://blog.kakaocdn.net/dna/FJhye/btsKC2lwMBS/AAAAAAAAAAAAAAAAAAAAAPLm7O2DUqVsa7QKILS0Ear4ysnv3s6MLSbE7EkGtq11/img.png?credential=yqXZFxpELC7KVnFOS48ylbz2pIh7yKj8&amp;expires=1772290799&amp;allow_ip=&amp;allow_referer=&amp;signature=TjuF7ewb%2BDlDGWtf1sKbPvibpEg%3D" alt="" class="img_ev3q"><img decoding="async" loading="lazy" src="https://blog.kakaocdn.net/dna/bBwlvt/btsKEsi1qVn/AAAAAAAAAAAAAAAAAAAAACZkMfdt4eJ_E6tM7YwZP9MIPIJZkLBVu94PZAdUuxML/img.png?credential=yqXZFxpELC7KVnFOS48ylbz2pIh7yKj8&amp;expires=1772290799&amp;allow_ip=&amp;allow_referer=&amp;signature=A%2FZ3Gnbe7tyPmnQQMqkWRCWQVWY%3D" alt="" class="img_ev3q"></p>
+<p>VIP 참가자는 미리 굿즈를 이것저것 담아주셨습니다. 팔찌 색도 다른 것 같더라구요 ^^</p>
+<p>이번에 참가자 신청을 받을 때 네 가지 트랙(프론트, 서버, 데이터/ML, 플랫폼) 중 하나를 선택하고 당첨되면 선택한 트랙의 세션만 들을 수 있는 것이 기본 규칙이었습니다. VIP 참가자는 모든 세션을 자유롭게 들을 수 있었는데요. 그중에서도 저는 서버 트랙의 세션을 쭉 들었습니다. 다른 트랙의 몇몇 세션도 관심이 있었는데요. 세션 간 쉬는 시간이 길지 않았고 나중에 유튜브로 세션 영상을 올려주신다고 하셔서 서버 세션만 진득하게 앉아서 들었습니다.</p>
+<p>제가 들었던 세션 중 몇 가지 세션에 대해서 정리해 봤습니다.</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="당근알바-초기-엔지니어링-전략-빠르게-빠르게-더-빠르게--박용진-님">당근알바 초기 엔지니어링 전략: 빠르게, 빠르게, 더 빠르게&nbsp;- 박용진 님<a href="https://doljae.github.io/blog/342#%EB%8B%B9%EA%B7%BC%EC%95%8C%EB%B0%94-%EC%B4%88%EA%B8%B0-%EC%97%94%EC%A7%80%EB%8B%88%EC%96%B4%EB%A7%81-%EC%A0%84%EB%9E%B5-%EB%B9%A0%EB%A5%B4%EA%B2%8C-%EB%B9%A0%EB%A5%B4%EA%B2%8C-%EB%8D%94-%EB%B9%A0%EB%A5%B4%EA%B2%8C--%EB%B0%95%EC%9A%A9%EC%A7%84-%EB%8B%98" class="hash-link" aria-label="당근알바 초기 엔지니어링 전략: 빠르게, 빠르게, 더 빠르게&nbsp;- 박용진 님에 대한 직접 링크" title="당근알바 초기 엔지니어링 전략: 빠르게, 빠르게, 더 빠르게&nbsp;- 박용진 님에 대한 직접 링크" translate="no">​</a></h2>
+<p><strong>API를 개발할 때 GraphQL을 적용하신 것이</strong> 인상 깊었는데요. <strong>데이터를 가져오는 행위에 대한 논의를 없애고 초기에 수시로 바뀌는 UX &amp; UI에 쉽게 대응해 클라이언트 서버 간의 커뮤니케이션 비용을 없앴다고</strong> 합니다. 단순히 GraphQL을 사용해보고 싶어서가 아니라 목적과 상황에 부합하는 기술 선택이었다고 생각합니다. 최대한 속도를 내기 위해서 기술적, 기술 외적으로 시도하신 방법과 여러 가지 선택에 대한 이야기가 주된 이야기였습니다.</p>
+<p>다만 이렇게 빠르게 빠르게 치고 나가려면 구성원 한 명 한 명이 정말 잘하는 사람이어야 한다고 생각합니다. 엔지니어링, 특히 코드 관점에서 보면 모두가 빠르게 개발하고 변경할 수 있는 좋은 코드를 써야 빠르게 변화에 대응할 수 있다고 생각하는데요. 목적에 부합하는 필요한 것만 개발해서 제한된 리소스를 효율적으로 사용하는 건 좋지만 그것이 돌아가기만 하는 코드, 내일의 부채에 대한 변명이 되어서는 안 된다고 생각합니다. 그래서 유지 보수하기 좋은, 기술 부채를 만들지 않고 변화에 빠르게 대응하는 그런 코드, 엔지니어링이 되어야 하고 이것을 빠르게 하려면 개개인이 정말 훌륭한 능력을 가지셔야 하지 않을까 싶습니다.</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="우리-동네-어디까지-좁아지는-거예요-자연경계로-좁혀보는-우리-동네---손진-님">우리 동네 어디까지 좁아지는 거예요? 자연경계로 좁혀보는 우리 동네 - 손진 님<a href="https://doljae.github.io/blog/342#%EC%9A%B0%EB%A6%AC-%EB%8F%99%EB%84%A4-%EC%96%B4%EB%94%94%EA%B9%8C%EC%A7%80-%EC%A2%81%EC%95%84%EC%A7%80%EB%8A%94-%EA%B1%B0%EC%98%88%EC%9A%94-%EC%9E%90%EC%97%B0%EA%B2%BD%EA%B3%84%EB%A1%9C-%EC%A2%81%ED%98%80%EB%B3%B4%EB%8A%94-%EC%9A%B0%EB%A6%AC-%EB%8F%99%EB%84%A4---%EC%86%90%EC%A7%84-%EB%8B%98" class="hash-link" aria-label="우리 동네 어디까지 좁아지는 거예요? 자연경계로 좁혀보는 우리 동네 - 손진 님에 대한 직접 링크" title="우리 동네 어디까지 좁아지는 거예요? 자연경계로 좁혀보는 우리 동네 - 손진 님에 대한 직접 링크" translate="no">​</a></h2>
+<p>사람마다 느끼는 동네의 영역이 다르다는 것에서 이어진 당근의 동네 구분 기능을 어떻게 개선하고 있는지에 대한 세션이었습니다. 당근 사옥(교보 타워)은 서초 4동에 있지만 반포 1동, 논현 1동, 역삼 1동의 경계선에 있는데요. 이것을 장소성이라는 개념으로 설명하셨습니다. 당근은 다른 서비스와 다르게 동네 영역을 사용자가 지정하는데요. <strong>우편번호, 행정동, 법정동로 구분하는 동네의 한계를 극복하기 위해 보다 더 작은 범위를 동네로 잡기 위해 사용한 여러 가지 기술을 소개해주셨습니다.</strong></p>
+<ol>
+<li class="">빌딩을 hot spot으로 클러스터링 -&gt; 그럼 빌딩 데이터가 없는 곳은?</li>
+<li class="">기존 행정 경계 + 토지 이용지도를 오버레이? -&gt; 그럼 토지이용의 범위가 읍면동보다 높은 경우는?</li>
+<li class="">기존 행정경계 + 자연경계(수계, 도로, 산지, 공원, 철도, 녹지)로 구분 -&gt; 이건 데이터는 다 구할 수 있겠다 -&gt; 채택!</li>
+<li class="">영역에 일정 사용자 패턴이 보이는 경우, 이를 단위로 구분해 사람이 많이 사는 곳은 더 잘게 쪼개고, 산지 등 사람이 많이 없는 곳은 넓게 쪼개기</li>
+</ol>
+<p>Spatial join, Voronoi diagram 등 여러 가지 어려운 개념이 나왔지만 각각의 알고리즘을 적용할 때의 변화를 시각적으로 보여주셔서 재밌었습니다. 예전에 아주 살짝 QGIS를 사용해 본 경험이 있는데요. 지리, 지도 도메인도 아직까지 여러 가지 해볼 만한 것과 도전과제가 많구나라는 생각을 했습니다.</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="지역-기반으로-중고거래-검색을-샤딩하라---임문규-님">지역 기반으로 중고거래 검색을 샤딩하라 - 임문규 님<a href="https://doljae.github.io/blog/342#%EC%A7%80%EC%97%AD-%EA%B8%B0%EB%B0%98%EC%9C%BC%EB%A1%9C-%EC%A4%91%EA%B3%A0%EA%B1%B0%EB%9E%98-%EA%B2%80%EC%83%89%EC%9D%84-%EC%83%A4%EB%94%A9%ED%95%98%EB%9D%BC---%EC%9E%84%EB%AC%B8%EA%B7%9C-%EB%8B%98" class="hash-link" aria-label="지역 기반으로 중고거래 검색을 샤딩하라 - 임문규 님에 대한 직접 링크" title="지역 기반으로 중고거래 검색을 샤딩하라 - 임문규 님에 대한 직접 링크" translate="no">​</a></h2>
+<p>당근의 핵심 서비스 중 하나인 중고거래 게시글을 샤딩해 효율적으로 검색 성능을 올린 이야기를 다루는 세션이었습니다. <strong>검색 시 모든 샤드에 검색 요청이 가면 특정 지역의 게시글에 대한 검색 요청이 전혀 다른 지역 게시글에 대한 검색 요청 성능에 영향을 주게 되는데요. 이를 지역 기반 샤딩이라는 전략으로 해결했다고 합니다.</strong></p>
+<ol>
+<li class="">처음에는 Hot/Cold Architecture를 사용해 최근 게시글을 hot에 저장하고, 오래된 게시글을 cold에 저장해서 관리하는 방식을 사용했다고 합니다.</li>
+<li class="">하지만 내부적으로 Hot, Cold의 경계를 지나면 추가 요청이 나가고 무엇보다 Hot, Cold 문서 간의 검색 랭킹이 끊기고 여전히 특정 지역의 트래픽이 다른 지역에 영향을 미칩니다.</li>
+<li class="">그래서 지역이 계층 구조를 가지고 있다는 점에서 착안한 지역 기반 샤딩 전략을 선택했는데요. 연관 지역이 저장되어 있는 샤드에만 검색을 요청하도록 지역 계층 하나를 샤드로 잡고 샤딩 알고리즘을 직접 구현했습니다.</li>
+<li class="">군집화(Clustering) 알고리즘 중 하나인 Weighted K-Means 알고리즘을 통해 문서 수를 반양한 군집화를 해서&nbsp;인접한 지역끼리 샤딩을 했다고 합니다.</li>
+<li class="">그리고 샤딩 정보 테이블을 메모리에 올려놓고 샤딩 서버가 어떤 샤드에 검색 요청을 해야 하는지 알 수 있도록 만들어 특정 지역의 문서를 가지고 있는 특정 샤드에만 요청을 하도록 했습니다.</li>
+<li class="">응답속도 50% 이상 개선, 클라우드 비용도 53% 감소, 노드 별 CPU 사용량 편차도 줄었고 요청량이 늘어도 CPU 사용량 증가폭이 감소하는 등 많은 성능 개선을 이뤘다고 합니다.</li>
+</ol>
+<p>샤딩 정보를 담고 있는 샤딩 서버가 SPOF(Single Point Of Failure)가 되어서 이를 잘 관리해줘야 하지만 그만큼의 효과가 있으니 좋은 설계라고 생각합니다.</p>
+<p>이외에도 여러 가지 세션을 들었는데요. 발표자료도 깔끔하고 어려운 기술 이야기를 쉽게 설명하기 위해서 리허설도 많이 하셨을 것 같더라고요. 특히 연사 분들의 열정적인 모습이 굉장히 좋았고 행사 내내 모든 세션 흥미롭게 잘 들었습니다.</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="총평">총평(?)<a href="https://doljae.github.io/blog/342#%EC%B4%9D%ED%8F%89" class="hash-link" aria-label="총평(?)에 대한 직접 링크" title="총평(?)에 대한 직접 링크" translate="no">​</a></h2>
+<p><img decoding="async" loading="lazy" src="https://blog.kakaocdn.net/dna/BFLe7/btsKEkekNwx/AAAAAAAAAAAAAAAAAAAAABfS7L3kCZydW4saCBAlg4BkJeMVs50ZlWvQjdIk2vSm/img.jpg?credential=yqXZFxpELC7KVnFOS48ylbz2pIh7yKj8&amp;expires=1772290799&amp;allow_ip=&amp;allow_referer=&amp;signature=NqTvD3J31yivnGqk8gVzbU4MG%2FI%3D" alt="" class="img_ev3q"><img decoding="async" loading="lazy" src="https://blog.kakaocdn.net/dna/y9IDn/btsKD52LHqV/AAAAAAAAAAAAAAAAAAAAAJF2tdfbCJMZlxJuRwf0D_op0hfUE_NuAJglDaxXSGIx/img.png?credential=yqXZFxpELC7KVnFOS48ylbz2pIh7yKj8&amp;expires=1772290799&amp;allow_ip=&amp;allow_referer=&amp;signature=ooY7qhYY3X76lDtm0VuVriXOvCI%3D" alt="" class="img_ev3q"><img decoding="async" loading="lazy" src="https://blog.kakaocdn.net/dna/wmzHb/btsKCxGLhXz/AAAAAAAAAAAAAAAAAAAAAOWDkNv4WqfqDODn3GW0X_zBqECntu9sxQpv2eO1rJdQ/img.png?credential=yqXZFxpELC7KVnFOS48ylbz2pIh7yKj8&amp;expires=1772290799&amp;allow_ip=&amp;allow_referer=&amp;signature=Gedwn8mnSkJIdp%2FhHjntHtVDlM0%3D" alt="" class="img_ev3q"></p>
+<p>당근이 귀여워요 🥕</p>
+<p>세션 외에도 여러 가지 이벤트를 준비해 주셨는데요. 특히 당근 임직원분이 만드시는 네트워킹 일정은 일정 알림이 오자마다 바로 만석이 될 정도로 인기가 많았습니다. 또 세션 중간중간에 나온 깜짝 퀴즈와 랜덤 뽑기 등으로 주신 귀여운 굿즈도 좋았습니다. 또 행사 가이드와 공지를 <strong>당근 모임</strong>이라는 당근 내부 커뮤니티 기능을 통해서 진행해 주셨습니다. 당근이 중고 거래뿐만 아니라 다른 도메인에도 도전하고 있는 것은 알고 있었지만 실제로 당근 모임은 이번에 처음이었는데요. 공지, 네트워킹 일정, 가이드, 퀴즈 등 행사 전반에 대한 리모컨 툴로 사용하시면서 자연스럽게 홍보 효과도 내신 것이 아닐까 싶습니다. 제가 생각했던 것보다 굉장히 많은 것을 할 수 있더라고요.</p>
+<p>여러 IT 콘퍼런스를 가봤지만 당근의 콘퍼런스는 진짜 당근 같다(?)라는 느낌이 들었는데요. 당근이 만든 제품과 회사가 지향하는 그런 이미지와 분위기를 행사에도 그대로 녹여주신 것 같았습니다. 좋은 이야기 많이 들으면서 리프레시할 수 있었던 그런 시간이었습니다.</p>]]></content:encoded>
+            <category>tistory</category>
+        </item>
+        <item>
+            <title><![CDATA[오픈 - 비즈니스 패권의 열쇠]]></title>
+            <link>https://doljae.github.io/blog/341</link>
+            <guid>https://doljae.github.io/blog/341</guid>
+            <pubDate>Sun, 03 Nov 2024 12:49:47 GMT</pubDate>
+            <description><![CDATA[원문//doljae.tistory.com/341]]></description>
+            <content:encoded><![CDATA[<blockquote>
+<p>원문: <a href="https://doljae.tistory.com/341" target="_blank" rel="noopener noreferrer" class="">https://doljae.tistory.com/341</a></p>
+</blockquote>
+<p><img decoding="async" loading="lazy" src="https://blog.kakaocdn.net/dna/biecC3/btsKvqTj3cN/AAAAAAAAAAAAAAAAAAAAANuFCKm2Hd7VgBP-lDb2fKo1HuMEL0yTvBFqW-y-Lc_L/img.jpg?credential=yqXZFxpELC7KVnFOS48ylbz2pIh7yKj8&amp;expires=1772290799&amp;allow_ip=&amp;allow_referer=&amp;signature=solgkuVZmBW6gyDJCxzaJpKsv3w%3D" alt="" class="img_ev3q"></p>
+<p>저자는 오픈이라는 단어가 주는 긍정적이고 선량한 느낌 이면에 감추어진 복잡한 세계에 대해서 이야기한다. 생각해 보면 개인이, 기업이 시간과 돈을 들여서 열심히 만든 무언가를 모두에게 무료로 사용할 수 있게 하고 나아가 제삼자가 그것에 직접적인 영향을 줄 수 있도록 하는 것은 무보수 노동이나 다름없는데 이상하다. 최근 소프트웨어 세상은 소스 코드를 공개하고 전 세계의 사용자들이 직간접적으로 영향을 줄 수 있는 오픈 소스 환경이 표준이라고 해도 과언이 아니다. 우리가 매일 사용하고 있는 메신저, SNS, 쇼핑몰 등 컴퓨터 화면으로 이용하는 거의 모든 서비스를 만드는 기술은 리액트, 스프링 등 유명한 오픈소스로 만들어졌다. 심지어 이 글을 작성하고 있는 크롬 브라우저의 핵심 엔진인 크로미움도 오픈소스다.</p>
+<p>이 책은 이렇게 오픈소스, 프리웨어 소프트웨어 등 오픈된 것과 오픈하는 것에 숨긴 의도와 진실에 대해 몇 가지 사례를 통해 다룬다. 오픈을 통해 얻는 긍정적인 이미지, 쉬운 접근성으로 비롯된 많은 사용자와 그들이 만드는 커뮤니티로 인한 자생력 확보, 해당 분야를 독점해 전 세계에 영향력 행사 등 개인 사용자, 개발자가 쉽게 생각할 수 없던 여러 이해관계자들이 만드는 첨예한 갈등과 전쟁 이야기가 궁금한 분들에게 추천한다.</p>
+<p><strong>한빛미디어 서평단 &lt;나는리뷰어다&gt; 활동을 위해서 책을 제공받아 작성된 서평입니다.</strong></p>]]></content:encoded>
+            <category>tistory</category>
+        </item>
+        <item>
+            <title><![CDATA[한 편으로 끝내기 - 제네릭과 변성(공변성, 반공변성)]]></title>
+            <link>https://doljae.github.io/blog/340</link>
+            <guid>https://doljae.github.io/blog/340</guid>
+            <pubDate>Sun, 13 Oct 2024 06:58:10 GMT</pubDate>
+            <description><![CDATA[원문//doljae.tistory.com/340]]></description>
+            <content:encoded><![CDATA[<blockquote>
+<p>원문: <a href="https://doljae.tistory.com/340" target="_blank" rel="noopener noreferrer" class="">https://doljae.tistory.com/340</a></p>
+</blockquote>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="서론">서론<a href="https://doljae.github.io/blog/340#%EC%84%9C%EB%A1%A0" class="hash-link" aria-label="서론에 대한 직접 링크" title="서론에 대한 직접 링크" translate="no">​</a></h2>
+<p>최근에 <a href="https://ebook.insightbook.co.kr/book/111" target="_blank" rel="noopener noreferrer" class="">이펙티브 코틀린</a>을 다시 읽고 있습니다. 처음 읽었을 때 이해가 잘 안 되어서 넘긴 내용이 이제는 조금씩 읽혀서 신기하기도 하고 다행이기도 하고 그렇습니다. 책에서 다루는 내용 중 <strong>"아이템 24. 제네릭 타입과 variance 한정자를 활용하라"</strong>&nbsp;챕터에서 다루는 코틀린의 제네릭과 변성에 대해서 이해한 내용을 정리했습니다. 예시 코드는 코틀린으로 작성했지만 여러 프로그래밍 언어에서 다루는 개념인 만큼 이번 글을 통해 제네릭의 변성과 관련된 개념을 정확하게 이해하실 수 있도록 풀어보겠습니다.</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="제네릭">제네릭<a href="https://doljae.github.io/blog/340#%EC%A0%9C%EB%84%A4%EB%A6%AD" class="hash-link" aria-label="제네릭에 대한 직접 링크" title="제네릭에 대한 직접 링크" translate="no">​</a></h2>
+<p><a href="https://ko.wikipedia.org/wiki/%EC%A0%9C%EB%84%A4%EB%A6%AD_%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%B0%8D" target="_blank" rel="noopener noreferrer" class="">위키백과</a>에선 <strong>제네릭 프로그래밍</strong>을 데이터 형식에 의존하지 않고, 하나의 값이 여러 다른 데이터 타입들을 가질 수 있는 기술에 중점을 두어 재사용성을 높일 수 있는 프로그래밍 방식이라고 설명합니다. 제네릭은 제네릭 프로그래밍을 할 때 사용하는 프로그래밍 언어에서 지원하는 문법이라고 생각하면 될 것 같습니다.</p>
+<p>제네릭의 가장 단순하면서도 큰 효과는 중복 로직(코드)을 줄여준다는 점입니다. 아래 예시의 로직은 동일하지만 파라미터 타입만 다른 함수의 경우 제네릭을 사용하면 하나의 함수로 공통화할 수 있습니다.</p>
+<div class="language-text codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-text codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><div class="token-line" style="color:#393A34"><span class="token plain">// 파라미터 타입만 다른 같은 일을 하는 함수</span><br></div><div class="token-line" style="color:#393A34"><span class="token plain">fun hitTheKlaxon(car: Car) {}</span><br></div><div class="token-line" style="color:#393A34"><span class="token plain" style="display:inline-block"></span><br></div><div class="token-line" style="color:#393A34"><span class="token plain">fun hitTheKlaxon(truck: Truck) {}</span><br></div><div class="token-line" style="color:#393A34"><span class="token plain" style="display:inline-block"></span><br></div><div class="token-line" style="color:#393A34"><span class="token plain">fun hitTheKlaxon(bike: Bike) {}</span><br></div></code></pre></div></div>
+<div class="language-text codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-text codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><div class="token-line" style="color:#393A34"><span class="token plain">// 제네릭을 쓰면...</span><br></div><div class="token-line" style="color:#393A34"><span class="token plain">fun &lt;T&gt; hitTheKlaxon(t: T) {}</span><br></div><div class="token-line" style="color:#393A34"><span class="token plain" style="display:inline-block"></span><br></div><div class="token-line" style="color:#393A34"><span class="token plain">fun main() {</span><br></div><div class="token-line" style="color:#393A34"><span class="token plain">    hitTheKlaxon(Car())</span><br></div><div class="token-line" style="color:#393A34"><span class="token plain">    hitTheKlaxon(Truck())</span><br></div><div class="token-line" style="color:#393A34"><span class="token plain">    hitTheKlaxon(Bike())</span><br></div><div class="token-line" style="color:#393A34"><span class="token plain">}</span><br></div></code></pre></div></div>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="공변성-반공변성">공변성, 반공변성<a href="https://doljae.github.io/blog/340#%EA%B3%B5%EB%B3%80%EC%84%B1-%EB%B0%98%EA%B3%B5%EB%B3%80%EC%84%B1" class="hash-link" aria-label="공변성, 반공변성에 대한 직접 링크" title="공변성, 반공변성에 대한 직접 링크" translate="no">​</a></h2>
+<p><a href="https://ko.wikipedia.org/wiki/%EA%B3%B5%EB%B3%80%EC%84%B1%EA%B3%BC_%EB%B0%98%EA%B3%B5%EB%B3%80%EC%84%B1_(%EC%BB%B4%ED%93%A8%ED%84%B0_%EA%B3%BC%ED%95%99)" target="_blank" rel="noopener noreferrer" class="">위키백과</a>에선 프로그래밍&nbsp;언어의&nbsp;**공변성(영어:&nbsp;Covariance)**과&nbsp;**반공변성(영어:&nbsp;Contravariance)**은&nbsp;프로그래밍&nbsp;언어가&nbsp;타입&nbsp;생성자(영어:&nbsp;type&nbsp;constructor)에&nbsp;있어&nbsp;서브타입을&nbsp;처리하는&nbsp;방법을&nbsp;나타내는&nbsp;것이라고 설명합니다.</p>
+<p>정확하진 않지만 이 부분을 이해하기 쉽게, 머릿속에 남게 하기 위해 다음과 같이 정리하겠습니다.</p>
+<ul>
+<li class=""><strong>공변성</strong>은 서브타입을 슈퍼타입으로 <strong>업캐스트</strong>해서 사용할 수 있는 성질입니다.</li>
+<li class=""><strong>반공변성</strong>은 공변성의 반대로 슈퍼타입을 서브타입으로 <strong>다운캐스트</strong>해서 사용할 수 있는 성질입니다.</li>
+</ul>
+<p>공변성은 업캐스트라는 것만 잘 기억하시면 반대인 반공변성도 쉽게 잊지 않으실 겁니다. 사실 공변성과 반공변성은 우리가 흔히 사용하는 함수에서 쉽게 찾아볼 수 있습니다. 예를 들어서 설명해 보겠습니다.</p>
+<div class="language-text codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-text codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><div class="token-line" style="color:#393A34"><span class="token plain">open class Animal</span><br></div><div class="token-line" style="color:#393A34"><span class="token plain">class Dog : Animal()</span><br></div><div class="token-line" style="color:#393A34"><span class="token plain" style="display:inline-block"></span><br></div><div class="token-line" style="color:#393A34"><span class="token plain">fun returnAnimal(): Animal {</span><br></div><div class="token-line" style="color:#393A34"><span class="token plain">    return Dog()</span><br></div><div class="token-line" style="color:#393A34"><span class="token plain">}</span><br></div><div class="token-line" style="color:#393A34"><span class="token plain" style="display:inline-block"></span><br></div><div class="token-line" style="color:#393A34"><span class="token plain">fun main() {</span><br></div><div class="token-line" style="color:#393A34"><span class="token plain">    val animal: Animal = returnAnimal()</span><br></div><div class="token-line" style="color:#393A34"><span class="token plain">}</span><br></div></code></pre></div></div>
+<p>함수 반환값에서는 공변성을 찾아볼 수 있습니다. 실제로 반환하는 타입은 Dog지만 Animal 타입으로 반환하는 것이 가능합니다. 즉 서브타입이 들어갈 자리에 슈퍼타입이 들어갈 수 있으니 업캐스팅 성질이 있고 이는 공변성에 해당합니다.</p>
+<div class="language-text codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-text codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><div class="token-line" style="color:#393A34"><span class="token plain">open class Animal</span><br></div><div class="token-line" style="color:#393A34"><span class="token plain">class Dog : Animal()</span><br></div><div class="token-line" style="color:#393A34"><span class="token plain" style="display:inline-block"></span><br></div><div class="token-line" style="color:#393A34"><span class="token plain">fun acceptAnimal(animal: Animal) {</span><br></div><div class="token-line" style="color:#393A34"><span class="token plain">    println("Received an Animal")</span><br></div><div class="token-line" style="color:#393A34"><span class="token plain">}</span><br></div><div class="token-line" style="color:#393A34"><span class="token plain" style="display:inline-block"></span><br></div><div class="token-line" style="color:#393A34"><span class="token plain">fun main() {</span><br></div><div class="token-line" style="color:#393A34"><span class="token plain">    val dog: Dog = Dog()</span><br></div><div class="token-line" style="color:#393A34"><span class="token plain">    acceptAnimal(dog)</span><br></div><div class="token-line" style="color:#393A34"><span class="token plain">}</span><br></div></code></pre></div></div>
+<p>함수 파라미터에는 반공변성을 찾아볼 수 있습니다. 파라미터 타입이 Animal이지만 Dog를 아규먼트로 전달해서 사용하는 것이 가능합니다. 즉 슈퍼타입이 들어갈 자리에 서브타입이 들어갈 수 있으니 다운캐스트 성질이 있고 이는 반공변성에 해당합니다.</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="제네릭과-변성">제네릭과 변성<a href="https://doljae.github.io/blog/340#%EC%A0%9C%EB%84%A4%EB%A6%AD%EA%B3%BC-%EB%B3%80%EC%84%B1" class="hash-link" aria-label="제네릭과 변성에 대한 직접 링크" title="제네릭과 변성에 대한 직접 링크" translate="no">​</a></h2>
+<p>지금까지 다룬 내용에 의하면 공변성, 반공변성은 슈퍼타입과 서브타입 간의 타입 변경과 관련된 개념입니다. 이를 제네릭에 대입해 보겠습니다.</p>
+<p>제네릭의 타입 파라미터는 기본적으로 업캐스팅, 다운캐스팅이 불가능합니다. 즉 변성 관계가 없는 <strong>무공변(영어: Invariance)입니다.</strong> 예를 들어 Animal과 Dog가 슈퍼타입과 서브타입 관계이고 Box&lt;T&gt;라는 제네릭을 사용한 클래스가 있다면 <strong>Box&lt;Dog&gt;는 Box&lt;Animal&gt;로 치환될 수 없고 그 반대도 불가능합니다.</strong> 즉 제네릭의 타입 파라미터는 타입의 상속 계층 관계를 무시합니다.</p>
+<div class="language-text codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-text codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><div class="token-line" style="color:#393A34"><span class="token plain">open class Dog</span><br></div><div class="token-line" style="color:#393A34"><span class="token plain">class Puppy : Dog()</span><br></div><div class="token-line" style="color:#393A34"><span class="token plain">class MyBox&lt;T&gt; {}</span><br></div><div class="token-line" style="color:#393A34"><span class="token plain" style="display:inline-block"></span><br></div><div class="token-line" style="color:#393A34"><span class="token plain">fun main() {</span><br></div><div class="token-line" style="color:#393A34"><span class="token plain">    val puppyBox = MyBox&lt;Puppy&gt;()</span><br></div><div class="token-line" style="color:#393A34"><span class="token plain">    val dogBox: MyBox&lt;Dog&gt; = puppyBox // 에러!</span><br></div><div class="token-line" style="color:#393A34"><span class="token plain" style="display:inline-block"></span><br></div><div class="token-line" style="color:#393A34"><span class="token plain">    val dogBox2 = MyBox&lt;Dog&gt;()</span><br></div><div class="token-line" style="color:#393A34"><span class="token plain">    val puppyBox2: MyBox&lt;Puppy&gt; = dogBox2 // 에러!</span><br></div><div class="token-line" style="color:#393A34"><span class="token plain">}</span><br></div></code></pre></div></div>
+<p>Puppy는 Dog의 서브타입입니다. Puppy는 Dog로 업캐스팅이 가능합니다. 하지만 MyBox&lt;Puppy&gt;는 MyBox&lt;Dog&gt;로 업캐스팅이 불가능합니다. 그 반대도 마찬가지입니다.</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="제네릭에-변성을-부여하기">제네릭에 변성을 부여하기<a href="https://doljae.github.io/blog/340#%EC%A0%9C%EB%84%A4%EB%A6%AD%EC%97%90-%EB%B3%80%EC%84%B1%EC%9D%84-%EB%B6%80%EC%97%AC%ED%95%98%EA%B8%B0" class="hash-link" aria-label="제네릭에 변성을 부여하기에 대한 직접 링크" title="제네릭에 변성을 부여하기에 대한 직접 링크" translate="no">​</a></h2>
+<p>이렇게 제네릭에는 우리가 무의식적으로 사용하고 있는 변성 개념이 기본적으로 포함되어 있지 않습니다. 그렇다면 제네릭에 변성이 필요한 경우에는 어떻게 할 수 있을까요? 여러 프로그래밍 언어에선 이를 위한 키워드가 문법으로 제공되고 있습니다. 코틀린에선 <strong>in</strong>과 <strong>out</strong>이 이에 해당합니다.</p>
+<div class="language-text codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-text codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><div class="token-line" style="color:#393A34"><span class="token plain">open class Dog</span><br></div><div class="token-line" style="color:#393A34"><span class="token plain">class Puppy : Dog()</span><br></div><div class="token-line" style="color:#393A34"><span class="token plain">class MyBox&lt;in T&gt; {}</span><br></div><div class="token-line" style="color:#393A34"><span class="token plain" style="display:inline-block"></span><br></div><div class="token-line" style="color:#393A34"><span class="token plain">fun main() {</span><br></div><div class="token-line" style="color:#393A34"><span class="token plain">    val puppyBox = MyBox&lt;Puppy&gt;()</span><br></div><div class="token-line" style="color:#393A34"><span class="token plain">    val dogBox: MyBox&lt;Dog&gt; = puppyBox // OK!</span><br></div><div class="token-line" style="color:#393A34"><span class="token plain">}</span><br></div></code></pre></div></div>
+<p><strong>in 키워드</strong>를 사용하면 <strong>제네릭 클래스에 공변성을 부여</strong>합니다. 이를 통해 MyBox&lt;Puppy&gt;가 MyBox&lt;Dog&gt;로 타입캐스팅해서 사용할 수 있습니다.</p>
+<div class="language-text codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-text codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><div class="token-line" style="color:#393A34"><span class="token plain">open class Dog</span><br></div><div class="token-line" style="color:#393A34"><span class="token plain">class Puppy : Dog()</span><br></div><div class="token-line" style="color:#393A34"><span class="token plain">class MyBox&lt;out T&gt; {}</span><br></div><div class="token-line" style="color:#393A34"><span class="token plain" style="display:inline-block"></span><br></div><div class="token-line" style="color:#393A34"><span class="token plain">fun main() {</span><br></div><div class="token-line" style="color:#393A34"><span class="token plain">    val dogBox = MyBox&lt;Dog&gt;()</span><br></div><div class="token-line" style="color:#393A34"><span class="token plain">    val puppyBox: MyBox&lt;Puppy&gt; = dogBox // OK!</span><br></div><div class="token-line" style="color:#393A34"><span class="token plain">}</span><br></div></code></pre></div></div>
+<p><strong>out 키워드</strong>를 사용하면 <strong>제네릭 클래스에 반공변성을 부여</strong>합니다. 이를 통해 MyBox&lt;Dog&gt;가 MyBox&lt;Puppy&gt;로 타입캐스팅해서 사용할 수 있습니다.</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="제네릭이-기본적으로-무공변성인-이유">제네릭이 기본적으로 무공변성인 이유<a href="https://doljae.github.io/blog/340#%EC%A0%9C%EB%84%A4%EB%A6%AD%EC%9D%B4-%EA%B8%B0%EB%B3%B8%EC%A0%81%EC%9C%BC%EB%A1%9C-%EB%AC%B4%EA%B3%B5%EB%B3%80%EC%84%B1%EC%9D%B8-%EC%9D%B4%EC%9C%A0" class="hash-link" aria-label="제네릭이 기본적으로 무공변성인 이유에 대한 직접 링크" title="제네릭이 기본적으로 무공변성인 이유에 대한 직접 링크" translate="no">​</a></h2>
+<p>이를 설명하기 위해서 유명한 제네릭 클래스인 List로 예시 코드를 적어보겠습니다.</p>
+<div class="language-text codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-text codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><div class="token-line" style="color:#393A34"><span class="token plain">fun main() {</span><br></div><div class="token-line" style="color:#393A34"><span class="token plain">    val puppies: MutableList&lt;Puppy&gt; = mutableListOf(Puppy())</span><br></div><div class="token-line" style="color:#393A34"><span class="token plain">    val dogs: MutableList&lt;Dog&gt; = puppies // 에러!</span><br></div><div class="token-line" style="color:#393A34"><span class="token plain">}</span><br></div></code></pre></div></div>
+<p>MutableList는 컬렉션 안에 원소를 추가할 수 있는 제네릭 클래스입니다. Puppy 한 마리가 담겨 있는 MutableList&lt;Puppy&gt;를 MutableList&lt;Dog&gt;로 변경하면 IDE에서 컴파일 에러가 발생합니다. <strong>만일 dogs를 MutableList&lt;Dog&gt;로 타입캐스팅할 수 있다면 Dog를 상속하는 Hound나 다른 Dog 서브타입도 MutableList에 추가할 수 있게 됩니다.</strong> 이는 puppies를 최초로 선언할 때 담긴 Puppy 타입 인스턴스를 담은 컬렉션이라는 의도가 변질되고 버그 가능성을 높입니다. puppies를 사용하는 코드는 puppies에 Puppy 인스턴스만 담겨있다고 가정하고 작성되었을 텐데 실제로는 컬렉션 안에 Puppy가 아닌 다른 타입의 인스턴스도 담겨있으니 런타임에 에러가 발생할 수 있습니다.</p>
+<div class="language-text codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-text codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><div class="token-line" style="color:#393A34"><span class="token plain">fun main() {</span><br></div><div class="token-line" style="color:#393A34"><span class="token plain">    val dogs: MutableList&lt;Dog&gt; = mutableListOf(Dog(), Hound())</span><br></div><div class="token-line" style="color:#393A34"><span class="token plain">    val puppies: MutableList&lt;Puppy&gt; = dogs // 에러!</span><br></div><div class="token-line" style="color:#393A34"><span class="token plain">}</span><br></div></code></pre></div></div>
+<p>MutableList&lt;Dog&gt;는 Dog와 Dog를 상속하는 서브타입을 담을 수 있는 컬렉션입니다. Dog와 Dog의 서브타입 Hound를 담은 dogs를 MutableList&lt;Puppy&gt;로 타입캐스팅을 할 수 있다면 어떻게 될까요? 이전 예시와 마찬가지로 <strong>실제 puppies는 Puppy 타입이 아닌 다른 타입의 인스턴스도 담고 있으니 이를 사용하는 다른 코드에서 에러가 발생할 수 있습니다.</strong></p>
+<p>위 두 예시가 왜 제네릭은 기본적으로 변성이 없는 무공변성의 성질을 띄는지 보여줍니다. 만일 제네릭에 아무런 조건 없이 변성을 부여한다면 제네릭의 장점이자 사용하는 이유 중 하나인 타입 안정성을 만족하지 못하게 됩니다. 이로 인해 발생하는 버그는 런타임의 특정 상황에서만 발생하기 때문이죠.</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="제네릭에-변성을-안전하게-부여하기">제네릭에 변성을 "안전하게" 부여하기<a href="https://doljae.github.io/blog/340#%EC%A0%9C%EB%84%A4%EB%A6%AD%EC%97%90-%EB%B3%80%EC%84%B1%EC%9D%84-%EC%95%88%EC%A0%84%ED%95%98%EA%B2%8C-%EB%B6%80%EC%97%AC%ED%95%98%EA%B8%B0" class="hash-link" aria-label="제네릭에 변성을 &quot;안전하게&quot; 부여하기에 대한 직접 링크" title="제네릭에 변성을 &quot;안전하게&quot; 부여하기에 대한 직접 링크" translate="no">​</a></h2>
+<p>그래서 코틀린에선 제네릭에 변성을 부여할 때는 <strong>변성의 종류</strong>에 따라 <strong>제약 조건</strong>을 두었고 이를 <strong>어기면 컴파일 타임에 감지</strong>할 수 있게 설계했습니다.</p>
+<div class="language-text codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-text codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><div class="token-line" style="color:#393A34"><span class="token plain">open class Dog</span><br></div><div class="token-line" style="color:#393A34"><span class="token plain">class Puppy : Dog()</span><br></div><div class="token-line" style="color:#393A34"><span class="token plain">// 공변성을 부여할 때 T에 해당하는 값을 val로 선언해 한 번 쓰면(set) 이후에는 읽기(get)만 가능하도록</span><br></div><div class="token-line" style="color:#393A34"><span class="token plain">class MyBox&lt;out T&gt;(val value: T)</span><br></div><div class="token-line" style="color:#393A34"><span class="token plain" style="display:inline-block"></span><br></div><div class="token-line" style="color:#393A34"><span class="token plain">fun main() {</span><br></div><div class="token-line" style="color:#393A34"><span class="token plain">    val puppyBox = MyBox&lt;Puppy&gt;(Puppy())</span><br></div><div class="token-line" style="color:#393A34"><span class="token plain">    val dogBox: MyBox&lt;Dog&gt; = puppyBox // OK!</span><br></div><div class="token-line" style="color:#393A34"><span class="token plain">}</span><br></div></code></pre></div></div>
+<div class="language-text codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-text codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><div class="token-line" style="color:#393A34"><span class="token plain">// T에 해당하는 값을 var로 선언하면 읽기, 쓰기가 모두 가능함, 컴파일 에러 발생</span><br></div><div class="token-line" style="color:#393A34"><span class="token plain">class MyBox&lt;out T&gt;(var value: T)</span><br></div></code></pre></div></div>
+<p>제네릭에 <strong>out</strong> 키워드로 <strong>공변성</strong>을 부여할 땐 제네릭 타입 파라미터에 해당하는 값을 최초에 초기화하거나 할당한 후에는 <strong>읽기만 가능하게</strong> 하고 쓰기는 못하게 합니다. 이렇게 하면 타입 파라미터의 업캐스팅도 지원하면서 타입 안정성도 보장할 수 있습니다.</p>
+<div class="language-text codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-text codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><div class="token-line" style="color:#393A34"><span class="token plain">open class Dog</span><br></div><div class="token-line" style="color:#393A34"><span class="token plain">class Puppy : Dog()</span><br></div><div class="token-line" style="color:#393A34"><span class="token plain">// 반공변성을 부여할 때 T에 해당하는 값을 private var로 선언해 쓰기는 가능하지만 읽기(get)는 불가능하도록</span><br></div><div class="token-line" style="color:#393A34"><span class="token plain">class MyBox&lt;in T&gt;(private var value: T) {</span><br></div><div class="token-line" style="color:#393A34"><span class="token plain" style="display:inline-block"></span><br></div><div class="token-line" style="color:#393A34"><span class="token plain">    fun setValue(value: T) {</span><br></div><div class="token-line" style="color:#393A34"><span class="token plain">        this.value = value</span><br></div><div class="token-line" style="color:#393A34"><span class="token plain">    }</span><br></div><div class="token-line" style="color:#393A34"><span class="token plain">}</span><br></div><div class="token-line" style="color:#393A34"><span class="token plain" style="display:inline-block"></span><br></div><div class="token-line" style="color:#393A34"><span class="token plain">fun main() {</span><br></div><div class="token-line" style="color:#393A34"><span class="token plain">    val dogBox = MyBox&lt;Dog&gt;(Puppy())</span><br></div><div class="token-line" style="color:#393A34"><span class="token plain">    val puppyBox: MyBox&lt;Puppy&gt; = dogBox // OK!</span><br></div><div class="token-line" style="color:#393A34"><span class="token plain">}</span><br></div></code></pre></div></div>
+<div class="language-text codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-text codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><div class="token-line" style="color:#393A34"><span class="token plain">// T에 해당하는 값을 var로 선언하면 읽기, 쓰기가 모두 가능함, 컴파일 에러 발생</span><br></div><div class="token-line" style="color:#393A34"><span class="token plain">class MyBox&lt;in T&gt;(var value: T)</span><br></div></code></pre></div></div>
+<p>비슷한 결로 제네릭에 <strong>in</strong> 키워드로 <strong>반공변성</strong>을 부여할 땐 제네릭 타입 파라미터에 해당하는 값을 <strong>할당하는 것만 가능하게</strong> 하고 읽기는 못하게 합니다. 이렇게 하면 타입 파라미터의 다운캐스팅도 지원하면서 타입 안정성도 보장할 수 있습니다. 그리고 이 규칙을 지키지 않는 경우 컴파일러는 런타임이 아닌 컴파일 단계에서 아래 에러를 발생시켜 제네릭 클래스의 잘못된 설계를 막습니다.</p>
+<ul>
+<li class="">Type parameter 'T' is declared as 'out' but occurs in 'invariant' position in type 'T'.</li>
+<li class="">Type parameter 'T' is declared as 'in' but occurs in 'invariant' position in type 'T'.</li>
+</ul>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="결론">결론<a href="https://doljae.github.io/blog/340#%EA%B2%B0%EB%A1%A0" class="hash-link" aria-label="결론에 대한 직접 링크" title="결론에 대한 직접 링크" translate="no">​</a></h2>
+<p>이렇게 제네릭의 변성에 대해서 다뤄봤습니다. 예시 코드를 코틀린으로 작성했지만 제네릭을 지원하는 많은 프로그래밍 언어는 모두 비슷한 개념 아래에서 제네릭 타입의 변성 부여 기능을 지원합니다. 이 글을 통해 한번쯤은 짚고 넘어가야 하는 제네릭의 변성에 대해서 잘 이해가 되셨으면 좋겠습니다.</p>]]></content:encoded>
+            <category>tistory</category>
+        </item>
+        <item>
+            <title><![CDATA[잘 읽히는 보고서 문장의 비밀]]></title>
+            <link>https://doljae.github.io/blog/339</link>
+            <guid>https://doljae.github.io/blog/339</guid>
+            <pubDate>Sat, 28 Sep 2024 08:06:33 GMT</pubDate>
+            <description><![CDATA[원문//doljae.tistory.com/339]]></description>
+            <content:encoded><![CDATA[<blockquote>
+<p>원문: <a href="https://doljae.tistory.com/339" target="_blank" rel="noopener noreferrer" class="">https://doljae.tistory.com/339</a></p>
+</blockquote>
+<p><img decoding="async" loading="lazy" src="https://blog.kakaocdn.net/dna/l5kY1/btsJQaLdgmD/AAAAAAAAAAAAAAAAAAAAAKJw9ucJUlhtct3g3QSmjxAU6LZBXGO8jQ5F5LCZhq3X/img.jpg?credential=yqXZFxpELC7KVnFOS48ylbz2pIh7yKj8&amp;expires=1772290799&amp;allow_ip=&amp;allow_referer=&amp;signature=GAqNDaiiuXWrDyO1NL9nr3%2FnWqo%3D" alt="" class="img_ev3q"></p>
+<p>글을 쓰는 것은 어렵다. 글을 잘 쓰는 것은 더 어렵다. 그래서 직장인은 힘들다. 회사를 다니는 것도 힘든데 글도 써야 한다. 하루 종일 글을 쓴다. 이 정도 쓰면 잘 쓸 법도 한데라는 생각이 들 정도로 글을 쓰지만 상사는 내가 올린 보고서를 읽고 항상 뭔가 맘에 들지 않는 것 같다. 반면에 옆자리 김 대리가 올린 보고서는 한 번도 반려된 적이 없다. 궁금해서 김 대리의 보고서를 읽어 봤지만 내 것과 뭐가 다른 건지 잘 모르겠다.</p>
+<p>이 책은 이런 생각을 하는 직장인들을 위한 책이다. 이 책은 제목 그대로 "잘 읽히는" 글을 적기 위한 기술을 27개의 기술과 13개의 꿀팁을 알려준다. 개인적으로 기억에 남는 몇 가지 팁을 정리해 봤다.</p>
+<ol>
+<li class="">직접 인용에는 큰따옴표를 쓴다.</li>
+<li class="">하이라이팅 기법은 한 가지 종류만 사용하고 전체 문장의 20% 정도 비율 정도로 맞추자.</li>
+<li class="">3W(Why, What, So What) 기법을 통해 전체 문장의 내용을 요약하자.</li>
+<li class="">보는 문서인 파워포인트는 고딕체를, 읽는 문서인 워드는 명조체를 사용하자.</li>
+<li class="">나머지 내용을 쉽게 이해할 수 있게 태그를 활용하자.</li>
+<li class="">간결함은 중요하지만 가독성을 해치지 않는 선을 지키자.</li>
+<li class="">자신감이 없어 보이는 수동 표현보단 능동 표현을 사용하자.</li>
+</ol>
+<p>저자는 회사에서 늘 접하는 잘못된 문장을 예시로 보여주고 이를 교정하는 식으로 내용을 전개한다. 문장의 잘못된 부분에 밑줄을 쳐 독자로 하여금 어떻게 수정해야 할까라는 생각을 하게 만드는데 퀴즈를 푸는 느낌이 들어서 재밌었다. 책에서 다루는 문장 기술이 그대로 녹아 들어서 그런지 책도 술술 읽혔다. 단순히 보고서에 국한되지 않고 글을 잘 쓰고 싶은 분들에게 적극 추천한다.</p>
+<p><strong>한빛미디어 서평단 &lt;나는리뷰어다&gt; 활동을 위해서 책을 제공받아 작성된 서평입니다.</strong></p>]]></content:encoded>
+            <category>tistory</category>
+        </item>
+        <item>
+            <title><![CDATA[AI 딥다이브]]></title>
+            <link>https://doljae.github.io/blog/338</link>
+            <guid>https://doljae.github.io/blog/338</guid>
+            <pubDate>Mon, 19 Aug 2024 03:35:22 GMT</pubDate>
+            <description><![CDATA[원문//doljae.tistory.com/338]]></description>
+            <content:encoded><![CDATA[<blockquote>
+<p>원문: <a href="https://doljae.tistory.com/338" target="_blank" rel="noopener noreferrer" class="">https://doljae.tistory.com/338</a></p>
+</blockquote>
+<p><img decoding="async" loading="lazy" src="https://blog.kakaocdn.net/dna/byDTWf/btsI8ovOucD/AAAAAAAAAAAAAAAAAAAAAAIsAd0vQaXehCRT_JVITb6tPNkpAcTRzirozUm05vk1/img.jpg?credential=yqXZFxpELC7KVnFOS48ylbz2pIh7yKj8&amp;expires=1772290799&amp;allow_ip=&amp;allow_referer=&amp;signature=wXRfFGeOmHt9umUwfPGwSdkfpts%3D" alt="" class="img_ev3q"></p>
+<p>가끔 우리는 우리가 뭘 모르는지를 모를 때가 있다. 뭘 모르는지 알면 검색이라도 해보고 ChatGPT에게 물어라도 볼 텐데 뭘 모르는지 모르니 찾아보지 못하는 그런 답답함을 다들 경험해 봤을 거라고 생각한다. 그렇게 열심히 기억을 헤집으면서 적절한 조합으로 검색을 했을 때 내가 원하던 그 개념을 뜻하는 단어, 키워드를 발견하면 그 뒤에는 일사천리다.</p>
+<p>이 책은 특정 시기나 기술에 국한되지 않는 대부분이 AI 관련 키워드를 정리했다. IT 분야에서도 AI는 매일매일이 급변하고 있다. 이 모델보다 성능이 좋은 저 모델보다 가벼운 그 모델과 같은 식으로 말이다. 그렇기 때문에 전체적인 개념을 아우르는 핵심 키워드를 모은 자료는 굉장히 소중한데 이 책이 그 역할을 하고 있다.</p>
+<p>기본적으로 비슷한 주제를 모아 하나의 단원으로 만들었지만 관심 있는, 궁금한 부분만 골라서 읽어도 충분하다. 단 아예 배경지식이 없는 사람이 읽기는 조금 어렵다. 기본적으로 AI 기술이 수학과 여러 가지 이론 바탕으로 이뤄진 만큼 책에선 수학식을 많이 사용하고 있다. 장황하게 설명하는 대신 간략하게 수식으로 설명하는 것이 이를 읽을 수 있는 사람과 그렇지 않은 사람에게 와닿는 느낌이 많이 다를 것이다.</p>
+<p>AI 필드에 경험이 있는 분들에게 이 책은 놓쳤던 최신 트렌드를 단숨에 따라잡고 다음 연구 주제를 고를 수 있게 도와주는 좋은 교보재가 될 것이다.</p>
+<p><strong>한빛미디어 서평단 &lt;나는리뷰어다&gt; 활동을 위해서 책을 제공받아 작성된 서평입니다.</strong></p>]]></content:encoded>
+            <category>tistory</category>
+        </item>
+        <item>
+            <title><![CDATA[인프콘 2024 후기]]></title>
+            <link>https://doljae.github.io/blog/337</link>
+            <guid>https://doljae.github.io/blog/337</guid>
+            <pubDate>Sun, 04 Aug 2024 12:15:06 GMT</pubDate>
+            <description><![CDATA[원문//doljae.tistory.com/337]]></description>
+            <content:encoded><![CDATA[<blockquote>
+<p>원문: <a href="https://doljae.tistory.com/337" target="_blank" rel="noopener noreferrer" class="">https://doljae.tistory.com/337</a></p>
+</blockquote>
+<p>[인프콘 2024 - INFCON 2024</p>
+<p>인프런이 만드는 IT인의 축제, 인프콘에 초대합니다</p>
+<p><a href="http://www.inflearn.com/" target="_blank" rel="noopener noreferrer" class="">www.inflearn.com</a>](<a href="https://www.inflearn.com/conf/infcon-2024/" target="_blank" rel="noopener noreferrer" class="">https://www.inflearn.com/conf/infcon-2024/</a>)</p>
+<p>올해도 인프콘에 다녀왔습니다. 티켓 추첨에서는 아쉽게 떨어졌지만 감사하게도 초대권을 받아 다녀왔습니다. 클로징 때 만 명 넘게 지원했고 2천 명 정도 참석하셨다고 하니 당첨 확률은 약 20% 정도였던 것 같습니다.</p>
+<p><img decoding="async" loading="lazy" src="https://blog.kakaocdn.net/dna/bcbdLx/btsITOoQqII/AAAAAAAAAAAAAAAAAAAAAPLrnO3-sZpuL9-1utf4y4cPHyVWhPlCN6-H67qF92U8/img.jpg?credential=yqXZFxpELC7KVnFOS48ylbz2pIh7yKj8&amp;expires=1772290799&amp;allow_ip=&amp;allow_referer=&amp;signature=nByW7MRDPPhoAEiob3I5ldW0vSU%3D" alt="" class="img_ev3q"><img decoding="async" loading="lazy" src="https://blog.kakaocdn.net/dna/qO2zh/btsIUu4sZEX/AAAAAAAAAAAAAAAAAAAAAKy0eXc-hee7O7Qlm0Ivx1dk6SYY9jJOpxBwEWcw-Flh/img.jpg?credential=yqXZFxpELC7KVnFOS48ylbz2pIh7yKj8&amp;expires=1772290799&amp;allow_ip=&amp;allow_referer=&amp;signature=H%2BzEcQiLr7sM%2FaHTRbHQXMiZVAQ%3D" alt="" class="img_ev3q"><img decoding="async" loading="lazy" src="https://blog.kakaocdn.net/dna/q24iA/btsIUhEhxVm/AAAAAAAAAAAAAAAAAAAAAD99qj2QKgLKyaRh-maL55FUi2Axmq1BGhxgCFy9hmOe/img.jpg?credential=yqXZFxpELC7KVnFOS48ylbz2pIh7yKj8&amp;expires=1772290799&amp;allow_ip=&amp;allow_referer=&amp;signature=nQWOOM65UN%2BgFxLdQPIKkepRyP8%3D" alt="" class="img_ev3q"><img decoding="async" loading="lazy" src="https://blog.kakaocdn.net/dna/D7Vwi/btsITaTD2Fy/AAAAAAAAAAAAAAAAAAAAACrrBO2HXH6L5abgvAukZTDUyBpil0Gtgs8zeErfa8KH/img.jpg?credential=yqXZFxpELC7KVnFOS48ylbz2pIh7yKj8&amp;expires=1772290799&amp;allow_ip=&amp;allow_referer=&amp;signature=5D5JlS%2F3hbjC24w8PoczqSeBp0s%3D" alt="" class="img_ev3q"></p>
+<p>올해도 코엑스 그랜드 볼룸 &amp; 아셈 볼룸에서!</p>
+<p>인프랩 대표님의 인트로와 CTO님의 서비스 성장 지표 및 로드맵, 그리고 커뮤니티 리드님의 행사 소개를 시작으로 인프콘을 시작했습니다. 인트로 영상도 너무 멋졌고 특히 인프랩과 인프런의 로드맵을 보면서 두근두근했습니다. (인프랩 인프런 랠릿 파이팅!)</p>
+<p>재밌어 보이는, 기대되는 세션이 많아서 고민이 많았는데요. 제가 참여한 세션은 다음과 같습니다.</p>
+<ul>
+<li class="">지속 성장 가능한 설계를 만들어가는 방법, 김재민 님</li>
+<li class="">인프런 아키텍처 2024 ~ 2025, 이동욱 님</li>
+<li class="">처음으로 기술 리더가 된 개발자를 위한 안내서, 박서진 님</li>
+<li class="">클린 스프링: 스프링 개발자를 위한 클린코드 전략, 이일민 님</li>
+<li class="">하루 1억 건 이상을 처리하는 견고한 포인트 시스템 구축하기, 서주은 님</li>
+<li class="">지난 4년간 6번의 무진장 행사를 통해 성장한 DevOps 이야기, 정주리 님</li>
+</ul>
+<p>저는 보통 콘퍼런스에 오면 세션에 집중하는 편입니다. (감사하게도) 인프콘 세션은 행사 후 잘 편집해서 인프런에서도 볼 수 있는데요. 저는 연사 님들이 준비하신, 공유해 주시는 이야기를 현장에서 들을 수 있다는 것이 좋은 점이고 제가 참석하는 이유기도 해서 대부분의 시간을 열심히 세션을 들으면서 시간을 보냈습니다.&nbsp;</p>
+<p><img decoding="async" loading="lazy" src="https://blog.kakaocdn.net/dna/cayG3r/btsIUVtXq88/AAAAAAAAAAAAAAAAAAAAAB5Ywkq738BtmZGkCgF41ogw35qmj_xg99SV11br-NMh/img.jpg?credential=yqXZFxpELC7KVnFOS48ylbz2pIh7yKj8&amp;expires=1772290799&amp;allow_ip=&amp;allow_referer=&amp;signature=3dKNc08L4fJ4RNVHDdYUxg80m1I%3D" alt="" class="img_ev3q"><img decoding="async" loading="lazy" src="https://blog.kakaocdn.net/dna/UYOd7/btsIUjIVjxl/AAAAAAAAAAAAAAAAAAAAAN_jjX3190IA3ln37f-2c-AT95XHe3mfi6xLgyRwWiVt/img.jpg?credential=yqXZFxpELC7KVnFOS48ylbz2pIh7yKj8&amp;expires=1772290799&amp;allow_ip=&amp;allow_referer=&amp;signature=245rEexWGu1BPqjNTUkFXK7GYjA%3D" alt="" class="img_ev3q"><img decoding="async" loading="lazy" src="https://blog.kakaocdn.net/dna/brb7RN/btsITWtAooP/AAAAAAAAAAAAAAAAAAAAAIN9oyp3td2QXA_KsMpoMHgGQe2iia-xNDiytfsKHZW4/img.jpg?credential=yqXZFxpELC7KVnFOS48ylbz2pIh7yKj8&amp;expires=1772290799&amp;allow_ip=&amp;allow_referer=&amp;signature=uWisIAnq%2Bhc3RAAA7DDUfW%2B1ySc%3D" alt="" class="img_ev3q"><img decoding="async" loading="lazy" src="https://blog.kakaocdn.net/dna/zltky/btsIVjnPO12/AAAAAAAAAAAAAAAAAAAAAKZWiZZ1TTEEe0Xio7WawFwoclUEvIfsjKbr_HSCcJAd/img.jpg?credential=yqXZFxpELC7KVnFOS48ylbz2pIh7yKj8&amp;expires=1772290799&amp;allow_ip=&amp;allow_referer=&amp;signature=zRom0TRy0ipbCjTu77ol4pldcS8%3D" alt="" class="img_ev3q"></p>
+<p>세션을 들으면서 한 컷</p>
+<p>연사 님들이 공유해 주시는 소중한 지식과 경험을 들으면서 많이 배울 수 있는 좋은 시간이었습니다. 굉장히 열심히 필기를 했지만 지면 관계상(?) 다 적기는 어려울 것 같습니다. 하지만 제가 들은 세션은 모두 만족스러웠고 업무적으로도 개인적으로도 최소 하나씩은 배울 점이 있었는데요. 영상이 올라오면 시간 관계상 참석하지 못한 다른 세션들과 함께 다시 보고 복습하려 합니다.</p>
+<p><img decoding="async" loading="lazy" src="https://blog.kakaocdn.net/dna/5gS1z/btsIVktvMWV/AAAAAAAAAAAAAAAAAAAAAG-UhPUxrt0m-eLCIAMEKybSu9G1chNBwk8lvITUSZos/img.jpg?credential=yqXZFxpELC7KVnFOS48ylbz2pIh7yKj8&amp;expires=1772290799&amp;allow_ip=&amp;allow_referer=&amp;signature=nLNoH%2BpbU2akUGz%2BAlO%2FJxFring%3D" alt="" class="img_ev3q"><img decoding="async" loading="lazy" src="https://blog.kakaocdn.net/dna/pIV1N/btsIU9lff8C/AAAAAAAAAAAAAAAAAAAAAAsxblxbsv5PPXADYJQWhIMu-p6ly_5THvGPMO14NS1t/img.png?credential=yqXZFxpELC7KVnFOS48ylbz2pIh7yKj8&amp;expires=1772290799&amp;allow_ip=&amp;allow_referer=&amp;signature=aQ7gcvP0whMQ479XI0fDSMQ7JBY%3D" alt="" class="img_ev3q"><img decoding="async" loading="lazy" src="https://blog.kakaocdn.net/dna/cZo1nk/btsISVPOhHM/AAAAAAAAAAAAAAAAAAAAAF5jWNJDrnXzfP1RSGBhTS7hovJfDCgzsRAau6kpDw5L/img.png?credential=yqXZFxpELC7KVnFOS48ylbz2pIh7yKj8&amp;expires=1772290799&amp;allow_ip=&amp;allow_referer=&amp;signature=2DUrvVTcPqEcEaspTJ691InUzNA%3D" alt="" class="img_ev3q"></p>
+<p>야무지게 세션 사이사이 부스도 방문하고 사진도 찍고!</p>
+<p>하지만 부스 방문도 포기할 수 없기 때문에 세션 사이사이 잠깐의 시간 동안 정말 열심히 돌아다녔습니다. 스탬프 투어도 작년과는 다르게 여러 종류의 부스(기업 부스, 커뮤니티 부스)와 이벤트를 참석해서 스탬프를 받아 다 모으면 인프콘 기념 굿즈를 받을 수 있게 만들어주셨는데요. 자연스럽게 여러 부스와 프로그램을 참여할 수 있어서 좋았습니다. 특히 SSAFYnity(SSAFY 동문회)에서도 커뮤니티 부스로 참여하셔서 방문해서 인사드렸습니다. SSAFY에서 열심히 코딩 공부하던 때가 얼마 전 같은데 시간 참 빠른 것 같습니다.</p>
+<p><img decoding="async" loading="lazy" src="https://blog.kakaocdn.net/dna/lMS6C/btsISXNzwZe/AAAAAAAAAAAAAAAAAAAAAJl5rdkZYjko6wo4sI7jtXgWrgBGPbIaLmfFSzA6bt4K/img.jpg?credential=yqXZFxpELC7KVnFOS48ylbz2pIh7yKj8&amp;expires=1772290799&amp;allow_ip=&amp;allow_referer=&amp;signature=L643jA0S2eJYquKpJtfpROtps7Q%3D" alt="" class="img_ev3q"><img decoding="async" loading="lazy" src="https://blog.kakaocdn.net/dna/60gQs/btsISLmgeZO/AAAAAAAAAAAAAAAAAAAAALc85pGzD_ln7RIfmF_TFgaCN1d5Q9Gz-pOaJsos_OeN/img.jpg?credential=yqXZFxpELC7KVnFOS48ylbz2pIh7yKj8&amp;expires=1772290799&amp;allow_ip=&amp;allow_referer=&amp;signature=NpDVbr4zb9PYCs%2BpRVOGsR73eCI%3D" alt="" class="img_ev3q"><img decoding="async" loading="lazy" src="https://blog.kakaocdn.net/dna/cTf4D6/btsIUMKzzXM/AAAAAAAAAAAAAAAAAAAAAK_TPiQ39k27NfmVFzngu8AmEpJqAEMEiAeqeju2dG7o/img.jpg?credential=yqXZFxpELC7KVnFOS48ylbz2pIh7yKj8&amp;expires=1772290799&amp;allow_ip=&amp;allow_referer=&amp;signature=POvAZEU7OIFsFnHJIue%2BviMsMTA%3D" alt="" class="img_ev3q"></p>
+<p>클로징, 만 명 넘게 지원하신 대박 컨퍼런스 인프콘!</p>
+<p><img decoding="async" loading="lazy" src="https://blog.kakaocdn.net/dna/UVaEH/btsISO4oNLr/AAAAAAAAAAAAAAAAAAAAAMSu2QzoJsCd3l27-0oxExCDVYoAoelFh-3iR84oVHmC/img.jpg?credential=yqXZFxpELC7KVnFOS48ylbz2pIh7yKj8&amp;expires=1772290799&amp;allow_ip=&amp;allow_referer=&amp;signature=BuGCt5nMTwBtBhzX%2BHOYm5Ak8SE%3D" alt="" class="img_ev3q"><img decoding="async" loading="lazy" src="https://blog.kakaocdn.net/dna/KTWmn/btsISMlcvFY/AAAAAAAAAAAAAAAAAAAAAHStgo33xGA0KxG3oAvplBvHtUIUumzvkYPMRtkmkh5f/img.png?credential=yqXZFxpELC7KVnFOS48ylbz2pIh7yKj8&amp;expires=1772290799&amp;allow_ip=&amp;allow_referer=&amp;signature=LfdFHhP3xEKAWJl2lh0latw4bUg%3D" alt="" class="img_ev3q"><img decoding="async" loading="lazy" src="https://blog.kakaocdn.net/dna/b2nZYh/btsITkV83iC/AAAAAAAAAAAAAAAAAAAAALiXmX1g60ImyDwvl0J5rt8tl7DjGP9PMa8GedQVKD2K/img.jpg?credential=yqXZFxpELC7KVnFOS48ylbz2pIh7yKj8&amp;expires=1772290799&amp;allow_ip=&amp;allow_referer=&amp;signature=JF%2BsGrI5NWn3hQqs9uSP0iJWis8%3D" alt="" class="img_ev3q"></p>
+<p>Good Bye 인프콘 2024!</p>
+<p>작년보다 훨씬 더 흥미로운 주제의 세션과 풍부한 콘텐츠, 그리고 깔끔한 진행이 돋보였던 것 같습니다. 어쩌다 보니 감사하게도 인프콘 개근 참석 중인데요. 내년에도 기회가 된다면 꼭 참석하고 싶습니다. 8월 하면 인프콘, 인프콘 하면 8월 같은 느낌으로 국내에서 가장 큰 IT 콘퍼런스 중 하나로서 앞으로의 인프콘이 더욱 기대됩니다. 멋진 행사를 준비해 주신 인프랩 관계자 분들, 소중한 경험을 공유해 주신 연사 님들, 부스를 준비해 주신 모든 분들에게 감사하다는 말씀드리면서 이만 줄입니다.</p>]]></content:encoded>
+            <category>tistory</category>
+        </item>
+        <item>
+            <title><![CDATA[올해도 갑니다, 인프콘 2024!]]></title>
+            <link>https://doljae.github.io/blog/336</link>
+            <guid>https://doljae.github.io/blog/336</guid>
+            <pubDate>Tue, 09 Jul 2024 01:23:12 GMT</pubDate>
+            <description><![CDATA[원문//doljae.tistory.com/336]]></description>
+            <content:encoded><![CDATA[<blockquote>
+<p>원문: <a href="https://doljae.tistory.com/336" target="_blank" rel="noopener noreferrer" class="">https://doljae.tistory.com/336</a></p>
+</blockquote>
+<p>[인프콘 2024 - INFCON 2024</p>
+<p>인프런이 만드는 IT인의 축제, 인프콘에 초대합니다</p>
+<p><a href="http://www.inflearn.com/" target="_blank" rel="noopener noreferrer" class="">www.inflearn.com</a>](<a href="https://www.inflearn.com/conf/infcon-2024/" target="_blank" rel="noopener noreferrer" class="">https://www.inflearn.com/conf/infcon-2024/</a>)</p>
+<p>&nbsp;[인프콘 2024 - MY페이지</p>
+<p>친구의 인프콘 MY페이지를 둘러보고 인프콘 참가신청 하세요!</p>
+<p><a href="http://www.inflearn.com/" target="_blank" rel="noopener noreferrer" class="">www.inflearn.com</a>](<a href="https://www.inflearn.com/conf/infcon-2024/share?year=2024&amp;id=503302&amp;hash=seok9211%403dd93911&amp;name=%EC%9D%B4%EC%84%9D%EC%9E%AC" target="_blank" rel="noopener noreferrer" class="">https://www.inflearn.com/conf/infcon-2024/share?year=2024&amp;id=503302&amp;hash=seok9211%403dd93911&amp;name=%EC%9D%B4%EC%84%9D%EC%9E%AC</a>)</p>
+<p>올해도 인프콘에 갑니다.</p>
+<p>현장에서 세션도 많이 듣고 여러 가지 좋은 인사이트를 얻을 수 있을 것 같아서 기대가 됩니다.</p>
+<p>8월 2일 금요일, 코엑스 그랜드볼룸&amp;아셈볼룸에서 만나요!</p>]]></content:encoded>
+            <category>tistory</category>
+        </item>
+        <item>
+            <title><![CDATA[프로그래밍의 규칙]]></title>
+            <link>https://doljae.github.io/blog/335</link>
+            <guid>https://doljae.github.io/blog/335</guid>
+            <pubDate>Tue, 25 Jun 2024 14:50:25 GMT</pubDate>
+            <description><![CDATA[원문//doljae.tistory.com/335]]></description>
+            <content:encoded><![CDATA[<blockquote>
+<p>원문: <a href="https://doljae.tistory.com/335" target="_blank" rel="noopener noreferrer" class="">https://doljae.tistory.com/335</a></p>
+</blockquote>
+<p><img decoding="async" loading="lazy" src="https://blog.kakaocdn.net/dna/AFP6C/btsIcEfIn45/AAAAAAAAAAAAAAAAAAAAAOQ74dQggCgKm8fQtvhFbKPmxnbkDY0X8fez-PIYklxs/img.jpg?credential=yqXZFxpELC7KVnFOS48ylbz2pIh7yKj8&amp;expires=1772290799&amp;allow_ip=&amp;allow_referer=&amp;signature=7QXDiT%2Fh%2FVK4uYJNoGWbHMYAH1A%3D" alt="" class="img_ev3q"></p>
+<p>유명한 게임 회사의 공동 설립자이자 책임자가 이야기하는 프로그래밍 규칙 이야기를 다루고 있다. 여기서 <strong>규칙</strong>이라는 것이 포인트인데 이 책에서 다루는 모든 규칙은 실제로 저자의 회사 개발 조직에서 하고 있는 것들인데 이것이 그들의 문화 그 자체라고 한다. 그리고 이것을 강하게 지키는 것이 성공을 이끌었다고 말한다.</p>
+<p>가장 인상 깊었던 내용을 정리해 봤다.</p>
+<p>&gt; 생각하게 하지 말라</p>
+<ul>
+<li class=""><strong>일관성의 핵심</strong>은 <strong>모든 것이 최대한 기계적이어야 한다는 것</strong>이다.</li>
+<li class="">명명과 관련된 <strong>팀의 규칙이 판단의 여지를 주거나 깊이 생각하게 만든다면 그 규칙은 잘 작동하지 않을 것이다.</strong></li>
+<li class="">일관성을 형성하는 가장 쉬운 방법은 <strong>모두가 따르는 기계적인 규칙을 정하는 것</strong>이다.</li>
+<li class="">가장 중요한 것은 명명 규칙의 세부 사항이 아니라, <strong>기계적이고 잘 문서화돼 있으며 잘 지켜지는 강력한 규칙을 갖고 있다는 사실 그 자체다.</strong></li>
+<li class="">덕분에 우리는 모두가 같은 것에 같은 이름을 선택하고, <strong>다른 사람과 일하는 것이 마치 나 자신과 일하는 것처럼 느껴지는</strong> 낙원으로 향한다.</li>
+</ul>
+<p>저자는 꽤 단호한 어조로 내용을 전개한다. 하지만 설득력 있는 예시와 경험 사례로 왜 이렇게 생각하는지, 그리고 자신의 팀과 조직이 왜 이런 규칙을 만들고 지켜나가는지에 대해 풀어나간다.</p>
+<p>최근에 여러 가지 경험을 하면서 나의 개발방법론이라는 것이 윤곽을 드러내고 있는 것 같은데 이를 조금 더 구체화할 수 있는 좋은 시간이었다. 코드를 작성하는 사람으로서, 개발자로서 나와 조직의 생산성과 효율성을 올리기 위해 규칙을 정해야 한다면 이 책을 읽어보는 것을 적극 추천한다.</p>
+<p><strong>한빛미디어 서평단 &lt;나는리뷰어다&gt; 활동을 위해서 책을 제공받아 작성된 서평입니다.</strong></p>]]></content:encoded>
+            <category>tistory</category>
+        </item>
+        <item>
+            <title><![CDATA[개발자를 위한 커리어 관리 핸드북]]></title>
+            <link>https://doljae.github.io/blog/334</link>
+            <guid>https://doljae.github.io/blog/334</guid>
+            <pubDate>Sun, 26 May 2024 23:18:08 GMT</pubDate>
+            <description><![CDATA[원문//doljae.tistory.com/334]]></description>
+            <content:encoded><![CDATA[<blockquote>
+<p>원문: <a href="https://doljae.tistory.com/334" target="_blank" rel="noopener noreferrer" class="">https://doljae.tistory.com/334</a></p>
+</blockquote>
+<p><img decoding="async" loading="lazy" src="https://blog.kakaocdn.net/dna/Mu1vE/btsHBBrPYuk/AAAAAAAAAAAAAAAAAAAAAJTymo0c9Ey-xTMDMbX2gDIS2rGbtq3OrmJho8n7nD38/img.jpg?credential=yqXZFxpELC7KVnFOS48ylbz2pIh7yKj8&amp;expires=1772290799&amp;allow_ip=&amp;allow_referer=&amp;signature=%2FsPpyvWb1Pnf6vAHUbaSkxS9bE0%3D" alt="" class="img_ev3q"></p>
+<p>요즘 커리어를 주제로 한 자기 계발서 서적이 많이 나온다. 그중 IT 필드에서는 <strong>개발자 커리어</strong>를 주제로 한 책을 많이 볼 수 있다. <a href="https://doljae.tistory.com/333" target="_blank" rel="noopener noreferrer" class="">지난달에 읽은 이 책</a>도 면접을 키워드로 한 커리어 관련 서적이었고. 어쩌다 보니 이런 류의 책을 몇 권 읽었다 보니 이번에도 어느 정도 이런 내용에 대해서 다루지 않을까 하면서 어림짐작했다.</p>
+<p>그런데 꽤 재밌게 술술 읽혔다. 이 책의 내용 대부분은 (약간 각색된 것으로 보인) <strong>에피소드와 함께 전개한다</strong>. 예를 들면 기술 면접 때 면접관이 하는 질문 유형과 대화 스타일 등으로 이 사람의 직급, 회사 내에서의 포지션과 영향력을 예측하고 <strong>기술 면접일 때는 이런 사람에게, 임원 면접일 때는 이런 사람에게</strong> 면접 포인트를 얻어야 한다라던가...</p>
+<p>또 상사, (빌런) 팀원의 유형을 나누고 분석해서 이들이 어떤 생각을 하는 사람이고 어떤 것을 선호하고 기피하는지 등 <strong>내가 경험했거나 앞으로 경험해 봄직한 크고 작은 회사 안팎에서의 생생한 이야기에 대해서</strong> 꽤 재밌게 풀어낸다. (번역도 이런 분위기에 맞게 재밌게 잘 된 것 같다.)</p>
+<p>"이렇게 하셔야 합니다", "이렇게 하시면 안 됩니다"와 같이 단정적 어조로 말하는 것 대신 에피소드만 다룬 뒤 열린 결말 느낌으로 남겨 둔 몇몇 주제도 개인적으로 고민해 볼 기회를 줘서 좋았다.</p>
+<p>개발자 커리어가 주제지만 개발자에 국한되지 않고 사회생활을 하는 사람들 모두가 재밌게 읽고 몇 가지 챙겨갈 수 있는 좋은 책이라고 생각한다.</p>
+<p><strong>한빛미디어 서평단 &lt;나는리뷰어다&gt; 활동을 위해서 책을 제공받아 작성된 서평입니다.</strong></p>]]></content:encoded>
+            <category>tistory</category>
+        </item>
+        <item>
+            <title><![CDATA[연봉 앞자리를 바꾸는 개발자 기술 면접 노트]]></title>
+            <link>https://doljae.github.io/blog/333</link>
+            <guid>https://doljae.github.io/blog/333</guid>
+            <pubDate>Sun, 14 Apr 2024 14:37:22 GMT</pubDate>
+            <description><![CDATA[원문//doljae.tistory.com/333]]></description>
+            <content:encoded><![CDATA[<blockquote>
+<p>원문: <a href="https://doljae.tistory.com/333" target="_blank" rel="noopener noreferrer" class="">https://doljae.tistory.com/333</a></p>
+</blockquote>
+<p><img decoding="async" loading="lazy" src="https://blog.kakaocdn.net/dna/48P48/btsGB3PmYZr/AAAAAAAAAAAAAAAAAAAAAEQ0G71IbBJRSYHACQIvurKOeCk_JCWfmWhwc0FAwS-N/img.jpg?credential=yqXZFxpELC7KVnFOS48ylbz2pIh7yKj8&amp;expires=1772290799&amp;allow_ip=&amp;allow_referer=&amp;signature=f%2BM7o%2BxsGxVLu6MzHIllbTC0lKg%3D" alt="" class="img_ev3q"></p>
+<p>이직, 커리어 관리를 하려는 개발자 분들에게 부담 없이 추천할 수 있는 책입니다.</p>
+<p>저도 그중 하나지만 지난 몇 년간 개발자 붐으로 많은 개발자가 생겼습니다. 그러다 보니 수요와 공급이라는 자연스러운 법칙 때문이랄까 국내에 개발 관련 콘텐츠가 굉장히 많이 늘었고 계속 늘고 있는 것을 느낍니다. 콘텐츠 방식도 책, 공식 문서와 같은 텍스트 위주의 것에서 인터넷 강의, 유튜브 채널 등 영상 위주로 변해가고 있습니다. 주제도 이전에는 특정 기술에 대한 것이 주였다면 요즘은 면접, 이직 등 커리어 관련된 것으로 확장하고 있습니다. 특히 이런 주제에 대해서 그리고 누가 들어도 맞는 말, 누구나 할 수 있는 그런 말이 아니라 뭔가 천기누설 급 마법과 같은 비법이 궁금한 건 모두가 그럴 거라고 생각합니다.</p>
+<p>이 책은 그런 마법 같은 비법을 담백하게 다루고 있습니다. 이력서부터 처우 협상까지 준비 과정뿐만 아니라 어떤 것들을 공부해야 하는지에 대한 소중한 정보를 아낌없이 담고 있습니다. 연차 별로 받을 수 있는 질문과 그 질문의 의도를 설명하고 모범답안을 다루는 식으로 내용을 전개합니다. 아직 주니어지만 조금 더 연차가 쌓이고 시니어가 되면, 되려면 이런 것들을 준비하고 이렇게 답변할 수 있어야 하구나라는 생각을 하면서 재밌게 읽었습니다. 저자 분이 생각하는 좋은 개발자, 일하고 싶은 개발자, 잘하는 개발자의 기준과 방향에 많이 공감해서 술술 읽힌 것 같습니다.</p>
+<p>이직과 면접을 앞두고 계신 분들, 앞으로 좋은 커리어를 가져갈 수 있는 개발자가 되고 싶은 분들에게 추천합니다.</p>
+<p><strong>한빛미디어 서평단 &lt;나는리뷰어다&gt; 활동을 위해서 책을 제공받아 작성된 서평입니다.</strong></p>]]></content:encoded>
+            <category>tistory</category>
+        </item>
+        <item>
+            <title><![CDATA[스타트업 서바이벌]]></title>
+            <link>https://doljae.github.io/blog/332</link>
+            <guid>https://doljae.github.io/blog/332</guid>
+            <pubDate>Mon, 25 Mar 2024 11:57:13 GMT</pubDate>
+            <description><![CDATA[원문//doljae.tistory.com/332]]></description>
+            <content:encoded><![CDATA[<blockquote>
+<p>원문: <a href="https://doljae.tistory.com/332" target="_blank" rel="noopener noreferrer" class="">https://doljae.tistory.com/332</a></p>
+</blockquote>
+<p><img decoding="async" loading="lazy" src="https://blog.kakaocdn.net/dna/HkTYW/btsF2QKe5wc/AAAAAAAAAAAAAAAAAAAAAGbATiGvD0w_-zHwPmJE-2posUQ96S8RsmVooPJCJh_A/img.jpg?credential=yqXZFxpELC7KVnFOS48ylbz2pIh7yKj8&amp;expires=1772290799&amp;allow_ip=&amp;allow_referer=&amp;signature=KHe6H2iYuy8iG5oUK5cpsy2OdrM%3D" alt="" class="img_ev3q"></p>
+<p>스타트업이라고 하면 뭔가 생동감이 넘치는 그런 이미지다.</p>
+<p>소규모, 독립적, 애자일, 기민하게 변화하는, 뭔가 정예 멤버들이 모여서 원대한 도전을 하는 그런 느낌이다.</p>
+<p>하지만 빛나고 멋있어 보이는 그 뒤에는 보이지 않는 피와 땀과 노력이 숨어있다고 저자는 말한다.</p>
+<p>특히 스타트업은 사람이 전부라고 말하는데 인재 영입과 조직 관리는 어디에서나 큰 숙제 같다.</p>
+<p>어느 조직이나 그럴 테지만 특히 스타트업은 오늘내일에 생존이 걸려 있기 때문에 보이지 않는 그곳이 훨씬 더 깊고 아프지 않을까 싶다.</p>
+<p>깊은 상처가 아물고 단단해지면서 얻은 경험과 앞으로 생길 상처가 깊지 않도록 준비해야 할 것들을 저자는 이 책을 통해서 아낌없이 공유하고 있다.</p>
+<p>스타트업의 CEO가 어떤 것인지 궁금하신 분, 혹은 창업에 관심 있는 분들에게 이 책을 추천한다.</p>
+<p><strong>한빛미디어&nbsp;서평단&nbsp;&lt;나는리뷰어다&gt;&nbsp;활동을&nbsp;위해서&nbsp;책을&nbsp;제공&nbsp;받아&nbsp;작성된&nbsp;서평입니다.</strong></p>]]></content:encoded>
+            <category>tistory</category>
+        </item>
+        <item>
+            <title><![CDATA[쉽고 빠르게 익히는 실전 LLM]]></title>
+            <link>https://doljae.github.io/blog/331</link>
+            <guid>https://doljae.github.io/blog/331</guid>
+            <pubDate>Sun, 25 Feb 2024 03:40:52 GMT</pubDate>
+            <description><![CDATA[원문//doljae.tistory.com/331]]></description>
+            <content:encoded><![CDATA[<blockquote>
+<p>원문: <a href="https://doljae.tistory.com/331" target="_blank" rel="noopener noreferrer" class="">https://doljae.tistory.com/331</a></p>
+</blockquote>
+<p><img decoding="async" loading="lazy" src="https://blog.kakaocdn.net/dna/bvj3UL/btsFirDdzSq/AAAAAAAAAAAAAAAAAAAAAMYMW7Qe2TPQ-nBLGlHLrwnE_vqZtaCriBe2Rv3ejms6/img.jpg?credential=yqXZFxpELC7KVnFOS48ylbz2pIh7yKj8&amp;expires=1772290799&amp;allow_ip=&amp;allow_referer=&amp;signature=su4m54DPN8olC0qKJiJS1hs9vXI%3D" alt="" class="img_ev3q"></p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="내용">내용<a href="https://doljae.github.io/blog/331#%EB%82%B4%EC%9A%A9" class="hash-link" aria-label="내용에 대한 직접 링크" title="내용에 대한 직접 링크" translate="no">​</a></h2>
+<p>ChatGPT로 뜨거운 LLM(Large Language Model)에 대한 책입니다. LLM의 소개, 활용법에 대해 다루고 있습니다.</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="특징">특징<a href="https://doljae.github.io/blog/331#%ED%8A%B9%EC%A7%95" class="hash-link" aria-label="특징에 대한 직접 링크" title="특징에 대한 직접 링크" translate="no">​</a></h2>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="llm을-실질적으로-구축하는-것에-대한-내용을-담고-있습니다">LLM을 실질적으로 구축하는 것에 대한 내용을 담고 있습니다.<a href="https://doljae.github.io/blog/331#llm%EC%9D%84-%EC%8B%A4%EC%A7%88%EC%A0%81%EC%9C%BC%EB%A1%9C-%EA%B5%AC%EC%B6%95%ED%95%98%EB%8A%94-%EA%B2%83%EC%97%90-%EB%8C%80%ED%95%9C-%EB%82%B4%EC%9A%A9%EC%9D%84-%EB%8B%B4%EA%B3%A0-%EC%9E%88%EC%8A%B5%EB%8B%88%EB%8B%A4" class="hash-link" aria-label="LLM을 실질적으로 구축하는 것에 대한 내용을 담고 있습니다.에 대한 직접 링크" title="LLM을 실질적으로 구축하는 것에 대한 내용을 담고 있습니다.에 대한 직접 링크" translate="no">​</a></h3>
+<p>이 책은 LLM 애플리케이션을 개발하고 운영하는 것에 대해서 집중적으로 다루고 있습니다. 반드시 알아야 하는 개념에 대해서 쉽고 짧게 언급하고 리얼 월드(실제 세계)에서 LLM 애플리케이션을 다룰 때 어떤 것을 고려해야 하고 어떻게 시스템을 설계해야 하는지에 대해서 말합니다.</p>
+<p>예를 들어 LLM을 사용한 <strong>의미 기반 검색 시스템</strong>을 개발하려 한다면 일반적으로 다음과 같은 단계를 따른다고 합니다.</p>
+<ol>
+<li class="">문서 저장<!-- -->
+<ol>
+<li class="">임베딩을 위한 <strong>문서 저장</strong></li>
+<li class="">의미 정보를 인코딩하기 위한 <strong>텍스트 임베딩</strong> 생성</li>
+<li class="">나중에 쿼리가 주어졌을 때 검색할 수 있도록 임베딩을 데이터베이스에 저장</li>
+</ol>
+</li>
+<li class="">문서 검색<!-- -->
+<ol>
+<li class="">사용자에게 전처리되고 정리할 수 있는 <strong>쿼리</strong> 입력</li>
+<li class=""><strong>임베딩 유사도</strong>를 통해 후보 문서를 검색</li>
+<li class="">필요한 경우 후보 문서의 순위를 <strong>재순위화</strong></li>
+<li class="">최종 검색 결과를 사용자에게 반환</li>
+</ol>
+</li>
+</ol>
+<p>애플리케이션 개발자 입장에서 특정 시스템을 만들기 위한 일반적인 단계와 필요한 구성 요소를 파악하는 것은 굉장히 중요합니다. 무엇을 만들지 모른다면 만들 수 없기 때문이죠. 나아가 각 단계를 실제로 구현하기 위해서 필요한 기술 및 장단점에 대해서도 다룹니다.</p>
+<ul>
+<li class="">텍스트를 임베딩하려면 단어, 구문을 받아 벡터로 변환하는 <strong>텍스트 임베더</strong>가 필요합니다.</li>
+<li class="">임베딩 유사도를 계산하는 방법 <strong>코사인 유사도</strong>를 사용합니다.</li>
+<li class="">큰 문서를 임베딩 하기 위해선 <strong>문서 청킹</strong>을 사용합니다.</li>
+<li class="">임베딩한 문서를 저장하는 저장소로는 파인콘 등의 <strong>벡터 데이터베이스</strong>를 사용합니다.</li>
+</ul>
+<p>이런 식으로 LLM을 이용하는 특정 시스템이 어떤 단계로 구성되는지, 그리고 각 단계에서 필요한 개념과 도구는 무엇인지에 대해서도 다루고 있습니다. 예시로 들어가 있는 파이썬 코드도 내용을 이해하는데 필요한 핵심 부분만 알맞게 들어가 있습니다. 흔히 발품을 팔아야 얻을 수 있는 이런 정보들을 한 권의 책에서 얻을 수 있다는 것이 신기할 따름입니다.</p>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="부담스럽지-않고-친절합니다">부담스럽지 않고 친절합니다.<a href="https://doljae.github.io/blog/331#%EB%B6%80%EB%8B%B4%EC%8A%A4%EB%9F%BD%EC%A7%80-%EC%95%8A%EA%B3%A0-%EC%B9%9C%EC%A0%88%ED%95%A9%EB%8B%88%EB%8B%A4" class="hash-link" aria-label="부담스럽지 않고 친절합니다.에 대한 직접 링크" title="부담스럽지 않고 친절합니다.에 대한 직접 링크" translate="no">​</a></h3>
+<p>비전문가 입장에서 AI 관련 서적은 일반적으로 읽기 난도가 높은 편입니다. 그리고 동시에 많은 개념을 다루어야 하는데 지면의 한계로 특정 개념에 대한 설명이 모호하거나 명확하지 않을 때도 있고, 반대로 너무 자세히 다루고 있어서 어려울 때도 있습니다.</p>
+<p>하지만 이 책은 부담스럽지 않습니다. 두께도 약 300페이지 정도로 무난하고 내용을 전개할 때 필요한 개념을 적절한 설명과 적당한 분량으로 설명하고 있습니다. 부록에 FAQ와 용어 설명을 따로 지면을 할당해서 넣어 두었는데요 이 부분만 잘 읽고 가져가도 충분할 정도로 훌륭하게 정리가 되어 있습니다.</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="추천-독자">추천 독자<a href="https://doljae.github.io/blog/331#%EC%B6%94%EC%B2%9C-%EB%8F%85%EC%9E%90" class="hash-link" aria-label="추천 독자에 대한 직접 링크" title="추천 독자에 대한 직접 링크" translate="no">​</a></h2>
+<ul>
+<li class="">LLM을 이용한 애플리케이션이나 시스템 개발에 관심이 있는 개발자</li>
+<li class="">ChatGPT 등 LLM 기술을 경험해 본 파이썬 개발자</li>
+</ul>
+<p><strong>한빛미디어 서평단 &lt;나는리뷰어다&gt; 활동을 위해서 책을 제공 받아 작성된 서평입니다.</strong></p>]]></content:encoded>
+            <category>tistory</category>
+        </item>
+        <item>
+            <title><![CDATA[퇴직, 그리고 새로운 도전]]></title>
+            <link>https://doljae.github.io/blog/330</link>
+            <guid>https://doljae.github.io/blog/330</guid>
+            <pubDate>Sun, 28 Jan 2024 08:02:40 GMT</pubDate>
+            <description><![CDATA[원문//doljae.tistory.com/330]]></description>
+            <content:encoded><![CDATA[<blockquote>
+<p>원문: <a href="https://doljae.tistory.com/330" target="_blank" rel="noopener noreferrer" class="">https://doljae.tistory.com/330</a></p>
+</blockquote>
+<p>회사에서 2년 8개월간의 근무를 마무리하고 퇴직했습니다. 그간의 일을 정리하고 기록하고 회고해보려고 합니다.</p>
+<p><img decoding="async" loading="lazy" src="https://blog.kakaocdn.net/dna/BPK4g/btsD4GPkobq/AAAAAAAAAAAAAAAAAAAAAPDnCKVRmdPr_E0kya0A_3GMBW6KRymLsfQUGAtg0jxW/img.png?credential=yqXZFxpELC7KVnFOS48ylbz2pIh7yKj8&amp;expires=1772290799&amp;allow_ip=&amp;allow_referer=&amp;signature=Fj2l20HliQcT9ZWSeoqrGrtPPQs%3D" alt="" class="img_ev3q"><img decoding="async" loading="lazy" src="https://blog.kakaocdn.net/dna/GmuEo/btsD096yxOh/AAAAAAAAAAAAAAAAAAAAANd2Y3p9S6Z2EfaB1M9tLFcQru7AD_mDVhIiBz65M4eF/img.png?credential=yqXZFxpELC7KVnFOS48ylbz2pIh7yKj8&amp;expires=1772290799&amp;allow_ip=&amp;allow_referer=&amp;signature=AkoVtY6qWJNt7SouWOwMy91tl%2Bw%3D" alt="" class="img_ev3q"><img decoding="async" loading="lazy" src="https://blog.kakaocdn.net/dna/RzTNK/btsD0IBdBHH/AAAAAAAAAAAAAAAAAAAAABiX_2WUi93Pv8fJNbeJOMGgBr6xYUuDxnkHnU1vEY_g/img.png?credential=yqXZFxpELC7KVnFOS48ylbz2pIh7yKj8&amp;expires=1772290799&amp;allow_ip=&amp;allow_referer=&amp;signature=3m67q30JTzZvtghj28XPi5L32Xc%3D" alt="" class="img_ev3q"></p>
+<p>21년 여름, 저는 회사의 <a href="https://doljae.tistory.com/157" target="_blank" rel="noopener noreferrer" class="">신입 개발자 공채에 합격</a>해 핀테크 도메인의 서버 개발자로 커리어를 시작했습니다. 취준 시절에 가장 가고 싶은 회사였던 만큼 합격 소식을 들었을 때 정말 기분이 좋았습니다. 당시 회사는 팬데믹 상황을 고려해 재택근무를 기본적인 골자로 가지고 있었기에 출근 첫날에 텅 빈 사무실을 이곳저곳 돌아다녔던 기억이 납니다. <a href="https://doljae.tistory.com/296" target="_blank" rel="noopener noreferrer" class="">비대면 환경에서의 입문 교육과 팀 온보딩</a>은 신선했고, 저 또한 큰 어려움 없이 이런 근무 환경에서의 업무와 커뮤니케이션에 잘 적응했습니다.</p>
+<p>당시 자바보다 파이썬이 익숙했던 저는 열심히 자바와 스프링 관련된 강의를 들으면서 기초 체력을 올렸습니다. 팀 데일리 시간에 오늘 한 일을 공유할 때 "인프런 스프링 강의를 들었습니다" 라고 말씀드리는 게 조금 부끄러웠지만, 팀에서 기초 체력을 기르기 위해서 충분한 시간을 주셨고 저도 열심히 팀에서 개발하고 있는 서버의 코드베이스를 분석하는 등 빠르게 업무를 할 수 있는 상태를 만들려고 했습니다. 테스트 코드를 보강하는 첫 PR을 등록하기 전에 여러 번이고 확인했던 기억이 나네요.(<a href="https://doljae.tistory.com/280" target="_blank" rel="noopener noreferrer" class="">21년 회고</a>)</p>
+<h1><a href="https://doljae.tistory.com/310" target="_blank" rel="noopener noreferrer" class="">2022년</a> - 신규 프로젝트 투입, 기술적 성장</h1>
+<p>이렇게 조금씩 제가 속한 파트와 업무에 익숙해질 무렵 새로운 이벤트가 생깁니다. 저는 파트 전환 후 프로젝트에 새로운 서비스를 제공하기 위한 신규 프로젝트에 투입되었습니다. 당시 팀은 내부적으로 몇 개의 파트로 나뉘어 있었는데요, 신규 파트가 생기는 성격의 프로젝트 개발을 위해 팀 리소스를 조정해야 했습니다. 큰 회사에서 주니어가 신규 프로젝트에 참여해 API 서버를 밑바닥부터 개발해보는 경험은 흔치 않다는 리드 님의 말씀에 힘입어 여름부터 새로운 일을 하게 되었습니다.</p>
+<p>시스템 디자인, 프로젝트 설계, 패키지 구조 설계, 도메인 설계 등 도전적인 과제들을 수행하면서 많이 성장했습니다. 평소 꾸준히 공부하던 것을 바탕으로 새로운 API 서버에 여러 가지 새로운 기술 도입을 제안하고 적용했습니다. 운영 서버에 코틀린 기반의 스프링 서버를 처음으로 도입하고 VM 기반의 운영 환경과 새로 도입한 쿠버네티스 환경과의 연동과 로깅 시스템을 구축하는 등 여러 가지 도전적인 과제들을 수행했습니다.</p>
+<p>제가 병목이 되면 안 된다는 생각에 개인 시간을 활용해 꾸준히 공부했고 팀과 프로젝트에 공유했습니다. 기술적, 기술 외적으로도 큰 성장을 이뤘고, 특히 팀원과 함께 일하는 개발자이자 직장인으로서 어떤 자세와 마인드셋을 가져야 하는지 배운 그런 의미 있는 한해였습니다. (<a href="https://doljae.tistory.com/310" target="_blank" rel="noopener noreferrer" class="">22년 회고</a>)</p>
+<h1><a href="https://doljae.tistory.com/328" target="_blank" rel="noopener noreferrer" class="">2023년</a> - 해외 연수, 외부 기술 공유, 프로젝트 오픈</h1>
+<p><img decoding="async" loading="lazy" src="https://blog.kakaocdn.net/dna/boXy1x/btsD7lw8yTH/AAAAAAAAAAAAAAAAAAAAAPFMNs0eOdQr00QBXaCEh4IdthdXNJVoQqh1yurkXOeg/img.jpg?credential=yqXZFxpELC7KVnFOS48ylbz2pIh7yKj8&amp;expires=1772290799&amp;allow_ip=&amp;allow_referer=&amp;signature=OA%2BFPPOEZ%2Bv0YhDwXr94oXC83fY%3D" alt="" class="img_ev3q"><img decoding="async" loading="lazy" src="https://blog.kakaocdn.net/dna/Dc9n8/btsD6ycggpz/AAAAAAAAAAAAAAAAAAAAAAd41JjACZqT0yBQsAAE2GOabtDd5ZPKo6TpAUHAxC-5/img.png?credential=yqXZFxpELC7KVnFOS48ylbz2pIh7yKj8&amp;expires=1772290799&amp;allow_ip=&amp;allow_referer=&amp;signature=2qsbSYyl8MuFrwbVm8Z7j7KDoBM%3D" alt="" class="img_ev3q"><img decoding="async" loading="lazy" src="https://blog.kakaocdn.net/dna/cjd1ec/btsD2HV7Ln8/AAAAAAAAAAAAAAAAAAAAACP5uweoB73e0m-uJgNsJgoaZC5YXx-yrssDcDK7IBOX/img.jpg?credential=yqXZFxpELC7KVnFOS48ylbz2pIh7yKj8&amp;expires=1772290799&amp;allow_ip=&amp;allow_referer=&amp;signature=9ZlDTCTmwAcJhouyomPksQVrzwM%3D" alt="" class="img_ev3q"></p>
+<p>연초에는 신입 사원 해외 연수를 다녀왔습니다. 회사에선 엔데믹이 되면서 입사 당시 다녀오지 못했던 본사 해외 연수를 보내주셨습니다. 입사할 때 화면으로만 만났던 동기들과 한 조가 되어 본사 오피스도 다녀오고 즐거운 시간을 보냈습니다. 개인적으로 일본어를 아주 약간 할 줄 알아서 가이드 느낌으로 다녔었는데 뭔가 멋있어 보인다는 동기 님의 이야기를 들었던 기억이 납니다. 회사에서 담당하고 있는 서비스가 일본 쪽 서비스가 아니라서 평소에는 잘 와 닿지 않았지만, 회사의 메인 프로덕트를 현지인분들께서 사용하는 모습을 보면서 신기하기도 하고 뿌듯하기도 했습니다.</p>
+<p><a href="https://doljae.tistory.com/321" target="_blank" rel="noopener noreferrer" class="">인프콘 연사</a>, <a href="https://techblog.lycorp.co.jp/ko/how-to-migrate-to-spring-boot-3" target="_blank" rel="noopener noreferrer" class="">회사 기술 블로그 글 투고</a>를 했던 것도 개인적으로 큰 이벤트였습니다. 외부 콘퍼런스와 글의 형태로 신규 프로젝트를 개발하면서 배운 것들을 공유했습니다. 발표하면 발표자가 가장 많이 배운다는 말이 있는 것처럼 준비하면서 정말 많이 배웠습니다. 두 가지 모두 정보 전달 성격의 콘텐츠라 혹여나 잘못된 정보를 전달하면 안되기 때문에 수십 수백 번을 다듬고 고쳤습니다. 그 덕분일까요 여러 곳에서 제 발표와 글을 보고 긍정적인 피드백을 주셨습니다. 특히 블로그 글은 사내 기술 블로그에 현재 올라간 모든 글 중에서 조회 수 1위를 달성했고 여러 회사 내부 채널에도 공유되었다고 전해 들었습니다.</p>
+<p>그리고 가을에 작년부터 준비한 <a href="https://www.linebk.com/en/news/detail/line-bk-boosts-insurance-brokerage/" target="_blank" rel="noopener noreferrer" class="">신규 프로젝트를 오픈했습니다</a>. 서버 로그가 올라가고 신규 고객과 상품 가입자가 생기는 것을 확인하고 메신저로 공유했던 기억이 나네요. 이렇게 신규 프로젝트를 성공적으로 오픈하고 저는 기존 파트로 다시 이동했습니다. 기존 파트의 업무가 비즈니스 모델을 맡고 있기에 예정된 신규 요건이 가장 많았습니다. 그래서 원래 예정되어 있기도 하고 현 상황에서 리소스를 조정해서 업무를 수행할 수 있는 사람이 이동하는 것이 맞다고 판단해서 기존 파트로 복귀했습니다. (<a href="https://doljae.tistory.com/328" target="_blank" rel="noopener noreferrer" class="">23년 회고</a>)</p>
+<h1>2024년 - 새로운 도전</h1>
+<p>자세하게 설명해 드리긴 어렵지만 여러 가지 상황과 이벤트로 인해 팀과 프로젝트 멤버들이 다른 업무를 하게 되었습니다. 저희 팀은 현지 개발 조직에 운영 중인 서버와 코드 베이스를 이관하고 새로운 조직에서 새로운 업무를 하게 되었습니다.</p>
+<p>이런 상황에서 작년 가을에 경력 채용 공고를 지원했던 두 회사에서 최종 합격 소식을 전해주셨습니다. 전배 예정 부서에서도 매우 큰 규모와 방대한 트래픽을 다루는 신규 프로젝트에 참여하게 될 예정이다 보니 감사하게도 여러 가지 선택지가 있었고 그 중 하나를 택해야 하는 상황이었습니다. 저는 다음과 같은 기준을 가지고 고민했습니다.</p>
+<ol>
+<li class="">향후 커리어를 위해 여러 가지 관점에서 내가 필요한 것이 무엇인지?</li>
+<li class="">그것을 업무를 통해 자연스럽게 채워넣을 수 있는지?</li>
+<li class="">팀과 조직이 좋은 개발 문화를 만들어 가고 있는지?</li>
+<li class="">그냥 느낌적으로 재밌게 일할 수 있을 거 같은지?</li>
+</ol>
+<p>나름의 기준을 가지고 고민했고 나에게 조금 더 큰 변화를 만들어보자는 생각에 따라 새로운 곳에서 도전을 해보기로 했습니다. 최종 오퍼를 수락한 뒤 최대한 빠르게 합류를 약속하고 재직 중인 회사에 퇴직 의사를 전달 드렸습니다. 감사하게도 팀원 분들과 함께 프로젝트를 했던 많은 분께서 저의 결정을 응원해주셨습니다.</p>
+<h1>정리</h1>
+<p><img decoding="async" loading="lazy" src="https://blog.kakaocdn.net/dna/cCyaHM/btsD4FCQAnM/AAAAAAAAAAAAAAAAAAAAAFzGAzJe7W8uzufj9_qzfiJgWEmpU05NispLsRGPYFJ1/img.png?credential=yqXZFxpELC7KVnFOS48ylbz2pIh7yKj8&amp;expires=1772290799&amp;allow_ip=&amp;allow_referer=&amp;signature=KXw%2Fc59OwP0xzF3gOyreKLh6q%2Fk%3D" alt="" class="img_ev3q"><img decoding="async" loading="lazy" src="https://blog.kakaocdn.net/dna/cbYX0f/btsD2ItWi2Z/AAAAAAAAAAAAAAAAAAAAAItT1tniQqrKKVlpM149TjxI6PgQXWQFLq-hIE-ZuUXq/img.png?credential=yqXZFxpELC7KVnFOS48ylbz2pIh7yKj8&amp;expires=1772290799&amp;allow_ip=&amp;allow_referer=&amp;signature=xdoGtaB2mkwOM%2F8h5GVm3TIVdmQ%3D" alt="" class="img_ev3q"><img decoding="async" loading="lazy" src="https://blog.kakaocdn.net/dna/ydVjN/btsD1puBCWz/AAAAAAAAAAAAAAAAAAAAAJhd_dkb2VJSXV7uSnfmB6OCFnuhuymwFkfdrk1dUDjG/img.png?credential=yqXZFxpELC7KVnFOS48ylbz2pIh7yKj8&amp;expires=1772290799&amp;allow_ip=&amp;allow_referer=&amp;signature=IqG%2FsuzoL4smDYeQfSYNSgCmTMU%3D" alt="" class="img_ev3q"></p>
+<p>이렇게 저의 2년 8개월간의 여정을 마무리하고 새로운 도전을 하러 떠나게 되었습니다. 처음으로 하는 경력 이직이었습니다. 신입이 아닌 만큼 나름대로 팀과 조직에서 기대하는 모습을 빠르게 보여드릴 수 있을까 하는 걱정도 있지만 새로운 곳에서의 도전이 두근거리기도 합니다.</p>
+<p>훌륭하신 동료, 선배님들을 만나서 정말 많이 배웠고 열심히, 그리고 행복하게 일했습니다. 직장인으로서, 개발자로서 제가 한 사람 몫을 할 수 있도록 물심양면으로 도와주신 프로젝트 멤버분들께 정말 고생 많으셨다는 감사의 말씀을 전하고 싶습니다.</p>
+<p>어떤 선택이 정답이었는지는 알 수 없지만, 이 선택에 후회하지 않고 그 나름대로 의미 있는 정답이 될 수 있게 만드는 것은 제 몫이라고 생각합니다. 그리고 긍정적인 마음으로 이 변화를 맞이하려 합니다. 신입으로 입사할 때 적었던 한 줄 소개처럼 새로운 곳에서도 건강한 자극을 팀에 주는 그런 저 자신이 될 수 있기를 바라며 이만 줄입니다.</p>]]></content:encoded>
+            <category>tistory</category>
+        </item>
+    </channel>
+</rss>
