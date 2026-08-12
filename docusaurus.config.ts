@@ -210,6 +210,7 @@ const config: Config = {
         {to: '/blog', label: 'Blog', position: 'left'},
         {to: '/blog/archive', label: 'Archive', position: 'left'},
         {to: '/blog/tags', label: 'Tags', position: 'left'},
+        {to: '/resume', label: 'Resume', position: 'left'},
         {to: '/privacy', label: 'Privacy', position: 'left'},
         // {
         //   type: 'docSidebar',

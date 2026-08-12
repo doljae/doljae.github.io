@@ -27,3 +27,11 @@ jobs:
         run: yarn build
       - name: Typecheck
         run: yarn typecheck
+
+      # onBrokenLinks catches links to missing static files, but pathname://
+      # links opt out of that check. Re-add it for just those links.
+      - name: Check pathname:// targets exist
+        run: |
+          for target in $(grep -rho 'pathname:///[^)"]*' src/ | sed 's|pathname://||'); do
+            test -f "static$target" || { echo "missing: static$target"; exit 1; }
+          done

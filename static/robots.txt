@@ -1,5 +1,9 @@
 User-agent: *
-Disallow:
+# Keep the resume PDFs out of search results. The /resume page itself stays
+# indexable, so these must be full paths: a bare "Disallow: /resume" would
+# prefix-match and block the page too.
+Disallow: /seokjae-lee-resume-ko.pdf
+Disallow: /seokjae-lee-resume-en.pdf
 Allow: /
 
 Sitemap: https://doljae.github.io/sitemap.xml
